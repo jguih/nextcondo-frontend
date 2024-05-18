@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { CssVarsProvider } from "@mui/joy/styles";
 import CssBaseline from "@mui/joy/CssBaseline";
 import "./globals.css";
+import { GlobalStyles } from "@mui/joy";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,17 @@ export default function RootLayout({
   return (
     <CssVarsProvider defaultMode="dark">
       <CssBaseline />
+      <GlobalStyles
+        styles={{
+          ".iconify-icon": {
+            color: "var(--Icon-color)",
+            margin: "var(--Icon-margin)",
+            fontSize: "var(--Icon-fontSize, 20px)",
+            width: "1em",
+            height: "1em",
+          },
+        }}
+      ></GlobalStyles>
       <html lang="en">
         <body className={inter.className}>{children}</body>
       </html>
