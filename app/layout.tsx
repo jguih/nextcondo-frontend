@@ -1,11 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
-import { CssVarsProvider } from "@mui/joy/styles";
-import CssBaseline from "@mui/joy/CssBaseline";
 import "./globals.css";
-import { GlobalStyles } from "@mui/joy";
-
-const inter = Inter({ subsets: ["latin"] });
+import ThemeRegistry from "@/components/theme-registry/theme-registry";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,22 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <CssVarsProvider defaultMode="dark">
-      <CssBaseline />
-      <GlobalStyles
-        styles={{
-          ".iconify-icon": {
-            color: "var(--Icon-color)",
-            margin: "var(--Icon-margin)",
-            fontSize: "var(--Icon-fontSize, 20px)",
-            width: "1em",
-            height: "1em",
-          },
-        }}
-      ></GlobalStyles>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </CssVarsProvider>
+    <html lang="en">
+      <body>
+        <ThemeRegistry>{children}</ThemeRegistry>
+      </body>
+    </html>
   );
 }
