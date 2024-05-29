@@ -1,6 +1,12 @@
 import { Box, BoxProps } from "@mui/joy";
+import { FC } from "react";
 
-const Header = (props: BoxProps) => {
+interface LayoutComponent {
+  Header: FC<BoxProps>;
+  DrawerContent: FC<BoxProps>;
+}
+
+const Header: LayoutComponent["Header"] = (props) => {
   return (
     <Box
       {...props}
@@ -24,13 +30,13 @@ const Header = (props: BoxProps) => {
   );
 };
 
-const DrawerContent = (props: BoxProps) => {
+const DrawerContent: LayoutComponent["DrawerContent"] = (props) => {
   return <Box role="presentation" {...props} sx={{ p: 2, ...props.sx }} />;
 };
 
-const Layout = {
+const Layout: LayoutComponent = {
   Header,
   DrawerContent,
 };
 
-export default Layout;
+export { Layout };

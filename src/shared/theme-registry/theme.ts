@@ -43,7 +43,7 @@ const theme = extendTheme({
     },
     JoyListItemButton: {
       styleOverrides: {
-        root: ({ ownerState, theme }) => ({
+        root: ({ theme }) => ({
           borderRadius: theme.vars.radius.sm,
         }),
       },
