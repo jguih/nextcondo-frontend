@@ -4,6 +4,8 @@ import { FC } from "react";
 interface LayoutComponent {
   Header: FC<BoxProps>;
   DrawerContent: FC<BoxProps>;
+  Root: FC<BoxProps>;
+  Main: FC<BoxProps>;
 }
 
 const Header: LayoutComponent["Header"] = (props) => {
@@ -11,14 +13,14 @@ const Header: LayoutComponent["Header"] = (props) => {
     <Box
       {...props}
       sx={{
-        p: 2,
+        p: 1,
         gap: 2,
         bgcolor: "background.surface",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center",
         gridColumn: "1 / -1",
+        alignItems: "center",
         borderBottom: "1px solid",
         borderColor: "divider",
         position: "sticky",
@@ -34,9 +36,43 @@ const DrawerContent: LayoutComponent["DrawerContent"] = (props) => {
   return <Box role="presentation" {...props} sx={{ p: 2, ...props.sx }} />;
 };
 
+const Root: LayoutComponent["Root"] = (props) => {
+  return (
+    <Box
+      {...props}
+      sx={{
+        display: "grid",
+        gridTemplateColumns: {
+          xs: "1fr",
+          sm: "minmax(64px, 200px) minmax(450px, 1fr)",
+          md: "minmax(160px, 300px) minmax(300px, 500px) minmax(500px, 1fr)",
+        },
+        gridTemplateRows: "54px 1fr",
+        minHeight: "100vh",
+        ...props.sx,
+      }}
+    />
+  );
+};
+
+const Main: LayoutComponent["Main"] = (props) => {
+  return (
+    <Box
+      {...props}
+      sx={{
+        p: 2,
+        maxWidth: "100vw",
+        ...props.sx,
+      }}
+    />
+  );
+};
+
 const Layout: LayoutComponent = {
   Header,
   DrawerContent,
+  Root,
+  Main,
 };
 
 export { Layout };

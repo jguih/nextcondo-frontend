@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, IconButton, Stack } from "@mui/joy";
+import { IconButton, Stack } from "@mui/joy";
 import { ColorSchemeToggle } from "../utils/color-scheme-toggle";
 import { FC } from "react";
 import { useSidebar } from "../sidebar/store";
@@ -12,7 +12,6 @@ export const Header = () => {
       <HeaderComponent.MenuButton />
       <Stack direction={"row"} gap={1}>
         <ColorSchemeToggle />
-        <HeaderComponent.AvatarButton />
       </Stack>
     </Stack>
   );
@@ -20,7 +19,6 @@ export const Header = () => {
 
 interface HeaderComponent {
   MenuButton: FC;
-  AvatarButton: FC;
 }
 
 const MenuButton: HeaderComponent["MenuButton"] = () => {
@@ -32,8 +30,4 @@ const MenuButton: HeaderComponent["MenuButton"] = () => {
   );
 };
 
-const AvatarButton: HeaderComponent["AvatarButton"] = () => {
-  return <Avatar size="sm" />;
-};
-
-const HeaderComponent: HeaderComponent = { MenuButton, AvatarButton };
+const HeaderComponent: HeaderComponent = { MenuButton };

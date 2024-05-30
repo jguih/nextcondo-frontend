@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Box } from "@mui/joy";
 import { ReactNode, Dispatch, useState, Fragment } from "react";

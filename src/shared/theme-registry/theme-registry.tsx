@@ -12,7 +12,7 @@ export default function ThemeRegistry({
 }) {
   return (
     <NextAppDirEmotionCacheProvider options={{ key: "joy" }}>
-      <CssVarsProvider theme={theme}>
+      <CssVarsProvider theme={theme} defaultMode="system">
         <CssBaseline />
         {children}
       </CssVarsProvider>

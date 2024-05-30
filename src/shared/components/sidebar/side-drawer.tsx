@@ -26,15 +26,15 @@ import {
 } from "@mui/icons-material";
 import { Toggler } from "../utils/toggler";
 
-type SidebarProps = Omit<DrawerProps, "open" | "onClose">;
+type SideDrawerProps = Omit<DrawerProps, "open" | "onClose">;
 
-const Sidebar: FC<SidebarProps> = (props) => {
+export const SideDrawer: FC<SideDrawerProps> = (props) => {
   const open = useSidebar((state) => state.open);
   const closeSidebar = useSidebar((state) => state.closeSidebar);
   return <Drawer open={open} onClose={closeSidebar} {...props} />;
 };
 
-const SidebarContent: FC = () => {
+export const SideDrawerContent: FC = () => {
   return (
     <Fragment>
       <Stack direction={"row"} gap={1}>
@@ -154,5 +154,3 @@ const Users: ContentSection["Users"] = () => {
 };
 
 const ContentSection: ContentSection = { Occurences, CommonAreas, Users };
-
-export { Sidebar, SidebarContent };
