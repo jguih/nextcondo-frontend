@@ -1,9 +1,9 @@
-import { Box, BoxProps } from "@mui/joy";
+import { Box, BoxProps, Sheet, SheetProps } from "@mui/joy";
 import { FC } from "react";
 
 interface LayoutComponent {
   Header: FC<BoxProps>;
-  DrawerContent: FC<BoxProps>;
+  DrawerContent: FC<SheetProps>;
   Root: FC<BoxProps>;
   Main: FC<BoxProps>;
 }
@@ -33,7 +33,13 @@ const Header: LayoutComponent["Header"] = (props) => {
 };
 
 const DrawerContent: LayoutComponent["DrawerContent"] = (props) => {
-  return <Box role="presentation" {...props} sx={{ p: 2, ...props.sx }} />;
+  return (
+    <Sheet
+      role="presentation"
+      {...props}
+      sx={{ p: 2, height: "100%", overflow: "auto", ...props.sx }}
+    />
+  );
 };
 
 const Root: LayoutComponent["Root"] = (props) => {

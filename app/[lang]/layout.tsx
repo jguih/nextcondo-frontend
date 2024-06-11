@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
-import ThemeRegistry from "@/src/shared/theme-registry/theme-registry";
+import "../globals.css";
+import ThemeRegistry from "@/src/theme-registry/components/theme-registry";
+import { AuthBoundary } from "@/src/shared/authentication/components/boundary";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeRegistry>{children}</ThemeRegistry>
+        <ThemeRegistry>
+          <AuthBoundary>{children}</AuthBoundary>
+        </ThemeRegistry>
       </body>
     </html>
   );

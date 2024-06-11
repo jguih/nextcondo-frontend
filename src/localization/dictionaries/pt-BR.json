@@ -1,0 +1,49 @@
+{
+  "page": {
+    "login": {
+      "title": "Login",
+      "subtitle": "Não tem uma conta?",
+      "subtitle_action": "Crie uma conta"
+    },
+    "register": {
+      "title": "Cadastrar",
+      "subtitle": "Já tem uma conta?",
+      "subtitle_action": "Faça login",
+      "full_name": "Nome completo",
+      "phone": "Celular",
+      "submit": "Criar Conta"
+    },
+    "home": {
+      "title": "Home"
+    }
+  },
+  "boolean": {
+    "yes": "Sim",
+    "no": "Não"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Sair",
+    "email": "Email",
+    "password": "Senha",
+    "forgot_password": "Esqueceu sua senha?"
+  },
+  "button": {
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Salvar"
+  },
+  "side_drawer": {
+    "home": "Home",
+    "common_areas": "Áreas comuns",
+    "occurrences": "Ocorrências",
+    "tenants": "Moradores",
+    "user": "Usuário",
+    "change_theme": "Tema Claro/Escuro",
+    "help": "Ajuda",
+    "configurations": "Configurações"
+  },
+  "common": {
+    "or": "ou"
+  }
+}

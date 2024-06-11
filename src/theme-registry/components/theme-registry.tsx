@@ -3,7 +3,7 @@ import * as React from "react";
 import { CssVarsProvider } from "@mui/joy/styles";
 import CssBaseline from "@mui/joy/CssBaseline";
 import NextAppDirEmotionCacheProvider from "./emotion-cache";
-import theme from "./theme";
+import theme from "../theme";
 
 export default function ThemeRegistry({
   children,

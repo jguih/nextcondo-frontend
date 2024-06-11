@@ -36,7 +36,9 @@ const theme = extendTheme({
       styleOverrides: {
         root: ({ ownerState, theme }) => ({
           ...(ownerState.nesting && {
-            paddingLeft: theme.spacing(4),
+            ".MuiListItemButton-root, .MuiListItem-root": {
+              paddingLeft: theme.spacing(5),
+            },
           }),
         }),
       },
@@ -45,7 +47,7 @@ const theme = extendTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           borderRadius: theme.vars.radius.sm,
-          padding: theme.spacing(1)
+          padding: theme.spacing(1),
         }),
       },
     },
