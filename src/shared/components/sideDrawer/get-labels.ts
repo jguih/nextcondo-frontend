@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import "server-only";
 
+import { Dictionary } from "@/src/localization/dictionary";
 import { SideDrawerContentProps } from "./side-drawer";
 
-/**
- * @param d Dictionary
- * @returns
- */
-export const getLabels = (d: any): SideDrawerContentProps["label"] => {
+export const getLabels = (d: Dictionary): SideDrawerContentProps["label"] => {
   const sideDrawerLabels = {
     home: d.side_drawer.home,
     commonAreas: d.side_drawer.common_areas,
