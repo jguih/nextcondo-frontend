@@ -1,3 +1,3 @@
-import dictinary from "./dictionaries/pt-BR.json";
+import dictionary from "./dictionaries/pt-BR.json";
 
-export type Dictionary = typeof dictinary;
+export type Dictionary = typeof dictionary;

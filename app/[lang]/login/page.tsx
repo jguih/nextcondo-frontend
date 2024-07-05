@@ -2,7 +2,7 @@ import { Divider, Link, Typography } from "@mui/joy";
 import { FC, Fragment } from "react";
 import { RegisterAction } from "@/src/page/login/components/register-action";
 import { Form } from "@/src/page/login/form/form";
-import { getDictionary } from "../dictionaries";
+import { getDictionary } from "../../../src/localization/dictionaries";
 import { WithLocale } from "@/src/shared/types/with-locale";
 
 const Login: FC<WithLocale> = async ({ params: { lang } }) => {
@@ -20,6 +20,7 @@ const Login: FC<WithLocale> = async ({ params: { lang } }) => {
           password: d.auth.password,
           submit: d.auth.login,
         }}
+        lang={lang}
       />
       <Link
         level="body-sm"

@@ -11,7 +11,8 @@
       "subtitle_action": "Faça login",
       "full_name": "Nome completo",
       "phone": "Celular",
-      "submit": "Criar Conta"
+      "submit": "Criar Conta",
+      "success": "Por favor, verifique seu email para completar o cadastro"
     },
     "home": {
       "title": "Home"
@@ -42,6 +43,11 @@
     "change_theme": "Tema Claro/Escuro",
     "help": "Ajuda",
     "configurations": "Configurações"
+  },
+  "validation": {
+    "invalid_login_credentials": "Email ou senha inválidos",
+    "invalid_email": "Endereço de email inválido",
+    "password_too_short": "Senha deve conter pelo menos {{ count }} caracteres"
   },
   "common": {
     "or": "ou"

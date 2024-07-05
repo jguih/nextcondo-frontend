@@ -12,7 +12,7 @@ import {
   SideDrawerContent,
 } from "@/src/shared/components/sideDrawer/side-drawer";
 import { Breadcrumbs, Typography } from "@mui/joy";
-import { getDictionary } from "./dictionaries";
+import { getDictionary } from "../../src/localization/dictionaries";
 import { FC } from "react";
 import { WithLocale } from "@/src/shared/types/with-locale";
 import { getLabels } from "@/src/shared/components/sideDrawer/get-labels";

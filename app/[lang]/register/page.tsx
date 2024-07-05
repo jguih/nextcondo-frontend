@@ -2,7 +2,7 @@ import { LoginAction } from "@/src/page/register/components/login-action";
 import { Typography } from "@mui/joy";
 import { FC, Fragment } from "react";
 import { Form } from "@/src/page/register/form/form";
-import { getDictionary } from "../dictionaries";
+import { getDictionary } from "../../../src/localization/dictionaries";
 import { WithLocale } from "@/src/shared/types/with-locale";
 
 const Register: FC<WithLocale> = async ({ params: { lang } }) => {
@@ -22,6 +22,7 @@ const Register: FC<WithLocale> = async ({ params: { lang } }) => {
           phone: d.page.register.phone,
           submit: d.page.register.submit,
         }}
+        lang={lang}
       />
     </Fragment>
   );

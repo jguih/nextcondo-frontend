@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "./src/shared/authentication/supabase/middleware";
 import { i18n } from "./i18n-config";
-import { getLocale } from "./src/localization/getLocale";
+import { getLocaleFromRequest } from "./src/localization/getLocale";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
   );
 
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
+    const locale = getLocaleFromRequest(request);
     return NextResponse.redirect(
       new URL(
         `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,

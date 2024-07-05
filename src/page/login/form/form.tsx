@@ -1,6 +1,15 @@
 "use client";
 import { SubmitButton } from "@/src/shared/components/utils/submit-button";
-import { Box, FormControl, FormLabel, Input, Typography } from "@mui/joy";
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  List,
+  ListItem,
+  ListItemContent,
+  Typography,
+} from "@mui/joy";
 import { FC } from "react";
 import { useFormState } from "react-dom";
 import { FormState, login } from "./login-action";
@@ -11,10 +20,14 @@ interface FormProps {
     password: string;
     submit: string;
   };
+  lang: string;
 }
 
-export const Form: FC<FormProps> = ({ label }) => {
-  const [state, formAction] = useFormState<FormState, FormData>(login, {});
+export const Form: FC<FormProps> = ({ label, lang }) => {
+  const [state, formAction] = useFormState<FormState, FormData>(
+    (state, payload) => login.bind(null, state, payload, lang)(),
+    {}
+  );
 
   return (
     <Box
@@ -22,18 +35,32 @@ export const Form: FC<FormProps> = ({ label }) => {
       sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 4 }}
       action={formAction}
     >
-      <FormControl>
+      <FormControl required>
         <FormLabel>{label.email}</FormLabel>
-        <Input type="email" name="email" required />
+        <Input type="email" name="email" />
       </FormControl>
-      <FormControl>
+      <FormControl required>
         <FormLabel>{label.password}</FormLabel>
-        <Input type="password" name="password" required />
+        <Input
+          type="password"
+          name="password"
+          slotProps={{ input: { minLength: 8 } }}
+        />
       </FormControl>
-      {state.message && (
-        <Typography level="body-sm" color="danger">
-          {state.message}
-        </Typography>
+      {state.error && (
+        <List>
+          {state.error.message.map((message) => {
+            return (
+              <ListItem>
+                <ListItemContent>
+                  <Typography level="body-sm" color="danger">
+                    {message}
+                  </Typography>
+                </ListItemContent>
+              </ListItem>
+            );
+          })}
+        </List>
       )}
       <SubmitButton sx={{ mt: 2 }}>{label.submit}</SubmitButton>
     </Box>

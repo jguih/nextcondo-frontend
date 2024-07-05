@@ -11,7 +11,8 @@
       "subtitle_action": "Login",
       "full_name": "Full Name",
       "phone": "Phone",
-      "submit": "Create Account"
+      "submit": "Create Account",
+      "success": "Please, check your email to complete your registration"
     },
     "home": {
       "title": "Home"
@@ -42,6 +43,11 @@
     "change_theme": "Theme Dark/Light",
     "help": "Help",
     "configurations": "Configurations"
+  },
+  "validation": {
+    "invalid_login_credentials": "Incorrect email or password",
+    "invalid_email": "Invalid email address",
+    "password_too_short": "Password must contain at least {{ count }} characters"
   },
   "common": {
     "or": "or"
