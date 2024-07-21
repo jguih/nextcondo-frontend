@@ -38,22 +38,23 @@ export const login = async (
 
   const parsed = await z_loginSchema.safeParseAsync(raw);
 
-  if (parsed.success) {
-    const { error } = await supabase.auth.signInWithPassword(parsed.data);
-    if (error) {
-      return {
-        error: {
-          message: [d.validation.invalid_login_credentials],
-        },
-      };
-    }
-    revalidatePath("/", "layout");
-    redirect("/");
+  if (!parsed.success) {
+    return {
+      error: {
+        message: Object.values(parsed.error.flatten().fieldErrors).flat(),
+      },
+    };
   }
 
-  return {
-    error: {
-      message: Object.values(parsed.error.flatten().fieldErrors).flat(),
-    },
-  };
+  const { error, data } = await supabase.auth.signInWithPassword(parsed.data);
+  if (error) {
+    return {
+      error: {
+        message: [d.validation.invalid_login_credentials],
+      },
+    };
+  }
+
+  revalidatePath("/", "layout");
+  redirect("/");
 };

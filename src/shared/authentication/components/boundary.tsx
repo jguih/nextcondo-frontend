@@ -12,6 +12,7 @@ export const AuthBoundary: FC<PropsWithChildren> = ({ children }) => {
       switch (event) {
         case "SIGNED_OUT": {
           router.push("/login");
+          break;
         }
       }
     });

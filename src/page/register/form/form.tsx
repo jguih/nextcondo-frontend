@@ -1,7 +1,7 @@
 "use client";
 import { Box, FormControl, FormLabel, Input, Typography } from "@mui/joy";
 import { FC } from "react";
-import { FormState, signUp } from "./signup-action";
+import { FormState, signUp } from "./signup.action";
 import { useFormState } from "react-dom";
 import { SubmitButton } from "@/src/shared/components/utils/submit-button";
 

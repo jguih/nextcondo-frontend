@@ -1,5 +1,6 @@
 "use server";
 
+import { createApiRequest } from "@/src/data/api-client";
 import { getDictionary } from "@/src/localization/dictionaries";
 import { format } from "@/src/localization/utils";
 import { createClient } from "@/src/shared/authentication/supabase/server";
@@ -41,25 +42,29 @@ export const signUp = async (
 
   const parsed = await z_registerSchema.safeParseAsync(raw);
 
-  if (parsed.success) {
-    const data = parsed.data;
-    const { email, password, name, phone } = data;
-    await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          name,
-          phone,
-        },
-      },
-    });
-  }
-
-  if (parsed.error) {
+  if (!parsed.success) {
     return {
       error: {
         message: Object.values(parsed.error.flatten().fieldErrors).flat(),
+      },
+    };
+  }
+
+  const { email, password, name, phone } = parsed.data;
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        name,
+        phone,
+      },
+    },
+  });
+  if (error && error.code !== "user_already_exists") {
+    return {
+      error: {
+        message: [d.page.register.fail],
       },
     };
   }

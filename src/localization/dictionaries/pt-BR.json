@@ -12,7 +12,8 @@
       "full_name": "Nome completo",
       "phone": "Celular",
       "submit": "Criar Conta",
-      "success": "Por favor, verifique seu email para completar o cadastro"
+      "success": "Por favor, verifique seu email para completar o cadastro",
+      "fail": "Estamos tendo problemas ao criar sua conta no momento"
     },
     "home": {
       "title": "Home"
