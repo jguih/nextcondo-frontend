@@ -1,11 +1,13 @@
 "use server";
 
+import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/src/localization/dictionaries";
 import { format } from "@/src/localization/utils";
 import { createClient } from "@/src/shared/authentication/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { getSchema } from "./validation/schema";
 
 export interface FormState {
   error?: {
@@ -16,19 +18,19 @@ export interface FormState {
 export const login = async (
   prevState: FormState,
   formData: FormData,
-  lang: string
+  lang: Locale
 ): Promise<FormState> => {
   const d = await getDictionary(lang);
   const supabase = createClient();
-
-  const z_loginSchema = z.object({
-    email: z
-      .string({ message: d.validation.invalid_email })
-      .email({ message: d.validation.invalid_email })
-      .min(1, { message: d.validation.invalid_email }),
-    password: z.string().min(8, {
-      message: format(d.validation.password_too_short, { count: 8 }),
-    }),
+  const loginCredencialsSchema = getSchema({
+    email: {
+      invalid: d.validation.invalid_email,
+      required: d.validation.required,
+    },
+    password: {
+      invalid: d.validation.invalid,
+      required: d.validation.required,
+    },
   });
 
   const raw = {
@@ -36,7 +38,7 @@ export const login = async (
     password: formData.get("password")?.valueOf(),
   };
 
-  const parsed = await z_loginSchema.safeParseAsync(raw);
+  const parsed = await loginCredencialsSchema.safeParseAsync(raw);
 
   if (!parsed.success) {
     return {

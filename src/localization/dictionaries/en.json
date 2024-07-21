@@ -46,9 +46,11 @@
     "configurations": "Configurations"
   },
   "validation": {
-    "invalid_login_credentials": "Incorrect email or password",
+    "invalid_login_credentials": "Invalid email or password",
     "invalid_email": "Invalid email address",
-    "password_too_short": "Password must contain at least {{ count }} characters"
+    "invalid": "Invalid field",
+    "required": "Required field",
+    "password_too_short": "Passord must have at least {{ count }} characters"
   },
   "common": {
     "or": "or"

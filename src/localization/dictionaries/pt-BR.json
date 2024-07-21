@@ -48,6 +48,8 @@
   "validation": {
     "invalid_login_credentials": "Email ou senha inválidos",
     "invalid_email": "Endereço de email inválido",
+    "invalid": "Campo inválido",
+    "required": "Campo obrigatório",
     "password_too_short": "Senha deve conter pelo menos {{ count }} caracteres"
   },
   "common": {

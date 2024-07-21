@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "../globals.css";
 import ThemeRegistry from "@/src/theme-registry/components/theme-registry";
 import { AuthBoundary } from "@/src/shared/authentication/components/boundary";
+import { Locale } from "@/i18n-config";
+import { LocaleProvider } from "@/src/localization/client/LangProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,14 +17,20 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
+  params: { lang },
 }: Readonly<{
   children: React.ReactNode;
+  params: {
+    lang: Locale;
+  };
 }>) {
   return (
-    <html lang="en">
+    <html lang={lang}>
       <body>
         <ThemeRegistry>
-          <AuthBoundary>{children}</AuthBoundary>
+          <LocaleProvider lang={lang}>
+            <AuthBoundary>{children}</AuthBoundary>
+          </LocaleProvider>
         </ThemeRegistry>
       </body>
     </html>

@@ -51,6 +51,11 @@ const theme = extendTheme({
         }),
       },
     },
+    JoyInput: {
+      defaultProps: {
+        size: "lg",
+      },
+    },
   },
 });
 

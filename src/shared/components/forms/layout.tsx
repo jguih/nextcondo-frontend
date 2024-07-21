@@ -1,10 +1,9 @@
 import { Box, BoxProps } from "@mui/joy";
 import { FC } from "react";
 
-const Form: FC<BoxProps<"form">> = (props) => {
+const FormContent: FC<BoxProps> = (props) => {
   return (
     <Box
-      component={"form"}
       {...props}
       sx={[
         { display: "flex", flexDirection: "column", gap: 2, mt: 4 },
@@ -14,4 +13,4 @@ const Form: FC<BoxProps<"form">> = (props) => {
   );
 };
 
-export const Layout = { Form };
+export const Layout = { FormContent };

@@ -3,21 +3,11 @@ import { FC, Fragment } from "react";
 import { RegisterAction } from "@/src/page/login/components/register-action";
 import { getDictionary } from "../../../src/localization/dictionaries";
 import { WithLocale } from "@/src/shared/types/with-locale";
-import { SocialLoginList } from "@/src/page/login/components/social-login-list";
-import { LoginForm } from "@/src/page/login/components/login-form";
-import { LoginValidator } from "@/src/page/login/validation/LoginValidator";
+import { SocialLoginList } from "@/src/page/login/social/social-login-list";
+import { LoginForm } from "@/src/page/login/login-form";
 
 const Login: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
-  const loginValidator = new LoginValidator(d);
-  const test = await loginValidator.validatePartial("password", "");
-
-  if (test.isError) {
-    test.errors;
-  } else {
-    test.data;
-  }
-
   return (
     <Fragment>
       <Typography level="h2">{d.page.login.title}</Typography>
@@ -31,7 +21,16 @@ const Login: FC<WithLocale> = async ({ params: { lang } }) => {
           password: d.auth.password,
           submit: d.auth.login,
         }}
-        lang={lang}
+        schemaMessages={{
+          email: {
+            invalid: d.validation.invalid_email,
+            required: d.validation.required,
+          },
+          password: {
+            invalid: d.validation.invalid,
+            required: d.validation.required,
+          },
+        }}
       />
       <Link
         level="body-sm"
