@@ -3,12 +3,11 @@
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/src/localization/dictionaries";
 import { createClient } from "@/src/shared/authentication/supabase/server";
-import { getSchema } from "./validation/schema";
-import { getSchemaMessages } from "./validation/get-schema-messages";
+import { z } from "zod";
 
 export interface FormState {
   error?: {
-    message: string[];
+    messages: string[];
   };
   message?: string;
 }
@@ -20,7 +19,31 @@ export const signUp = async (
 ): Promise<FormState> => {
   const supabase = createClient();
   const d = await getDictionary(lang);
-  const createUserSchema = getSchema(getSchemaMessages(d));
+  const createUserSchema = z
+    .object({
+      email: z
+        .string({
+          invalid_type_error: d.validation.required_email,
+          required_error: d.validation.required_email,
+        })
+        .email(d.validation.required_email)
+        .min(1, d.validation.required_email),
+      password: z
+        .string({
+          invalid_type_error: d.validation.required_password,
+          required_error: d.validation.required_password,
+        })
+        .min(8, d.validation.required_password),
+      name: z
+        .string({
+          invalid_type_error: d.validation.required_full_name,
+          required_error: d.validation.required_full_name,
+        })
+        .max(255, d.validation.required_full_name)
+        .min(1, d.validation.required_full_name),
+      phone: z.string({ invalid_type_error: d.validation.required_phone }),
+    })
+    .required();
 
   const raw = {
     email: formData.get("email") as string,
@@ -34,7 +57,7 @@ export const signUp = async (
   if (!parsed.success) {
     return {
       error: {
-        message: Object.values(parsed.error.flatten().fieldErrors).flat(),
+        messages: Object.values(parsed.error.flatten().fieldErrors).flat(),
       },
     };
   }
@@ -53,7 +76,7 @@ export const signUp = async (
   if (error && error.code !== "user_already_exists") {
     return {
       error: {
-        message: [d.page.register.fail],
+        messages: [d.page.register.fail],
       },
     };
   }

@@ -1,22 +1,18 @@
 "use client";
-import {
-  Box,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Input,
-  Typography,
-} from "@mui/joy";
 import { FC } from "react";
 import { FormState, signUp } from "./signup.action";
 import { useFormState } from "react-dom";
-import { SubmitButton } from "@/src/shared/components/utils/submit-button";
 import { useLocale } from "@/src/localization/client/LangProvider";
-import { CreateUserSchemaMessages, getSchema } from "./validation/schema";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Layout } from "@/src/shared/forms/layout";
+import { FormWithValidation } from "@/src/shared/forms/form";
+import {
+  InputWithValidation,
+  InputWithValidationProps,
+  ValidationMessages,
+} from "@/src/shared/forms/input";
+import { Box, List, ListItem, ListItemContent, Typography } from "@mui/joy";
+import { ErrorList } from "@/src/shared/forms/error-list";
+import { SubmitButton } from "@/src/shared/components/utils/submit-button";
 
 interface FormProps {
   label: {
@@ -26,77 +22,88 @@ interface FormProps {
     password: string;
     submit: string;
   };
-  schemaMessages: CreateUserSchemaMessages;
+  description: {
+    phone: string;
+    email: string;
+    password: {
+      title: string;
+      rules: string;
+    };
+  };
+  validationMessages: {
+    name: Required<Pick<ValidationMessages, "valueMissing">>;
+    email: Required<Pick<ValidationMessages, "valueMissing">>;
+    password: Required<Pick<ValidationMessages, "valueMissing">>;
+  };
 }
 
-export const SignUpForm: FC<FormProps> = ({ label, schemaMessages }) => {
+export const SignUpForm: FC<FormProps> = ({
+  label,
+  validationMessages,
+  description,
+}) => {
   const lang = useLocale();
-  const schema = getSchema(schemaMessages);
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-  });
   const [state, formAction] = useFormState<FormState, FormData>(
     (state, payload) => signUp.bind(null, state, payload, lang)(),
     {}
   );
 
-  const handleAction = (formData: FormData) => {
-    handleSubmit(async () => {
-      await formAction(formData);
-    })();
-  };
+  const inputs: InputWithValidationProps[] = [
+    {
+      name: "name",
+      label: label.fullName,
+      type: "text",
+      required: true,
+      validationMessages: validationMessages.name,
+    },
+    {
+      name: "phone",
+      label: label.phone,
+      description: description.phone,
+      type: "tel",
+    },
+    {
+      name: "email",
+      label: label.email,
+      description: description.email,
+      type: "email",
+      required: true,
+      validationMessages: validationMessages.email,
+    },
+    {
+      name: "password",
+      label: label.password,
+      type: "password",
+      description: (
+        <Box>
+          <Typography level="body-sm">{description.password.title}</Typography>
+          <List sx={{ pt: 0 }} size="sm">
+            {description.password.rules.split(",").map((text, index) => (
+              <ListItem key={index}>
+                <ListItemContent>
+                  <Typography level="body-sm">{text}</Typography>
+                </ListItemContent>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      ),
+      required: true,
+      validationMessages: validationMessages.password,
+    },
+  ];
 
   return (
-    <Box component={"form"} action={handleAction}>
+    <FormWithValidation action={formAction}>
       <Layout.FormContent>
-        <FormControl error={errors.name !== undefined}>
-          <FormLabel required>{label.fullName}</FormLabel>
-          <Input slotProps={{ input: { ...register("name"), type: "text" } }} />
-          {errors.name && (
-            <FormHelperText>{errors.name.message}</FormHelperText>
-          )}
-        </FormControl>
-        <FormControl error={errors.phone !== undefined}>
-          <FormLabel>{label.phone}</FormLabel>
-          <Input slotProps={{ input: { ...register("phone"), type: "tel" } }} />
-          {errors.phone && (
-            <FormHelperText>{errors.phone.message}</FormHelperText>
-          )}
-        </FormControl>
-        <FormControl error={errors.email !== undefined}>
-          <FormLabel required>{label.email}</FormLabel>
-          <Input
-            slotProps={{ input: { ...register("email"), type: "email" } }}
-          />
-          {errors.email && (
-            <FormHelperText>{errors.email.message}</FormHelperText>
-          )}
-        </FormControl>
-        <FormControl error={errors.password !== undefined}>
-          <FormLabel required>{label.password}</FormLabel>
-          <Input
-            slotProps={{ input: { ...register("password"), type: "password" } }}
-          />
-          {errors.password && (
-            <FormHelperText>{errors.password.message}</FormHelperText>
-          )}
-        </FormControl>
-        {state.error && (
-          <Typography level="body-sm" color="danger">
-            {state.error.message}
-          </Typography>
-        )}
-        {state.message && !state.error && (
-          <Typography level="body-sm" color="success">
-            {state.message}
-          </Typography>
-        )}
-        <SubmitButton sx={{ mt: 2 }}>{label.submit}</SubmitButton>
+        {inputs.map((props, index) => (
+          <InputWithValidation {...props} key={`${index}-${props.name}`} />
+        ))}
       </Layout.FormContent>
-    </Box>
+      <Box sx={{ mt: state.error ? 2 : 4 }}>
+        {state.error && <ErrorList errors={state.error.messages} />}
+        <SubmitButton fullWidth>{label.submit}</SubmitButton>
+      </Box>
+    </FormWithValidation>
   );
 };

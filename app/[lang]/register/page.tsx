@@ -4,11 +4,10 @@ import { FC, Fragment } from "react";
 import { getDictionary } from "../../../src/localization/dictionaries";
 import { WithLocale } from "@/src/shared/types/with-locale";
 import { SignUpForm } from "@/src/page/register/signup-form";
-import { getSchemaMessages } from "@/src/page/register/validation/get-schema-messages";
+import { format } from "@/src/localization/utils";
 
 const Register: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
-  const schemaMessages = getSchemaMessages(d);
   return (
     <Fragment>
       <Typography level="h2">{d.page.register.title}</Typography>
@@ -24,7 +23,29 @@ const Register: FC<WithLocale> = async ({ params: { lang } }) => {
           phone: d.page.register.phone,
           submit: d.page.register.submit,
         }}
-        schemaMessages={schemaMessages}
+        description={{
+          phone: d.validation.required_phone,
+          email: d.validation.required_email,
+          password: {
+            title: d.page.register.password_must_have,
+            rules: format(d.page.register.password_rules, {
+              chars: 8,
+              specials: 1,
+              numbers: 1,
+            }),
+          },
+        }}
+        validationMessages={{
+          email: {
+            valueMissing: d.validation.required_email_without_example,
+          },
+          name: {
+            valueMissing: d.validation.required_full_name,
+          },
+          password: {
+            valueMissing: d.validation.required_new_password,
+          },
+        }}
       />
     </Fragment>
   );

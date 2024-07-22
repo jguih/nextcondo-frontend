@@ -13,7 +13,9 @@
       "phone": "Phone",
       "submit": "Create Account",
       "success": "Please, check your email to complete your registration",
-      "fail": "We are having problems while attempting to create your account"
+      "fail": "We are having problems while attempting to create your account",
+      "password_must_have": "Must have:",
+      "password_rules": "At least 8 characters, At least one special character, At least one number"
     },
     "home": {
       "title": "Home"
@@ -47,8 +49,12 @@
   },
   "validation": {
     "invalid_login_credentials": "Invalid email or password",
-    "required_or_invalid_email": "Enter an email address in the correct format, like name@exemple.com",
+    "required_email": "Enter an email address in the correct format, like name@exemple.com",
+    "required_email_without_example": "Enter an email address in the correct format",
+    "required_phone": "Enter a valid phone number, like (00) 0000-0000",
     "required_password": "Enter your password",
+    "required_new_password": "Enter a valid password",
+    "required_full_name": "Enter your full name",
     "password_too_short": "Passord must have at least {{ count }} characters"
   },
   "common": {

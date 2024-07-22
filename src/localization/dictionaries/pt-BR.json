@@ -13,7 +13,9 @@
       "phone": "Celular",
       "submit": "Criar Conta",
       "success": "Por favor, verifique seu email para completar o cadastro",
-      "fail": "Estamos tendo problemas ao criar sua conta no momento"
+      "fail": "Estamos tendo problemas ao criar sua conta no momento",
+      "password_must_have": "Deve conter:",
+      "password_rules": "Pelo menos {{ chars }} caracteres, Pelo menos {{ specials }} caractere especial, Pelo menos {{ numbers }} número"
     },
     "home": {
       "title": "Home"
@@ -47,8 +49,12 @@
   },
   "validation": {
     "invalid_login_credentials": "Email ou senha inválidos",
-    "required_or_invalid_email": "Informe um endereço de email válido, exemplo: nome@exemplo.com",
+    "required_email": "Informe um endereço de email válido, exemplo: nome@exemplo.com",
+    "required_email_without_example": "Informe um endereço de email válido",
+    "required_phone": "Informe um número de celular válido no formato (00) 0000-0000",
     "required_password": "Informe sua senha",
+    "required_new_password": "Informe uma senha válida",
+    "required_full_name": "Informe seu nome completo",
     "password_too_short": "Senha deve conter pelo menos {{ count }} caracteres"
   },
   "common": {

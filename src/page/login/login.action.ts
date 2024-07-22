@@ -24,11 +24,11 @@ export const login = async (
     .object({
       email: z
         .string({
-          invalid_type_error: d.validation.required_or_invalid_email,
-          required_error: d.validation.required_or_invalid_email,
+          invalid_type_error: d.validation.required_email,
+          required_error: d.validation.required_email,
         })
-        .email(d.validation.required_or_invalid_email)
-        .min(1, d.validation.required_or_invalid_email),
+        .email(d.validation.required_email)
+        .min(1, d.validation.required_email),
       password: z
         .string({
           invalid_type_error: d.validation.required_password,

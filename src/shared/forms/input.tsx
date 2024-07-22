@@ -3,6 +3,7 @@ import {
   FormHelperText,
   FormLabel,
   Input as JoyInput,
+  Typography,
 } from "@mui/joy";
 import {
   ChangeEventHandler,
@@ -22,6 +23,7 @@ export type ValidationMessages = Omit<
 
 export type InputWithValidationProps = {
   label: string | ReactElement;
+  description?: string | ReactElement;
   name: string;
   /** @default false */
   required?: boolean;
@@ -30,6 +32,7 @@ export type InputWithValidationProps = {
 
 export const InputWithValidation: FC<InputWithValidationProps> = ({
   label,
+  description,
   name,
   required = false,
   validationMessages,
@@ -90,6 +93,13 @@ export const InputWithValidation: FC<InputWithValidationProps> = ({
   return (
     <FormControl error={error !== null} required={required}>
       {typeof label === "string" ? <FormLabel>{label}</FormLabel> : label}
+      {typeof description === "string" ? (
+        <Typography level="body-sm" sx={{ mb: 1 }}>
+          {description}
+        </Typography>
+      ) : (
+        description
+      )}
       <JoyInput
         slotProps={{
           input: {

@@ -60,6 +60,20 @@ const theme = extendTheme({
       defaultProps: {
         size: "lg",
       },
+      styleOverrides: {
+        root: ({ ownerState, theme }) => ({
+          ...(ownerState.error && {
+            borderLeftWidth: theme.spacing(0.5),
+            borderRadius: theme.vars.radius.xs,
+            paddingLeft: theme.spacing(2),
+            borderLeftColor: `rgba(${theme.vars.palette.danger.mainChannel})`,
+            [theme.getColorSchemeSelector("dark")]: {
+              borderLeftColor: `rgba(${theme.vars.palette.danger.darkChannel})`,
+            },
+            borderLeftStyle: "solid",
+          }),
+        }),
+      },
     },
   },
 });

@@ -23,8 +23,8 @@ const Login: FC<WithLocale> = async ({ params: { lang } }) => {
         }}
         validationMessages={{
           email: {
-            typeMismatch: d.validation.required_or_invalid_email,
-            valueMissing: d.validation.required_or_invalid_email,
+            typeMismatch: d.validation.required_email,
+            valueMissing: d.validation.required_email,
           },
           password: {
             valueMissing: d.validation.required_password,
