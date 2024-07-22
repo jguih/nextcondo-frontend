@@ -3,7 +3,7 @@ export const format = (
   props: Record<string, string | number>
 ): string => {
   let newEntry = entry;
-  for (var prop in props) {
+  for (const prop in props) {
     newEntry = newEntry.replace(
       new RegExp("{{ " + prop + " }}", "g"),
       String(props[prop])

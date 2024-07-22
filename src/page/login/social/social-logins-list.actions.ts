@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export const signInWithGoogle = async () => {
   const supabase = createClient();
 
-  const { data, error } = await supabase.auth.signInWithOAuth({
+  const { data } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
       redirectTo: "http://localhost:3000/auth/callback",

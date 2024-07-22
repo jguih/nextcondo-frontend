@@ -2,16 +2,14 @@
 
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/src/localization/dictionaries";
-import { format } from "@/src/localization/utils";
 import { createClient } from "@/src/shared/authentication/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { getSchema } from "./validation/schema";
 
 export interface FormState {
   error?: {
-    message: string[];
+    messages: string[];
   };
 }
 
@@ -22,16 +20,23 @@ export const login = async (
 ): Promise<FormState> => {
   const d = await getDictionary(lang);
   const supabase = createClient();
-  const loginCredencialsSchema = getSchema({
-    email: {
-      invalid: d.validation.invalid_email,
-      required: d.validation.required,
-    },
-    password: {
-      invalid: d.validation.invalid,
-      required: d.validation.required,
-    },
-  });
+  const loginCredencialsSchema = z
+    .object({
+      email: z
+        .string({
+          invalid_type_error: d.validation.required_or_invalid_email,
+          required_error: d.validation.required_or_invalid_email,
+        })
+        .email(d.validation.required_or_invalid_email)
+        .min(1, d.validation.required_or_invalid_email),
+      password: z
+        .string({
+          invalid_type_error: d.validation.required_password,
+          required_error: d.validation.required_password,
+        })
+        .min(1, d.validation.required_password),
+    })
+    .required();
 
   const raw = {
     email: formData.get("email")?.valueOf(),
@@ -43,16 +48,16 @@ export const login = async (
   if (!parsed.success) {
     return {
       error: {
-        message: Object.values(parsed.error.flatten().fieldErrors).flat(),
+        messages: Object.values(parsed.error.flatten().fieldErrors).flat(),
       },
     };
   }
 
-  const { error, data } = await supabase.auth.signInWithPassword(parsed.data);
+  const { error } = await supabase.auth.signInWithPassword(parsed.data);
   if (error) {
     return {
       error: {
-        message: [d.validation.invalid_login_credentials],
+        messages: [d.validation.invalid_login_credentials],
       },
     };
   }

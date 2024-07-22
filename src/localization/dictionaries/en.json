@@ -47,9 +47,8 @@
   },
   "validation": {
     "invalid_login_credentials": "Invalid email or password",
-    "invalid_email": "Invalid email address",
-    "invalid": "Invalid field",
-    "required": "Required field",
+    "required_or_invalid_email": "Enter an email address in the correct format, like name@exemple.com",
+    "required_password": "Enter your password",
     "password_too_short": "Passord must have at least {{ count }} characters"
   },
   "common": {

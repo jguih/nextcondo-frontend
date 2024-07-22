@@ -1,10 +1,10 @@
 "use server";
 
-import { createApiRequest } from "@/src/data/api-client";
+import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/src/localization/dictionaries";
-import { format } from "@/src/localization/utils";
 import { createClient } from "@/src/shared/authentication/supabase/server";
-import { z } from "zod";
+import { getSchema } from "./validation/schema";
+import { getSchemaMessages } from "./validation/get-schema-messages";
 
 export interface FormState {
   error?: {
@@ -16,22 +16,11 @@ export interface FormState {
 export const signUp = async (
   prevState: FormState,
   formData: FormData,
-  lang: string
+  lang: Locale
 ): Promise<FormState> => {
   const supabase = createClient();
   const d = await getDictionary(lang);
-
-  const z_registerSchema = z.object({
-    email: z
-      .string({ message: d.validation.invalid_email })
-      .email({ message: d.validation.invalid_email })
-      .min(1, { message: d.validation.invalid_email }),
-    password: z.string().min(8, {
-      message: format(d.validation.password_too_short, { count: 8 }),
-    }),
-    name: z.string().max(255),
-    phone: z.string(),
-  });
+  const createUserSchema = getSchema(getSchemaMessages(d));
 
   const raw = {
     email: formData.get("email") as string,
@@ -40,7 +29,7 @@ export const signUp = async (
     phone: formData.get("phone") as string,
   };
 
-  const parsed = await z_registerSchema.safeParseAsync(raw);
+  const parsed = await createUserSchema.safeParseAsync(raw);
 
   if (!parsed.success) {
     return {

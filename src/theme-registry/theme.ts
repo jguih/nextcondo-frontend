@@ -56,6 +56,11 @@ const theme = extendTheme({
         size: "lg",
       },
     },
+    JoyFormControl: {
+      defaultProps: {
+        size: "lg",
+      },
+    },
   },
 });
 

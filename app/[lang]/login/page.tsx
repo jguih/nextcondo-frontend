@@ -21,14 +21,13 @@ const Login: FC<WithLocale> = async ({ params: { lang } }) => {
           password: d.auth.password,
           submit: d.auth.login,
         }}
-        schemaMessages={{
+        validationMessages={{
           email: {
-            invalid: d.validation.invalid_email,
-            required: d.validation.required,
+            typeMismatch: d.validation.required_or_invalid_email,
+            valueMissing: d.validation.required_or_invalid_email,
           },
           password: {
-            invalid: d.validation.invalid,
-            required: d.validation.required,
+            valueMissing: d.validation.required_password,
           },
         }}
       />
