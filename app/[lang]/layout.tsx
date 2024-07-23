@@ -4,6 +4,7 @@ import ThemeRegistry from "@/src/theme-registry/components/theme-registry";
 import { AuthBoundary } from "@/src/shared/authentication/components/boundary";
 import { Locale } from "@/i18n-config";
 import { LocaleProvider } from "@/src/localization/client/LangProvider";
+import { EnvProvider } from "@/src/shared/env/context";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body>
         <ThemeRegistry>
           <LocaleProvider lang={lang}>
-            <AuthBoundary>{children}</AuthBoundary>
+            <EnvProvider>
+              <AuthBoundary>{children}</AuthBoundary>
+            </EnvProvider>
           </LocaleProvider>
         </ThemeRegistry>
       </body>

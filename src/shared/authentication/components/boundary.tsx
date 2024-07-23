@@ -1,10 +1,10 @@
 "use client";
 import { FC, PropsWithChildren, useEffect } from "react";
-import { createClient } from "../supabase/client";
+import { useSupabaseClient } from "../supabase/client";
 import { useRouter } from "next/navigation";
 
 export const AuthBoundary: FC<PropsWithChildren> = ({ children }) => {
-  const supabase = createClient();
+  const supabase = useSupabaseClient();
   const router = useRouter();
 
   useEffect(() => {

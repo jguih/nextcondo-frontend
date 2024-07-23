@@ -1,0 +1,10 @@
+services:
+  nextcondo-test:
+    image: nextcondo-test
+    container_name: nextcondo-test
+    restart: unless-stopped
+    ports:
+      - 3000:80
+    environment:
+      NEXT_PUBLIC_SUPABASE_URL: https://wtvtifqsswylqohvmnqy.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0dnRpZnFzc3d5bHFvaHZtbnF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc1ODY2NjQsImV4cCI6MjAzMzE2MjY2NH0.JSDfaIZsfXTXCMvukUxR38e_WSlmDt3bLKDG0oN0WH4

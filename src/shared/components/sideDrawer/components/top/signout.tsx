@@ -1,13 +1,13 @@
 "use client";
 
-import { createClient } from "@/src/shared/authentication/supabase/client";
+import { useSupabaseClient } from "@/src/shared/authentication/supabase/client";
 import { LogoutRounded } from "@mui/icons-material";
 import { IconButton } from "@mui/joy";
 import { FC, useEffect, useState } from "react";
 
 export const SignOut: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const supabase = createClient();
+  const supabase = useSupabaseClient();
 
   const handleSignOut = () => {
     setIsLoading(true);
