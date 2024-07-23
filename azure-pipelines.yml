@@ -14,7 +14,9 @@ steps:
     inputs:
       key: next | $(Agent.OS) | package-lock.json
       path: '$(System.DefaultWorkingDirectory)/.next/cache'
-  - script: |
-      npm install
-      npm run build
-    displayName: 'npm install and build'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'azure'
+      repository: 'thejguih/nextcondo'
+      command: 'buildAndPush'
+      Dockerfile: '**/Dockerfile'
