@@ -6,16 +6,37 @@
 pr:
 - master
 
-pool:
-  vmImage: ubuntu-latest
+pool: "Home Server"
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+stages:
+- stage: build
+  jobs:
+  - job: run_build
+    pool: "Home Server"
+    steps:
+    - task: Cache@2
+      displayName: 'Cache .next/cache'
+      inputs:
+        key: next | $(Agent.OS) | package-lock.json
+        path: '$(System.DefaultWorkingDirectory)/.next/cache'
+    - script: |
+        npm install
+      displayName: 'install dependencies'
+    - script: |
+        npm run build
+      displayName: 'npm build'
+    - task: CopyFiles@2
+      displayName: 'Copy .next/standalone to staging directory'
+      inputs:
+        SourceFolder: '.next/standalone'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/standalone'
+    - task: CopyFiles@2
+      displayName: 'Copy .next/static to staging directory'
+      inputs:
+        SourceFolder: '.next/static'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/static'
+    - publish: '$(Build.ArtifactStagingDirectory)'
+      displayName: 'Publish Nextapp'
+      artifact: nextapp
