@@ -28,7 +28,7 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   if (!token) return;
 
   try {
-    const response = await fetch(`${process.env.PROJECT_SIMPLIFY_API}/Users`, {
+    const response = await fetch(`${process.env.NEXTCONDO_API}/Users`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const users = await response.json();

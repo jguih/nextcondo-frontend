@@ -1,5 +1,5 @@
 import { LoginAction } from "@/src/page/register/components/login-action";
-import { Typography } from "@mui/joy";
+import { Box, Typography } from "@mui/joy";
 import { FC, Fragment } from "react";
 import { getDictionary } from "../../../src/localization/dictionaries";
 import { WithLocale } from "@/src/shared/types/with-locale";
@@ -23,27 +23,26 @@ const Register: FC<WithLocale> = async ({ params: { lang } }) => {
           phone: d.page.register.phone,
           submit: d.page.register.submit,
         }}
+        goToLoginPageActionMessage={d.page.register.go_to_login_page}
         description={{
-          phone: d.validation.required_phone,
-          email: d.validation.required_email,
-          password: {
-            title: d.page.register.password_must_have,
-            rules: format(d.page.register.password_rules, {
-              chars: 8,
-              specials: 1,
-              numbers: 1,
-            }),
-          },
+          phone: d.page.register.phone_description,
+          email: d.page.register.email_description,
+          password: format(d.page.register.password_description, {
+            min: 8,
+            max: 30,
+          }),
         }}
         validationMessages={{
           email: {
             valueMissing: d.validation.required_email_without_example,
+            typeMismatch: d.validation.required_email_without_example,
           },
           name: {
             valueMissing: d.validation.required_full_name,
           },
           password: {
-            valueMissing: d.validation.required_new_password,
+            tooLong: d.validation.required_new_password,
+            tooShort: d.validation.required_new_password,
           },
         }}
       />

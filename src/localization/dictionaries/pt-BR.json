@@ -10,12 +10,14 @@
       "subtitle": "Já tem uma conta?",
       "subtitle_action": "Faça login",
       "full_name": "Nome completo",
-      "phone": "Celular",
+      "phone": "Número de celular (Opcional)",
       "submit": "Criar Conta",
-      "success": "Por favor, verifique seu email para completar o cadastro",
+      "success": "Verifique seu email para completar o cadastro.",
       "fail": "Estamos tendo problemas ao criar sua conta no momento",
-      "password_must_have": "Deve conter:",
-      "password_rules": "Pelo menos {{ chars }} caracteres, Pelo menos {{ specials }} caractere especial, Pelo menos {{ numbers }} número"
+      "go_to_login_page": "Ir para a página de login",
+      "password_description": "Deve conter pelo menos {{ min }} caracteres e no máximo {{ max }}.",
+      "email_description": "Informe um endereço de email válido, exemplo: nome@exemplo.com",
+      "phone_description": "Caso queira que outros entrem em contato com você."
     },
     "home": {
       "title": "Home"
@@ -55,7 +57,8 @@
     "required_password": "Informe sua senha",
     "required_new_password": "Informe uma senha válida",
     "required_full_name": "Informe seu nome completo",
-    "password_too_short": "Senha deve conter pelo menos {{ count }} caracteres"
+    "password_too_short_plural": "Senha deve conter pelo menos {{ count }} caracteres",
+    "password_too_long_plural": "Senha deve conter no máximo {{ count }} caracteres"
   },
   "common": {
     "or": "ou"

@@ -1,16 +1,30 @@
 "use server";
 
 import { Locale } from "@/i18n-config";
+import { registerUser } from "@/src/data/user";
 import { getDictionary } from "@/src/localization/dictionaries";
 import { createClient } from "@/src/shared/authentication/supabase/server";
 import { z } from "zod";
 
 export interface FormState {
+  submited: boolean;
   error?: {
-    messages: string[];
+    message: string;
   };
   message?: string;
 }
+
+const createUserSchema = z
+  .object({
+    email: z.string().email().min(1),
+    password: z.string().min(8).max(30),
+    name: z.string().max(255).min(1),
+    phone: z
+      .string()
+      .nullable()
+      .transform((x) => x || null),
+  })
+  .required();
 
 export const signUp = async (
   prevState: FormState,
@@ -19,31 +33,6 @@ export const signUp = async (
 ): Promise<FormState> => {
   const supabase = createClient();
   const d = await getDictionary(lang);
-  const createUserSchema = z
-    .object({
-      email: z
-        .string({
-          invalid_type_error: d.validation.required_email,
-          required_error: d.validation.required_email,
-        })
-        .email(d.validation.required_email)
-        .min(1, d.validation.required_email),
-      password: z
-        .string({
-          invalid_type_error: d.validation.required_password,
-          required_error: d.validation.required_password,
-        })
-        .min(8, d.validation.required_password),
-      name: z
-        .string({
-          invalid_type_error: d.validation.required_full_name,
-          required_error: d.validation.required_full_name,
-        })
-        .max(255, d.validation.required_full_name)
-        .min(1, d.validation.required_full_name),
-      phone: z.string({ invalid_type_error: d.validation.required_phone }),
-    })
-    .required();
 
   const raw = {
     email: formData.get("email") as string,
@@ -56,14 +45,15 @@ export const signUp = async (
 
   if (!parsed.success) {
     return {
+      submited: true,
       error: {
-        messages: Object.values(parsed.error.flatten().fieldErrors).flat(),
+        message: d.page.register.fail,
       },
     };
   }
 
   const { email, password, name, phone } = parsed.data;
-  const { error } = await supabase.auth.signUp({
+  const { error, data } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -75,13 +65,18 @@ export const signUp = async (
   });
   if (error && error.code !== "user_already_exists") {
     return {
+      submited: true,
       error: {
-        messages: [d.page.register.fail],
+        message: d.page.register.fail,
       },
     };
   }
 
-  return {
-    message: d.page.register.success,
-  };
+  if (data.session)
+    await registerUser(data.session, {
+      fullName: parsed.data.name,
+      phone: parsed.data.phone,
+    });
+
+  return { submited: true, message: d.page.register.success };
 };

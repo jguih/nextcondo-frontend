@@ -10,9 +10,19 @@ import {
   InputWithValidationProps,
   ValidationMessages,
 } from "@/src/shared/forms/input";
-import { Box, List, ListItem, ListItemContent, Typography } from "@mui/joy";
+import {
+  Box,
+  Button,
+  LinearProgress,
+  Link,
+  List,
+  ListItem,
+  ListItemContent,
+  Typography,
+} from "@mui/joy";
 import { ErrorList } from "@/src/shared/forms/error-list";
 import { SubmitButton } from "@/src/shared/components/utils/submit-button";
+import { useRouter } from "next/navigation";
 
 interface FormProps {
   label: {
@@ -25,27 +35,27 @@ interface FormProps {
   description: {
     phone: string;
     email: string;
-    password: {
-      title: string;
-      rules: string;
-    };
+    password: string;
   };
   validationMessages: {
     name: Required<Pick<ValidationMessages, "valueMissing">>;
-    email: Required<Pick<ValidationMessages, "valueMissing">>;
-    password: Required<Pick<ValidationMessages, "valueMissing">>;
+    email: Required<Pick<ValidationMessages, "valueMissing" | "typeMismatch">>;
+    password: Required<Pick<ValidationMessages, "tooShort" | "tooLong">>;
   };
+  goToLoginPageActionMessage: string;
 }
 
 export const SignUpForm: FC<FormProps> = ({
   label,
   validationMessages,
   description,
+  goToLoginPageActionMessage,
 }) => {
+  const router = useRouter();
   const lang = useLocale();
   const [state, formAction] = useFormState<FormState, FormData>(
     (state, payload) => signUp.bind(null, state, payload, lang)(),
-    {}
+    { submited: false }
   );
 
   const inputs: InputWithValidationProps[] = [
@@ -74,24 +84,37 @@ export const SignUpForm: FC<FormProps> = ({
       name: "password",
       label: label.password,
       type: "password",
-      description: (
-        <Box>
-          <Typography level="body-sm">{description.password.title}</Typography>
-          <List sx={{ pt: 0 }} size="sm">
-            {description.password.rules.split(",").map((text, index) => (
-              <ListItem key={index}>
-                <ListItemContent>
-                  <Typography level="body-sm">{text}</Typography>
-                </ListItemContent>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      ),
+      description: description.password,
       required: true,
+      minLength: 8,
+      maxLength: 30,
       validationMessages: validationMessages.password,
     },
   ];
+
+  if (!state.error && state.submited) {
+    return (
+      <Box
+        sx={{
+          marginTop: "auto",
+          display: "block",
+        }}
+      >
+        <Typography level="body-md" color="success">
+          {state.message}
+        </Typography>
+        <Button
+          fullWidth
+          sx={{ mt: 2 }}
+          onClick={() => {
+            router.push("/login");
+          }}
+        >
+          {goToLoginPageActionMessage}
+        </Button>
+      </Box>
+    );
+  }
 
   return (
     <FormWithValidation action={formAction}>
@@ -100,8 +123,12 @@ export const SignUpForm: FC<FormProps> = ({
           <InputWithValidation {...props} key={`${index}-${props.name}`} />
         ))}
       </Layout.FormContent>
-      <Box sx={{ mt: state.error ? 2 : 4 }}>
-        {state.error && <ErrorList errors={state.error.messages} />}
+      <Box sx={{ mt: 2 }}>
+        {state.error && (
+          <Typography color="danger" sx={{ mb: 1 }}>
+            {state.error.message}
+          </Typography>
+        )}
         <SubmitButton fullWidth>{label.submit}</SubmitButton>
       </Box>
     </FormWithValidation>
