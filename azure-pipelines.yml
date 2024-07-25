@@ -8,15 +8,86 @@ trigger:
 
 pool: "Home Server"
 
-steps:
-  - task: Cache@2
-    displayName: 'Cache .next/cache'
-    inputs:
-      key: next | $(Agent.OS) | package-lock.json
-      path: '$(System.DefaultWorkingDirectory)/.next/cache'
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'azure'
-      repository: 'thejguih/nextcondo'
-      command: 'buildAndPush'
-      Dockerfile: '**/Dockerfile'
+stages:
+- stage: build
+  jobs:
+  - job: run_build
+    pool: "Home Server"
+    steps:
+    - task: Cache@2
+      displayName: 'Cache .next/cache'
+      inputs:
+        key: next | $(Agent.OS) | package-lock.json
+        path: '$(System.DefaultWorkingDirectory)/.next/cache'
+    - script: |
+        npm install
+      displayName: 'install dependencies'
+    - script: |
+        npm run build
+      displayName: 'npm build'
+    - task: CopyFiles@2
+      displayName: 'Copy .next/standalone to staging directory'
+      inputs:
+        SourceFolder: '.next/standalone'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/standalone'
+    - task: CopyFiles@2
+      displayName: 'Copy .next/static to staging directory'
+      inputs:
+        SourceFolder: '.next/static'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/static'
+    - publish: '$(Build.ArtifactStagingDirectory)'
+      displayName: 'Publish Nextapp'
+      artifact: nextapp
+  
+# - stage: test
+#   dependsOn: build
+#   jobs:
+#   - job: run_test
+#     pool: "Home Server"
+#     steps:
+#     - download: current
+#       artifact: nextapp
+#     - script: ls $(Pipeline.Workspace)/nextapp
+
+- stage: buildDockerImage
+  dependsOn: build
+  jobs:
+  - job: run_buildDockerImage
+    pool: "Home Server"
+    steps:
+    - download: current
+      artifact: nextapp
+    - task: CopyFiles@2
+      displayName: 'Copy nextapp/standalone to working directory'
+      inputs:
+        SourceFolder: '$(Pipeline.Workspace)/nextapp/standalone'
+        Contents: '**'
+        TargetFolder: '.next/standalone'
+    - task: CopyFiles@2
+      displayName: 'Copy nextapp/static to working directory'
+      inputs:
+        SourceFolder: '$(Pipeline.Workspace)/nextapp/static'
+        Contents: '**'
+        TargetFolder: '.next/static'
+    - task: Docker@2
+      displayName: 'Build docker image'
+      inputs:
+        containerRegistry: 'azure'
+        repository: 'thejguih/nextcondo'
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
+        tags: 'beta-0.$(Build.BuildId)'
+    - task: Docker@2
+      displayName: 'Publish image to docker-hub'
+      inputs:
+        containerRegistry: 'azure'
+        repository: 'thejguih/nextcondo'
+        command: 'push'
+        tags: 'beta-0.$(Build.BuildId)'
+    - script: |
+        docker rmi thejguih/nextcondo:beta-0.$(Build.BuildId)
+      displayName: "Remove image from host"
+    
+
