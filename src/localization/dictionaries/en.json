@@ -10,12 +10,14 @@
       "subtitle": "Already registered?",
       "subtitle_action": "Login",
       "full_name": "Full Name",
-      "phone": "Phone",
+      "phone": "Phone number (Optional)",
       "submit": "Create Account",
       "success": "Please, check your email to complete your registration",
       "fail": "We are having problems while attempting to create your account",
-      "password_must_have": "Must have:",
-      "password_rules": "At least 8 characters, At least one special character, At least one number"
+      "go_to_login_page": "Go to login page",
+      "password_description": "Must have at least {{ min }} characters and at most {{ max }}.",
+      "email_description": "Enter a valid email address, like nome@exemplo.com",
+      "phone_description": "If you want others to contact you."
     },
     "home": {
       "title": "Home"
@@ -55,7 +57,8 @@
     "required_password": "Enter your password",
     "required_new_password": "Enter a valid password",
     "required_full_name": "Enter your full name",
-    "password_too_short": "Passord must have at least {{ count }} characters"
+    "password_too_short_plural": "Passord must have at least {{ count }} characters",
+    "password_too_long_plural": "Password must have at most {{ count }} caracteres"
   },
   "common": {
     "or": "or"

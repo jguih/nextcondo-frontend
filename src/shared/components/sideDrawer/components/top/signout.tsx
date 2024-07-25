@@ -15,8 +15,7 @@ export const SignOut: FC = () => {
 
   useEffect(() => {
     const signOut = async () => {
-      await supabase.auth.signOut();
-      setIsLoading(false);
+      await supabase.auth.signOut().then(() => setIsLoading(false));
     };
     if (isLoading) {
       signOut();
