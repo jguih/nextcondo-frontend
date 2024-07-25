@@ -2,7 +2,6 @@
 
 import { Locale } from "@/i18n-config";
 import { registerUser } from "@/src/data/user";
-import { sendResponse } from "@/src/data/utils";
 import { getDictionary } from "@/src/localization/dictionaries";
 import { createClient } from "@/src/shared/authentication/supabase/server";
 import { z } from "zod";

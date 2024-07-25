@@ -57,7 +57,8 @@
     "required_password": "Enter your password",
     "required_new_password": "Enter a valid password",
     "required_full_name": "Enter your full name",
-    "password_too_short": "Passord must have at least {{ count }} characters"
+    "password_too_short_plural": "Passord must have at least {{ count }} characters",
+    "password_too_long_plural": "Password must have at most {{ count }} caracteres"
   },
   "common": {
     "or": "or"

@@ -8,7 +8,7 @@ export const parseNextCondoApiAddress = (endpoint: string) => {
   return `${process.env.NEXTCONDO_API}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
 };
 
-export const fetchNextCondoApi = <Body extends object = {}>({
+export const fetchNextCondoApi = <Body extends object>({
   endpoint,
   token,
   body,

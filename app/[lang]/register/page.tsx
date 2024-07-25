@@ -1,5 +1,5 @@
 import { LoginAction } from "@/src/page/register/components/login-action";
-import { Box, Typography } from "@mui/joy";
+import { Typography } from "@mui/joy";
 import { FC, Fragment } from "react";
 import { getDictionary } from "../../../src/localization/dictionaries";
 import { WithLocale } from "@/src/shared/types/with-locale";
@@ -42,7 +42,12 @@ const Register: FC<WithLocale> = async ({ params: { lang } }) => {
           },
           password: {
             valueMissing: d.validation.required_new_password,
-            tooShort: d.validation.required_new_password,
+            tooShort: format(d.validation.password_too_short_plural, {
+              count: 8,
+            }),
+            tooLong: format(d.validation.password_too_long_plural, {
+              count: 30,
+            }),
           },
         }}
       />

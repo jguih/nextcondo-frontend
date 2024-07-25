@@ -10,17 +10,7 @@ import {
   InputWithValidationProps,
   ValidationMessages,
 } from "@/src/shared/forms/input";
-import {
-  Box,
-  Button,
-  LinearProgress,
-  Link,
-  List,
-  ListItem,
-  ListItemContent,
-  Typography,
-} from "@mui/joy";
-import { ErrorList } from "@/src/shared/forms/error-list";
+import { Box, Button, Typography } from "@mui/joy";
 import { SubmitButton } from "@/src/shared/components/utils/submit-button";
 import { useRouter } from "next/navigation";
 
@@ -40,7 +30,9 @@ interface FormProps {
   validationMessages: {
     name: Required<Pick<ValidationMessages, "valueMissing">>;
     email: Required<Pick<ValidationMessages, "valueMissing" | "typeMismatch">>;
-    password: Required<Pick<ValidationMessages, "tooShort" | "valueMissing">>;
+    password: Required<
+      Pick<ValidationMessages, "tooShort" | "tooLong" | "valueMissing">
+    >;
   };
   goToLoginPageActionMessage: string;
 }
