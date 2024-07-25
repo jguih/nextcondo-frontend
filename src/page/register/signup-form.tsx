@@ -40,7 +40,7 @@ interface FormProps {
   validationMessages: {
     name: Required<Pick<ValidationMessages, "valueMissing">>;
     email: Required<Pick<ValidationMessages, "valueMissing" | "typeMismatch">>;
-    password: Required<Pick<ValidationMessages, "tooShort" | "tooLong">>;
+    password: Required<Pick<ValidationMessages, "tooShort" | "valueMissing">>;
   };
   goToLoginPageActionMessage: string;
 }

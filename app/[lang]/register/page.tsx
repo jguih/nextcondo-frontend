@@ -41,7 +41,7 @@ const Register: FC<WithLocale> = async ({ params: { lang } }) => {
             valueMissing: d.validation.required_full_name,
           },
           password: {
-            tooLong: d.validation.required_new_password,
+            valueMissing: d.validation.required_new_password,
             tooShort: d.validation.required_new_password,
           },
         }}

@@ -3,7 +3,7 @@ import "server-only";
 
 export const parseNextCondoApiAddress = (endpoint: string) => {
   if (!process.env.NEXTCONDO_API) {
-    throw new Error("PROJECT_SIMPLIFY_API env empty, check .env vars");
+    throw new Error("NEXTCONDO_API env empty, check .env vars");
   }
   return `${process.env.NEXTCONDO_API}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
 };
@@ -17,7 +17,7 @@ export const fetchNextCondoApi = <Body extends object = {}>({
   endpoint: string;
   token: string;
   body?: Body;
-  options?: RequestInit;
+  options?: Omit<RequestInit, "body">;
 }) => {
   return fetch(parseNextCondoApiAddress(endpoint), {
     headers: {
@@ -28,4 +28,8 @@ export const fetchNextCondoApi = <Body extends object = {}>({
     body: JSON.stringify(body),
     ...options,
   });
+};
+
+export const sendResponse = async (response: Response) => {
+  return await response.json();
 };
