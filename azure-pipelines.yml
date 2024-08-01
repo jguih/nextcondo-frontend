@@ -51,11 +51,15 @@ stages:
     displayName: "Test nextapp"
     steps:
     - task: Npm@1
+      inputs:
+        command: 'install'
+        workingDir: '$(System.DefaultWorkingDirectory)'
+    - task: Npm@1
       displayName: "Run Tests"
       inputs:
-        command: "custom"
-        workingDir: "./"
-        customCommand: "test" 
+        command: 'custom'
+        workingDir: '$(System.DefaultWorkingDirectory)'
+        customCommand: 'test'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
