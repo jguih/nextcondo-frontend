@@ -97,7 +97,7 @@ stages:
           TargetFolder: '$(System.DefaultWorkingDirectory)/release'
           CleanTargetFolder: true
       - script: |
-          ls $(System.DefaultWorkingDirectory)/release
+          ls $(Pipeline.Workspace)/nextapp
 
 - stage: deploy
   dependsOn: test
