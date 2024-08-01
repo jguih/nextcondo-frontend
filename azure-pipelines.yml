@@ -90,15 +90,9 @@ stages:
           - task: CopyFiles@2
             displayName: 'Copy nextapp/standalone to working directory'
             inputs:
-              SourceFolder: '$(Pipeline.Workspace)/nextapp/standalone'
+              SourceFolder: '$(Pipeline.Workspace)/nextapp'
               Contents: '**'
-              TargetFolder: '.next/standalone'
-          - task: CopyFiles@2
-            displayName: 'Copy nextapp/static to working directory'
-            inputs:
-              SourceFolder: '$(Pipeline.Workspace)/nextapp/static'
-              Contents: '**'
-              TargetFolder: '.next/static'
+              TargetFolder: '$(System.DefaultWorkingDirectory)/release'
           - task: Docker@2
             displayName: 'Build docker image'
             inputs:
