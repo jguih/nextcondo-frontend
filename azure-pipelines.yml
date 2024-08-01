@@ -22,11 +22,16 @@ stages:
       inputs:
         key: next | $(Agent.OS) | package-lock.json
         path: '$(System.DefaultWorkingDirectory)/.next/cache'
-    - script: |
-        npm install
+    - task: Npm@1
+      inputs:
+        command: 'install'
+        workingDir: '$(System.DefaultWorkingDirectory)'
       displayName: 'install dependencies'
-    - script: |
-        npm run build
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        workingDir: '$(System.DefaultWorkingDirectory)'
+        customCommand: 'build'
       displayName: 'npm build'
     - task: CopyFiles@2
       displayName: 'Copy .next/standalone to staging directory'
