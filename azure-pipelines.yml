@@ -39,6 +39,13 @@ stages:
         SourceFolder: '$(System.DefaultWorkingDirectory)/.next/standalone'
         Contents: '**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    # The following two folders needs to be copied over manualy, see https://nextjs.org/docs/app/api-reference/next-config-js/output
+    - task: CopyFiles@2
+      displayName: 'Copy public folder to staging directory'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)/public'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/public'
     - task: CopyFiles@2
       displayName: 'Copy .next/static to staging directory'
       inputs:
