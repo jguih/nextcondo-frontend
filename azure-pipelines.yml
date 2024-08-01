@@ -46,12 +46,13 @@ stages:
         SourceFolder: '$(System.DefaultWorkingDirectory)/public'
         Contents: '**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)/public'
+    # Static folder is deprecated, see https://nextjs.org/docs/messages/static-dir-deprecated
     - task: CopyFiles@2
       displayName: 'Copy .next/static to staging directory'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)/.next/static'
         Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/.next/static'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/public/static'
     - publish: '$(Build.ArtifactStagingDirectory)'
       displayName: 'Publish Nextapp'
       artifact: nextapp
