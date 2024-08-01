@@ -58,7 +58,7 @@ stages:
   condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
   jobs:
   - deployment: 
-    displayName: "Docker image deployt"
+    displayName: "Deploy version $(Build.SourceBranchName)"
     environment:
       name: nextcondo
     strategy:
@@ -104,4 +104,4 @@ stages:
             displayName: "Remove image $(Build.SourceBranchName) from host"
           - script: |
               docker rmi thejguih/nextcondo:latest
-              displayName: "Remove image latest from host"
+            displayName: "Remove image latest from host"
