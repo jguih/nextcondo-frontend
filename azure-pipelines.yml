@@ -52,7 +52,7 @@ stages:
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)/.next/static'
         Contents: '**'
-        TargetFolder: '$(System.DefaultWorkingDirectory)/staging/public/static'
+        TargetFolder: '$(System.DefaultWorkingDirectory)/staging/.next/static'
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(System.DefaultWorkingDirectory)/staging'
