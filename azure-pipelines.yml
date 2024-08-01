@@ -62,7 +62,6 @@ stages:
   
 - stage: test
   dependsOn: build
-  condition: failed('build')
   jobs:
   - job:
     displayName: "Test nextapp"
@@ -84,20 +83,6 @@ stages:
         failTaskOnFailureToPublishResults: true
         failTaskOnMissingResultsFile: true
 
-- stage: testing
-  dependsOn: build
-  jobs:
-  - job:
-    displayName: "testing"
-    steps:
-      - task: DownloadPipelineArtifact@2
-        inputs:
-          buildType: 'current'
-          artifactName: 'nextapp'
-          targetPath: '$(System.DefaultWorkingDirectory)/release'
-      - script: |
-          ls $(System.DefaultWorkingDirectory)/release
-
 - stage: deploy
   dependsOn: test
   condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
@@ -111,15 +96,11 @@ stages:
         deploy:
           steps:
           - checkout: self
-          - download: current
-            artifact: nextapp
-          - task: CopyFiles@2
-            displayName: 'Copy nextapp/standalone to working directory'
+          - task: DownloadPipelineArtifact@2
             inputs:
-              SourceFolder: '$(Pipeline.Workspace)/nextapp'
-              Contents: '**'
-              TargetFolder: '$(System.DefaultWorkingDirectory)/release'
-              CleanTargetFolder: true
+              buildType: 'current'
+              artifactName: 'nextapp'
+              targetPath: '$(System.DefaultWorkingDirectory)/release'
           - task: Docker@2
             displayName: 'Build docker image'
             inputs:
