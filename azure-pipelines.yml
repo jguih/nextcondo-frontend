@@ -31,20 +31,20 @@ stages:
       inputs:
         command: 'custom'
         workingDir: '$(System.DefaultWorkingDirectory)'
-        customCommand: 'build'
+        customCommand: 'run build'
       displayName: 'Build app'
     - task: CopyFiles@2
       displayName: 'Copy .next/standalone to staging directory'
       inputs:
-        SourceFolder: '.next/standalone'
+        SourceFolder: '$(System.DefaultWorkingDirectory)/.next/standalone'
         Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/standalone'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - task: CopyFiles@2
       displayName: 'Copy .next/static to staging directory'
       inputs:
-        SourceFolder: '.next/static'
+        SourceFolder: '$(System.DefaultWorkingDirectory)/.next/static'
         Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/static'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/.next/static'
     - publish: '$(Build.ArtifactStagingDirectory)'
       displayName: 'Publish Nextapp'
       artifact: nextapp
