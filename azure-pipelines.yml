@@ -101,6 +101,7 @@ stages:
               SourceFolder: '$(Pipeline.Workspace)/nextapp'
               Contents: '**'
               TargetFolder: '$(System.DefaultWorkingDirectory)/release'
+              CleanTargetFolder: true
           - task: Docker@2
             displayName: 'Build docker image'
             inputs:
