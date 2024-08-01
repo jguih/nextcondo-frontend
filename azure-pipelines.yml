@@ -6,7 +6,7 @@
 trigger:
   tags:
     include: 
-    - 0.*
+    - '*'
 
 pool: "Home Server"
 
