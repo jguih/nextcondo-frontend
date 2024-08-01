@@ -16,6 +16,10 @@ stages:
   - job: run_build
     pool: "Home Server"
     steps:
+    - task: NodeTool@0
+      inputs:
+        versionSource: 'spec'
+        versionSpec: '20.x'
     - task: Cache@2
       displayName: 'Cache .next/cache'
       inputs:
