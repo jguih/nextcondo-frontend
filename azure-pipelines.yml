@@ -58,7 +58,7 @@ stages:
   condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
   jobs:
   - deployment: 
-    displayName: "Deploy version $(Build.SourceBranchName)"
+    displayName: "Deploy Docker Image"
     environment:
       name: nextcondo
     strategy:
