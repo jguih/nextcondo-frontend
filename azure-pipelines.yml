@@ -38,24 +38,27 @@ stages:
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)/.next/standalone'
         Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        TargetFolder: '$(System.DefaultWorkingDirectory)/staging'
     # The following two folders needs to be copied over manualy, see https://nextjs.org/docs/app/api-reference/next-config-js/output
     - task: CopyFiles@2
       displayName: 'Copy public folder to staging directory'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)/public'
         Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/public'
+        TargetFolder: '$(System.DefaultWorkingDirectory)/staging/public'
     # Static folder is deprecated, see https://nextjs.org/docs/messages/static-dir-deprecated
     - task: CopyFiles@2
       displayName: 'Copy .next/static to staging directory'
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)/.next/static'
         Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/public/static'
-    - publish: '$(Build.ArtifactStagingDirectory)'
-      displayName: 'Publish Nextapp'
-      artifact: nextapp
+        TargetFolder: '$(System.DefaultWorkingDirectory)/staging/public/static'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/pipeline-release'
+        artifact: 'nextapp'
+        publishLocation: 'pipeline'
+    
   
 - stage: test
   dependsOn: build
@@ -87,17 +90,13 @@ stages:
   - job:
     displayName: "testing"
     steps:
-      - download: current
-        artifact: nextapp
-      - task: CopyFiles@2
-        displayName: 'Copy nextapp/standalone to working directory'
+      - task: DownloadPipelineArtifact@2
         inputs:
-          SourceFolder: '$(Pipeline.Workspace)/nextapp'
-          Contents: '**'
-          TargetFolder: '$(System.DefaultWorkingDirectory)/release'
-          CleanTargetFolder: true
+          buildType: 'current'
+          artifactName: 'nextapp'
+          targetPath: '$(System.DefaultWorkingDirectory)/release'
       - script: |
-          ls $(Pipeline.Workspace)/nextapp
+          ls $(System.DefaultWorkingDirectory)/release
 
 - stage: deploy
   dependsOn: test
