@@ -80,6 +80,24 @@ stages:
         failTaskOnFailureToPublishResults: true
         failTaskOnMissingResultsFile: true
 
+- stage: testing
+  dependsOn: build
+  jobs:
+  - job:
+    displayName: "testing"
+    steps:
+      - download: current
+        artifact: nextapp
+      - task: CopyFiles@2
+        displayName: 'Copy nextapp/standalone to working directory'
+        inputs:
+          SourceFolder: '$(Pipeline.Workspace)/nextapp'
+          Contents: '**'
+          TargetFolder: '$(System.DefaultWorkingDirectory)/release'
+          CleanTargetFolder: true
+      - script: |
+          ls $(System.DefaultWorkingDirectory)/release
+
 - stage: deploy
   dependsOn: test
   condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
