@@ -13,7 +13,8 @@ pool: "Home Server"
 stages:
 - stage: build
   jobs:
-  - job: run_build
+  - job:
+    displayName: "Build nextapp"
     pool: "Home Server"
     steps:
     - task: Cache@2
@@ -53,12 +54,12 @@ stages:
 #       artifact: nextapp
 #     - script: ls $(Pipeline.Workspace)/nextapp
 
-- stage: buildDockerImage
+- stage: deploy
   dependsOn: build
   condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
   jobs:
   - deployment: 
-    displayName: "Deploy Docker Image"
+    displayName: "Deploy docker image"
     environment:
       name: nextcondo-frontend
     strategy:
