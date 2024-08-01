@@ -82,7 +82,7 @@ stages:
         command: 'build'
         Dockerfile: '**/Dockerfile'
         tags: |
-          ${Build.SourceBranchName}
+          $(Build.SourceBranchName)
           latest
     - task: Docker@2
       displayName: 'Publish image to docker-hub'
@@ -91,11 +91,11 @@ stages:
         repository: 'thejguih/nextcondo'
         command: 'push'
         tags: |
-          ${Build.SourceBranchName}
+          $(Build.SourceBranchName)
           latest
     - script: |
-        docker rmi thejguih/nextcondo:${Build.SourceBranchName}
-      displayName: "Remove image ${Build.SourceBranchName} from host"
+        docker rmi thejguih/nextcondo:$(Build.SourceBranchName)
+      displayName: "Remove image $(Build.SourceBranchName) from host"
     - script: |
         docker rmi thejguih/nextcondo:latest
       displayName: "Remove image latest from host"
