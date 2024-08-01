@@ -80,7 +80,9 @@ stages:
         repository: 'thejguih/nextcondo'
         command: 'build'
         Dockerfile: '**/Dockerfile'
-        tags: ${Build.SourceBranchName}
+        tags: |
+          ${Build.SourceBranchName}
+          latest
     # - task: Docker@2
     #   displayName: 'Publish image to docker-hub'
     #   inputs:
