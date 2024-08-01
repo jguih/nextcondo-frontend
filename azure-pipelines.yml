@@ -44,15 +44,24 @@ stages:
       displayName: 'Publish Nextapp'
       artifact: nextapp
   
-# - stage: test
-#   dependsOn: build
-#   jobs:
-#   - job: run_test
-#     pool: "Home Server"
-#     steps:
-#     - download: current
-#       artifact: nextapp
-#     - script: ls $(Pipeline.Workspace)/nextapp
+- stage: test
+  dependsOn: build
+  jobs:
+  - job:
+    displayName: "Test nextapp"
+    steps:
+    - task: Npm@1
+      displayName: "Run Tests"
+      inputs:
+        command: "custom"
+        workingDir: "./"
+        customCommand: "test" 
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/junit.xml'
+        failTaskOnFailureToPublishResults: true
+        failTaskOnMissingResultsFile: true
 
 - stage: deploy
   dependsOn: build
