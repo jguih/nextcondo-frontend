@@ -59,6 +59,7 @@ stages:
   
 - stage: test
   dependsOn: build
+  condition: failed('build')
   jobs:
   - job:
     displayName: "Test nextapp"
