@@ -1,0 +1,25 @@
+@use "theme.utils" as theme;
+
+@mixin base() {
+  padding: theme.spacing(0.8) theme.spacing(2);
+  border-radius: var(--radius-sm);
+  color: var(--background);
+  border: none;
+  cursor: pointer;
+}
+
+.button {
+  @include base();
+}
+
+.primary {
+  background-color: var(--primary);
+
+  &:hover {
+    background-color: var(--primary-600);
+  }
+
+  &:active {
+    background-color: var(--primary-500);
+  }
+}

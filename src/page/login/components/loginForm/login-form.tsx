@@ -6,18 +6,22 @@ import {
 } from "@/src/shared/components/validation/input-validation-container";
 import { FC } from "react";
 import { useLocale } from "@/src/localization/client/LangProvider";
-import { FormState, login } from "./login.action";
+import { FormState, login } from "../../login.action";
 import { FormGroup } from "@/src/shared/components/formGroup/form-group";
 import { Label } from "@/src/shared/components/label/label";
 import { Input } from "@/src/shared/components/input/input";
 import { HelperText } from "@/src/shared/components/helperText/helper-text";
 import { useFormState } from "react-dom";
+import { Button } from "@/src/shared/components/button/button";
+import styles from "./styles.module.scss";
+import Link from "next/link";
 
 interface LoginFormProps {
   label: {
     email: string;
     password: string;
     submit: string;
+    recoverPassword: string;
   };
   validationMessages: {
     email: Required<Pick<ValidationMessages, "valueMissing" | "typeMismatch">>;
@@ -40,7 +44,7 @@ export const LoginForm: FC<LoginFormProps> = ({
       action={formAction}
       onSubmit={handleSubmit}
       noValidate
-      style={{ marginTop: "calc(var(--spacing) * 4)" }}
+      className={styles.form}
     >
       <InputValidationContainer
         id="login-email"
@@ -92,7 +96,12 @@ export const LoginForm: FC<LoginFormProps> = ({
           </FormGroup>
         )}
       />
-      <button type="submit">{label.submit}</button>
+      <Link href={"/recover-password"} className={styles["forgot-password"]}>
+        {label.recoverPassword}
+      </Link>
+      <Button type="submit" className={styles["submit-btn"]}>
+        {label.submit}
+      </Button>
     </form>
   );
 };
