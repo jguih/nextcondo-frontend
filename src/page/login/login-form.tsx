@@ -1,18 +1,17 @@
 "use client";
-import { SubmitButton } from "@/src/shared/components/utils/submit-button";
-import { FC } from "react";
-import { useFormState } from "react-dom";
-import { FormState, login } from "./login.action";
-import { Layout } from "@/src/shared/forms/layout";
-import { useLocale } from "@/src/localization/client/LangProvider";
+import { handleSubmit } from "@/src/shared/components/validation/submit-custom-validation";
 import {
-  InputWithValidation,
-  InputWithValidationProps,
+  InputValidationContainer,
   ValidationMessages,
-} from "@/src/shared/forms/input";
-import { FormWithValidation } from "@/src/shared/forms/form";
-import { ErrorList } from "@/src/shared/forms/error-list";
-import { Box } from "@mui/joy";
+} from "@/src/shared/components/validation/input-validation-container";
+import { FC } from "react";
+import { useLocale } from "@/src/localization/client/LangProvider";
+import { FormState, login } from "./login.action";
+import { FormGroup } from "@/src/shared/components/formGroup/form-group";
+import { Label } from "@/src/shared/components/label/label";
+import { Input } from "@/src/shared/components/input/input";
+import { HelperText } from "@/src/shared/components/helperText/helper-text";
+import { useFormState } from "react-dom";
 
 interface LoginFormProps {
   label: {
@@ -36,34 +35,64 @@ export const LoginForm: FC<LoginFormProps> = ({
     {}
   );
 
-  const inputs: InputWithValidationProps[] = [
-    {
-      name: "email",
-      label: label.email,
-      type: "email",
-      required: true,
-      validationMessages: validationMessages.email,
-    },
-    {
-      name: "password",
-      label: label.password,
-      type: "password",
-      required: true,
-      validationMessages: validationMessages.password,
-    },
-  ];
-
   return (
-    <FormWithValidation action={formAction}>
-      <Layout.FormContent>
-        {inputs.map((props, index) => (
-          <InputWithValidation {...props} key={`${index}-${props.name}`} />
-        ))}
-      </Layout.FormContent>
-      <Box sx={{ mt: state.error ? 2 : 4 }}>
-        {state.error && <ErrorList errors={state.error.messages} />}
-        <SubmitButton fullWidth>{label.submit}</SubmitButton>
-      </Box>
-    </FormWithValidation>
+    <form
+      action={formAction}
+      onSubmit={handleSubmit}
+      noValidate
+      style={{ marginTop: "calc(var(--spacing) * 4)" }}
+    >
+      <InputValidationContainer
+        id="login-email"
+        validationMessages={validationMessages.email}
+        render={({ id, errorMessage, isError, ...inputProps }) => (
+          <FormGroup>
+            <Label required htmlFor={id}>
+              {label.email}
+            </Label>
+            <Input
+              id={id}
+              name="email"
+              type="email"
+              required
+              error={isError}
+              aria-describedby={isError ? `${id}-help` : undefined}
+              {...inputProps}
+            />
+            {isError && (
+              <HelperText id={`${id}-help`} error>
+                {errorMessage}
+              </HelperText>
+            )}
+          </FormGroup>
+        )}
+      />
+      <InputValidationContainer
+        id="login-password"
+        validationMessages={validationMessages.password}
+        render={({ id, errorMessage, isError, ...inputProps }) => (
+          <FormGroup>
+            <Label required htmlFor={id}>
+              {label.password}
+            </Label>
+            <Input
+              id={id}
+              name="password"
+              type="password"
+              required
+              error={isError}
+              aria-describedby={isError ? `${id}-help` : undefined}
+              {...inputProps}
+            />
+            {isError && (
+              <HelperText id={`${id}-help`} error>
+                {errorMessage}
+              </HelperText>
+            )}
+          </FormGroup>
+        )}
+      />
+      <button type="submit">{label.submit}</button>
+    </form>
   );
 };

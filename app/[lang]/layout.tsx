@@ -1,41 +1,7 @@
-import type { Metadata, Viewport } from "next";
-import "../globals.css";
-import ThemeRegistry from "@/src/theme-registry/components/theme-registry";
-import { AuthBoundary } from "@/src/shared/authentication/components/boundary";
-import { Locale } from "@/i18n-config";
-import { LocaleProvider } from "@/src/localization/client/LangProvider";
-import { EnvProvider } from "@/src/shared/env/context";
+import { FC, PropsWithChildren } from "react";
 
-export const metadata: Metadata = {
-  title: "NextCondo",
-  description: "Simple property management app",
+const HomeLayout: FC<PropsWithChildren> = ({ children }) => {
+  return children;
 };
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-};
-
-export default function RootLayout({
-  children,
-  params: { lang },
-}: Readonly<{
-  children: React.ReactNode;
-  params: {
-    lang: Locale;
-  };
-}>) {
-  return (
-    <html lang={lang}>
-      <body>
-        <ThemeRegistry>
-          <LocaleProvider lang={lang}>
-            <EnvProvider>
-              <AuthBoundary>{children}</AuthBoundary>
-            </EnvProvider>
-          </LocaleProvider>
-        </ThemeRegistry>
-      </body>
-    </html>
-  );
-}
+export default HomeLayout;

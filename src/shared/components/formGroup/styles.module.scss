@@ -1,0 +1,17 @@
+@use "theme.utils" as theme;
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: theme.spacing();
+}
+
+.error {
+  border-left: 0.3rem solid var(--danger);
+  border-radius: var(--radius-xs);
+  padding-left: theme.spacing(2);
+}
+
+.form-control:not(:first-child) {
+  margin-top: theme.spacing(2);
+}

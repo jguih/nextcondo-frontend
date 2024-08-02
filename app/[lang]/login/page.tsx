@@ -1,4 +1,4 @@
-import { Link, Typography } from "@mui/joy";
+import { Link } from "@mui/joy";
 import { FC, Fragment } from "react";
 import { RegisterAction } from "@/src/page/login/components/register-action";
 import { getDictionary } from "../../../src/localization/dictionaries";
@@ -9,7 +9,7 @@ const Login: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
   return (
     <Fragment>
-      <Typography level="h2">{d.page.login.title}</Typography>
+      <h3>{d.page.login.title}</h3>
       <RegisterAction
         text={d.page.login.subtitle}
         linkText={d.page.login.subtitle_action}

@@ -1,0 +1,7 @@
+@function spacing($factor: 1) {
+  @return calc($factor * var(--spacing));
+}
+
+@function radius($factor: 1) {
+  @return calc($factor * var(--radius));
+}
