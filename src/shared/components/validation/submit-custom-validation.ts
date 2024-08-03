@@ -15,4 +15,7 @@ export const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
       }
     }
   }
+  if (document.activeElement instanceof HTMLInputElement) {
+    document.activeElement.blur();
+  }
 };

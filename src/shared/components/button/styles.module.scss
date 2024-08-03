@@ -1,15 +1,16 @@
 @use "theme.utils" as theme;
 
-@mixin base() {
+
+.button {
   padding: theme.spacing(0.8) theme.spacing(2);
   border-radius: var(--radius-sm);
   color: var(--background);
   border: none;
   cursor: pointer;
-}
 
-.button {
-  @include base();
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .primary {
@@ -21,5 +22,10 @@
 
   &:active {
     background-color: var(--primary-500);
+  }
+
+  &:disabled {
+    background-color: var(--static-5);
+    cursor: not-allowed;
   }
 }

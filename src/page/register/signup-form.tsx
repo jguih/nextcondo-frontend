@@ -11,8 +11,8 @@ import {
   ValidationMessages,
 } from "@/src/shared/forms/input";
 import { Box, Button, Typography } from "@mui/joy";
-import { SubmitButton } from "@/src/shared/components/utils/submit-button";
 import { useRouter } from "next/navigation";
+import { SubmitButton } from "@/src/shared/components/button/submit/submit-button";
 
 interface FormProps {
   label: {
@@ -121,7 +121,7 @@ export const SignUpForm: FC<FormProps> = ({
             {state.error.message}
           </Typography>
         )}
-        <SubmitButton fullWidth>{label.submit}</SubmitButton>
+        <SubmitButton>{label.submit}</SubmitButton>
       </Box>
     </FormWithValidation>
   );

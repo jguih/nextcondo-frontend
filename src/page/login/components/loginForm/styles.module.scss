@@ -13,5 +13,9 @@
   margin-top: theme.spacing();
   margin-bottom: theme.spacing(2);
   width: fit-content;
-  margin-left: auto;
+  margin-right: auto;
+}
+
+.error {
+  margin-bottom: theme.spacing(2);
 }

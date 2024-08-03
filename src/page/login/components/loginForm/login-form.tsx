@@ -6,15 +6,16 @@ import {
 } from "@/src/shared/components/validation/input-validation-container";
 import { FC } from "react";
 import { useLocale } from "@/src/localization/client/LangProvider";
-import { FormState, login } from "../../login.action";
+import { FormState, login } from "./login.action";
 import { FormGroup } from "@/src/shared/components/formGroup/form-group";
 import { Label } from "@/src/shared/components/label/label";
 import { Input } from "@/src/shared/components/input/input";
 import { HelperText } from "@/src/shared/components/helperText/helper-text";
 import { useFormState } from "react-dom";
-import { Button } from "@/src/shared/components/button/button";
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import { SubmitButton } from "@/src/shared/components/button/submit/submit-button";
+import { Error } from "@/src/shared/components/typography/error/error";
 
 interface LoginFormProps {
   label: {
@@ -36,7 +37,7 @@ export const LoginForm: FC<LoginFormProps> = ({
   const lang = useLocale();
   const [state, formAction] = useFormState<FormState, FormData>(
     (state, payload) => login.bind(null, state, payload, lang)(),
-    {}
+    { isError: false }
   );
 
   return (
@@ -99,9 +100,12 @@ export const LoginForm: FC<LoginFormProps> = ({
       <Link href={"/recover-password"} className={styles["forgot-password"]}>
         {label.recoverPassword}
       </Link>
-      <Button type="submit" className={styles["submit-btn"]}>
+      {state.isError && (
+        <Error className={styles.error}>{state.errorMessage}</Error>
+      )}
+      <SubmitButton className={styles["submit-btn"]}>
         {label.submit}
-      </Button>
+      </SubmitButton>
     </form>
   );
 };

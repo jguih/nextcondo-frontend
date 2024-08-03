@@ -1,11 +1,9 @@
 "use client";
-import { Button, ButtonProps } from "@mui/joy";
 import { FC, useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { Button, ButtonProps } from "../button";
 
-interface SubmitButtonProps extends ButtonProps {}
-
-export const SubmitButton: FC<SubmitButtonProps> = (props) => {
+export const SubmitButton: FC<ButtonProps> = (props) => {
   const [mounted, setMounted] = useState(false);
   const { pending } = useFormStatus();
 

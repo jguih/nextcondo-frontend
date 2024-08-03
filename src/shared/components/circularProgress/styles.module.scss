@@ -1,0 +1,29 @@
+$base-size: 0.6rem;
+
+.spinner {
+  border-radius: 50%;
+  border: solid var(--border);
+  border-color: var(--static-5) var(--static-5) var(--static-5) var(--accent);
+  animation: .7s spin linear infinite;
+}
+
+.sm {
+  width: $base-size;
+  height: $base-size;
+}
+
+.md {
+  width: $base-size * 1.5;
+  height: $base-size * 1.5;
+}
+
+.lg {
+  width: $base-size * 2;
+  height: $base-size * 2;
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
