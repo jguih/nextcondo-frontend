@@ -9,7 +9,7 @@ import {
   useTransition,
 } from "react";
 import { getEnv } from "./get-env.action";
-import { LinearProgress } from "@mui/joy";
+import { CircularProgress } from "../components/circularProgress/circular-progress";
 
 const EnvContext = createContext<Awaited<ReturnType<typeof getEnv>>>({
   NEXT_PUBLIC_SUPABASE_URL: "",
@@ -30,7 +30,14 @@ export const EnvProvider: FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   if (isPending || !env) {
-    return <LinearProgress />;
+    return (
+      <div style={{ width: "100%" }}>
+        <CircularProgress
+          size="lg"
+          style={{ marginLeft: "auto", marginRight: "auto" }}
+        />
+      </div>
+    );
   }
 
   return <EnvContext.Provider value={env}>{children}</EnvContext.Provider>;

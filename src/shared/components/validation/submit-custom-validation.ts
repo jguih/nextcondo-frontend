@@ -14,8 +14,10 @@ export const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         break;
       }
     }
-  }
-  if (document.activeElement instanceof HTMLInputElement) {
-    document.activeElement.blur();
+  } else {
+    // Form is valid
+    if (document.activeElement instanceof HTMLInputElement) {
+      document.activeElement.blur();
+    }
   }
 };

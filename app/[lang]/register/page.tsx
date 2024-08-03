@@ -19,7 +19,7 @@ const Register: FC<WithLocale> = async ({ params: { lang } }) => {
         label={{
           email: d.auth.email,
           password: d.auth.password,
-          fullName: d.page.register.full_name,
+          name: d.page.register.full_name,
           phone: d.page.register.phone,
           submit: d.page.register.submit,
         }}

@@ -1,8 +1,8 @@
 import { FC, Fragment } from "react";
 import { getDictionary } from "../../../src/localization/dictionaries";
 import { WithLocale } from "@/src/shared/types/with-locale";
-import { LoginForm } from "@/src/page/login/components/loginForm/login-form";
 import Link from "next/link";
+import { LoginForm } from "@/src/page/login/components/loginForm/login-form";
 
 const Login: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);

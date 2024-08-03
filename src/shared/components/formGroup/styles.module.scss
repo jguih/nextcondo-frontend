@@ -7,7 +7,7 @@
 }
 
 .error {
-  border-left: 0.3rem solid var(--danger);
+  border-left: var(--border) solid var(--danger);
   border-radius: var(--radius-xs);
   padding-left: theme.spacing(2);
 }

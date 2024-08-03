@@ -10,7 +10,7 @@ import { FormState, login } from "./login.action";
 import { FormGroup } from "@/src/shared/components/formGroup/form-group";
 import { Label } from "@/src/shared/components/label/label";
 import { Input } from "@/src/shared/components/input/input";
-import { HelperText } from "@/src/shared/components/helperText/helper-text";
+import { HelperText } from "@/src/shared/components/typography/helperText/helper-text";
 import { useFormState } from "react-dom";
 import styles from "./styles.module.scss";
 import Link from "next/link";
@@ -51,7 +51,7 @@ export const LoginForm: FC<LoginFormProps> = ({
         id="login-email"
         validationMessages={validationMessages.email}
         render={({ id, errorMessage, isError, ...inputProps }) => (
-          <FormGroup>
+          <FormGroup error={isError}>
             <Label required htmlFor={id}>
               {label.email}
             </Label>
@@ -76,7 +76,7 @@ export const LoginForm: FC<LoginFormProps> = ({
         id="login-password"
         validationMessages={validationMessages.password}
         render={({ id, errorMessage, isError, ...inputProps }) => (
-          <FormGroup>
+          <FormGroup error={isError}>
             <Label required htmlFor={id}>
               {label.password}
             </Label>

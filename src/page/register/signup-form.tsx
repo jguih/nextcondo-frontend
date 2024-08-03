@@ -3,20 +3,20 @@ import { FC } from "react";
 import { FormState, signUp } from "./signup.action";
 import { useFormState } from "react-dom";
 import { useLocale } from "@/src/localization/client/LangProvider";
-import { Layout } from "@/src/shared/forms/layout";
-import { FormWithValidation } from "@/src/shared/forms/form";
-import {
-  InputWithValidation,
-  InputWithValidationProps,
-  ValidationMessages,
-} from "@/src/shared/forms/input";
+import { ValidationMessages } from "@/src/shared/forms/input";
 import { Box, Button, Typography } from "@mui/joy";
 import { useRouter } from "next/navigation";
+import { handleSubmit } from "@/src/shared/components/validation/submit-custom-validation";
+import { InputValidationContainer } from "@/src/shared/components/validation/input-validation-container";
+import { FormGroup } from "@/src/shared/components/formGroup/form-group";
+import { Label } from "@/src/shared/components/label/label";
+import { Input } from "@/src/shared/components/input/input";
+import { HelperText } from "@/src/shared/components/typography/helperText/helper-text";
 import { SubmitButton } from "@/src/shared/components/button/submit/submit-button";
 
 interface FormProps {
   label: {
-    fullName: string;
+    name: string;
     phone: string;
     email: string;
     password: string;
@@ -50,40 +50,6 @@ export const SignUpForm: FC<FormProps> = ({
     { submited: false }
   );
 
-  const inputs: InputWithValidationProps[] = [
-    {
-      name: "name",
-      label: label.fullName,
-      type: "text",
-      required: true,
-      validationMessages: validationMessages.name,
-    },
-    {
-      name: "phone",
-      label: label.phone,
-      description: description.phone,
-      type: "tel",
-    },
-    {
-      name: "email",
-      label: label.email,
-      description: description.email,
-      type: "email",
-      required: true,
-      validationMessages: validationMessages.email,
-    },
-    {
-      name: "password",
-      label: label.password,
-      type: "password",
-      description: description.password,
-      required: true,
-      minLength: 8,
-      maxLength: 30,
-      validationMessages: validationMessages.password,
-    },
-  ];
-
   if (!state.error && state.submited) {
     return (
       <Box
@@ -109,20 +75,105 @@ export const SignUpForm: FC<FormProps> = ({
   }
 
   return (
-    <FormWithValidation action={formAction}>
-      <Layout.FormContent>
-        {inputs.map((props, index) => (
-          <InputWithValidation {...props} key={`${index}-${props.name}`} />
-        ))}
-      </Layout.FormContent>
-      <Box sx={{ mt: 2 }}>
-        {state.error && (
-          <Typography color="danger" sx={{ mb: 1 }}>
-            {state.error.message}
-          </Typography>
+    <form action={formAction} onSubmit={handleSubmit} noValidate>
+      <InputValidationContainer
+        id="register-name"
+        validationMessages={validationMessages.name}
+        render={({ id, errorMessage, isError, ...inputProps }) => (
+          <FormGroup error={isError}>
+            <Label required htmlFor={id}>
+              {label.name}
+            </Label>
+            <Input
+              id={id}
+              name="name"
+              type="text"
+              required
+              error={isError}
+              aria-describedby={isError ? `${id}-help` : undefined}
+              {...inputProps}
+            />
+            {isError && (
+              <HelperText id={`${id}-help`} error>
+                {errorMessage}
+              </HelperText>
+            )}
+          </FormGroup>
         )}
-        <SubmitButton>{label.submit}</SubmitButton>
-      </Box>
-    </FormWithValidation>
+      />
+      <InputValidationContainer
+        id="register-phone"
+        render={({ id, errorMessage, isError, ...inputProps }) => (
+          <FormGroup error={isError}>
+            <Label htmlFor={id}>{label.phone}</Label>
+            <HelperText id={`${id}-help`}>{description.phone}</HelperText>
+            <Input
+              id={id}
+              name="phone"
+              type="tel"
+              error={isError}
+              aria-describedby={`${id}-help`}
+              {...inputProps}
+            />
+            {isError && (
+              <HelperText id={`${id}-help`} error>
+                {errorMessage}
+              </HelperText>
+            )}
+          </FormGroup>
+        )}
+      />
+      <InputValidationContainer
+        id="register-email"
+        validationMessages={validationMessages.email}
+        render={({ id, errorMessage, isError, ...inputProps }) => (
+          <FormGroup error={isError}>
+            <Label required htmlFor={id}>
+              {label.email}
+            </Label>
+            <HelperText id={`${id}-help`}>{description.email}</HelperText>
+            <Input
+              id={id}
+              name="email"
+              type="email"
+              required
+              error={isError}
+              aria-describedby={`${id}-help`}
+              {...inputProps}
+            />
+            {isError && <HelperText error>{errorMessage}</HelperText>}
+          </FormGroup>
+        )}
+      />
+      <InputValidationContainer
+        id="register-password"
+        validationMessages={validationMessages.password}
+        render={({ id, errorMessage, isError, ...inputProps }) => (
+          <FormGroup error={isError}>
+            <Label required htmlFor={id}>
+              {label.password}
+            </Label>
+            <HelperText id={`${id}-help`}>{description.password}</HelperText>
+            <Input
+              id={id}
+              name="password"
+              type="password"
+              required
+              minLength={8}
+              maxLength={30}
+              error={isError}
+              aria-describedby={`${id}-help`}
+              {...inputProps}
+            />
+            {isError && <HelperText error>{errorMessage}</HelperText>}
+          </FormGroup>
+        )}
+      />
+      <SubmitButton
+        style={{ marginTop: "calc(var(--spacing)*2)", width: "100%" }}
+      >
+        {label.submit}
+      </SubmitButton>
+    </form>
   );
 };
