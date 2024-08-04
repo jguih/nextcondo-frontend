@@ -1,18 +1,36 @@
+"use client";
 import { ComponentProps, forwardRef } from "react";
 import styles from "./styles.module.scss";
+import { buildClassNames } from "../utils/build-class-names";
+import { useFormGroupContext } from "../formGroup/context";
 
 export type InputProps = {
   error?: boolean;
 } & ComponentProps<"input">;
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(function a(
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   { error, ...props },
   forwardedRef
 ) {
-  const classes = [
+  const context = useFormGroupContext();
+  const classes = buildClassNames(
+    {
+      [styles.error]:
+        error === true || (context !== null && context.error === true),
+    },
     styles.input,
-    `${(error && styles.error) ?? ""}`,
-    `${props.className ?? ""}`,
-  ];
-  return <input {...props} className={classes.join(" ")} ref={forwardedRef} />;
+    props.className
+  );
+
+  const required =
+    props.required !== undefined ? props.required : context?.required;
+
+  return (
+    <input
+      {...props}
+      required={required}
+      className={classes}
+      ref={forwardedRef}
+    />
+  );
 });

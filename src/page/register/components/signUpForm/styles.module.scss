@@ -1,0 +1,18 @@
+@use "theme.utils" as theme;
+
+.form {
+  margin-top: theme.spacing(4);
+}
+
+.submit-btn {
+  margin-top: theme.spacing(2);
+  width: 100%;
+}
+
+.success-box {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: theme.spacing(2),
+}

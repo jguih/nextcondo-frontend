@@ -10,12 +10,11 @@ import { FormState, login } from "./login.action";
 import { FormGroup } from "@/src/shared/components/formGroup/form-group";
 import { Label } from "@/src/shared/components/label/label";
 import { Input } from "@/src/shared/components/input/input";
-import { HelperText } from "@/src/shared/components/typography/helperText/helper-text";
 import { useFormState } from "react-dom";
 import styles from "./styles.module.scss";
-import Link from "next/link";
 import { SubmitButton } from "@/src/shared/components/button/submit/submit-button";
-import { Error } from "@/src/shared/components/typography/error/error";
+import { Typography } from "@/src/shared/components/typography/typography";
+import { Link } from "@/src/shared/components/link/link";
 
 interface LoginFormProps {
   label: {
@@ -51,23 +50,19 @@ export const LoginForm: FC<LoginFormProps> = ({
         id="login-email"
         validationMessages={validationMessages.email}
         render={({ id, errorMessage, isError, ...inputProps }) => (
-          <FormGroup error={isError}>
-            <Label required htmlFor={id}>
-              {label.email}
-            </Label>
+          <FormGroup error={isError} required>
+            <Label htmlFor={id}>{label.email}</Label>
             <Input
               id={id}
               name="email"
               type="email"
-              required
-              error={isError}
               aria-describedby={isError ? `${id}-help` : undefined}
               {...inputProps}
             />
             {isError && (
-              <HelperText id={`${id}-help`} error>
+              <Typography tag="small" color="danger" id={`${id}-help`}>
                 {errorMessage}
-              </HelperText>
+              </Typography>
             )}
           </FormGroup>
         )}
@@ -76,32 +71,30 @@ export const LoginForm: FC<LoginFormProps> = ({
         id="login-password"
         validationMessages={validationMessages.password}
         render={({ id, errorMessage, isError, ...inputProps }) => (
-          <FormGroup error={isError}>
-            <Label required htmlFor={id}>
-              {label.password}
-            </Label>
+          <FormGroup error={isError} required>
+            <Label htmlFor={id}>{label.password}</Label>
             <Input
               id={id}
               name="password"
               type="password"
-              required
-              error={isError}
               aria-describedby={isError ? `${id}-help` : undefined}
               {...inputProps}
             />
             {isError && (
-              <HelperText id={`${id}-help`} error>
+              <Typography tag="small" color="danger" id={`${id}-help`}>
                 {errorMessage}
-              </HelperText>
+              </Typography>
             )}
           </FormGroup>
         )}
       />
-      <Link href={"/recover-password"} className={styles["forgot-password"]}>
+      <Link href={"/login"} className={styles["forgot-password"]}>
         {label.recoverPassword}
       </Link>
       {state.isError && (
-        <Error className={styles.error}>{state.errorMessage}</Error>
+        <Typography color="danger" className={styles.error}>
+          {state.errorMessage}
+        </Typography>
       )}
       <SubmitButton className={styles["submit-btn"]}>
         {label.submit}

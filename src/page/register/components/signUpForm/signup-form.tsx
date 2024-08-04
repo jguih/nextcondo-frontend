@@ -4,15 +4,16 @@ import { FormState, signUp } from "./signup.action";
 import { useFormState } from "react-dom";
 import { useLocale } from "@/src/localization/client/LangProvider";
 import { ValidationMessages } from "@/src/shared/forms/input";
-import { Box, Button, Typography } from "@mui/joy";
 import { useRouter } from "next/navigation";
 import { handleSubmit } from "@/src/shared/components/validation/submit-custom-validation";
 import { InputValidationContainer } from "@/src/shared/components/validation/input-validation-container";
 import { FormGroup } from "@/src/shared/components/formGroup/form-group";
 import { Label } from "@/src/shared/components/label/label";
 import { Input } from "@/src/shared/components/input/input";
-import { HelperText } from "@/src/shared/components/typography/helperText/helper-text";
 import { SubmitButton } from "@/src/shared/components/button/submit/submit-button";
+import { Typography } from "@/src/shared/components/typography/typography";
+import { Button } from "@/src/shared/components/button/button";
+import styles from "./styles.module.scss";
 
 interface FormProps {
   label: {
@@ -52,51 +53,46 @@ export const SignUpForm: FC<FormProps> = ({
 
   if (!state.error && state.submited) {
     return (
-      <Box
-        sx={{
-          marginTop: "auto",
-          display: "block",
-        }}
-      >
-        <Typography level="body-md" color="success">
-          {state.message}
+      <div className={styles["success-box"]}>
+        <Typography tag="p" color="success">
+          {/* {state.message} */}
+          Success message
         </Typography>
         <Button
-          fullWidth
-          sx={{ mt: 2 }}
           onClick={() => {
             router.push("/login");
           }}
         >
           {goToLoginPageActionMessage}
         </Button>
-      </Box>
+      </div>
     );
   }
 
   return (
-    <form action={formAction} onSubmit={handleSubmit} noValidate>
+    <form
+      action={formAction}
+      onSubmit={handleSubmit}
+      noValidate
+      className={styles.form}
+    >
       <InputValidationContainer
         id="register-name"
         validationMessages={validationMessages.name}
         render={({ id, errorMessage, isError, ...inputProps }) => (
-          <FormGroup error={isError}>
-            <Label required htmlFor={id}>
-              {label.name}
-            </Label>
+          <FormGroup error={isError} required>
+            <Label htmlFor={id}>{label.name}</Label>
             <Input
               id={id}
               name="name"
               type="text"
-              required
-              error={isError}
               aria-describedby={isError ? `${id}-help` : undefined}
               {...inputProps}
             />
             {isError && (
-              <HelperText id={`${id}-help`} error>
+              <Typography tag="small" color="danger" id={`${id}-help`}>
                 {errorMessage}
-              </HelperText>
+              </Typography>
             )}
           </FormGroup>
         )}
@@ -106,19 +102,20 @@ export const SignUpForm: FC<FormProps> = ({
         render={({ id, errorMessage, isError, ...inputProps }) => (
           <FormGroup error={isError}>
             <Label htmlFor={id}>{label.phone}</Label>
-            <HelperText id={`${id}-help`}>{description.phone}</HelperText>
+            <Typography tag="small" color="text-500" id={`${id}-help`}>
+              {description.phone}
+            </Typography>
             <Input
               id={id}
               name="phone"
               type="tel"
-              error={isError}
               aria-describedby={`${id}-help`}
               {...inputProps}
             />
             {isError && (
-              <HelperText id={`${id}-help`} error>
+              <Typography tag="small" color="danger" id={`${id}-help`}>
                 {errorMessage}
-              </HelperText>
+              </Typography>
             )}
           </FormGroup>
         )}
@@ -127,21 +124,23 @@ export const SignUpForm: FC<FormProps> = ({
         id="register-email"
         validationMessages={validationMessages.email}
         render={({ id, errorMessage, isError, ...inputProps }) => (
-          <FormGroup error={isError}>
-            <Label required htmlFor={id}>
-              {label.email}
-            </Label>
-            <HelperText id={`${id}-help`}>{description.email}</HelperText>
+          <FormGroup error={isError} required>
+            <Label htmlFor={id}>{label.email}</Label>
+            <Typography tag="small" color="text-500" id={`${id}-help`}>
+              {description.email}
+            </Typography>
             <Input
               id={id}
               name="email"
               type="email"
-              required
-              error={isError}
               aria-describedby={`${id}-help`}
               {...inputProps}
             />
-            {isError && <HelperText error>{errorMessage}</HelperText>}
+            {isError && (
+              <Typography tag="small" color="danger">
+                {errorMessage}
+              </Typography>
+            )}
           </FormGroup>
         )}
       />
@@ -149,29 +148,29 @@ export const SignUpForm: FC<FormProps> = ({
         id="register-password"
         validationMessages={validationMessages.password}
         render={({ id, errorMessage, isError, ...inputProps }) => (
-          <FormGroup error={isError}>
-            <Label required htmlFor={id}>
-              {label.password}
-            </Label>
-            <HelperText id={`${id}-help`}>{description.password}</HelperText>
+          <FormGroup error={isError} required>
+            <Label htmlFor={id}>{label.password}</Label>
+            <Typography tag="small" color="text-500" id={`${id}-help`}>
+              {description.password}
+            </Typography>
             <Input
               id={id}
               name="password"
               type="password"
-              required
               minLength={8}
               maxLength={30}
-              error={isError}
               aria-describedby={`${id}-help`}
               {...inputProps}
             />
-            {isError && <HelperText error>{errorMessage}</HelperText>}
+            {isError && (
+              <Typography tag="small" color="danger">
+                {errorMessage}
+              </Typography>
+            )}
           </FormGroup>
         )}
       />
-      <SubmitButton
-        style={{ marginTop: "calc(var(--spacing)*2)", width: "100%" }}
-      >
+      <SubmitButton className={styles["submit-btn"]}>
         {label.submit}
       </SubmitButton>
     </form>

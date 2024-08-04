@@ -1,15 +1,23 @@
 import { ComponentProps, FC } from "react";
 import styles from "./styles.module.scss";
-import { safeParseClasses } from "../utils/safe-parse-classes";
+import { buildClassNames } from "../utils/build-class-names";
+import { FormGroupContextState, FormGroupProvider } from "./context";
 
-export type FormGroupProps = { error?: boolean } & ComponentProps<"div">;
+export type FormGroupProps = FormGroupContextState & ComponentProps<"div">;
 
-export const FormGroup: FC<FormGroupProps> = ({ error, ...props }) => {
-  const classes = safeParseClasses([
+export const FormGroup: FC<FormGroupProps> = ({
+  error,
+  required,
+  ...props
+}) => {
+  const classes = buildClassNames(
+    { [styles.error]: error === true },
     styles["form-control"],
-    error ? styles.error : "",
-    props.className,
-  ]);
-
-  return <div {...props} className={classes} />;
+    props.className
+  );
+  return (
+    <FormGroupProvider value={{ error, required }}>
+      <div {...props} className={classes} />
+    </FormGroupProvider>
+  );
 };

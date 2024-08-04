@@ -5,7 +5,7 @@ const RegisterLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
+        minHeight: "calc(100vh - 32px)",
         p: 2,
         display: "flex",
         flexDirection: "column",

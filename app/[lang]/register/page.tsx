@@ -1,20 +1,22 @@
-import { LoginAction } from "@/src/page/register/components/login-action";
-import { Typography } from "@mui/joy";
 import { FC, Fragment } from "react";
 import { getDictionary } from "../../../src/localization/dictionaries";
 import { WithLocale } from "@/src/shared/types/with-locale";
-import { SignUpForm } from "@/src/page/register/signup-form";
+import { SignUpForm } from "@/src/page/register/components/signUpForm/signup-form";
 import { format } from "@/src/localization/utils";
+import { Typography } from "@/src/shared/components/typography/typography";
+import { Link } from "@/src/shared/components/link/link";
 
 const Register: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
   return (
     <Fragment>
-      <Typography level="h2">{d.page.register.title}</Typography>
-      <LoginAction
-        text={d.page.register.subtitle}
-        linkText={d.page.register.subtitle_action}
-      />
+      <Typography tag="h1">{d.page.register.title}</Typography>
+      <Typography tag="small" color="text-500">
+        {d.page.register.subtitle}{" "}
+        <Link href={"/login"} size="inherit">
+          {d.page.register.subtitle_action}
+        </Link>
+      </Typography>
       <SignUpForm
         label={{
           email: d.auth.email,

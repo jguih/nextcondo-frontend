@@ -1,15 +1,22 @@
+"use client";
 import { ComponentProps, FC } from "react";
 import styles from "./styles.module.scss";
-import { safeParseClasses } from "../utils/safe-parse-classes";
+import { buildClassNames } from "../utils/build-class-names";
+import { useFormGroupContext } from "../formGroup/context";
 
 export type LabelProps = {
   required?: boolean;
 } & ComponentProps<"label">;
 
 export const Label: FC<LabelProps> = ({ required, ...props }) => {
-  const classes = safeParseClasses([
-    required ? styles.required : "",
-    props.className,
-  ]);
+  const context = useFormGroupContext();
+  const classes = buildClassNames(
+    {
+      [styles.required]:
+        (context && context.required === true) || required === true,
+    },
+    props.className
+  );
+
   return <label {...props} className={classes} />;
 };

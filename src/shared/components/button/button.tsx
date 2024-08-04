@@ -1,6 +1,6 @@
 import { ComponentProps, FC } from "react";
 import styles from "./styles.module.scss";
-import { safeParseClasses } from "../utils/safe-parse-classes";
+import { buildClassNames } from "../utils/build-class-names";
 import { CircularProgress } from "../circularProgress/circular-progress";
 
 export type ButtonProps = {
@@ -13,8 +13,11 @@ export const Button: FC<ButtonProps> = ({
   loading,
   ...props
 }) => {
-  const _classes = [props.className, styles.button, styles[variant]];
-  const classes = safeParseClasses(_classes);
+  const classes = buildClassNames(
+    { [styles[variant]]: variant !== undefined },
+    props.className,
+    styles.button
+  );
   return (
     <button {...props} disabled={loading} className={classes}>
       {loading ? <CircularProgress /> : props.children}

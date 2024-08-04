@@ -1,6 +1,6 @@
 import { ComponentProps, FC } from "react";
 import styles from "./styles.module.scss";
-import { safeParseClasses } from "../utils/safe-parse-classes";
+import { buildClassNames } from "../utils/build-class-names";
 
 export type CircularProgressProps = {
   /** @default "sm" */
@@ -11,10 +11,10 @@ export const CircularProgress: FC<CircularProgressProps> = ({
   size = "sm",
   ...props
 }) => {
-  const classes = safeParseClasses([
+  const classes = buildClassNames(
+    { [styles[size]]: size !== undefined },
     styles.spinner,
-    styles[size],
-    props.className,
-  ]);
+    props.className
+  );
   return <div {...props} className={classes}></div>;
 };
