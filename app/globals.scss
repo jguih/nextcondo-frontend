@@ -2,6 +2,10 @@
 @use "typography";
 @use "theme.utils" as utils;
 
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
 body {
   background-color: var(--background);
   padding: 0;
