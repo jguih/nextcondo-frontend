@@ -10,11 +10,7 @@ export type LabelProps = {
   color?: SemanticColors;
 } & Omit<ComponentProps<"label">, "color">;
 
-export const Label: FC<LabelProps> = ({
-  required,
-  color = "inherit",
-  ...props
-}) => {
+export const Label: FC<LabelProps> = ({ required, color, ...props }) => {
   const context = useFormGroupContext();
   const classes = buildClassNames(
     {

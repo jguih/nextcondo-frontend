@@ -13,7 +13,7 @@ export type TypographyProps<Tag extends TypographyTags> = {
 
 export const Typography = <Tag extends TypographyTags>({
   tag,
-  color = "inherit",
+  color,
   muted,
   ...props
 }: TypographyProps<Tag>) => {

@@ -6,8 +6,7 @@ export type SemanticColors =
   | "primary"
   | "on-primary"
   | "secondary"
-  | "on-background"
-  | "inherit";
+  | "on-background";
 
 export type Sizes = {
   small: "sm";
