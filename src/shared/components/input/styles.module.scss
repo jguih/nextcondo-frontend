@@ -6,6 +6,7 @@
 
 @mixin base() {
   background-color: var(--primary-100);
+  color: var(--on-background);
   padding: theme.spacing(1);
   border-radius: var(--radius-sm);
   @include border(var(--static-10));
