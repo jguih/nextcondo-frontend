@@ -15,7 +15,8 @@ export const Label: FC<LabelProps> = ({ required, ...props }) => {
       [styles.required]:
         (context && context.required === true) || required === true,
     },
-    props.className
+    props.className,
+    styles.label
   );
 
   return <label {...props} className={classes} />;

@@ -1,0 +1,29 @@
+@mixin base() {
+  fill: none;
+  display: inline-block;
+}
+
+.icon {
+  --sm-size: 1.6rem;
+  --md-size: calc(var(--sm-size) * var(--font-scale));
+  --lg-size: calc(var(--md-size) * var(--font-scale));
+  stroke: inherit;
+}
+
+.icon-sm {
+  @include base();
+  width: var(--sm-size);
+  height: var(--sm-size);
+}
+
+.icon-md {
+  @include base();
+  width: var(--md-size);
+  height: var(--md-size);
+}
+
+.icon-lg {
+  @include base();
+  width: var(--lg-size);
+  height: var(--lg-size);
+}

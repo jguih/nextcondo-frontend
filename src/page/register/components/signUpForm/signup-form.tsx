@@ -3,10 +3,12 @@ import { FC } from "react";
 import { FormState, signUp } from "./signup.action";
 import { useFormState } from "react-dom";
 import { useLocale } from "@/src/localization/client/LangProvider";
-import { ValidationMessages } from "@/src/shared/forms/input";
 import { useRouter } from "next/navigation";
-import { handleSubmit } from "@/src/shared/components/validation/submit-custom-validation";
-import { InputValidationContainer } from "@/src/shared/components/validation/input-validation-container";
+import { handleSubmitWithValidation } from "@/src/shared/components/validation/submit-custom-validation";
+import {
+  InputValidationContainer,
+  ValidationMessages,
+} from "@/src/shared/components/validation/input-validation-container";
 import { FormGroup } from "@/src/shared/components/formGroup/form-group";
 import { Label } from "@/src/shared/components/label/label";
 import { Input } from "@/src/shared/components/input/input";
@@ -72,7 +74,7 @@ export const SignUpForm: FC<FormProps> = ({
   return (
     <form
       action={formAction}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmitWithValidation}
       noValidate
       className={styles.form}
     >
@@ -102,7 +104,7 @@ export const SignUpForm: FC<FormProps> = ({
         render={({ id, errorMessage, isError, ...inputProps }) => (
           <FormGroup error={isError}>
             <Label htmlFor={id}>{label.phone}</Label>
-            <Typography tag="small" color="text-500" id={`${id}-help`}>
+            <Typography tag="small" muted id={`${id}-help`}>
               {description.phone}
             </Typography>
             <Input
@@ -126,7 +128,7 @@ export const SignUpForm: FC<FormProps> = ({
         render={({ id, errorMessage, isError, ...inputProps }) => (
           <FormGroup error={isError} required>
             <Label htmlFor={id}>{label.email}</Label>
-            <Typography tag="small" color="text-500" id={`${id}-help`}>
+            <Typography tag="small" muted id={`${id}-help`}>
               {description.email}
             </Typography>
             <Input
@@ -150,7 +152,7 @@ export const SignUpForm: FC<FormProps> = ({
         render={({ id, errorMessage, isError, ...inputProps }) => (
           <FormGroup error={isError} required>
             <Label htmlFor={id}>{label.password}</Label>
-            <Typography tag="small" color="text-500" id={`${id}-help`}>
+            <Typography tag="small" muted id={`${id}-help`}>
               {description.password}
             </Typography>
             <Input

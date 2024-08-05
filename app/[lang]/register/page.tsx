@@ -11,12 +11,12 @@ const Register: FC<WithLocale> = async ({ params: { lang } }) => {
   return (
     <Fragment>
       <Typography tag="h1">{d.page.register.title}</Typography>
-      <Typography tag="small" color="text-500">
-        {d.page.register.subtitle}{" "}
-        <Link href={"/login"} size="inherit">
-          {d.page.register.subtitle_action}
-        </Link>
-      </Typography>
+      <div>
+        <Typography tag="small" muted>
+          {d.page.register.subtitle}{" "}
+        </Typography>
+        <Link href={"/login"}>{d.page.register.subtitle_action}</Link>
+      </div>
       <SignUpForm
         label={{
           email: d.auth.email,

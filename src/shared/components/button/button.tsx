@@ -4,7 +4,7 @@ import { buildClassNames } from "../utils/build-class-names";
 import { CircularProgress } from "../circularProgress/circular-progress";
 
 export type ButtonProps = {
-  variant?: "primary" | "secondary" | "danger";
+  variant?: "primary" | "secondary" | "transparent";
   loading?: boolean;
 } & ComponentProps<"button">;
 

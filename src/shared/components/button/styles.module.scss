@@ -4,7 +4,6 @@
 .button {
   padding: theme.spacing(0.8) theme.spacing(2);
   border-radius: var(--radius-sm);
-  color: var(--background);
   border: none;
   cursor: pointer;
 
@@ -13,19 +12,56 @@
   justify-content: center;
 }
 
-.primary {
-  background-color: var(--primary);
+@mixin button($color) {
+  background-color: var(--#{$color});
+  color: var(--on-#{$color});
+  stroke: var(--on-#{$color});
 
   &:hover {
-    background-color: var(--primary-600);
+    background-color: var(--#{$color}-600);
   }
 
   &:active {
-    background-color: var(--primary-500);
+    background-color: var(--#{$color}-500);
   }
 
   &:disabled {
-    background-color: var(--static-5);
+    background-color: var(--disabled);
     cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: var(--#{$color}-700) solid 2px;
+  }
+}
+
+.primary {
+  @include button("primary");
+}
+
+.secondary {
+  @include button("secondary");
+}
+
+.transparent {
+  background-color: transparent;
+  color: var(--text);
+  stroke: var(--text);
+
+  &:hover {
+    opacity: 60%;
+  }
+
+  &:active {
+    background-color: transparent;
+  }
+
+  &:disabled {
+    background-color: var(--disabled);
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: var(--primary-700) solid 2px;
   }
 }

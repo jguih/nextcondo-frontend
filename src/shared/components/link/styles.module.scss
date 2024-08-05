@@ -1,8 +1,19 @@
+@use "theme.utils" as theme;
 
 .font-size-sm {
   font-size: var(--text-small);
 }
 
-.font-size-inherit {
-  font-size: inherit;
+.link {
+  color: var(--primary);
+  padding: theme.spacing(0.2) theme.spacing(0.2);
+  border-radius: var(--radius-xs);
+  text-decoration: underline;
+  text-decoration-color: var(--primary-400);
+  
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--primary-300);
+    background-color: var(--primary-100);
+  }
 }

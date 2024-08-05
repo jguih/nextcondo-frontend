@@ -1,7 +1,12 @@
 "use client";
 import { FormEventHandler } from "react";
 
-export const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+/**
+ * Submit function that handles custom form validation. It'll focus the first invalid input in the form when invalid and will blur current fucused input on submit.
+ */
+export const handleSubmitWithValidation: FormEventHandler<HTMLFormElement> = (
+  event
+) => {
   if (!event.currentTarget.checkValidity()) {
     event.preventDefault();
     event.stopPropagation();

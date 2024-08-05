@@ -1,5 +1,5 @@
 "use client";
-import { handleSubmit } from "@/src/shared/components/validation/submit-custom-validation";
+import { handleSubmitWithValidation } from "@/src/shared/components/validation/submit-custom-validation";
 import {
   InputValidationContainer,
   ValidationMessages,
@@ -42,7 +42,7 @@ export const LoginForm: FC<LoginFormProps> = ({
   return (
     <form
       action={formAction}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmitWithValidation}
       noValidate
       className={styles.form}
     >
@@ -97,7 +97,9 @@ export const LoginForm: FC<LoginFormProps> = ({
         </Typography>
       )}
       <SubmitButton className={styles["submit-btn"]}>
-        {label.submit}
+        <Typography tag="p" color="inherit">
+          {label.submit}
+        </Typography>
       </SubmitButton>
     </form>
   );

@@ -4,18 +4,19 @@ import { WithLocale } from "@/src/shared/types/with-locale";
 import { LoginForm } from "@/src/page/login/components/loginForm/login-form";
 import { Typography } from "@/src/shared/components/typography/typography";
 import { Link } from "@/src/shared/components/link/link";
+import { ThemeToggle } from "@/src/theme/components/theme-toggle";
 
 const Login: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
   return (
     <Fragment>
       <Typography tag="h1">{d.page.login.title}</Typography>
-      <Typography tag="small" color="text-500">
-        {d.page.login.subtitle}{" "}
-        <Link href={"/register"} size="inherit">
-          {d.page.login.subtitle_action}
-        </Link>
-      </Typography>
+      <div>
+        <Typography tag="small" muted>
+          {d.page.login.subtitle}{" "}
+        </Typography>
+        <Link href={"/register"}>{d.page.login.subtitle_action}</Link>
+      </div>
       <LoginForm
         label={{
           email: d.auth.email,
@@ -33,6 +34,7 @@ const Login: FC<WithLocale> = async ({ params: { lang } }) => {
           },
         }}
       />
+      <ThemeToggle />
       {/* <Divider sx={{ mt: 4, mb: 4 }}>{d.common.or}</Divider>
       <SocialLoginList /> */}
     </Fragment>

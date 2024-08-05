@@ -8,15 +8,20 @@ type TypographyTags = "p" | "small" | "h1" | "h2" | "h3" | "h4";
 export type TypographyProps<Tag extends TypographyTags> = {
   tag?: Tag;
   color?: SemanticColors;
+  muted?: boolean;
 } & Omit<ComponentProps<Tag>, "color">;
 
 export const Typography = <Tag extends TypographyTags>({
   tag,
-  color = "text",
+  color,
+  muted,
   ...props
 }: TypographyProps<Tag>) => {
   const classes = buildClassNames(
-    { [styles[color]]: color !== undefined },
+    {
+      [`color-${color}`]: color !== undefined && color !== "inherit",
+      [styles["muted"]]: muted === true,
+    },
     props.className
   );
   return createElement(
