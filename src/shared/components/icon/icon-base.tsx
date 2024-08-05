@@ -12,13 +12,13 @@ export type IconBaseProps = {
 
 export const IconBase: FC<IconBaseProps> = ({
   size = "sm",
-  color = "on-background",
+  color,
   ...props
 }) => {
   const classes = buildClassNames(
     {
       [styles[`icon-${size}`]]: size !== undefined,
-      [`stroke-${color}`]: color !== undefined && color !== "inherit",
+      [`stroke-${color}`]: color !== undefined,
     },
     props.className,
     styles.icon
