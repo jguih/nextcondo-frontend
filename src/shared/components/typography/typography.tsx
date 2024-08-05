@@ -13,13 +13,13 @@ export type TypographyProps<Tag extends TypographyTags> = {
 
 export const Typography = <Tag extends TypographyTags>({
   tag,
-  color,
+  color = "inherit",
   muted,
   ...props
 }: TypographyProps<Tag>) => {
   const classes = buildClassNames(
     {
-      [`color-${color}`]: color !== undefined && color !== "inherit",
+      [`color-${color}`]: color !== undefined,
       [styles["muted"]]: muted === true,
     },
     props.className
