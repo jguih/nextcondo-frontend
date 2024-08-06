@@ -1,37 +1,30 @@
 @use "theme.utils" as theme;
 
-@mixin border($color) {
-  border: 2px solid $color
-}
-
-@mixin base() {
-  background-color: var(--primary-100);
+.input {
+  background-color: var(--background-level1);
   color: var(--on-background);
   padding: theme.spacing(1);
   border-radius: var(--radius-sm);
-  @include border(var(--static-10));
-}
+  border: var(--border) solid var(--static-10);
+  outline: transparent solid var(--border);
 
-.input {
-  @include base();
-  
   &:hover {
-    @include border(var(--static-40));
+    border-color: var(--primary-hover-border);
   }
 
   &:focus {
-    outline: var(--primary) solid 2px;
+    outline-color: var(--primary-active-border);
   }
 }
 
 .error {
-  @include border(var(--danger));
+  border-color: var(--danger);
 
   &:hover {
-    @include border(var(--danger-500));
+    border-color: var(--danger-hover-border);
   }
 
   &:focus {
-    outline: var(--danger) solid 2px;
+    outline-color: var(--danger-active-border);
   }
 }

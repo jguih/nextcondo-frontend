@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang={lang}
-      data-theme="dark"
+      data-theme="light"
       style={{ fontFamily: `${InterFont.style.fontFamily}` }}
     >
       <body>

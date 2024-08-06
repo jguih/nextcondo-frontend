@@ -96,10 +96,8 @@ export const LoginForm: FC<LoginFormProps> = ({
           {state.errorMessage}
         </Typography>
       )}
-      <SubmitButton className={styles["submit-btn"]}>
-        <Typography tag="p" color="inherit">
-          {label.submit}
-        </Typography>
+      <SubmitButton className={styles["submit-btn"]} variant="primary">
+        <Typography tag="p">{label.submit}</Typography>
       </SubmitButton>
     </form>
   );
