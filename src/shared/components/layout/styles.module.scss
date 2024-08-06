@@ -1,10 +1,10 @@
 @use "theme.utils" as theme;
 
 .root {
-  display: "grid";
+  display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 55px 1fr; // First row for Header
-  min-height: "100vh";
+  min-height: 100vh;
 }
 
 .header {
@@ -20,7 +20,7 @@
   border-color: var(--static-40);
   position: sticky;
   top: 0;
-  z-index: 1100;
+  z-index: 999;
 }
 
 .main {

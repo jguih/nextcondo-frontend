@@ -4,7 +4,8 @@ export type SemanticColors =
   | "accent"
   | "danger"
   | "success"
-  | "warning";
+  | "warning"
+  | "neutral";
 
 export type Sizes = {
   small: "sm";

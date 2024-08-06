@@ -1,4 +1,5 @@
-$colors: "primary", "secondary", "accent", "danger", "success", "warning";
+$colors: "primary", "secondary", "accent", "danger", "success", "warning",
+  "neutral";
 
 @each $color in $colors {
   .bg-#{$color} {

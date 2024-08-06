@@ -4,31 +4,20 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { Button } from "../button/button";
 import { Menu } from "../icon/icons/menu";
+import { Typography } from "../typography/typography";
+import { Sidebar } from "../sidebar/sidebar";
 
-export const Header = () => {
+export type HeaderProps = {
+  title?: string;
+};
+
+export const Header: FC<HeaderProps> = ({ title }) => {
   return (
     <div className={styles.header}>
-      <HeaderComponent.SideDrawerButton />
-      <HeaderComponent.PropertyMenu />
+      <div className={styles.left}>
+        <Sidebar />
+        {title && <Typography>{title}</Typography>}
+      </div>
     </div>
   );
 };
-
-interface HeaderComponent {
-  SideDrawerButton: FC;
-  PropertyMenu: FC;
-}
-
-const SideDrawerButton: HeaderComponent["SideDrawerButton"] = () => {
-  return (
-    <Button variant="light" aria-label="open sidedrawer">
-      <Menu />
-    </Button>
-  );
-};
-
-const PropertyMenu: HeaderComponent["PropertyMenu"] = () => {
-  return <></>;
-};
-
-const HeaderComponent: HeaderComponent = { SideDrawerButton, PropertyMenu };

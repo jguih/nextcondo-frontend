@@ -1,0 +1,52 @@
+@use "theme.utils" as theme;
+
+$width: 80dvw;
+$anim-duration: 0.2s;
+$anim-timing-function: ease-in-out;
+
+.sidebar-container:focus-within {
+  .sidebar {
+    left: 0;
+  }
+  .sidebar::after {
+    content: "";
+    height: 100dvh;
+    width: 100dvw;
+    background-color: black;
+    opacity: 0%;
+    animation: $anim-duration backdrop $anim-timing-function;
+    animation-fill-mode: forwards;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.sidebar {
+  height: 100dvh;
+  width: $width;
+  position: fixed;
+  left: -$width;
+  top: 0;
+  bottom: 0;
+  background-color: var(--background);
+  z-index: 1000;
+  transition-property: width;
+  transition: $anim-duration $anim-timing-function;
+  padding: theme.spacing(2);
+}
+
+@keyframes backdrop {
+  to {
+    opacity: 30%;
+    width: calc(100dvw - $width);
+    left: $width;
+  }
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

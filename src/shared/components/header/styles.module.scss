@@ -1,5 +1,14 @@
+@use "theme.utils" as theme;
+
 .header {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: theme.spacing(1);
 }

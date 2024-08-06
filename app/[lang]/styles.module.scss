@@ -1,0 +1,12 @@
+@use "theme.utils" as theme;
+
+.main {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.add-condo-btn {
+  margin-top: theme.spacing(2);
+  width: 100%;
+}

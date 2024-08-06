@@ -85,3 +85,7 @@
     @include light("#{$color}-light");
   }
 }
+
+.full-width {
+  width: 100%;
+}

@@ -20,7 +20,10 @@
       "phone_description": "If you want others to contact you."
     },
     "home": {
-      "title": "Home"
+      "title": "Home",
+      "no_property_added": "We couldn't find a property associated with your account. Add one to start managing it.",
+      "welcome": "Welcome!",
+      "add_property": "Add Condominium"
     }
   },
   "boolean": {

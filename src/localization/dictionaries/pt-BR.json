@@ -20,7 +20,10 @@
       "phone_description": "Caso queira que outros entrem em contato com você."
     },
     "home": {
-      "title": "Home"
+      "title": "Home",
+      "no_property_added": "Não encontramos uma propriedade associada a sua conta. Adicione uma para começar a gerenciar o seu condomínio.",
+      "welcome": "Bem Vindo!",
+      "add_property": "Adicionar Condomínio"
     }
   },
   "boolean": {
