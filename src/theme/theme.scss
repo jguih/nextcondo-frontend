@@ -1,6 +1,8 @@
 @use "sass:map";
+@use "./colors.utils.scss";
 
 $pallete: (
+  // Primary
   "primary-100": hsl(222, 45%, 90%),
   "primary-200": hsl(222, 45%, 80%),
   "primary-300": hsl(222, 46%, 70%),
@@ -10,20 +12,22 @@ $pallete: (
   "primary-700": hsl(222, 46%, 30%),
   "primary-800": hsl(222, 45%, 20%),
   "primary-900": hsl(222, 45%, 10%),
-  //
+  // Others
   "background-body": hsl(220, 23%, 96%),
   "shadow-color": hsl(225, 25%, 30%),
-  //
-  "neutral-100": hsl(226, 25%, 90%),
-  "neutral-200": hsl(224, 25%, 80%),
-  "neutral-300": hsl(225, 25%, 70%),
-  "neutral-400": hsl(226, 25%, 60%),
-  "neutral-500": hsl(225, 25%, 50%),
-  "neutral-600": hsl(226, 25%, 40%),
-  "neutral-700": hsl(225, 25%, 30%),
-  "neutral-800": hsl(224, 25%, 20%),
-  "neutral-900": hsl(226, 25%, 10%),
-  //
+  "white": #ffffff,
+  "black": #000000,
+  // Neutral
+  "neutral-100": hsl(240, 2%, 90%),
+  "neutral-200": hsl(240, 4%, 80%),
+  "neutral-300": hsl(240, 4%, 70%),
+  "neutral-400": hsl(240, 2%, 60%),
+  "neutral-500": hsl(240, 2%, 50%),
+  "neutral-600": hsl(240, 2%, 40%),
+  "neutral-700": hsl(240, 2%, 30%),
+  "neutral-800": hsl(240, 2%, 20%),
+  "neutral-900": hsl(240, 2%, 12%),
+  // Secondary
   "secondary-100": hsl(222, 65%, 90%),
   "secondary-200": hsl(222, 65%, 80%),
   "secondary-300": hsl(222, 65%, 70%),
@@ -33,7 +37,7 @@ $pallete: (
   "secondary-700": hsl(222, 65%, 30%),
   "secondary-800": hsl(222, 65%, 20%),
   "secondary-900": hsl(222, 65%, 10%),
-  //
+  // Accent
   "accent-100": hsl(224, 80%, 90%),
   "accent-200": hsl(223, 82%, 80%),
   "accent-300": hsl(223, 82%, 70%),
@@ -43,7 +47,7 @@ $pallete: (
   "accent-700": hsl(223, 82%, 30%),
   "accent-800": hsl(223, 82%, 20%),
   "accent-900": hsl(224, 80%, 10%),
-  //
+  // Danger
   "danger-100": hsl(0, 79%, 94%),
   "danger-200": hsl(0, 79%, 83%),
   "danger-300": hsl(0, 80%, 72%),
@@ -52,7 +56,27 @@ $pallete: (
   "danger-600": hsl(0, 80%, 39%),
   "danger-700": hsl(0, 80%, 28%),
   "danger-800": hsl(0, 81%, 16%),
-  "danger-900": hsl(0, 79%, 5%),
+  "danger-900": hsl(0, 79%, 10%),
+  // Success
+  "success-100": hsl(121, 79%, 89%),
+  "success-200": hsl(128, 80%, 79%),
+  "success-300": hsl(134, 65%, 64%),
+  "success-400": hsl(140, 51%, 50%),
+  "success-500": hsl(146, 81%, 33%),
+  "success-600": hsl(152, 84%, 27%),
+  "success-700": hsl(158, 86%, 23%),
+  "success-800": hsl(164, 89%, 18%),
+  "success-900": hsl(170, 92%, 10%),
+  // Warning
+  "warning-100": hsl(54, 96%, 90%),
+  "warning-200": hsl(53, 98%, 80%),
+  "warning-300": hsl(51, 97%, 70%),
+  "warning-400": hsl(50, 96%, 63%),
+  "warning-500": hsl(49, 95%, 50%),
+  "warning-600": hsl(48, 95%, 43%),
+  "warning-700": hsl(47, 97%, 23%),
+  "warning-800": hsl(46, 97%, 15%),
+  "warning-900": hsl(45, 98%, 10%)
 );
 
 $themes: (
@@ -63,19 +87,28 @@ $themes: (
     "background-level2": map.get($pallete, "neutral-200"),
     "background-level3": map.get($pallete, "neutral-300"),
     "shadow-color": map.get($pallete, "shadow-color"),
-    //
-    "primary": map.get($pallete, "primary-500"),
-    "on-primary": map.get($pallete, "neutral-100"),
-    "primary-hover-bg": map.get($pallete, "primary-600"),
-    "primary-hover-border": map.get($pallete, "primary-600"),
-    "primary-active-bg": map.get($pallete, "primary-700"),
-    "primary-active-border": map.get($pallete, "primary-700"),
+    // Primary variant
+    "primary": map.get($pallete, "primary-600"),
+    "on-primary": map.get($pallete, "white"),
+    "primary-hover-bg": map.get($pallete, "primary-700"),
+    "primary-hover-border": map.get($pallete, "primary-700"),
+    "primary-active-bg": map.get($pallete, "primary-800"),
+    "primary-active-border": map.get($pallete, "primary-800"),
     "primary-on-active-bg": map.get($pallete, "neutral-200"),
-    "primary-disabled-bg": map.get($pallete, "neutral-400"),
-    "primary-on-disabled-bg": map.get($pallete, "neutral-100"),
-    //
+    "primary-disabled-bg": map.get($pallete, "neutral-800"),
+    "primary-on-disabled-bg": map.get($pallete, "neutral-400"),
+    // Primary light variant
+    "on-primary-light": map.get($pallete, "primary-700"),
+    "primary-light-hover-bg": map.get($pallete, "primary-200"),
+    "primary-light-hover-border": map.get($pallete, "primary-200"),
+    "primary-light-active-bg": map.get($pallete, "primary-300"),
+    "primary-light-active-border": map.get($pallete, "primary-300"),
+    "primary-light-on-active-bg": map.get($pallete, "primary-700"),
+    "primary-light-disabled-bg": map.get($pallete, "neutral-800"),
+    "primary-light-on-disabled-bg": map.get($pallete, "neutral-400"),
+    // Secondary variant
     "secondary": map.get($pallete, "secondary-500"),
-    "on-secondary": map.get($pallete, "neutral-100"),
+    "on-secondary": map.get($pallete, "white"),
     "secondary-hover-bg": map.get($pallete, "secondary-600"),
     "secondary-hover-border": map.get($pallete, "secondary-600"),
     "secondary-active-bg": map.get($pallete, "secondary-700"),
@@ -83,9 +116,37 @@ $themes: (
     "secondary-on-active-bg": map.get($pallete, "neutral-200"),
     "secondary-disabled-bg": map.get($pallete, "neutral-400"),
     "secondary-on-disabled-bg": map.get($pallete, "neutral-100"),
-    //
+    // Secondary light variant
+    "on-secondary-light": map.get($pallete, "secondary-800"),
+    "secondary-light-hover-bg": map.get($pallete, "secondary-200"),
+    "secondary-light-hover-border": map.get($pallete, "secondary-200"),
+    "secondary-light-active-bg": map.get($pallete, "secondary-300"),
+    "secondary-light-active-border": map.get($pallete, "secondary-300"),
+    "secondary-light-on-active-bg": map.get($pallete, "secondary-700"),
+    "secondary-light-disabled-bg": map.get($pallete, "neutral-800"),
+    "secondary-light-on-disabled-bg": map.get($pallete, "neutral-400"),
+    // Accent variant
+    "accent": map.get($pallete, "accent-500"),
+    "on-accent": map.get($pallete, "white"),
+    "accent-hover-bg": map.get($pallete, "accent-600"),
+    "accent-hover-border": map.get($pallete, "accent-600"),
+    "accent-active-bg": map.get($pallete, "accent-700"),
+    "accent-active-border": map.get($pallete, "accent-700"),
+    "accent-on-active-bg": map.get($pallete, "neutral-200"),
+    "accent-disabled-bg": map.get($pallete, "neutral-400"),
+    "accent-on-disabled-bg": map.get($pallete, "neutral-100"),
+    // Accent light variant
+    "on-accent-light": map.get($pallete, "accent-800"),
+    "accent-light-hover-bg": map.get($pallete, "accent-200"),
+    "accent-light-hover-border": map.get($pallete, "accent-200"),
+    "accent-light-active-bg": map.get($pallete, "accent-300"),
+    "accent-light-active-border": map.get($pallete, "accent-300"),
+    "accent-light-on-active-bg": map.get($pallete, "accent-700"),
+    "accent-light-disabled-bg": map.get($pallete, "neutral-800"),
+    "accent-light-on-disabled-bg": map.get($pallete, "neutral-400"),
+    // Danger variant
     "danger": map.get($pallete, "danger-500"),
-    "on-danger": map.get($pallete, "neutral-100"),
+    "on-danger": map.get($pallete, "white"),
     "danger-hover-bg": map.get($pallete, "danger-600"),
     "danger-hover-border": map.get($pallete, "danger-600"),
     "danger-active-bg": map.get($pallete, "danger-700"),
@@ -93,12 +154,57 @@ $themes: (
     "danger-on-active-bg": map.get($pallete, "neutral-200"),
     "danger-disabled-bg": map.get($pallete, "neutral-400"),
     "danger-on-disabled-bg": map.get($pallete, "neutral-100"),
-    //
+    // Danger light variant
+    "on-danger-light": map.get($pallete, "danger-800"),
+    "danger-light-hover-bg": map.get($pallete, "danger-200"),
+    "danger-light-hover-border": map.get($pallete, "danger-200"),
+    "danger-light-active-bg": map.get($pallete, "danger-300"),
+    "danger-light-active-border": map.get($pallete, "danger-300"),
+    "danger-light-on-active-bg": map.get($pallete, "danger-700"),
+    "danger-light-disabled-bg": map.get($pallete, "neutral-800"),
+    "danger-light-on-disabled-bg": map.get($pallete, "neutral-400"),
+    // Success variant
+    "success": map.get($pallete, "success-500"),
+    "on-success": map.get($pallete, "black"),
+    "success-hover-bg": map.get($pallete, "success-600"),
+    "success-hover-border": map.get($pallete, "success-600"),
+    "success-active-bg": map.get($pallete, "success-700"),
+    "success-active-border": map.get($pallete, "success-700"),
+    "success-on-active-bg": map.get($pallete, "neutral-200"),
+    "success-disabled-bg": map.get($pallete, "neutral-400"),
+    "success-on-disabled-bg": map.get($pallete, "neutral-100"),
+    // Success light variant
+    "on-success-light": map.get($pallete, "success-800"),
+    "success-light-hover-bg": map.get($pallete, "success-200"),
+    "success-light-hover-border": map.get($pallete, "success-200"),
+    "success-light-active-bg": map.get($pallete, "success-300"),
+    "success-light-active-border": map.get($pallete, "success-300"),
+    "success-light-on-active-bg": map.get($pallete, "success-700"),
+    "success-light-disabled-bg": map.get($pallete, "neutral-800"),
+    "success-light-on-disabled-bg": map.get($pallete, "neutral-400"),
+    // Warning variant
+    "warning": map.get($pallete, "warning-500"),
+    "on-warning": map.get($pallete, "black"),
+    "warning-hover-bg": map.get($pallete, "warning-600"),
+    "warning-hover-border": map.get($pallete, "warning-600"),
+    "warning-active-bg": map.get($pallete, "warning-700"),
+    "warning-active-border": map.get($pallete, "warning-700"),
+    "warning-on-active-bg": map.get($pallete, "neutral-200"),
+    "warning-disabled-bg": map.get($pallete, "neutral-400"),
+    "warning-on-disabled-bg": map.get($pallete, "neutral-100"),
+    // Warning light variant
+    "on-warning-light": map.get($pallete, "warning-800"),
+    "warning-light-hover-bg": map.get($pallete, "warning-200"),
+    "warning-light-hover-border": map.get($pallete, "warning-200"),
+    "warning-light-active-bg": map.get($pallete, "warning-300"),
+    "warning-light-active-border": map.get($pallete, "warning-300"),
+    "warning-light-on-active-bg": map.get($pallete, "warning-700"),
+    "warning-light-disabled-bg": map.get($pallete, "neutral-800"),
+    "warning-light-on-disabled-bg": map.get($pallete, "neutral-400"),
+    // Static
     "static-5": hsla(0, 0%, 0%, 0.05),
     "static-10": hsla(0, 0%, 0%, 0.1),
     "static-40": hsla(0, 0%, 0%, 0.4),
-    "success": hsl(120, 75%, 45%),
-    "success-500": hsl(120, 75%, 50%),
   ),
   "dark": (
     "text": hsl(210, 11%, 93%),
@@ -176,38 +282,16 @@ $themes: (
 );
 
 :root[data-theme="light"] {
-  @each $color, $value in map.get($themes, "light") {
+  $light: map.get($themes, "light");
+  @each $color, $value in $light {
     --#{$color}: #{$value};
-
-    .bg-#{$color} {
-      background-color: $value;
-    }
-
-    .color-#{$color} {
-      color: $value;
-    }
-
-    .stroke-#{$color} {
-      stroke: $value;
-    }
   }
 }
 
 :root[data-theme="dark"] {
-  @each $color, $value in map.get($themes, "dark") {
+  $dark: map.get($themes, "dark");
+  @each $color, $value in $dark {
     --#{$color}: #{$value};
-
-    .bg-#{$color} {
-      background-color: $value;
-    }
-
-    .color-#{$color} {
-      color: $value;
-    }
-
-    .stroke-#{$color} {
-      stroke: $value;
-    }
   }
 }
 

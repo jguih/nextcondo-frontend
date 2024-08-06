@@ -5,12 +5,16 @@ import { LoginForm } from "@/src/page/login/components/loginForm/login-form";
 import { Typography } from "@/src/shared/components/typography/typography";
 import { Link } from "@/src/shared/components/link/link";
 import { ThemeToggle } from "@/src/theme/components/theme-toggle";
+import styles from "./styles.module.scss";
 
 const Login: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
   return (
     <Fragment>
-      <Typography tag="h1">{d.page.login.title}</Typography>
+      <div className={styles["title-container"]}>
+        <Typography tag="h1">{d.page.login.title}</Typography>
+        <ThemeToggle />
+      </div>
       <div>
         <Typography tag="small" muted>
           {d.page.login.subtitle}{" "}
@@ -34,7 +38,6 @@ const Login: FC<WithLocale> = async ({ params: { lang } }) => {
           },
         }}
       />
-      <ThemeToggle />
       {/* <Divider sx={{ mt: 4, mb: 4 }}>{d.common.or}</Divider>
       <SocialLoginList /> */}
     </Fragment>

@@ -1,0 +1,13 @@
+$colors: "primary", "secondary", "accent", "danger", "success", "warning";
+
+@each $color in $colors {
+  .bg-#{$color} {
+    background-color: var(--#{$color});
+  }
+  .color-#{$color} {
+    color: var(--#{$color});
+  }
+  .stroke-#{$color} {
+    stroke: var(--#{$color});
+  }
+}

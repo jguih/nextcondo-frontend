@@ -8,7 +8,7 @@ export type CircularProgressProps = {
 } & ComponentProps<"div">;
 
 export const CircularProgress: FC<CircularProgressProps> = ({
-  size = "sm",
+  size = "md",
   ...props
 }) => {
   const classes = buildClassNames(

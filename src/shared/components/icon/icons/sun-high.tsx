@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IconBase, IconBaseProps } from "./icon-base";
+import { IconBase, IconBaseProps } from "../icon-base";
 
 export const SunHigh: FC<IconBaseProps> = (props) => {
   return (

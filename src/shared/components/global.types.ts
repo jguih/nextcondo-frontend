@@ -1,12 +1,10 @@
 export type SemanticColors =
-  | "danger"
-  | "info"
-  | "warning"
-  | "success"
   | "primary"
-  | "on-primary"
   | "secondary"
-  | "on-background";
+  | "accent"
+  | "danger"
+  | "success"
+  | "warning";
 
 export type Sizes = {
   small: "sm";

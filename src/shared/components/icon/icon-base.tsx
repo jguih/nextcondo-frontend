@@ -11,7 +11,7 @@ export type IconBaseProps = {
 } & ComponentProps<"span">;
 
 export const IconBase: FC<IconBaseProps> = ({
-  size = "sm",
+  size = "md",
   color,
   ...props
 }) => {
@@ -19,6 +19,7 @@ export const IconBase: FC<IconBaseProps> = ({
     {
       [styles[`icon-${size}`]]: size !== undefined,
       [`stroke-${color}`]: color !== undefined,
+      [`color-${color}`]: color !== undefined,
     },
     props.className,
     styles.icon

@@ -4,10 +4,11 @@
 }
 
 .icon {
-  --sm-size: 1.6rem;
+  --sm-size: var(--p);
   --md-size: calc(var(--sm-size) * var(--font-scale));
   --lg-size: calc(var(--md-size) * var(--font-scale));
   stroke: inherit;
+  color: inherit;
 }
 
 .icon-sm {

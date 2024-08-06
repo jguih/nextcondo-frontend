@@ -1,25 +1,23 @@
-$base-size: 0.6rem;
-
 .spinner {
   border-radius: 50%;
-  border: solid var(--border);
+  border: 0.14rem solid transparent;
   border-color: var(--static-5) var(--static-5) var(--static-5) var(--accent);
-  animation: .7s spin linear infinite;
+  animation: 0.7s spin linear infinite;
 }
 
 .sm {
-  width: $base-size;
-  height: $base-size;
+  width: var(--text-small);
+  height: var(--text-small);
 }
 
 .md {
-  width: $base-size * 1.5;
-  height: $base-size * 1.5;
+  width: var(--p);
+  height: var(--p);
 }
 
 .lg {
-  width: $base-size * 2;
-  height: $base-size * 2;
+  width: calc(var(--p) * 1.5);
+  height: calc(var(--p) * 1.5);
 }
 
 @keyframes spin {

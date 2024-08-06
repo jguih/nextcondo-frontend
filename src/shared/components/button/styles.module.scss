@@ -1,24 +1,23 @@
 @use "theme.utils" as theme;
+@use "colors.utils" as colors;
 
 .button {
   padding: theme.spacing(0.6) theme.spacing(1);
   border-radius: var(--radius-sm);
-  border: none;
+  border: var(--border) solid transparent;
   cursor: pointer;
+  transition-property: background-color;
+  transition: 0.06s ease;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-@mixin button($color) {
+@mixin solid($color) {
   background-color: var(--#{$color});
   color: var(--on-#{$color});
   stroke: var(--on-#{$color});
-  border: var(--border) solid transparent;
-  transition-property: background-color;
-  transition: 0.08s ease;
-  box-shadow: 4px 4px 8px 1px var(--shadow-color);
 
   &:hover,
   &:focus {
@@ -35,9 +34,11 @@
 
   &:disabled {
     background-color: var(--#{$color}-disabled-bg);
+    border-color: var(--#{$color}-disabled-bg);
     color: var(--#{$color}-on-disabled-bg);
     stroke: var(--#{$color}-on-disabled-bg);
     cursor: not-allowed;
+    box-shadow: none;
   }
 
   &:focus {
@@ -45,31 +46,44 @@
   }
 }
 
-.primary {
-  @include button("primary");
-}
-
-.secondary {
-  @include button("secondary");
-}
-
-.transparent {
+@mixin light($color) {
   background-color: transparent;
+  color: var(--on-#{$color});
+  stroke: var(--on-#{$color});
 
-  &:hover {
-    opacity: 60%;
+  &:hover,
+  &:focus {
+    background-color: var(--#{$color}-hover-bg);
+    border-color: var(--#{$color}-hover-border);
   }
 
   &:active {
-    background-color: transparent;
+    background-color: var(--#{$color}-active-bg);
+    border: var(--border) solid var(--#{$color}-active-border);
+    color: var(--#{$color}-on-active-bg);
+    stroke: var(--#{$color}-on-active-bg);
   }
 
   &:disabled {
-    background-color: var(--disabled);
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--#{$color}-on-disabled-bg);
+    stroke: var(--#{$color}-on-disabled-bg);
     cursor: not-allowed;
+    box-shadow: none;
   }
 
   &:focus {
-    outline: var(--primary-700) solid 2px;
+    outline: none;
+  }
+}
+
+@each $color in colors.$colors {
+  .solid.#{$color} {
+    @include solid("#{$color}");
+  }
+
+  .light.#{$color} {
+    @include light("#{$color}-light");
   }
 }
