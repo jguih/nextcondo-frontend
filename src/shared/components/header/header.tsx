@@ -1,23 +1,16 @@
 "use client";
 
-import {
-  Dropdown,
-  IconButton,
-  Menu,
-  MenuItem,
-  Stack,
-  MenuButton,
-} from "@mui/joy";
 import { FC } from "react";
-import { KeyboardArrowDown, MenuOutlined } from "@mui/icons-material";
-import { useSideDrawerContext } from "../sideDrawer/context";
+import styles from "./styles.module.scss";
+import { Button } from "../button/button";
+import { Menu } from "../icon/icons/menu";
 
 export const Header = () => {
   return (
-    <Stack direction={"row"} justifyContent={"space-between"} width={"100%"}>
+    <div className={styles.header}>
       <HeaderComponent.SideDrawerButton />
       <HeaderComponent.PropertyMenu />
-    </Stack>
+    </div>
   );
 };
 
@@ -27,30 +20,15 @@ interface HeaderComponent {
 }
 
 const SideDrawerButton: HeaderComponent["SideDrawerButton"] = () => {
-  const { setOpen } = useSideDrawerContext();
-  const openSideDrawer = () => setOpen(true);
   return (
-    <IconButton size="sm" aria-label="open sidebar" onClick={openSideDrawer}>
-      <MenuOutlined />
-    </IconButton>
+    <Button variant="light" aria-label="open sidedrawer">
+      <Menu />
+    </Button>
   );
 };
 
 const PropertyMenu: HeaderComponent["PropertyMenu"] = () => {
-  return (
-    <Dropdown>
-      <MenuButton
-        variant="plain"
-        endDecorator={<KeyboardArrowDown />}
-        size="md"
-      >
-        Ed. Downtown
-      </MenuButton>
-      <Menu variant="soft">
-        <MenuItem>Perfil do condomínio</MenuItem>
-      </Menu>
-    </Dropdown>
-  );
+  return <></>;
 };
 
 const HeaderComponent: HeaderComponent = { SideDrawerButton, PropertyMenu };

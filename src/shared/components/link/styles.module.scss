@@ -4,16 +4,50 @@
   font-size: var(--text-small);
 }
 
-.link {
-  color: var(--primary);
-  padding: theme.spacing(0.2) theme.spacing(0.2);
-  border-radius: var(--radius-xs);
-  text-decoration: underline;
-  text-decoration-color: var(--primary-400);
-  
+.font-size-md {
+  font-size: var(--p);
+}
+
+.font-size-lg {
+  font-size: calc(var(--p) * 1.2);
+}
+
+@mixin base() {
+  border: var(--border) solid transparent;
+  border-radius: var(--radius);
+}
+
+@mixin light($color) {
+  @include base();
+  background-color: transparent;
+  color: var(--on-#{$color});
+
   &:hover {
-    text-decoration: underline;
-    text-decoration-color: var(--primary-300);
-    background-color: var(--primary-100);
+    background-color: var(--#{$color}-hover-bg);
+    border-color: var(--#{$color}-hover-border);
   }
+
+  &:active {
+    background-color: var(--#{$color}-active-bg);
+    border-color: var(--#{$color}-active-border);
+    color: var(--#{$color}-on-active-bg);
+    stroke: var(--#{$color}-on-active-bg);
+  }
+
+  &:disabled {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--#{$color}-on-disabled-bg);
+    stroke: var(--#{$color}-on-disabled-bg);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  &:focus {
+    outline: var(--#{$color}-active-border) solid var(--border);
+  }
+}
+
+.link {
+  @include light("accent-light");
 }

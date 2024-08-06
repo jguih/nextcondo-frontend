@@ -12,10 +12,11 @@ export type LabelProps = {
 
 export const Label: FC<LabelProps> = ({ required, color, ...props }) => {
   const context = useFormGroupContext();
+  const isRequired =
+    (required !== undefined ? required : context?.required) ?? false;
   const classes = buildClassNames(
     {
-      [styles.required]:
-        (context && context.required === true) || required === true,
+      [styles.required]: isRequired,
       [`color-${color}`]: color !== undefined,
     },
     props.className,

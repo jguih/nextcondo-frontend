@@ -57,8 +57,7 @@ export const SignUpForm: FC<FormProps> = ({
     return (
       <div className={styles["success-box"]}>
         <Typography tag="p" color="success">
-          {/* {state.message} */}
-          Success message
+          {state.message}
         </Typography>
         <Button
           onClick={() => {

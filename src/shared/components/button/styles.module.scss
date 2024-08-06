@@ -19,15 +19,14 @@
   color: var(--on-#{$color});
   stroke: var(--on-#{$color});
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: var(--#{$color}-hover-bg);
     border-color: var(--#{$color}-hover-border);
   }
 
   &:active {
     background-color: var(--#{$color}-active-bg);
-    border: var(--border) solid var(--#{$color}-active-border);
+    border-color: var(--#{$color}-active-border);
     color: var(--#{$color}-on-active-bg);
     stroke: var(--#{$color}-on-active-bg);
   }
@@ -42,7 +41,7 @@
   }
 
   &:focus {
-    outline: none;
+    outline: var(--#{$color}-active-border) solid var(--border);
   }
 }
 
@@ -51,15 +50,14 @@
   color: var(--on-#{$color});
   stroke: var(--on-#{$color});
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: var(--#{$color}-hover-bg);
     border-color: var(--#{$color}-hover-border);
   }
 
   &:active {
     background-color: var(--#{$color}-active-bg);
-    border: var(--border) solid var(--#{$color}-active-border);
+    border-color: var(--#{$color}-active-border);
     color: var(--#{$color}-on-active-bg);
     stroke: var(--#{$color}-on-active-bg);
   }
@@ -74,7 +72,7 @@
   }
 
   &:focus {
-    outline: none;
+    outline: var(--#{$color}-active-border) solid var(--border);
   }
 }
 

@@ -10,9 +10,13 @@
 }
 
 .success-box {
-  flex-grow: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: theme.spacing(2),
+  gap: theme.spacing(2);
+  padding: theme.spacing(2);
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }

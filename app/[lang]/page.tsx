@@ -1,6 +1,5 @@
 import { Header } from "@/src/shared/components/header/header";
-import { Layout } from "@/src/shared/components/layout";
-import { SideDrawerProvider } from "@/src/shared/components/sideDrawer/context";
+import { Layout } from "@/src/shared/components/layout/layout";
 import { getDictionary } from "../../src/localization/dictionaries";
 import { FC } from "react";
 import { WithLocale } from "@/src/shared/types/with-locale";
@@ -11,15 +10,12 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
 
   return (
-    <SideDrawerProvider>
-      <Layout.Root>
-        <Layout.Header>
-          <Header />
-        </Layout.Header>
-        <div></div>
-        <Layout.Main></Layout.Main>
-      </Layout.Root>
-    </SideDrawerProvider>
+    <Layout.Root>
+      <Layout.Header>
+        <Header />
+      </Layout.Header>
+      <Layout.Main></Layout.Main>
+    </Layout.Root>
   );
 };
 

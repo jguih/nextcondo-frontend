@@ -297,10 +297,11 @@ $themes: (
 
 :root {
   --spacing: 0.6rem;
-  --radius: 0.4rem;
-  --radius-xs: calc(var(--radius) / 2);
-  --radius-sm: var(--radius);
-  --radius-md: calc(var(--radius) * 1.5);
-  --radius-lg: calc(var(--radius) * 2);
+  --radius: 0.2rem;
+  --radius-xs: var(--radius);
+  --radius-sm: calc(var(--radius) * 2);
+  --radius-md: calc(var(--radius) * 2.5);
+  --radius-lg: calc(var(--radius) * 3);
   --border: 0.2rem;
+  --border-sm: var(--border);
 }
