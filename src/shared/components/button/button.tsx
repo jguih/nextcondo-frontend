@@ -26,8 +26,8 @@ export const Button: FC<ButtonProps> = ({
       [styles[variant]]: variant !== undefined,
       [styles["full-width"]]: fullWidth === true,
     },
-    props.className,
-    styles.button
+    styles.button,
+    props.className
   );
   const content =
     typeof children === "string" ? (

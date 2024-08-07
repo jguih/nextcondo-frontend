@@ -1,6 +1,5 @@
 import "../globals.scss";
 import type { Metadata, Viewport } from "next";
-// import ThemeRegistry from "@/src/theme-registry/components/theme-registry";
 import { AuthBoundary } from "@/src/shared/authentication/components/boundary";
 import { Locale } from "@/i18n-config";
 import { LocaleProvider } from "@/src/localization/client/LangProvider";
@@ -35,13 +34,11 @@ export default function RootLayout({
       style={{ fontFamily: `${InterFont.style.fontFamily}` }}
     >
       <body>
-        {/* <ThemeRegistry> */}
         <LocaleProvider lang={lang}>
           <EnvProvider>
             <AuthBoundary>{children}</AuthBoundary>
           </EnvProvider>
         </LocaleProvider>
-        {/* </ThemeRegistry> */}
       </body>
     </html>
   );

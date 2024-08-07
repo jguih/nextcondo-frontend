@@ -17,16 +17,12 @@ export const ThemeToggle: FC = () => {
 
   const toggleTheme = () => {
     const html = getHtmlTag();
-    if (theme === "light") {
-      if (html) {
-        html.setAttribute("data-theme", "dark");
-        setTheme("dark");
-      }
-    } else if (theme === "dark") {
-      if (html) {
-        html.setAttribute("data-theme", "light");
-        setTheme("light");
-      }
+    if (theme === "light" && html) {
+      html.setAttribute("data-theme", "dark");
+      setTheme("dark");
+    } else if (theme === "dark" && html) {
+      html.setAttribute("data-theme", "light");
+      setTheme("light");
     }
   };
 
@@ -41,7 +37,7 @@ export const ThemeToggle: FC = () => {
 
   return (
     <Button
-      color="primary"
+      color="neutral"
       variant="light"
       disabled={!mounted}
       onClick={() => toggleTheme()}

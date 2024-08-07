@@ -6,6 +6,9 @@ import { ThemeToggle } from "@/src/theme/components/theme-toggle";
 import { Typography } from "../../typography/typography";
 import { Button } from "../../button/button";
 import { buildClassNames } from "../../utils/build-class-names";
+import { Close } from "../../icon/icons/close";
+import { List } from "../../list/list";
+import { ListItem } from "../../list/item/list-item";
 
 export const AppSidebar: FC = () => {
   const [open, setOpen] = useState(false);
@@ -16,7 +19,7 @@ export const AppSidebar: FC = () => {
     if (!document) return;
 
     const toggler = document.getElementById("appsidebar-toggler");
-    const handleOnClick = (event: MouseEvent) => {
+    const handleOnClick: (event: MouseEvent) => void = () => {
       setMounted(!mounted);
       if (!open) setOpen(true);
     };
@@ -25,6 +28,7 @@ export const AppSidebar: FC = () => {
     }
 
     return () => toggler?.removeEventListener("click", handleOnClick);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sidebarClasses = buildClassNames(
@@ -47,10 +51,16 @@ export const AppSidebar: FC = () => {
       }}
     >
       <div className={styles["sidebar-header"]}>
-        <Typography>Sidebar</Typography>
-        <Button onClick={unmount}>Close</Button>
+        <Typography>Galaxy Towers</Typography>
+        <Button onClick={unmount} color="neutral" variant="light">
+          <Close />
+        </Button>
       </div>
-      <ThemeToggle />
+      <List>
+        <ListItem>
+          <ThemeToggle />
+        </ListItem>
+      </List>
       <div className={backdropClasses} onClick={unmount} />
     </div>
   );
