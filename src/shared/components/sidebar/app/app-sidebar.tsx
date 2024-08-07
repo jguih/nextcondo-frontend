@@ -16,12 +16,15 @@ export const AppSidebar: FC = () => {
     if (!document) return;
 
     const toggler = document.getElementById("appsidebar-toggler");
+    const handleOnClick = (event: MouseEvent) => {
+      setMounted(!mounted);
+      if (!open) setOpen(true);
+    };
     if (toggler instanceof HTMLButtonElement) {
-      toggler.onclick = (ev) => {
-        setMounted(!mounted);
-        if (!open) setOpen(true);
-      };
+      toggler.onclick = handleOnClick;
     }
+
+    return () => toggler?.removeEventListener("click", handleOnClick);
   }, []);
 
   const sidebarClasses = buildClassNames(
