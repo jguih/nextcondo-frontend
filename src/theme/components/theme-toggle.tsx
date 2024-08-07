@@ -37,7 +37,7 @@ export const ThemeToggle: FC = () => {
 
   return (
     <Button
-      color="neutral"
+      color="primary"
       variant="light"
       disabled={!mounted}
       onClick={() => toggleTheme()}

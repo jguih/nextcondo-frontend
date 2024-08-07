@@ -5,15 +5,17 @@ import { buildClassNames } from "../utils/build-class-names";
 import { Sizes } from "../global.types";
 
 export type LinkProps = {
-  size?: Sizes["small"];
+  size?: Sizes;
 } & NextLinkProps &
   ComponentProps<"a">;
 
-export const Link: FC<LinkProps> = ({ size, ...props }) => {
+export const Link: FC<LinkProps> = ({ size = "md", ...props }) => {
   const classes = buildClassNames(
-    { [styles[`font-size-${size}`]]: size !== undefined },
-    props.className,
-    styles.link
+    {
+      [styles[`font-size-${size}`]]: size !== undefined,
+    },
+    styles.link,
+    props.className
   );
   return <NextLink {...props} className={classes} />;
 };

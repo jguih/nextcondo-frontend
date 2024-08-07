@@ -2,13 +2,12 @@
 
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import { ThemeToggle } from "@/src/theme/components/theme-toggle";
 import { Typography } from "../../typography/typography";
 import { Button } from "../../button/button";
 import { buildClassNames } from "../../utils/build-class-names";
 import { Close } from "../../icon/icons/close";
 import { List } from "../../list/list";
-import { ListItem } from "../../list/item/list-item";
+import { ListItem, ListItemAnchor } from "../../list/items";
 
 export const AppSidebar: FC = () => {
   const [open, setOpen] = useState(false);
@@ -51,14 +50,17 @@ export const AppSidebar: FC = () => {
       }}
     >
       <div className={styles["sidebar-header"]}>
-        <Typography>Galaxy Towers</Typography>
+        <Typography tag="h4">Galaxy Towers</Typography>
         <Button onClick={unmount} color="neutral" variant="light">
           <Close />
         </Button>
       </div>
       <List>
         <ListItem>
-          <ThemeToggle />
+          <ListItemAnchor href={"/"}>Configurações</ListItemAnchor>
+        </ListItem>
+        <ListItem>
+          <ListItemAnchor href={"/"}>Tema</ListItemAnchor>
         </ListItem>
       </List>
       <div className={backdropClasses} onClick={unmount} />

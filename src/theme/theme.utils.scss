@@ -5,3 +5,6 @@
 @function radius($factor: 1) {
   @return calc($factor * var(--radius));
 }
+
+$colors: "primary", "secondary", "accent", "danger", "success", "warning",
+  "neutral";

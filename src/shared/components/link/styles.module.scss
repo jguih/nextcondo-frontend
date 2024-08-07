@@ -12,42 +12,36 @@
   font-size: calc(var(--p) * 1.2);
 }
 
-@mixin base() {
+.link {
+  text-decoration: none;
   border: var(--border) solid transparent;
   border-radius: var(--radius);
-}
 
-@mixin light($color) {
-  @include base();
   background-color: transparent;
-  color: var(--on-#{$color});
+  color: var(--on-accent-light);
+  stroke: var(--on-accent-light);
 
   &:hover {
-    background-color: var(--#{$color}-hover-bg);
-    border-color: var(--#{$color}-hover-border);
+    background-color: var(--accent-light-hover-bg);
+    border-color: var(--accent-light-hover-border);
   }
 
   &:active {
-    background-color: var(--#{$color}-active-bg);
-    border-color: var(--#{$color}-active-border);
-    color: var(--#{$color}-on-active-bg);
-    stroke: var(--#{$color}-on-active-bg);
+    background-color: var(--accent-light-active-bg);
+    border-color: var(--accent-light-active-border);
+    color: var(--accent-light-on-active-bg);
+    stroke: var(--accent-light-on-active-bg);
   }
 
   &:disabled {
     background-color: transparent;
     border-color: transparent;
-    color: var(--#{$color}-on-disabled-bg);
-    stroke: var(--#{$color}-on-disabled-bg);
+    color: var(--accent-light-on-disabled-bg);
+    stroke: var(--accent-light-on-disabled-bg);
     cursor: not-allowed;
-    box-shadow: none;
   }
 
   &:focus {
-    outline: var(--#{$color}-active-border) solid var(--border);
+    outline: var(--accent-light-active-border) solid var(--border);
   }
-}
-
-.link {
-  @include light("accent-light");
 }

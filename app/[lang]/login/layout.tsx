@@ -1,8 +1,8 @@
-import { Box } from "@mui/joy";
 import { FC, ReactNode } from "react";
+import styles from "./styles.module.scss";
 
 const LoginLayout: FC<{ children: ReactNode }> = ({ children }) => {
-  return <Box sx={{ p: 2 }}>{children}</Box>;
+  return <div className={styles.layout}>{children}</div>;
 };
 
 export default LoginLayout;
