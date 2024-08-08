@@ -5,13 +5,13 @@
  * @returns `String` containing all classes.
  */
 export const buildClassNames = (
-  classes: Record<string, boolean>,
+  classes: Record<string, boolean | null | undefined>,
   ...staticClasses: Array<string | undefined | null>
 ) => {
   const newClasses: string[] = Object.entries(classes)
     .filter((obj) => {
       const [, value] = obj;
-      return value;
+      return value === true;
     })
     .map((obj) => obj[0].trim());
 

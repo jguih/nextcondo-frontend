@@ -8,11 +8,13 @@ export type IconBaseProps = {
   size?: SizeOptions;
   /** @default "inherit" */
   color?: SemanticColors;
+  bold?: boolean;
 } & ComponentProps<"span">;
 
 export const IconBase: FC<IconBaseProps> = ({
   size = "md",
   color,
+  bold,
   ...props
 }) => {
   const classes = buildClassNames(
@@ -20,9 +22,10 @@ export const IconBase: FC<IconBaseProps> = ({
       [styles[`icon-${size}`]]: size !== undefined,
       [`stroke-${color}`]: color !== undefined,
       [`color-${color}`]: color !== undefined,
+      [styles.bold]: bold,
     },
-    props.className,
-    styles.icon
+    styles.icon,
+    props.className
   );
   return <span className={classes} {...props} />;
 };

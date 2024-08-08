@@ -43,7 +43,24 @@
 
 .item-anchor {
   text-decoration: none;
-  display: block;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: theme.spacing(1);
+  width: 100%;
+  height: 100%;
+  padding: theme.spacing(1);
+  border: var(--border) solid transparent;
+  border-radius: var(--radius);
+  @include light("neutral-light");
+}
+
+.item-button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: theme.spacing(1);
+  cursor: pointer;
   width: 100%;
   height: 100%;
   padding: theme.spacing(1);

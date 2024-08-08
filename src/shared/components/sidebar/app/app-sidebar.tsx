@@ -7,7 +7,11 @@ import { Button } from "../../button/button";
 import { buildClassNames } from "../../utils/build-class-names";
 import { Close } from "../../icon/icons/close";
 import { List } from "../../list/list";
-import { ListItem, ListItemAnchor } from "../../list/items";
+import { ListItem, ListItemAnchor, ListItemButton } from "../../list/items";
+import { SunHigh } from "../../icon/icons/sun-high";
+import { useThemeToggler } from "@/src/theme/components/useThemeToggler";
+import { MoonFilled } from "../../icon/icons/moon-filled";
+import { Gear } from "../../icon/icons/gear";
 
 export const AppSidebar: FC = () => {
   const [open, setOpen] = useState(false);
@@ -52,18 +56,31 @@ export const AppSidebar: FC = () => {
       <div className={styles["sidebar-header"]}>
         <Typography tag="h4">Galaxy Towers</Typography>
         <Button onClick={unmount} color="neutral" variant="light">
-          <Close />
+          <Close size="lg" />
         </Button>
       </div>
       <List>
         <ListItem>
-          <ListItemAnchor href={"/"}>Configurações</ListItemAnchor>
+          <ListItemAnchor href={"/"}>
+            <Gear size="md" bold />
+            Configurações
+          </ListItemAnchor>
         </ListItem>
         <ListItem>
-          <ListItemAnchor href={"/"}>Tema</ListItemAnchor>
+          <ThemeToggler />
         </ListItem>
       </List>
       <div className={backdropClasses} onClick={unmount} />
     </div>
+  );
+};
+
+const ThemeToggler: FC = () => {
+  const { toggleTheme, theme, mounted } = useThemeToggler();
+  return (
+    <ListItemButton onClick={toggleTheme} disabled={!mounted}>
+      {theme === "light" ? <SunHigh bold /> : <MoonFilled bold />}
+      <Typography>Alternar Tema</Typography>
+    </ListItemButton>
   );
 };

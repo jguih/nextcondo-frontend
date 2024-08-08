@@ -12,3 +12,8 @@ export const ListItemAnchor: FC<ComponentProps<"a"> & LinkProps> = (props) => {
   const classes = buildClassNames({}, styles["item-anchor"], props.className);
   return <Link {...props} className={classes} />;
 };
+
+export const ListItemButton: FC<ComponentProps<"button">> = (props) => {
+  const classes = buildClassNames({}, styles["item-button"], props.className);
+  return <button {...props} className={classes} />;
+};

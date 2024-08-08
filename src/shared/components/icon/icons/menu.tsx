@@ -8,7 +8,6 @@ export const Menu: FC<IconBaseProps> = (props) => {
         xmlns="http://www.w3.org/2000/svg"
         className="icon icon-tabler icon-tabler-menu-2"
         viewBox="0 0 24 24"
-        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       >

@@ -212,12 +212,12 @@ $themes: (
     "neutral-disabled-bg": map.get($pallete, "neutral-500"),
     "neutral-on-disabled-bg": map.get($pallete, "neutral-100"),
     // Neutral light variant
-    "on-neutral-light": map.get($pallete, "neutral-800"),
-    "neutral-light-hover-bg": map.get($pallete, "neutral-300"),
-    "neutral-light-hover-border": map.get($pallete, "neutral-300"),
-    "neutral-light-active-bg": map.get($pallete, "neutral-400"),
-    "neutral-light-active-border": map.get($pallete, "neutral-400"),
-    "neutral-light-on-active-bg": map.get($pallete, "neutral-900"),
+    "on-neutral-light": map.get($pallete, "neutral-900"),
+    "neutral-light-hover-bg": map.get($pallete, "neutral-200"),
+    "neutral-light-hover-border": map.get($pallete, "neutral-200"),
+    "neutral-light-active-bg": map.get($pallete, "neutral-300"),
+    "neutral-light-active-border": map.get($pallete, "neutral-300"),
+    "neutral-light-on-active-bg": map.get($pallete, "neutral-800"),
     "neutral-light-disabled-bg": map.get($pallete, "neutral-700"),
     "neutral-light-on-disabled-bg": map.get($pallete, "neutral-400"),
     // Static

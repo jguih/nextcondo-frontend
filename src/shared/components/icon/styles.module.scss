@@ -1,30 +1,29 @@
-@mixin base() {
+.icon {
   fill: none;
   display: inline-block;
-}
-
-.icon {
-  --sm-size: var(--p);
-  --md-size: calc(var(--sm-size) * var(--font-scale));
-  --lg-size: calc(var(--md-size) * var(--font-scale));
   stroke: inherit;
   color: inherit;
 }
 
+$sm: 1.2rem;
+$md: 1.4rem;
+$lg: 1.6rem;
+
 .icon-sm {
-  @include base();
-  width: var(--sm-size);
-  height: var(--sm-size);
+  width: $sm;
+  height: $sm;
 }
 
 .icon-md {
-  @include base();
-  width: var(--md-size);
-  height: var(--md-size);
+  width: $md;
+  height: $md;
 }
 
 .icon-lg {
-  @include base();
-  width: var(--lg-size);
-  height: var(--lg-size);
+  width: $lg;
+  height: $lg;
+}
+
+.bold {
+  stroke-width: 1.5;
 }

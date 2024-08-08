@@ -8,7 +8,6 @@ export const MoonFilled: FC<IconBaseProps> = (props) => {
         xmlns="http://www.w3.org/2000/svg"
         className="icon icon-tabler icon-tabler-moon-filled"
         viewBox="0 0 24 24"
-        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
