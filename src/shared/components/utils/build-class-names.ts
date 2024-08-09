@@ -15,9 +15,9 @@ export const buildClassNames = (
     })
     .map((obj) => obj[0].trim());
 
-  staticClasses
-    .filter((c) => typeof c === "string")
-    .forEach((c) => newClasses.push(c));
+  staticClasses.forEach((c) => {
+    if (typeof c === "string") newClasses.push(c);
+  });
 
   return newClasses.join(" ").trim();
 };

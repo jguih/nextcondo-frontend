@@ -1,5 +1,6 @@
 "use client";
-import { List, ListItem, ListItemButton } from "@mui/joy";
+import { ListItem, ListItemButton } from "@/src/shared/components/list/items";
+import { List } from "@/src/shared/components/list/list";
 import { FC } from "react";
 // import { signInWithGoogle } from "./social-logins-list.actions";
 
