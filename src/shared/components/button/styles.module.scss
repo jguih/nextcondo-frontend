@@ -70,6 +70,10 @@
     stroke: var(--#{$color}-on-disabled-bg);
     cursor: not-allowed;
     box-shadow: none;
+    &:hover {
+      background-color: var(--#{$color}-disabled-bg);
+      border-color: var(--#{$color}-disabled-bg);
+    }
   }
 
   &:focus {
