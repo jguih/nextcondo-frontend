@@ -18,7 +18,7 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
       <Layout.Header>
         <Header title={d.page.home.welcome} />
       </Layout.Header>
-      <AppSidebar />
+      <AppSidebar title="NextCondo" />
       <Layout.Main className={styles.main}>
         <Typography tag="p">{d.page.home.no_property_added}</Typography>
         <Button className={styles["add-condo-btn"]}>

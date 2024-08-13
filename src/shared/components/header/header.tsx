@@ -12,7 +12,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
   return (
     <div className={styles.header}>
       <div className={styles.left}>
-        <Button variant="light" color="neutral" id="appsidebar-toggler">
+        <Button variant="light" color="neutral" data-sidebarid="appsidebar">
           <Menu bold />
         </Button>
         {title && <Typography>{title}</Typography>}

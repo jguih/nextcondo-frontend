@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import styles from "./styles.module.scss";
 import { Typography } from "../../typography/typography";
 import { Button } from "../../button/button";
@@ -12,50 +12,38 @@ import { SunHigh } from "../../icon/icons/sun-high";
 import { useThemeToggler } from "@/src/theme/components/useThemeToggler";
 import { MoonFilled } from "../../icon/icons/moon-filled";
 import { Gear } from "../../icon/icons/gear";
+import { useSidebar } from "./useSidebar";
 
-export const AppSidebar: FC = () => {
-  const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const unmount = () => setMounted(false);
+export type AppSidebarProps = {
+  title: string;
+};
 
-  useEffect(() => {
-    if (!document) return;
-
-    const toggler = document.getElementById("appsidebar-toggler");
-    const handleOnClick: (event: MouseEvent) => void = () => {
-      setMounted(!mounted);
-      if (!open) setOpen(true);
-    };
-    if (toggler instanceof HTMLButtonElement) {
-      toggler.onclick = handleOnClick;
-    }
-
-    return () => toggler?.removeEventListener("click", handleOnClick);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+export const AppSidebar: FC<AppSidebarProps> = ({ title }) => {
+  const id = "appsidebar";
+  const { open, shouldMount, closeSidebar } = useSidebar({ id, delay: 250 });
 
   const sidebarClasses = buildClassNames(
-    { [styles.in]: mounted === true, [styles.out]: mounted === false },
+    { [styles.in]: open === true, [styles.out]: open === false },
     styles.sidebar
   );
 
   const backdropClasses = buildClassNames(
-    { [styles.in]: mounted === true, [styles.out]: mounted === false },
+    { [styles.in]: open === true, [styles.out]: open === false },
     styles.backdrop
   );
 
-  if (!open) return;
+  if (!shouldMount) return;
 
   return (
-    <div
-      className={sidebarClasses}
-      onAnimationEnd={() => {
-        if (!mounted) setOpen(false);
-      }}
-    >
+    <div id={id} data-testid={id} className={sidebarClasses}>
       <div className={styles["sidebar-header"]}>
-        <Typography tag="h4">Galaxy Towers</Typography>
-        <Button onClick={unmount} color="neutral" variant="light">
+        <Typography tag="h4">{title}</Typography>
+        <Button
+          onClick={closeSidebar}
+          color="neutral"
+          variant="light"
+          aria-label="close sidebar"
+        >
           <Close size="lg" />
         </Button>
       </div>
@@ -70,7 +58,11 @@ export const AppSidebar: FC = () => {
           <ThemeToggler />
         </ListItem>
       </List>
-      <div className={backdropClasses} onClick={unmount} />
+      <div
+        className={backdropClasses}
+        onClick={closeSidebar}
+        data-testid="backdrop"
+      />
     </div>
   );
 };

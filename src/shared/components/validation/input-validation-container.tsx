@@ -42,9 +42,12 @@ export const InputValidationContainer: FC<InputValidationContainerProps> = ({
     if (!inputRef.current) return;
     const validity = inputRef.current.validity;
     const messages = validationMessages;
+    const fallbackMessage = "invalid";
 
-    if (validity.valueMissing && messages?.valueMissing) {
-      inputRef.current.setCustomValidity(messages.valueMissing);
+    if (validity.valueMissing) {
+      inputRef.current.setCustomValidity(
+        messages.valueMissing ?? fallbackMessage
+      );
     } else if (validity.patternMismatch && messages?.patternMismatch) {
       inputRef.current.setCustomValidity(messages.patternMismatch);
     } else if (validity.typeMismatch && messages?.typeMismatch) {
@@ -57,10 +60,10 @@ export const InputValidationContainer: FC<InputValidationContainerProps> = ({
       inputRef.current.setCustomValidity(messages?.rangeUnderflow);
     } else if (validity.stepMismatch && messages?.stepMismatch) {
       inputRef.current.setCustomValidity(messages?.stepMismatch);
-    } else if (validity.tooLong && messages?.tooLong) {
-      inputRef.current.setCustomValidity(messages?.tooLong);
-    } else if (validity.tooShort && messages?.tooShort) {
-      inputRef.current.setCustomValidity(messages?.tooShort);
+    } else if (validity.tooLong) {
+      inputRef.current.setCustomValidity(messages?.tooLong ?? fallbackMessage);
+    } else if (validity.tooShort) {
+      inputRef.current.setCustomValidity(messages?.tooShort ?? fallbackMessage);
     } else {
       inputRef.current.setCustomValidity("");
     }

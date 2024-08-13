@@ -19,7 +19,6 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@mui/material": ["./node_modules/@mui/joy"]
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/[lang]/dictionaries.js", "jest.config.js", "jest.setup.js"],
