@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 import { Typography } from "../../typography/typography";
 import { Button } from "../../button/button";
 import { buildClassNames } from "../../utils/build-class-names";
@@ -12,7 +12,7 @@ import { SunHigh } from "../../icon/icons/sun-high";
 import { useThemeToggler } from "@/src/theme/components/useThemeToggler";
 import { MoonFilled } from "../../icon/icons/moon-filled";
 import { Gear } from "../../icon/icons/gear";
-import { useSidebar } from "./useSidebar";
+import { useSidebar } from "../hooks/useSidebar";
 
 export type AppSidebarProps = {
   title: string;
