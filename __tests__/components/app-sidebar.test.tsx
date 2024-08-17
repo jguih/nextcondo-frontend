@@ -1,9 +1,9 @@
+import { AppSidebar } from "@/src/shared/components/sidebar/app/app-sidebar";
 import {
   render,
   screen,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import { AppSidebar } from "./app-sidebar";
 import userEvent from "@testing-library/user-event";
 
 describe("<AppSidebar />", () => {
@@ -16,6 +16,7 @@ describe("<AppSidebar />", () => {
 
   it("closes on backdrop click", async () => {
     const sidebarId = "appsidebar";
+    const user = userEvent.setup();
     render(
       <>
         <AppSidebar title="NextCondo" />
@@ -23,16 +24,17 @@ describe("<AppSidebar />", () => {
       </>
     );
 
-    await userEvent.click(screen.getByText(/open/i));
+    await user.click(screen.getByText(/open/i));
     expect(screen.getByTestId(sidebarId)).toBeInTheDocument();
     expect(screen.getByText(/NextCondo/i)).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTestId(/backdrop/i));
+    await user.click(screen.getByTestId(/backdrop/i));
     await waitForElementToBeRemoved(() => screen.getByText(/NextCondo/i));
   });
 
   it("closes on close button click", async () => {
     const sidebarId = "appsidebar";
+    const user = userEvent.setup();
     render(
       <>
         <AppSidebar title="NextCondo" />
@@ -40,11 +42,11 @@ describe("<AppSidebar />", () => {
       </>
     );
 
-    await userEvent.click(screen.getByText(/open/i));
+    await user.click(screen.getByText(/open/i));
     expect(screen.getByTestId(sidebarId)).toBeInTheDocument();
     expect(screen.getByText(/NextCondo/i)).toBeInTheDocument();
 
-    await userEvent.click(screen.getByLabelText(/close sidebar/i));
+    await user.click(screen.getByLabelText(/close sidebar/i));
     await waitForElementToBeRemoved(() => screen.getByText(/NextCondo/i));
   });
 });

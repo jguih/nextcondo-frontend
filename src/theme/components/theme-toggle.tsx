@@ -14,6 +14,7 @@ export const ThemeToggle: FC = () => {
       variant="light"
       disabled={!mounted}
       onClick={() => toggleTheme()}
+      aria-label={theme === "dark" ? "use light theme" : "use dark theme"}
     >
       {theme === "light" ? (
         <SunHigh />

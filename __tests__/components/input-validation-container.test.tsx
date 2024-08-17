@@ -1,12 +1,13 @@
-import { render, screen } from "@testing-library/react";
 import {
   InputValidationContainer,
   ValidationMessages,
-} from "./input-validation-container";
+} from "@/src/shared/components/validation/input-validation-container";
+import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 
 describe("<InputValidationContainer />", () => {
   it("display required field message on blur", async () => {
+    const user = userEvent.setup();
     const validationMessages: Required<
       Pick<ValidationMessages, "valueMissing">
     > = {
@@ -32,7 +33,7 @@ describe("<InputValidationContainer />", () => {
       />
     );
 
-    await userEvent.type(screen.getByLabelText("Name"), "[Tab]");
+    await user.type(screen.getByLabelText("Name"), "[Tab]");
 
     expect(
       screen.getByText(validationMessages.valueMissing)
