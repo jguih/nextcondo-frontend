@@ -37,3 +37,8 @@ next-env.d.ts
 
 certificates
 junit.xml
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+certs/root.crt
