@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --verbose",
+    "test": "jest test --verbose",
+    "test:unit": "jest --verbose --testPathPattern=__tests__/unit",
+    "test:integration": "jest --verbose --testPathPattern=__tests__/integration",
     "test:watch": "jest --watch"
   },
   "dependencies": {
@@ -23,7 +25,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@playwright/test": "^1.46.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
@@ -43,6 +44,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-junit": "^16.0.0",
     "msw": "^2.3.5",
+    "puppeteer": "^23.1.0",
     "sass": "^1.77.8",
     "typescript": "^5.4.5"
   },

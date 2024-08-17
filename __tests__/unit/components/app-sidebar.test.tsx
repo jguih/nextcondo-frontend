@@ -1,3 +1,4 @@
+/** @jest-environment jsdom */
 import { AppSidebar } from "@/src/shared/components/sidebar/app/app-sidebar";
 import {
   render,

@@ -1,3 +1,4 @@
+/** @jest-environment jsdom */
 import {
   InputValidationContainer,
   ValidationMessages,
