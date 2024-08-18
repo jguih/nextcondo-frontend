@@ -46,6 +46,7 @@
     "msw": "^2.3.5",
     "puppeteer": "^23.1.0",
     "sass": "^1.77.8",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
   "engines": {

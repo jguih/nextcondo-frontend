@@ -4,7 +4,6 @@ import { FC } from "react";
 import styles from "../styles.module.scss";
 import { Typography } from "../../typography/typography";
 import { Button } from "../../button/button";
-import { buildClassNames } from "../../utils/build-class-names";
 import { Close } from "../../icon/icons/close";
 import { List } from "../../list/list";
 import { ListItem, ListItemAnchor, ListItemButton } from "../../list/items";
@@ -13,31 +12,21 @@ import { useThemeToggler } from "@/src/theme/components/useThemeToggler";
 import { MoonFilled } from "../../icon/icons/moon-filled";
 import { Gear } from "../../icon/icons/gear";
 import { useSidebar } from "../hooks/useSidebar";
+import { Sidebar } from "../sidebar";
 
-export type AppSidebarProps = {
-  title: string;
-};
-
-export const AppSidebar: FC<AppSidebarProps> = ({ title }) => {
+export const AppSidebar: FC = () => {
   const id = "appsidebar";
-  const { open, shouldMount, closeSidebar } = useSidebar({ id, delay: 250 });
-
-  const sidebarClasses = buildClassNames(
-    { [styles.in]: open === true, [styles.out]: open === false },
-    styles.sidebar
-  );
-
-  const backdropClasses = buildClassNames(
-    { [styles.in]: open === true, [styles.out]: open === false },
-    styles.backdrop
-  );
+  const { register, closeSidebar } = useSidebar({
+    id,
+  });
+  const { shouldMount } = register;
 
   if (!shouldMount) return;
 
   return (
-    <div id={id} data-testid={id} className={sidebarClasses}>
+    <Sidebar {...register} data-testid={id}>
       <div className={styles["sidebar-header"]}>
-        <Typography tag="h4">{title}</Typography>
+        <Typography tag="h4">NextCondo</Typography>
         <Button
           onClick={closeSidebar}
           color="neutral"
@@ -58,12 +47,7 @@ export const AppSidebar: FC<AppSidebarProps> = ({ title }) => {
           <ThemeToggler />
         </ListItem>
       </List>
-      <div
-        className={backdropClasses}
-        onClick={closeSidebar}
-        data-testid="backdrop"
-      />
-    </div>
+    </Sidebar>
   );
 };
 
