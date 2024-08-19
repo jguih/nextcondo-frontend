@@ -1,7 +1,6 @@
 "use server";
 
 import { Locale } from "@/i18n-config";
-import { registerUser } from "@/src/data/user";
 import { getDictionary } from "@/src/localization/dictionaries";
 import { createClient } from "@/src/shared/authentication/supabase/server";
 import { z } from "zod";
@@ -73,12 +72,13 @@ export const signUp = async (
   }
 
   if (data.session) {
-    await registerUser(data.session, {
-      fullName: parsed.data.name,
-      phone: parsed.data.phone,
-    })
-      .then(() => {})
-      .catch(() => {});
+    // await registerUser(data.session, {
+    //   fullName: parsed.data.name,
+    //   phone: parsed.data.phone,
+    // })
+    //   .then((res) => {
+    //   })
+    //   .catch(() => {});
   }
 
   return { submited: true, message: d.page.register.success };

@@ -6,7 +6,7 @@ import { render } from "@testing-library/react";
 
 jest.mock("react-dom", () => {
   const state: FormState = { isError: false };
-  const formAction = (playload: FormData) => {};
+  const formAction = "";
   const isPending = false;
 
   return {
@@ -28,7 +28,7 @@ jest.mock("react-dom", () => {
  * be made.
  */
 
-describe.skip("<LoginForm />", () => {
+describe("<LoginForm />", () => {
   it("renders", async () => {
     const d = await getDictionary("en");
     render(<LoginForm d={d} />);
