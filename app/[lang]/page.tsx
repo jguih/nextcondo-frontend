@@ -3,14 +3,18 @@ import { Layout } from "@/src/shared/components/layout/layout";
 import { getDictionary } from "../../src/localization/dictionaries";
 import { FC } from "react";
 import { WithLocale } from "@/src/shared/types/with-locale";
-import { authenticate } from "@/src/shared/authentication/server";
 import { Typography } from "@/src/shared/components/typography/typography";
 import styles from "./styles.module.scss";
 import { Button } from "@/src/shared/components/button/button";
 import { AppSidebar } from "@/src/shared/components/sidebar/app/app-sidebar";
+import { getMeAsync } from "@/src/data/users/server";
+import { redirect } from "next/navigation";
 
 const Home: FC<WithLocale> = async ({ params: { lang } }) => {
-  await authenticate();
+  const { success, data } = await getMeAsync();
+  if (!success) {
+    redirect("/login");
+  }
   const d = await getDictionary(lang);
 
   return (

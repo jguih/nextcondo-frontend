@@ -6,8 +6,14 @@ import { Typography } from "@/src/shared/components/typography/typography";
 import { Link } from "@/src/shared/components/link/link";
 import { ThemeToggle } from "@/src/theme/components/theme-toggle";
 import styles from "./styles.module.scss";
+import { getMeAsync } from "@/src/data/users/server";
+import { redirect } from "next/navigation";
 
 const Login: FC<WithLocale> = async ({ params: { lang } }) => {
+  const { success } = await getMeAsync();
+  if (success) {
+    redirect("/");
+  }
   const d = await getDictionary(lang);
   return (
     <Fragment>

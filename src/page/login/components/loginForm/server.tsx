@@ -8,8 +8,11 @@ export const LoginForm: FC<{ d: Dictionary }> = ({ d }) => {
       label={{
         email: d.auth.email,
         password: d.auth.password,
+      }}
+      text={{
         submit: d.auth.login,
         recoverPassword: d.auth.forgot_password,
+        error: d.validation.invalid_login_credentials,
       }}
       validationMessages={{
         email: {

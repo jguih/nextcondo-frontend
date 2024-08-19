@@ -6,15 +6,8 @@ import { getDictionary } from "@/src/localization/dictionaries";
 import { createClient } from "@/src/shared/authentication/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
-export type FormState =
-  | {
-      isError: true;
-      errorMessage: string;
-    }
-  | {
-      isError: false;
-    };
+import * as auth from "@/src/data/auth/client";
+import { cookies, headers } from "next/headers";
 
 export const login = async (
   prevState: FormState,
@@ -22,7 +15,7 @@ export const login = async (
   lang: Locale
 ): Promise<FormState> => {
   const d = await getDictionary(lang);
-  const supabase = createClient();
+  // const supabase = createClient();
 
   const raw = {
     email: formData.get("email")?.valueOf(),
@@ -38,8 +31,10 @@ export const login = async (
     };
   }
 
-  const { error } = await supabase.auth.signInWithPassword(parsed.data);
-  if (error) {
+  // const { error } = await supabase.auth.signInWithPassword(parsed.data);
+  const response = await auth.loginAsync(formData);
+  const { success, headers } = response;
+  if (!success) {
     return {
       isError: true,
       errorMessage: d.validation.invalid_login_credentials,

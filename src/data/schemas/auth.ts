@@ -10,10 +10,11 @@ export const loginCredencialsSchema = z
 export type LoginCredentials = z.infer<typeof loginCredencialsSchema>;
 
 export const problemDetailsSchema = z.object({
-  title: z.string().min(1),
-  detail: z.string().min(1),
-  type: z.string().min(1),
-  statusCode: z.number(),
+  title: z.string(),
+  detail: z.string(),
+  type: z.string(),
+  status: z.number(),
+  traceId: z.string().optional(),
 });
 
 export type ProblemDetails = z.infer<typeof problemDetailsSchema>;

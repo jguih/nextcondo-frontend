@@ -4,22 +4,26 @@ import {
   InputValidationContainer,
   ValidationMessages,
 } from "@/src/shared/components/validation/input-validation-container";
-import { FC } from "react";
-import { useLocale } from "@/src/localization/client/LangProvider";
-import { FormState, login } from "./login.action";
+import { FC, useState } from "react";
 import { FormGroup } from "@/src/shared/components/formGroup/form-group";
 import { Label } from "@/src/shared/components/label/label";
 import { Input } from "@/src/shared/components/input/input";
-import { useFormState } from "react-dom";
 import styles from "./styles.module.scss";
 import { SubmitButton } from "@/src/shared/components/button/submit/submit-button";
 import { Typography } from "@/src/shared/components/typography/typography";
 import { Link } from "@/src/shared/components/link/link";
+import * as auth from "@/src/data/auth/client";
+import { useRouter } from "next/navigation";
+import { loginCredencialsSchema } from "@/src/data/schemas/auth";
+import { useEnv } from "@/src/shared/env/context";
 
 interface LoginFormProps {
   label: {
     email: string;
     password: string;
+  };
+  text: {
+    error: string;
     submit: string;
     recoverPassword: string;
   };
@@ -29,19 +33,50 @@ interface LoginFormProps {
   };
 }
 
+export type FormState =
+  | {
+      isError: true;
+      errorMessage: string;
+    }
+  | {
+      isError: false;
+    };
+
 export const LoginForm: FC<LoginFormProps> = ({
   label,
+  text,
   validationMessages,
 }) => {
-  const lang = useLocale();
-  const [state, formAction] = useFormState<FormState, FormData>(
-    (state, payload) => login.bind(null, state, payload, lang)(),
-    { isError: false }
-  );
+  const [state, setState] = useState<FormState>({ isError: false });
+  const router = useRouter();
+  const env = useEnv();
+
+  const handleFormAction = async (formData: FormData) => {
+    const jsonData = {
+      email: formData.get("email")?.valueOf(),
+      password: formData.get("password")?.valueOf(),
+    };
+    const result = await loginCredencialsSchema.safeParseAsync(jsonData);
+
+    if (!result.success) {
+      setState({ isError: true, errorMessage: text.error });
+      return;
+    }
+
+    const { success } = await auth.loginAsync(
+      env.NEXT_PUBLIC_NEXTCONDOAPI_URL,
+      formData
+    );
+    if (success) {
+      router.push("/");
+    } else {
+      setState({ isError: true, errorMessage: text.error });
+    }
+  };
 
   return (
     <form
-      action={formAction}
+      action={handleFormAction}
       onSubmit={handleSubmitWithValidation}
       noValidate
       className={styles.form}
@@ -89,7 +124,7 @@ export const LoginForm: FC<LoginFormProps> = ({
         )}
       />
       <Link href={"/login"} className={styles["forgot-password"]}>
-        {label.recoverPassword}
+        {text.recoverPassword}
       </Link>
       {state.isError && (
         <Typography color="danger" className={styles.error}>
@@ -97,7 +132,7 @@ export const LoginForm: FC<LoginFormProps> = ({
         </Typography>
       )}
       <SubmitButton className={styles["submit-btn"]}>
-        <Typography tag="p">{label.submit}</Typography>
+        <Typography tag="p">{text.submit}</Typography>
       </SubmitButton>
     </form>
   );
