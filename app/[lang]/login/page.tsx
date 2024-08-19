@@ -1,7 +1,7 @@
 import { FC, Fragment } from "react";
 import { getDictionary } from "../../../src/localization/dictionaries";
 import { WithLocale } from "@/src/shared/types/with-locale";
-import { LoginForm } from "@/src/page/login/components/loginForm/login-form";
+import { LoginForm } from "@/src/page/login/components/loginForm/server";
 import { Typography } from "@/src/shared/components/typography/typography";
 import { Link } from "@/src/shared/components/link/link";
 import { ThemeToggle } from "@/src/theme/components/theme-toggle";
@@ -21,23 +21,7 @@ const Login: FC<WithLocale> = async ({ params: { lang } }) => {
         </Typography>
         <Link href={"/register"}>{d.page.login.subtitle_action}</Link>
       </div>
-      <LoginForm
-        label={{
-          email: d.auth.email,
-          password: d.auth.password,
-          submit: d.auth.login,
-          recoverPassword: d.auth.forgot_password,
-        }}
-        validationMessages={{
-          email: {
-            typeMismatch: d.validation.required_email,
-            valueMissing: d.validation.required_email,
-          },
-          password: {
-            valueMissing: d.validation.required_password,
-          },
-        }}
-      />
+      <LoginForm d={d} />
       {/* <Divider sx={{ mt: 4, mb: 4 }}>{d.common.or}</Divider>
       <SocialLoginList /> */}
     </Fragment>
