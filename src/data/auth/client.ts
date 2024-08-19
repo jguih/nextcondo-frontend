@@ -11,6 +11,13 @@ export const loginAsync = async (url: string, credentials: FormData) => {
   });
 };
 
-export const logoutAsync = () => {};
+export const logoutAsync = async (url: string) => {
+  return await fetchNextCondoApi(url, {
+    endpoint: "/Auth/logout",
+    credentials: "include",
+    method: "GET",
+    schema: z.object({}),
+  });
+};
 
-export const registerAsync = () => {};
+export const registerAsync = async () => {};
