@@ -1,12 +1,34 @@
+import "../globals.scss";
+import { LocaleProvider } from "@/src/localization/client/LangProvider";
+import { EnvProvider } from "@/src/shared/env/context";
+import { WithLocale } from "@/src/shared/types/with-locale";
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { FC, PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
-  title: "NextCondo",
+  title: "NextCondo | Home",
 };
 
-const HomeLayout: FC<PropsWithChildren> = ({ children }) => {
-  return children;
+const InterFont = Inter({ subsets: ["latin"] });
+
+const HomeLayout: FC<PropsWithChildren<WithLocale>> = ({
+  children,
+  params: { lang },
+}) => {
+  return (
+    <html
+      lang={lang}
+      data-theme="light"
+      style={{ fontFamily: `${InterFont.style.fontFamily}` }}
+    >
+      <body>
+        <LocaleProvider lang={lang}>
+          <EnvProvider>{children}</EnvProvider>
+        </LocaleProvider>
+      </body>
+    </html>
+  );
 };
 
 export default HomeLayout;

@@ -4,7 +4,7 @@ import {
   InputValidationContainer,
   ValidationMessages,
 } from "@/src/shared/components/validation/input-validation-container";
-import { FC, FormEventHandler, useState, useTransition } from "react";
+import { FC, FormEventHandler, useState } from "react";
 import { FormGroup } from "@/src/shared/components/formGroup/form-group";
 import { Label } from "@/src/shared/components/label/label";
 import { Input } from "@/src/shared/components/input/input";
@@ -49,7 +49,7 @@ export const LoginForm: FC<LoginFormProps> = ({
   const [state, setState] = useState<FormState>({ isError: false });
   const router = useRouter();
   const { NEXT_PUBLIC_NEXTCONDOAPI_URL } = useEnv();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
 
   const handleOnSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -60,17 +60,17 @@ export const LoginForm: FC<LoginFormProps> = ({
 
     const formData: FormData = new FormData(event.currentTarget);
 
-    startTransition(async () => {
-      const { success } = await loginAsync(
-        NEXT_PUBLIC_NEXTCONDOAPI_URL,
-        formData
-      );
-      if (success) {
-        router.push("/");
-      } else {
-        setState({ isError: true, errorMessage: text.error });
-      }
-    });
+    setIsPending(true);
+    const { success } = await loginAsync(
+      NEXT_PUBLIC_NEXTCONDOAPI_URL,
+      formData
+    );
+    if (success) {
+      router.push("/");
+    } else {
+      setState({ isError: true, errorMessage: text.error });
+    }
+    setIsPending(false);
   };
 
   return (

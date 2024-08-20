@@ -27,10 +27,11 @@ export type FetchNextCondoApiFnReturn<Output extends object> =
     }
   | {
       success: false;
-      data?: ProblemDetails;
       originalResponse?: unknown;
       statusCode: number;
+      data?: undefined;
       error: {
+        details?: ProblemDetails;
         message: string;
       };
     };

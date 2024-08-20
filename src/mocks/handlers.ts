@@ -1,6 +1,11 @@
 import { http, HttpResponse } from "msw";
+import { joinUrlAndEndpoint } from "../data/utils";
+import { FAKE_API } from "@/jest.setup";
 
 export const handlers = [
+  http.post(joinUrlAndEndpoint(FAKE_API, "/Auth/login"), () => {
+    return HttpResponse.json({}, { status: 200 });
+  }),
   // Intercept "GET https://example.com/user" requests...
   http.get("https://example.com/user", () => {
     // ...and respond to them using this JSON response.

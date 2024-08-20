@@ -1,36 +1,36 @@
 /** @jest-environment jsdom */
 import { getDictionary } from "@/src/localization/dictionaries";
-import { FormState } from "@/src/page/login/components/loginForm/login.action";
 import { LoginForm } from "@/src/page/login/components/loginForm/server";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-jest.mock("react-dom", () => {
-  const state: FormState = { isError: false };
-  const formAction = "";
-  const isPending = false;
-
+jest.mock("next/navigation", () => {
+  const router = {
+    push: (url: string) => undefined,
+  };
   return {
-    ...jest.requireActual("react-dom"),
-    useFormState: () => [state, formAction, isPending],
-    useFormStatus: () => {
-      return { pending: isPending };
-    },
+    ...jest.requireActual("next/navigation"),
+    useRouter: () => router,
   };
 });
 
-/**
- * React 19 is required to properlly unit test this.
- *
- * Mocking useFormState don't solve the problems, because
- * in pure HTML a form's action cannot be a function.
- *
- * Action will never be called, so API request's will never
- * be made.
- */
-
 describe("<LoginForm />", () => {
   it("renders", async () => {
+    // Arrange
+    const user = userEvent.setup();
     const d = await getDictionary("en");
     render(<LoginForm d={d} />);
+
+    // Act
+    const email = screen.getByLabelText(/email/i);
+    const password = screen.getByLabelText(/password/i);
+    await screen.findByRole("button", { name: /login/i });
+
+    await user.type(email, "test@test.com");
+    await user.type(password, "12345678");
+
+    // Assert
+    expect(email).toHaveValue("test@test.com");
+    expect(password).toHaveValue("12345678");
   });
 });

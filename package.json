@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "jest test --verbose",
     "test:unit": "jest --verbose --testPathPattern=__tests__/unit",
+    "test:unit:watch": "jest --watch --testPathPattern=__tests__/unit",
     "test:integration": "jest --verbose --testPathPattern=__tests__/integration",
     "test:watch": "jest --watch"
   },

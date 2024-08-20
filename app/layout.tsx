@@ -1,9 +1,5 @@
-import "./globals.scss";
 import type { Metadata, Viewport } from "next";
-import { Locale } from "@/i18n-config";
-import { LocaleProvider } from "@/src/localization/client/LangProvider";
-import { EnvProvider } from "@/src/shared/env/context";
-import { Inter } from "next/font/google";
+import { FC, PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
   title: "NextCondo",
@@ -15,28 +11,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const InterFont = Inter({ subsets: ["latin"] });
+const RootLayout: FC<PropsWithChildren> = ({ children }) => {
+  return children;
+};
 
-export default function RootLayout({
-  children,
-  params: { lang },
-}: Readonly<{
-  children: React.ReactNode;
-  params: {
-    lang: Locale;
-  };
-}>) {
-  return (
-    <html
-      lang={lang}
-      data-theme="light"
-      style={{ fontFamily: `${InterFont.style.fontFamily}` }}
-    >
-      <body>
-        <LocaleProvider lang={lang}>
-          <EnvProvider>{children}</EnvProvider>
-        </LocaleProvider>
-      </body>
-    </html>
-  );
-}
+export default RootLayout;

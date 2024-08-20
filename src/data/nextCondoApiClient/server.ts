@@ -5,27 +5,21 @@ import {
   HttpResponseError,
 } from "./types";
 import { problemDetailsSchema } from "../schemas/auth";
+import { joinUrlAndEndpoint } from "../utils";
 
-const parseNextCondoApiAddress = (endpoint: string) => {
-  const api = process.env.NEXTCONDOAPI_URL;
-  if (!api) {
-    throw new Error("NEXTCONDOAPI_URL env empty, check .env vars");
-  }
-  return `${api}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
-};
-
-export const fetchNextCondoApi = async <Output extends object>({
-  endpoint,
-  schema,
-  body,
-  method,
-  ...reqProps
-}: FetchNextCondoApiFnProps<Output>): Promise<
-  FetchNextCondoApiFnReturn<Output>
-> => {
-  const url = parseNextCondoApiAddress(endpoint);
+export const fetchNextCondoApi = async <Output extends object>(
+  url: string,
+  {
+    endpoint,
+    schema,
+    body,
+    method,
+    ...reqProps
+  }: FetchNextCondoApiFnProps<Output>
+): Promise<FetchNextCondoApiFnReturn<Output>> => {
+  const joinedUrl = joinUrlAndEndpoint(url, endpoint);
   try {
-    const response = await fetch(url, {
+    const response = await fetch(joinedUrl, {
       body: body && (body instanceof FormData ? body : JSON.stringify(body)),
       method,
       ...reqProps,
@@ -64,9 +58,9 @@ export const fetchNextCondoApi = async <Output extends object>({
       return {
         success: false,
         originalResponse: error.response,
-        data: error.details,
         statusCode: error.statusCode,
         error: {
+          details: error.details,
           message: error.details?.detail ?? "Fetch failed",
         },
       };

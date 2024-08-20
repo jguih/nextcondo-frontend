@@ -4,17 +4,10 @@ import {
   HttpResponseError,
 } from "./types";
 import { problemDetailsSchema } from "../schemas/auth";
-
-export const joinUrlAndEndpoint = (apiUrl: string, endpoint: string) => {
-  const parsedEndpoint = endpoint.startsWith("/")
-    ? endpoint.substring(1, endpoint.length)
-    : endpoint;
-  const parsedApiUrl = apiUrl.endsWith("/") ? apiUrl : `${apiUrl}/`;
-  return `${parsedApiUrl}${parsedEndpoint}`;
-};
+import { joinUrlAndEndpoint } from "../utils";
 
 export const fetchNextCondoApi = async <Output extends object>(
-  apiUrl: string,
+  url: string,
   {
     endpoint,
     schema,
@@ -23,8 +16,9 @@ export const fetchNextCondoApi = async <Output extends object>(
     ...reqProps
   }: FetchNextCondoApiFnProps<Output>
 ): Promise<FetchNextCondoApiFnReturn<Output>> => {
+  const joinedUrl = joinUrlAndEndpoint(url, endpoint);
   try {
-    const response = await fetch(joinUrlAndEndpoint(apiUrl, endpoint), {
+    const response = await fetch(joinedUrl, {
       body: body && (body instanceof FormData ? body : JSON.stringify(body)),
       method,
       ...reqProps,
@@ -54,18 +48,18 @@ export const fetchNextCondoApi = async <Output extends object>(
 
     return {
       success: true,
-      data: zodResult.data,
       originalResponse: originalJson,
       statusCode: response.status,
+      data: zodResult.data,
     };
   } catch (error) {
     if (error instanceof HttpResponseError) {
       return {
         success: false,
         originalResponse: error.response,
-        data: error.details,
         statusCode: error.statusCode,
         error: {
+          details: error.details,
           message: error.details?.detail ?? "Fetch failed",
         },
       };
