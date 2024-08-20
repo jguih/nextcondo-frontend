@@ -12,9 +12,8 @@ import styles from "./styles.module.scss";
 import { Typography } from "@/src/shared/components/typography/typography";
 import { Link } from "@/src/shared/components/link/link";
 import { useRouter } from "next/navigation";
-import { useEnv } from "@/src/shared/env/context";
 import { Button } from "@/src/shared/components/button/button";
-import { loginAsync } from "@/src/data/auth/client";
+import { useAuthService } from "@/src/data/auth/client";
 
 interface LoginFormProps {
   label: {
@@ -48,7 +47,7 @@ export const LoginForm: FC<LoginFormProps> = ({
 }) => {
   const [state, setState] = useState<FormState>({ isError: false });
   const router = useRouter();
-  const { NEXT_PUBLIC_NEXTCONDOAPI_URL } = useEnv();
+  const { loginAsync } = useAuthService();
   const [isPending, setIsPending] = useState(false);
 
   const handleOnSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
@@ -61,10 +60,7 @@ export const LoginForm: FC<LoginFormProps> = ({
     const formData: FormData = new FormData(event.currentTarget);
 
     setIsPending(true);
-    const { success } = await loginAsync(
-      NEXT_PUBLIC_NEXTCONDOAPI_URL,
-      formData
-    );
+    const { success } = await loginAsync(formData);
     if (success) {
       router.push("/");
     } else {

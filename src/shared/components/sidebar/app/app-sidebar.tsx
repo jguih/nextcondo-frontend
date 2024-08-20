@@ -13,8 +13,7 @@ import { MoonFilled } from "../../icon/icons/moon-filled";
 import { Gear } from "../../icon/icons/gear";
 import { useSidebar } from "../hooks/useSidebar";
 import { Sidebar } from "../sidebar";
-import { logoutAsync } from "@/src/data/auth/client";
-import { useEnv } from "@/src/shared/env/context";
+import { useAuthService } from "@/src/data/auth/client";
 import { useRouter } from "next/navigation";
 
 export const AppSidebar: FC = () => {
@@ -68,11 +67,11 @@ const ThemeToggler: FC = () => {
 };
 
 const Loggout: FC = () => {
-  const { NEXT_PUBLIC_NEXTCONDOAPI_URL } = useEnv();
+  const { logoutAsync } = useAuthService();
   const router = useRouter();
 
   const handleLogout = async () => {
-    await logoutAsync(NEXT_PUBLIC_NEXTCONDOAPI_URL);
+    await logoutAsync();
     router.push("/login");
   };
 

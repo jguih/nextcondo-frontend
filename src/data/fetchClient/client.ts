@@ -1,8 +1,8 @@
 import {
   HttpGetProps,
   HttpPostProps,
-  FetchClientSuccessResponse,
   FetchClientFailedResponse,
+  FetchClientResponse,
 } from "./types";
 import { joinUrlAndEndpoint } from "../utils";
 import { JsonStrategyError, StrategyError } from "./strategy.error";
@@ -44,10 +44,10 @@ const sendError = (error: unknown): FetchClientFailedResponse => {
   };
 };
 
-const httpGet = async <Output>(
+const httpGetAsync = async <Output>(
   url: string,
   { endpoint, strategy, ...props }: HttpGetProps<Output>
-): Promise<FetchClientSuccessResponse<Output> | FetchClientFailedResponse> => {
+): Promise<FetchClientResponse<Output>> => {
   try {
     const parsedUrl = joinUrlAndEndpoint(url, endpoint);
     const response = await fetch(parsedUrl, {
@@ -67,10 +67,10 @@ const httpGet = async <Output>(
   }
 };
 
-const httpPost = async <Output>(
+const httpPostAsync = async <Output>(
   url: string,
   { endpoint, strategy, body, ...props }: HttpPostProps<Output>
-): Promise<FetchClientSuccessResponse<Output> | FetchClientFailedResponse> => {
+): Promise<FetchClientResponse<Output>> => {
   const parsedUrl = joinUrlAndEndpoint(url, endpoint);
   try {
     const response = await fetch(parsedUrl, {
@@ -91,9 +91,35 @@ const httpPost = async <Output>(
   }
 };
 
-export const createFetchClient = (url: string) => {
+/**
+ * Client that handles HTTP requests.
+ * It works as a fetch wrapper.
+ */
+interface FetchClient {
+  /**
+   * Handles GET requests.
+   * @param endpoint (optional) The endpoint to be fetched.
+   * @param strategy Response body parser strategy.
+   * @returns `Output` as defined by the chosen strategy.
+   */
+  getAsync: <Output>(
+    props: HttpGetProps<Output>
+  ) => Promise<FetchClientResponse<Output>>;
+  /**
+   * Handles POST requests.
+   * @param endpoint (optional) The endpoint to be fetched.
+   * @param strategy Response body parser strategy.
+   * @param body (optional) Request body.
+   * @returns `Output` as defined by the chosen strategy.
+   */
+  postAsync: <Output>(
+    props: HttpPostProps<Output>
+  ) => Promise<FetchClientResponse<Output>>;
+}
+
+export const createFetchClient = (url: string): FetchClient => {
   return {
-    get: <Output>(props: HttpGetProps<Output>) => httpGet(url, { ...props }),
-    post: <Output>(props: HttpPostProps<Output>) => httpPost(url, { ...props }),
+    getAsync: (props) => httpGetAsync(url, { ...props }),
+    postAsync: (props) => httpPostAsync(url, { ...props }),
   };
 };

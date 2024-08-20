@@ -19,7 +19,7 @@ describe("Auth service", () => {
     credentials.append("password", "12345678");
 
     // Act
-    const result = await client.post({
+    const result = await client.postAsync({
       endpoint: "/Auth/login",
       strategy: new JsonStrategy(schema),
       body: credentials,

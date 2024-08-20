@@ -29,3 +29,6 @@ export type FetchClientFailedResponse = {
     message: string;
   };
 };
+export type FetchClientResponse<Output> =
+  | FetchClientSuccessResponse<Output>
+  | FetchClientFailedResponse;

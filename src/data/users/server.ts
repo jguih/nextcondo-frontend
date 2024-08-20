@@ -1,14 +1,21 @@
 import "server-only";
 import { headers } from "next/headers";
 import { userSchema } from "../schemas/users";
-import { fetchNextCondoApi } from "../nextCondoApiClient/server";
 import { getNextCondoApiUrl } from "../utils";
+import { createFetchClient } from "../fetchClient/client";
+import { JsonStrategy } from "../fetchClient/strategy";
 
-export const getMeAsync = async () => {
-  return await fetchNextCondoApi(getNextCondoApiUrl(), {
-    endpoint: "/Users/me",
-    method: "GET",
-    headers: headers(),
-    schema: userSchema,
-  });
+export const getUsersService = () => {
+  const client = createFetchClient(getNextCondoApiUrl());
+
+  const getMeAsync = async () => {
+    return await client.getAsync({
+      strategy: new JsonStrategy(userSchema),
+      endpoint: "/Users/me",
+      headers: headers(),
+      credentials: "include",
+    });
+  };
+
+  return { getMeAsync };
 };
