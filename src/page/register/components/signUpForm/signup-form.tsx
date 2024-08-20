@@ -4,7 +4,7 @@ import { FormState, signUp } from "./signup.action";
 import { useFormState } from "react-dom";
 import { useLocale } from "@/src/localization/client/LangProvider";
 import { useRouter } from "next/navigation";
-import { handleSubmitWithValidation } from "@/src/shared/components/validation/submit-custom-validation";
+import { checkFormValidityFromEvent } from "@/src/shared/components/validation/form";
 import {
   InputValidationContainer,
   ValidationMessages,
@@ -73,7 +73,7 @@ export const SignUpForm: FC<FormProps> = ({
   return (
     <form
       action={formAction}
-      onSubmit={handleSubmitWithValidation}
+      onSubmit={checkFormValidityFromEvent}
       noValidate
       className={styles.form}
     >
