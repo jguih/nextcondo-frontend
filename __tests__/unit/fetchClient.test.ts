@@ -1,6 +1,8 @@
 import { FAKE_API } from "@/jest.setup";
-import { createJsonFetchClient } from "@/src/data/fetchClient/client";
+import { createFetchClient } from "@/src/data/fetchClient/client";
+import { JsonStrategy } from "@/src/data/fetchClient/strategy";
 import { server } from "@/src/mocks/node";
+import { HttpResponse } from "msw";
 import { z } from "zod";
 
 describe("Auth service", () => {
@@ -8,23 +10,25 @@ describe("Auth service", () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  it("works", async () => {
+  it("parses successfull login response", async () => {
     // Arrange
-    const client = createJsonFetchClient(FAKE_API);
+    const client = createFetchClient(FAKE_API);
+    const schema = z.object({ status: z.string() });
     const credentials: FormData = new FormData();
     credentials.append("email", "test@test.com");
     credentials.append("password", "12345678");
 
     // Act
-    const { success, data, statusCode } = await client.post({
+    const result = await client.post({
       endpoint: "/Auth/login",
-      schema: z.object({}),
+      strategy: new JsonStrategy(schema),
       body: credentials,
     });
+    const { success, response } = result;
 
     // Assert
     expect(success).toBeTruthy();
-    expect(data).toStrictEqual({});
-    expect(statusCode).toBe(200);
+    expect(response?.data).toStrictEqual({ status: "ok" });
+    expect(response?.statusCode).toBe(200);
   });
 });

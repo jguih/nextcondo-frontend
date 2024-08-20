@@ -1,16 +1,36 @@
-import { SafeParseReturnType } from "zod";
-import { HttpGetProps, HttpPostProps, JsonFetchClientResponse } from "./types";
-import { problemDetailsSchema } from "../schemas/auth";
+import {
+  HttpGetProps,
+  HttpPostProps,
+  FetchClientSuccessResponse,
+  FetchClientFailedResponse,
+} from "./types";
 import { joinUrlAndEndpoint } from "../utils";
+import { JsonStrategyError, StrategyError } from "./strategy.error";
 
-const sendError = <Output>(
-  error: unknown,
-  status: number
-): JsonFetchClientResponse<Output> => {
+const sendError = (error: unknown): FetchClientFailedResponse => {
+  if (error instanceof JsonStrategyError) {
+    return {
+      success: false,
+      response: {
+        statusCode: error.statusCode,
+        data: error.data,
+      },
+      error: {
+        message: error.message,
+      },
+    };
+  }
+  if (error instanceof StrategyError) {
+    return {
+      success: false,
+      error: {
+        message: error.message,
+      },
+    };
+  }
   if (error instanceof Error) {
     return {
       success: false,
-      statusCode: status,
       error: {
         message: error.message,
       },
@@ -18,109 +38,60 @@ const sendError = <Output>(
   }
   return {
     success: false,
-    statusCode: status,
     error: {
       message: "Fetch failed",
     },
-  };
-};
-
-const sendResponseErrorAsync = async <Output>(
-  originalJson: unknown,
-  status: number
-): Promise<JsonFetchClientResponse<Output>> => {
-  const result = await problemDetailsSchema.safeParseAsync(originalJson);
-  if (result.success) {
-    return {
-      success: false,
-      statusCode: status,
-      error: {
-        details: result.data,
-        message: result.data.detail,
-      },
-    };
-  }
-  return {
-    success: false,
-    statusCode: status,
-    error: {
-      details: result.data,
-      message: "Fetch failed",
-    },
-  };
-};
-
-const sendZodResult = <Output>(
-  zodResult: SafeParseReturnType<Output, Output>,
-  status: number
-): JsonFetchClientResponse<Output> => {
-  if (!zodResult.success) {
-    return {
-      success: false,
-      statusCode: status,
-      error: {
-        message: "Zod error",
-      },
-    };
-  }
-
-  return {
-    success: true,
-    statusCode: status,
-    data: zodResult.data,
   };
 };
 
 const httpGet = async <Output>(
   url: string,
-  { endpoint, schema, ...props }: HttpGetProps<Output>
-): Promise<JsonFetchClientResponse<Output>> => {
-  let status: number = 500;
+  { endpoint, strategy, ...props }: HttpGetProps<Output>
+): Promise<FetchClientSuccessResponse<Output> | FetchClientFailedResponse> => {
   try {
     const parsedUrl = joinUrlAndEndpoint(url, endpoint);
     const response = await fetch(parsedUrl, {
       ...props,
       method: "GET",
     });
-    const originalJson = await response.json();
-    status = response.status;
-    if (!response.ok) {
-      return await sendResponseErrorAsync(originalJson, status);
-    }
-    const zodResult = await schema.safeParseAsync(originalJson);
-    return sendZodResult(zodResult, status);
+    const result = await strategy.handleAsync(response);
+    return {
+      success: true,
+      response: {
+        data: result,
+        statusCode: response.status,
+      },
+    };
   } catch (error) {
-    return sendError(error, status);
+    return sendError(error);
   }
 };
 
 const httpPost = async <Output>(
   url: string,
-  { endpoint, schema, body, ...props }: HttpPostProps<Output>
-): Promise<JsonFetchClientResponse<Output>> => {
-  let status: number = 500;
+  { endpoint, strategy, body, ...props }: HttpPostProps<Output>
+): Promise<FetchClientSuccessResponse<Output> | FetchClientFailedResponse> => {
+  const parsedUrl = joinUrlAndEndpoint(url, endpoint);
   try {
-    const parsedUrl = joinUrlAndEndpoint(url, endpoint);
-    const parsedBody =
-      body && (body instanceof FormData ? body : JSON.stringify(body));
     const response = await fetch(parsedUrl, {
       ...props,
       method: "POST",
-      body: parsedBody,
+      body,
     });
-    const originalJson = await response.json();
-    status = response.status;
-    if (!response.ok) {
-      return sendResponseErrorAsync(originalJson, status);
-    }
-    const zodResult = await schema.safeParseAsync(originalJson);
-    return sendZodResult(zodResult, status);
+    const result = await strategy.handleAsync(response);
+    return {
+      success: true,
+      response: {
+        data: result,
+        statusCode: response.status,
+      },
+    };
   } catch (error) {
-    return sendError(error, status);
+    return sendError(error);
   }
 };
 
-export const createJsonFetchClient = (url: string) => {
+export const createFetchClient = (url: string) => {
   return {
     get: <Output>(props: HttpGetProps<Output>) => httpGet(url, { ...props }),
     post: <Output>(props: HttpPostProps<Output>) => httpPost(url, { ...props }),

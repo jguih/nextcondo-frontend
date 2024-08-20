@@ -4,7 +4,7 @@ import { FAKE_API } from "@/jest.setup";
 
 export const handlers = [
   http.post(joinUrlAndEndpoint(FAKE_API, "/Auth/login"), () => {
-    return HttpResponse.json({}, { status: 200 });
+    return HttpResponse.json({ status: "ok" });
   }),
   // Intercept "GET https://example.com/user" requests...
   http.get("https://example.com/user", () => {

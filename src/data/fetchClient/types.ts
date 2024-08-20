@@ -1,28 +1,31 @@
-import { ZodSchema } from "zod";
 import { ProblemDetails } from "../schemas/auth";
+import { FetchStrategy } from "./strategy";
 
 type BaseHttpProps<Output> = {
   endpoint?: string;
-  schema: ZodSchema<Output>;
+  strategy: FetchStrategy<Output>;
 } & Omit<RequestInit, "method" | "body">;
 
 export type HttpGetProps<Output> = BaseHttpProps<Output>;
 
 export type HttpPostProps<Output> = BaseHttpProps<Output> & {
-  body?: object | FormData;
+  body?: RequestInit["body"];
 };
 
-export type JsonFetchClientResponse<Output> = { statusCode: number } & (
-  | {
-      success: true;
-      data: Output;
-    }
-  | {
-      success: false;
-      data?: undefined;
-      error: {
-        message: string;
-        details?: ProblemDetails;
-      };
-    }
-);
+export type FetchClientSuccessResponse<Output> = {
+  success: true;
+  response: {
+    data?: Output;
+    statusCode: number;
+  };
+};
+export type FetchClientFailedResponse = {
+  success: false;
+  response?: {
+    data?: ProblemDetails;
+    statusCode: number;
+  };
+  error: {
+    message: string;
+  };
+};
