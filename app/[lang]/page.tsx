@@ -11,7 +11,7 @@ import { getMeAsync } from "@/src/data/users/server";
 import { redirect } from "next/navigation";
 
 const Home: FC<WithLocale> = async ({ params: { lang } }) => {
-  const { success, data } = await getMeAsync();
+  const { success } = await getMeAsync();
   if (!success) {
     redirect("/login");
   }

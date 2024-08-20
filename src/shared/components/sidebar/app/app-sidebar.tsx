@@ -13,6 +13,9 @@ import { MoonFilled } from "../../icon/icons/moon-filled";
 import { Gear } from "../../icon/icons/gear";
 import { useSidebar } from "../hooks/useSidebar";
 import { Sidebar } from "../sidebar";
+import { logoutAsync } from "@/src/data/auth/client";
+import { useEnv } from "@/src/shared/env/context";
+import { useRouter } from "next/navigation";
 
 export const AppSidebar: FC = () => {
   const id = "appsidebar";
@@ -46,6 +49,9 @@ export const AppSidebar: FC = () => {
         <ListItem>
           <ThemeToggler />
         </ListItem>
+        <ListItem>
+          <Loggout />
+        </ListItem>
       </List>
     </Sidebar>
   );
@@ -57,6 +63,22 @@ const ThemeToggler: FC = () => {
     <ListItemButton onClick={toggleTheme} disabled={!mounted}>
       {theme === "light" ? <SunHigh bold /> : <MoonFilled bold />}
       <Typography>Alternar Tema</Typography>
+    </ListItemButton>
+  );
+};
+
+const Loggout: FC = () => {
+  const { NEXT_PUBLIC_NEXTCONDOAPI_URL } = useEnv();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logoutAsync(NEXT_PUBLIC_NEXTCONDOAPI_URL);
+    router.push("/login");
+  };
+
+  return (
+    <ListItemButton onClick={() => handleLogout()}>
+      <Typography tag="p">Logout</Typography>
     </ListItemButton>
   );
 };

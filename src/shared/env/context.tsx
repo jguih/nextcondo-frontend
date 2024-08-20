@@ -14,6 +14,7 @@ import { CircularProgress } from "../components/circularProgress/circular-progre
 const EnvContext = createContext<Awaited<ReturnType<typeof getEnv>>>({
   NEXT_PUBLIC_SUPABASE_URL: "",
   NEXT_PUBLIC_SUPABASE_ANON_KEY: "",
+  NEXT_PUBLIC_NEXTCONDOAPI_URL: "",
 });
 
 export const EnvProvider: FC<PropsWithChildren> = ({ children }) => {
