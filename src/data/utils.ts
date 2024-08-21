@@ -12,10 +12,3 @@ export const joinUrlAndEndpoint = (url: string, endpoint?: string) => {
   const parsedApiUrl = url.endsWith("/") ? url : `${url}/`;
   return `${parsedApiUrl}${parsedEndpoint}`;
 };
-
-export const getNextCondoApiUrl = (): string => {
-  if (!process.env.NEXTCONDOAPI_URL) {
-    throw new Error("NEXTCONDOAPI_URL not found, check enviroment variables");
-  }
-  return process.env.NEXTCONDOAPI_URL;
-};

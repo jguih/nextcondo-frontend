@@ -6,7 +6,7 @@ import { z } from "zod";
 describe("JsonStrategy", () => {
   it("throws when content-type is not json or problem+json", async () => {
     // Arrange
-    const response = new Response(null, { status: 200 });
+    const response = new Response("", { status: 200 });
     const schema = z.object({});
     const strategy = new JsonStrategy(schema);
 

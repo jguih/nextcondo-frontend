@@ -2,7 +2,6 @@ import { FAKE_API } from "@/jest.setup";
 import { createFetchClient } from "@/src/data/fetchClient/client";
 import { JsonStrategy } from "@/src/data/fetchClient/strategy";
 import { server } from "@/src/mocks/node";
-import { HttpResponse } from "msw";
 import { z } from "zod";
 
 describe("Auth service", () => {

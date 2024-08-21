@@ -1,3 +1,4 @@
+import { PUBLIC_NEXTCONDOAPI_URL } from "@/jest.setup";
 import puppeteer, { Browser, Page } from "puppeteer";
 
 describe("Puppeteer", () => {
@@ -5,7 +6,7 @@ describe("Puppeteer", () => {
   let page: Page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({ headless: false });
     page = await browser.newPage();
   });
 
@@ -13,7 +14,6 @@ describe("Puppeteer", () => {
     // Arrange
     const page = await browser.newPage();
     await page.goto("http://localhost:3000");
-
     // Act
     // wait login page redirect
     await page.locator('input[name="email"]').wait();
@@ -26,7 +26,7 @@ describe("Puppeteer", () => {
   it("logins", async () => {
     // Arrange
     const page = await browser.newPage();
-    await page.goto("http://localhost:3000");
+    await page.goto("http://localhost:3000/login");
 
     // Act
     await page.locator('input[name="email"]').fill("test@test.com");
@@ -36,7 +36,7 @@ describe("Puppeteer", () => {
 
     // Assert
     const title = await page.title();
-    expect(title).toBe("NextCondo");
+    expect(title).toBe("NextCondo | Home");
   });
 
   afterAll(async () => {
