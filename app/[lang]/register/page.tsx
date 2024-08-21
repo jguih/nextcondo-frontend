@@ -5,7 +5,7 @@ import { Typography } from "@/src/shared/components/typography/typography";
 import { Link } from "@/src/shared/components/link/link";
 import { ThemeToggle } from "@/src/theme/components/theme-toggle";
 import styles from "./styles.module.scss";
-import { RegisterUserForm } from "@/src/page/register/components/signUpForm/server";
+import { RegisterUserForm } from "@/src/page/register/components/registerForm/server";
 
 const Register: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
