@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { updateSession } from "./src/shared/authentication/supabase/middleware";
+// import { updateSession } from "./src/shared/authentication/supabase/middleware";
 import { i18n } from "./i18n-config";
 import { getLocaleFromRequest } from "./src/localization/getLocale";
 
