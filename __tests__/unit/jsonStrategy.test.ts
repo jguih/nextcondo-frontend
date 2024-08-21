@@ -68,7 +68,7 @@ describe("JsonStrategy", () => {
     }
   });
 
-  it("pases valid json body", async () => {
+  it("parses valid json body", async () => {
     // Arrange
     const responseBody = {
       name: "Willy Wonka",

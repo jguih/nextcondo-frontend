@@ -1,129 +1,138 @@
 "use client";
-import { checkFormValidityFromEvent } from "@/src/shared/components/validation/form";
+import { checkFormValidityFromEvent } from "@/src/shared/components/validation/utils";
 import {
   InputValidationContainer,
   ValidationMessages,
 } from "@/src/shared/components/validation/input-validation-container";
-import { FC, FormEventHandler, useState } from "react";
+import { FC, FormEventHandler, ReactElement } from "react";
 import { FormGroup } from "@/src/shared/components/formGroup/form-group";
 import { Label } from "@/src/shared/components/label/label";
 import { Input } from "@/src/shared/components/input/input";
 import styles from "./styles.module.scss";
 import { Typography } from "@/src/shared/components/typography/typography";
-import { Link } from "@/src/shared/components/link/link";
 import { useRouter } from "next/navigation";
-import { Button } from "@/src/shared/components/button/button";
 import { useAuthService } from "@/src/data/auth/client";
+import { FormProvider, useForm } from "@/src/shared/components/form/context";
 
 interface LoginFormProps {
-  label: {
-    email: string;
-    password: string;
-  };
-  text: {
-    error: string;
-    submit: string;
-    recoverPassword: string;
-  };
-  validationMessages: {
-    email: Required<Pick<ValidationMessages, "valueMissing" | "typeMismatch">>;
-    password: Required<Pick<ValidationMessages, "valueMissing">>;
-  };
+  children?: ReactElement[];
+  forgotPassword: ReactElement;
+  error: ReactElement;
+  submit: ReactElement;
 }
 
-export type FormState =
-  | {
-      isError: true;
-      errorMessage: string;
-    }
-  | {
-      isError: false;
-    };
-
 export const LoginForm: FC<LoginFormProps> = ({
-  label,
-  text,
-  validationMessages,
+  children,
+  forgotPassword,
+  error,
+  submit,
 }) => {
-  const [state, setState] = useState<FormState>({ isError: false });
+  const form = useForm();
+  const { isError, dispatch } = form;
   const router = useRouter();
   const { loginAsync } = useAuthService();
-  const [isPending, setIsPending] = useState(false);
 
   const handleOnSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     event.stopPropagation();
+    dispatch({ type: "reset" });
     const isValid = checkFormValidityFromEvent(event);
 
     if (!isValid) return;
 
     const formData: FormData = new FormData(event.currentTarget);
 
-    setIsPending(true);
+    dispatch({ type: "pending", payload: true });
     const { success } = await loginAsync(formData);
     if (success) {
+      dispatch({ type: "success", payload: true });
       router.push("/");
     } else {
-      setState({ isError: true, errorMessage: text.error });
+      dispatch({ type: "error", payload: true });
     }
-    setIsPending(false);
+    dispatch({ type: "pending", payload: false });
   };
 
   return (
-    <form onSubmit={handleOnSubmit} noValidate className={styles.form}>
-      <InputValidationContainer
-        id="login-email"
-        validationMessages={validationMessages.email}
-        render={({ id, errorMessage, isError, ...inputProps }) => (
-          <FormGroup error={isError} required>
-            <Label htmlFor={id}>{label.email}</Label>
-            <Input
-              id={id}
-              name="email"
-              type="email"
-              aria-describedby={isError ? `${id}-help` : undefined}
-              {...inputProps}
-            />
-            {isError && (
-              <Typography tag="small" color="danger" id={`${id}-help`}>
-                {errorMessage}
-              </Typography>
-            )}
-          </FormGroup>
-        )}
-      />
-      <InputValidationContainer
-        id="login-password"
-        validationMessages={validationMessages.password}
-        render={({ id, errorMessage, isError, ...inputProps }) => (
-          <FormGroup error={isError} required>
-            <Label htmlFor={id}>{label.password}</Label>
-            <Input
-              id={id}
-              name="password"
-              type="password"
-              aria-describedby={isError ? `${id}-help` : undefined}
-              {...inputProps}
-            />
-            {isError && (
-              <Typography tag="small" color="danger" id={`${id}-help`}>
-                {errorMessage}
-              </Typography>
-            )}
-          </FormGroup>
-        )}
-      />
-      <Link href={"/login"} className={styles["forgot-password"]}>
-        {text.recoverPassword}
-      </Link>
-      {state.isError && (
-        <Typography color="danger" className={styles.error}>
-          {state.errorMessage}
-        </Typography>
+    <FormProvider {...form}>
+      <form onSubmit={handleOnSubmit} noValidate className={styles.form}>
+        {children}
+        {forgotPassword}
+        {isError && error}
+        {submit}
+      </form>
+    </FormProvider>
+  );
+};
+
+type EmailProps = {
+  validationMessages: Required<
+    Pick<ValidationMessages, "valueMissing" | "typeMismatch">
+  >;
+  label: string;
+};
+
+export const LoginFormEmail: FC<EmailProps> = ({
+  validationMessages,
+  label,
+}) => {
+  return (
+    <InputValidationContainer
+      id="login-email"
+      validationMessages={validationMessages}
+      render={({ id, errorMessage, isError, ...inputProps }) => (
+        <FormGroup error={isError} required>
+          <Label htmlFor={id}>{label}</Label>
+          <Input
+            id={id}
+            name="email"
+            type="email"
+            aria-describedby={isError ? `${id}-help` : undefined}
+            {...inputProps}
+          />
+          {isError && (
+            <Typography tag="small" color="danger" id={`${id}-help`}>
+              {errorMessage}
+            </Typography>
+          )}
+        </FormGroup>
       )}
-      <Button className={styles["submit-btn"]} loading={isPending}>
-        <Typography tag="p">{text.submit}</Typography>
-      </Button>
-    </form>
+    />
+  );
+};
+
+type PasswordProps = {
+  validationMessages: Required<
+    Required<Pick<ValidationMessages, "valueMissing">>
+  >;
+  label: string;
+};
+
+export const LoginFormPassword: FC<PasswordProps> = ({
+  validationMessages,
+  label,
+}) => {
+  return (
+    <InputValidationContainer
+      id="login-password"
+      validationMessages={validationMessages}
+      render={({ id, errorMessage, isError, ...inputProps }) => (
+        <FormGroup error={isError} required>
+          <Label htmlFor={id}>{label}</Label>
+          <Input
+            id={id}
+            name="password"
+            type="password"
+            aria-describedby={isError ? `${id}-help` : undefined}
+            {...inputProps}
+          />
+          {isError && (
+            <Typography tag="small" color="danger" id={`${id}-help`}>
+              {errorMessage}
+            </Typography>
+          )}
+        </FormGroup>
+      )}
+    />
   );
 };

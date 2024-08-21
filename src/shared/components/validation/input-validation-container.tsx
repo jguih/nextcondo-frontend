@@ -10,23 +10,24 @@ import {
   useRef,
   useState,
 } from "react";
+import { getValidationMessageFromValidity } from "./utils";
 
 export type ValidationMessages = Omit<
   Partial<Record<keyof ValidityState, string>>,
   "valid"
 >;
 
+type RenderFnProps = {
+  id: string;
+  isError: boolean;
+  errorMessage: string | null;
+  ref: MutableRefObject<HTMLInputElement | null>;
+} & Pick<ComponentProps<"input">, "onChange" | "onBlur" | "onInvalid">;
+
 export type InputValidationContainerProps = {
   validationMessages?: ValidationMessages;
   id: string;
-  render: (
-    props: {
-      id: string;
-      isError: boolean;
-      errorMessage: string | null;
-      ref: MutableRefObject<HTMLInputElement | null>;
-    } & Pick<ComponentProps<"input">, "onChange" | "onBlur" | "onInvalid">
-  ) => ReactElement;
+  render: (props: RenderFnProps) => ReactElement;
 };
 
 export const InputValidationContainer: FC<InputValidationContainerProps> = ({
@@ -41,34 +42,13 @@ export const InputValidationContainer: FC<InputValidationContainerProps> = ({
   const validate = () => {
     if (!inputRef.current) return;
     const validity = inputRef.current.validity;
-    const messages = validationMessages;
-    const fallbackMessage = "invalid";
+    const message = getValidationMessageFromValidity(
+      validity,
+      validationMessages
+    );
+    inputRef.current.setCustomValidity(message);
 
-    if (validity.valueMissing) {
-      inputRef.current.setCustomValidity(
-        messages.valueMissing ?? fallbackMessage
-      );
-    } else if (validity.patternMismatch && messages?.patternMismatch) {
-      inputRef.current.setCustomValidity(messages.patternMismatch);
-    } else if (validity.typeMismatch && messages?.typeMismatch) {
-      inputRef.current.setCustomValidity(messages?.typeMismatch);
-    } else if (validity.badInput && messages?.badInput) {
-      inputRef.current.setCustomValidity(messages?.badInput);
-    } else if (validity.rangeOverflow && messages?.rangeOverflow) {
-      inputRef.current.setCustomValidity(messages?.rangeOverflow);
-    } else if (validity.rangeUnderflow && messages?.rangeUnderflow) {
-      inputRef.current.setCustomValidity(messages?.rangeUnderflow);
-    } else if (validity.stepMismatch && messages?.stepMismatch) {
-      inputRef.current.setCustomValidity(messages?.stepMismatch);
-    } else if (validity.tooLong) {
-      inputRef.current.setCustomValidity(messages?.tooLong ?? fallbackMessage);
-    } else if (validity.tooShort) {
-      inputRef.current.setCustomValidity(messages?.tooShort ?? fallbackMessage);
-    } else {
-      inputRef.current.setCustomValidity("");
-    }
-
-    if (!inputRef.current.validity.valid) {
+    if (!validity.valid) {
       setError(inputRef.current.validationMessage);
     } else {
       setError(null);

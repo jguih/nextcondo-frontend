@@ -36,4 +36,13 @@ describe("joinUrlAndEndpoint", () => {
 
     expect(joined).toBe("https://myurl.domain/api/Endpoint");
   });
+
+  it("returns url if endpoint is undefined", () => {
+    const url = "https://myurl.domain/api";
+    const endpoint = undefined;
+
+    const joined = joinUrlAndEndpoint(url, endpoint);
+
+    expect(joined).toBe("https://myurl.domain/api");
+  });
 });

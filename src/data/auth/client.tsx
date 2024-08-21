@@ -28,8 +28,19 @@ export const useAuthService = () => {
     });
   };
 
+  const registerSchema = z.object({});
+  const registerStrategy = new JsonStrategy(registerSchema);
+  const registerAsync = async (data: FormData) => {
+    return await client.postAsync({
+      endpoint: "/Auth/register",
+      strategy: registerStrategy,
+      body: data,
+    });
+  };
+
   return {
     loginAsync,
     logoutAsync,
+    registerAsync,
   };
 };
