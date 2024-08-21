@@ -74,7 +74,7 @@ stages:
       inputs:
         command: 'custom'
         workingDir: '$(System.DefaultWorkingDirectory)'
-        customCommand: 'test:unit'
+        customCommand: 'run test:unit'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
