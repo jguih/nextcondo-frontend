@@ -46,7 +46,6 @@ stages:
         SourceFolder: '$(System.DefaultWorkingDirectory)/public'
         Contents: '**'
         TargetFolder: '$(System.DefaultWorkingDirectory)/staging/public'
-    # Static folder is deprecated, see https://nextjs.org/docs/messages/static-dir-deprecated
     - task: CopyFiles@2
       displayName: 'Copy .next/static to staging directory'
       inputs:
@@ -75,7 +74,7 @@ stages:
       inputs:
         command: 'custom'
         workingDir: '$(System.DefaultWorkingDirectory)'
-        customCommand: 'test'
+        customCommand: 'test:unit'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
