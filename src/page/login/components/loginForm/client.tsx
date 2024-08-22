@@ -11,26 +11,22 @@ import { Input } from "@/src/shared/components/input/input";
 import styles from "./styles.module.scss";
 import { Typography } from "@/src/shared/components/typography/typography";
 import { useRouter } from "next/navigation";
-import { useAuthService } from "@/src/data/auth/client";
-import { FormProvider, useForm } from "@/src/shared/components/form/context";
+import {
+  FormProvider,
+  useForm,
+  useFormContext,
+} from "@/src/shared/components/form/context";
+import { useServices } from "@/src/services/provider";
 
 interface LoginFormProps {
-  children?: ReactElement[];
-  forgotPassword: ReactElement;
-  error: ReactElement;
-  submit: ReactElement;
+  children?: ReactElement | ReactElement[];
 }
 
-export const LoginForm: FC<LoginFormProps> = ({
-  children,
-  forgotPassword,
-  error,
-  submit,
-}) => {
+export const LoginForm: FC<LoginFormProps> = ({ children }) => {
   const form = useForm();
-  const { isError, dispatch } = form;
+  const { dispatch } = form;
   const router = useRouter();
-  const { loginAsync } = useAuthService();
+  const { AuthService } = useServices();
 
   const handleOnSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -43,7 +39,7 @@ export const LoginForm: FC<LoginFormProps> = ({
     const formData: FormData = new FormData(event.currentTarget);
 
     dispatch({ type: "pending", payload: true });
-    const { success } = await loginAsync(formData);
+    const success = await AuthService.LoginAsync(formData);
     if (success) {
       dispatch({ type: "success", payload: true });
       router.push("/");
@@ -57,9 +53,6 @@ export const LoginForm: FC<LoginFormProps> = ({
     <FormProvider {...form}>
       <form onSubmit={handleOnSubmit} noValidate className={styles.form}>
         {children}
-        {forgotPassword}
-        {isError && error}
-        {submit}
       </form>
     </FormProvider>
   );
@@ -135,4 +128,16 @@ export const LoginFormPassword: FC<PasswordProps> = ({
       )}
     />
   );
+};
+
+export const LoginFormError: FC<{ message: string }> = ({ message }) => {
+  const { isError } = useFormContext();
+
+  if (isError) {
+    return (
+      <Typography color="danger" className={styles.error}>
+        {message}
+      </Typography>
+    );
+  }
 };

@@ -95,7 +95,7 @@ const httpPostAsync = async <Output>(
  * Client that handles HTTP requests.
  * It works as a fetch wrapper.
  */
-interface FetchClient {
+export interface IFetchClient {
   /**
    * Handles GET requests.
    * @param endpoint (optional) The endpoint to be fetched.
@@ -117,7 +117,7 @@ interface FetchClient {
   ) => Promise<FetchClientResponse<Output>>;
 }
 
-export const createFetchClient = (url: string): FetchClient => {
+export const createFetchClient = (url: string): IFetchClient => {
   return {
     getAsync: (props) => httpGetAsync(url, { ...props }),
     postAsync: (props) => httpPostAsync(url, { ...props }),

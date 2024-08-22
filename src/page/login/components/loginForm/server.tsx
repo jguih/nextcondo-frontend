@@ -4,6 +4,7 @@ import {
   LoginForm as ClientLoginForm,
   LoginFormEmail,
   LoginFormPassword,
+  LoginFormError,
 } from "./client";
 import { Link } from "@/src/shared/components/link/link";
 import styles from "./styles.module.scss";
@@ -12,23 +13,7 @@ import { SubmitButton } from "@/src/shared/components/button/submit/submit";
 
 export const LoginForm: FC<{ d: Dictionary }> = ({ d }) => {
   return (
-    <ClientLoginForm
-      forgotPassword={
-        <Link href={"/login"} className={styles["forgot-password"]}>
-          {d.auth.forgot_password}
-        </Link>
-      }
-      error={
-        <Typography color="danger" className={styles.error}>
-          {d.validation.invalid_login_credentials}
-        </Typography>
-      }
-      submit={
-        <SubmitButton className={styles["submit-btn"]}>
-          <Typography tag="p">{d.auth.login}</Typography>
-        </SubmitButton>
-      }
-    >
+    <ClientLoginForm>
       <LoginFormEmail
         label={d.auth.email}
         validationMessages={{
@@ -42,6 +27,13 @@ export const LoginForm: FC<{ d: Dictionary }> = ({ d }) => {
           valueMissing: d.validation.required_password,
         }}
       />
+      <Link href={"/login"} className={styles["forgot-password"]}>
+        {d.auth.forgot_password}
+      </Link>
+      <LoginFormError message={d.validation.invalid_login_credentials} />
+      <SubmitButton className={styles["submit-btn"]}>
+        <Typography tag="p">{d.auth.login}</Typography>
+      </SubmitButton>
     </ClientLoginForm>
   );
 };

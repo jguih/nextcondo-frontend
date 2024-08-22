@@ -1,5 +1,6 @@
 import "../globals.scss";
 import { LocaleProvider } from "@/src/localization/client/LangProvider";
+import { GlobalServiceProvider } from "@/src/services/global-provider";
 import { EnvProvider } from "@/src/shared/env/context";
 import { WithLocale } from "@/src/shared/types/with-locale";
 import type { Metadata } from "next";
@@ -24,7 +25,9 @@ const HomeLayout: FC<PropsWithChildren<WithLocale>> = ({
     >
       <body>
         <LocaleProvider lang={lang}>
-          <EnvProvider>{children}</EnvProvider>
+          <EnvProvider>
+            <GlobalServiceProvider>{children}</GlobalServiceProvider>
+          </EnvProvider>
         </LocaleProvider>
       </body>
     </html>

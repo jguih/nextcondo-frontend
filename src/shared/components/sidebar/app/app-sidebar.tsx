@@ -13,8 +13,8 @@ import { MoonFilled } from "../../icon/icons/moon-filled";
 import { Gear } from "../../icon/icons/gear";
 import { useSidebar } from "../hooks/useSidebar";
 import { Sidebar } from "../sidebar";
-import { useAuthService } from "@/src/data/auth/client";
 import { useRouter } from "next/navigation";
+import { useServices } from "@/src/services/provider";
 
 export const AppSidebar: FC = () => {
   const id = "appsidebar";
@@ -67,11 +67,11 @@ const ThemeToggler: FC = () => {
 };
 
 const Loggout: FC = () => {
-  const { logoutAsync } = useAuthService();
+  const { AuthService } = useServices();
   const router = useRouter();
 
   const handleLogout = async () => {
-    await logoutAsync();
+    await AuthService.LogoutAsync();
     router.push("/login");
   };
 

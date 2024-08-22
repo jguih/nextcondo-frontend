@@ -1,8 +1,9 @@
 /** @jest-environment jsdom */
-import { getDictionary } from "@/src/localization/dictionaries";
-import { LoginForm } from "@/src/page/login/components/loginForm/server";
+import { LoginForm } from "@/src/page/login/components/loginForm/client";
+import { GlobalServiceProvider } from "@/src/services/global-provider";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { FC } from "react";
 
 jest.mock("next/navigation", () => {
   const router = {
@@ -14,12 +15,21 @@ jest.mock("next/navigation", () => {
   };
 });
 
+const TestLoginForm: FC = () => {
+  return (
+    <GlobalServiceProvider>
+      <LoginForm>
+        <button type="submit">submit</button>
+      </LoginForm>
+    </GlobalServiceProvider>
+  );
+};
+
 describe("<LoginForm />", () => {
   it("renders", async () => {
     // Arrange
     const user = userEvent.setup();
-    const d = await getDictionary("en");
-    render(<LoginForm d={d} />);
+    render(<TestLoginForm />);
 
     // Act
     const email = screen.getByLabelText(/email/i);

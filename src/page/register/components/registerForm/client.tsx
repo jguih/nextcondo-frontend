@@ -10,8 +10,8 @@ import { Label } from "@/src/shared/components/label/label";
 import { Input } from "@/src/shared/components/input/input";
 import { Typography } from "@/src/shared/components/typography/typography";
 import styles from "./styles.module.scss";
-import { useAuthService } from "@/src/data/auth/client";
 import { FormProvider, useForm } from "@/src/shared/components/form/context";
+import { useServices } from "@/src/services/provider";
 
 interface FormProps {
   children: ReactElement[] | ReactElement;
@@ -26,7 +26,7 @@ export const RegisterUserForm: FC<FormProps> = ({
   submit,
   success,
 }) => {
-  const { registerAsync } = useAuthService();
+  const { AuthService } = useServices();
   const form = useForm();
   const { isSuccess, isError, dispatch } = form;
 
@@ -47,7 +47,7 @@ export const RegisterUserForm: FC<FormProps> = ({
     const formData: FormData = new FormData(event.currentTarget);
 
     dispatch({ type: "pending", payload: true });
-    const { success } = await registerAsync(formData);
+    const success = await AuthService.RegisterAsync(formData);
     if (success) {
       dispatch({ type: "success", payload: true });
     } else {
