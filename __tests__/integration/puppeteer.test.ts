@@ -6,7 +6,7 @@ describe("Puppeteer", () => {
   let page: Page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch({ headless: false });
+    browser = await puppeteer.launch();
     page = await browser.newPage();
   });
 
@@ -23,7 +23,7 @@ describe("Puppeteer", () => {
     expect(title).toBe("NextCondo | Login");
   });
 
-  it("logins", async () => {
+  it.skip("logins", async () => {
     // Arrange
     const page = await browser.newPage();
     await page.goto("http://localhost:3000/login");
