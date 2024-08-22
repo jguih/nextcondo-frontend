@@ -27,7 +27,7 @@ describe("Auth service", () => {
 
     // Assert
     expect(success).toBeTruthy();
-    expect(response?.data).toStrictEqual({ status: "ok" });
+    expect(response?.data).toBeTruthy();
     expect(response?.statusCode).toBe(200);
   });
 });

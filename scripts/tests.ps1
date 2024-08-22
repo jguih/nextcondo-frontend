@@ -1,7 +1,9 @@
 
 param(
   [parameter()]
-  [switch]$Puppeteer
+  [switch]$Puppeteer,
+  [parameter()]
+  [switch]$NoBuild
 )
 
 $StandaloneFolder = "$PSScriptRoot\..\.next\standalone"
@@ -11,8 +13,14 @@ function BuildNextjsApp {
   Invoke-Command -ScriptBlock {
     npx next build
   }
-  Copy-Item -Path "$PSScriptRoot\..\public" -Destination "$StandaloneFolder\public" -Force -Recurse
-  Copy-Item -Path "$PSScriptRoot\..\.next\static" -Destination "$StandaloneFolder\.next\static" -Recurse -Force
+  $publicFolderPath = "$PSScriptRoot\..\public"
+  $staticFolderPath = "$PSScriptRoot\..\.next\static"
+  if (Test-Path $publicFolderPath -PathType Container) {
+    Copy-Item -Path $publicFolderPath -Destination "$StandaloneFolder\public" -Force -Recurse
+  }
+  if (Test-Path $staticFolderPath -PathType Container) {
+    Copy-Item -Path $staticFolderPath -Destination "$StandaloneFolder\.next\static" -Recurse -Force
+  }
 }
 
 function StartNextjsServer {
@@ -51,9 +59,10 @@ Invoke-Command -ScriptBlock {
 
 # Setup Nextjs server and run tests that use puppeteer
 if ($Puppeteer) {
-  BuildNextjsApp
+  if (-not $NoBuild) {
+    BuildNextjsApp
+  }
   StartNextjsServer
   RunPuppeteerTests
   StopNextjsSever
-  DeleteStandaloneFolder
 }
