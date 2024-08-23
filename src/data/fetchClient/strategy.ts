@@ -22,7 +22,7 @@ export class JsonStrategy<Output> implements FetchStrategy<Output> {
     if (!isJsonResponse && !isProblemDetailsResponse) {
       throw new JsonStrategyError({
         message: "Response body is not a valid JSON",
-        statusCode: response.status,
+        statusCode: 500,
       });
     }
 
@@ -59,7 +59,7 @@ export class JsonStrategy<Output> implements FetchStrategy<Output> {
     throw new JsonStrategyError({
       message:
         "Request succeded, but response body failed to parse using schema",
-      statusCode: response.status,
+      statusCode: 500,
     });
   }
 }
