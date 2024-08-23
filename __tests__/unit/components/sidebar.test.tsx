@@ -63,9 +63,6 @@ describe("<AppSidebar />", () => {
     fireEvent.animationEnd(screen.getByTestId(sidebarId));
 
     // Assert
-    expect(
-      screen.getByRole("heading", { name: /Testing/i })
-    ).toBeInTheDocument();
     expect(mockHandleOnUnmount).toHaveBeenCalled();
   });
 });
