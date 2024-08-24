@@ -1,4 +1,3 @@
-import { PUBLIC_NEXTCONDOAPI_URL } from "@/jest.setup";
 import puppeteer, { Browser, Page } from "puppeteer";
 
 describe("Puppeteer", () => {

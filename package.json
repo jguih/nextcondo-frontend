@@ -7,11 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest test --verbose",
+    "test": "jest --verbose",
     "test:unit": "jest --verbose --testPathPattern=__tests__/unit",
     "test:unit:watch": "jest --watch --testPathPattern=__tests__/unit",
-    "test:integration": "jest --verbose --testPathPattern=__tests__/integration",
-    "test:watch": "jest --watch"
+    "test:integration": "jest --verbose --testPathPattern=__tests__/integration"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "0.2.32",
@@ -45,12 +44,17 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-junit": "^16.0.0",
     "msw": "^2.3.5",
-    "puppeteer": "^23.1.0",
+    "puppeteer": "^23.1.1",
     "sass": "^1.77.8",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
   "engines": {
     "node": "20.16.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
