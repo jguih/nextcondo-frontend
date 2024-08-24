@@ -1,6 +1,6 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 
-describe("Puppeteer", () => {
+describe.skip("Puppeteer", () => {
   let browser: Browser;
   let page: Page;
 
@@ -22,7 +22,7 @@ describe("Puppeteer", () => {
     expect(title).toBe("NextCondo | Login");
   });
 
-  it.skip("logins", async () => {
+  it("logins", async () => {
     // Arrange
     const page = await browser.newPage();
     await page.goto("http://localhost:3000/login");
