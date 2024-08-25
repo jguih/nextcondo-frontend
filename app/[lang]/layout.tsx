@@ -9,7 +9,7 @@ import { Inter } from "next/font/google";
 import { FC, PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
-  title: "NextCondo | Home",
+  title: "NextCondo",
   description: "Simple property management app",
 };
 
