@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-// import { updateSession } from "./src/shared/authentication/supabase/middleware";
 import { i18n } from "./i18n-config";
 import { getLocaleFromRequest } from "./src/localization/getLocale";
 
@@ -19,7 +18,6 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  // return await updateSession(request);
   return NextResponse.next();
 }
 
@@ -32,6 +30,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * Feel free to modify this pattern to include more paths.
      */
-    "/((?!_next/static|_next/image|favicon.ico|manifest.webmanifest|mockServiceWorker.js|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|manifest.webmanifest|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

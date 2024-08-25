@@ -2,6 +2,7 @@ import "../globals.scss";
 import { LocaleProvider } from "@/src/localization/client/LangProvider";
 import { GlobalServiceProvider } from "@/src/services/global-provider";
 import { EnvProvider } from "@/src/shared/env/context";
+import { getEnv } from "@/src/shared/env/get-env.action";
 import { WithLocale } from "@/src/shared/types/with-locale";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -13,10 +14,12 @@ export const metadata: Metadata = {
 
 const InterFont = Inter({ subsets: ["latin"] });
 
-const HomeLayout: FC<PropsWithChildren<WithLocale>> = ({
+const HomeLayout: FC<PropsWithChildren<WithLocale>> = async ({
   children,
   params: { lang },
 }) => {
+  const env = await getEnv();
+
   return (
     <html
       lang={lang}
@@ -25,7 +28,7 @@ const HomeLayout: FC<PropsWithChildren<WithLocale>> = ({
     >
       <body>
         <LocaleProvider lang={lang}>
-          <EnvProvider>
+          <EnvProvider env={env}>
             <GlobalServiceProvider>{children}</GlobalServiceProvider>
           </EnvProvider>
         </LocaleProvider>
