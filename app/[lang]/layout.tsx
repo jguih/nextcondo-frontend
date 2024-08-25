@@ -4,12 +4,18 @@ import { GlobalServiceProvider } from "@/src/services/global-provider";
 import { EnvProvider } from "@/src/shared/env/context";
 import { getEnv } from "@/src/shared/env/get-env.action";
 import { WithLocale } from "@/src/shared/types/with-locale";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { FC, PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
   title: "NextCondo | Home",
+  description: "Simple property management app",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 const InterFont = Inter({ subsets: ["latin"] });

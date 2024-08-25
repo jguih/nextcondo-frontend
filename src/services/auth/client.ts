@@ -1,6 +1,6 @@
 "use client";
 import { createFetchClient } from "@/src/data/fetchClient/client";
-import { IAuthService } from "./IAuth";
+import { IAuthService } from "./IAuthService";
 import { useEnv } from "@/src/shared/env/context";
 import { JsonStrategy } from "@/src/data/fetchClient/strategy";
 import { authSchema } from "./schemas";

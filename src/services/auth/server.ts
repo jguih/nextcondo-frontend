@@ -1,7 +1,7 @@
 import "server-only";
 import { createFetchClient, IFetchClient } from "@/src/data/fetchClient/client";
 import { JsonStrategy } from "@/src/data/fetchClient/strategy";
-import { IAuthService } from "./IAuth";
+import { IAuthService } from "./IAuthService";
 import { authSchema } from "./schemas";
 import { getNextCondoApiUrl } from "@/src/shared/env/utils";
 
