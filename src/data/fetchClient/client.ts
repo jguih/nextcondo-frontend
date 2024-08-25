@@ -15,32 +15,23 @@ const sendError = (error: unknown): FetchClientFailedResponse => {
         statusCode: error.statusCode,
         data: error.data,
       },
-      error: {
-        message: error.message,
-      },
     };
   }
   if (error instanceof StrategyError) {
     return {
       success: false,
-      error: {
-        message: error.message,
+      response: {
+        statusCode: error.statusCode,
       },
     };
   }
   if (error instanceof Error) {
     return {
       success: false,
-      error: {
-        message: error.message,
-      },
     };
   }
   return {
     success: false,
-    error: {
-      message: "Fetch failed",
-    },
   };
 };
 

@@ -8,12 +8,11 @@ import styles from "./styles.module.scss";
 import { Button } from "@/src/shared/components/button/button";
 import { AppSidebar } from "@/src/shared/components/sidebar/app/app-sidebar";
 import { redirect } from "next/navigation";
-import { getUsersService } from "@/src/data/users/server";
+import { UsersService } from "@/src/services/users/server";
 
 const Home: FC<WithLocale> = async ({ params: { lang } }) => {
-  const { getMeAsync } = getUsersService();
-  const { success } = await getMeAsync();
-  if (!success) {
+  const user = await UsersService.GetMeAsync();
+  if (!user) {
     redirect("/login");
   }
   const d = await getDictionary(lang);

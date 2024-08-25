@@ -7,12 +7,11 @@ import { Link } from "@/src/shared/components/link/link";
 import { ThemeToggle } from "@/src/theme/components/theme-toggle";
 import styles from "./styles.module.scss";
 import { redirect } from "next/navigation";
-import { getUsersService } from "@/src/data/users/server";
+import { UsersService } from "@/src/services/users/server";
 
 const Login: FC<WithLocale> = async ({ params: { lang } }) => {
-  const { getMeAsync } = getUsersService();
-  const { success } = await getMeAsync();
-  if (success) {
+  const user = await UsersService.GetMeAsync();
+  if (user) {
     redirect("/");
   }
   const d = await getDictionary(lang);

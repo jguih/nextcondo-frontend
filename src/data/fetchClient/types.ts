@@ -15,7 +15,7 @@ export type HttpPostProps<Output> = BaseHttpProps<Output> & {
 export type FetchClientSuccessResponse<Output> = {
   success: true;
   response: {
-    data?: Output;
+    data: Output;
     statusCode: number;
   };
 };
@@ -24,9 +24,6 @@ export type FetchClientFailedResponse = {
   response?: {
     data?: ProblemDetails;
     statusCode: number;
-  };
-  error: {
-    message: string;
   };
 };
 export type FetchClientResponse<Output> =
