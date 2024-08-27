@@ -1,5 +1,5 @@
 /** @jest-environment jsdom */
-import { Typography } from "@/src/shared/components/typography/typography";
+import { Typography } from "@/src/components/typography/typography";
 import { render, screen } from "@testing-library/react";
 
 describe("<Typography />", () => {

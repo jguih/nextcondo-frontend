@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
-import { useSidebar } from "@/src/shared/components/sidebar/hooks/useSidebar";
-import { Sidebar } from "@/src/shared/components/sidebar/sidebar";
+import { useSidebar } from "@/src/components/sidebar/hooks/useSidebar";
+import { Sidebar } from "@/src/components/sidebar/sidebar";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FC, Fragment } from "react";

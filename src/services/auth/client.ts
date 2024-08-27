@@ -1,9 +1,9 @@
 "use client";
-import { createFetchClient } from "@/src/data/fetchClient/client";
 import { IAuthService } from "./IAuthService";
-import { useEnv } from "@/src/shared/env/context";
-import { JsonStrategy } from "@/src/data/fetchClient/strategy";
 import { authSchema } from "./schemas";
+import { JsonStrategy } from "@/src/lib/fetchClient/strategy";
+import { createFetchClient } from "@/src/lib/fetchClient/client";
+import { useEnv } from "@/src/components/env/context";
 
 export const useAuthService = (): IAuthService => {
   const { NEXT_PUBLIC_NEXTCONDOAPI_URL } = useEnv();

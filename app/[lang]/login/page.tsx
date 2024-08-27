@@ -1,13 +1,13 @@
 import { FC, Fragment } from "react";
-import { getDictionary } from "../../../src/localization/dictionaries";
-import { WithLocale } from "@/src/shared/types/with-locale";
-import { LoginForm } from "@/src/page/login/components/loginForm/server";
-import { Typography } from "@/src/shared/components/typography/typography";
-import { Link } from "@/src/shared/components/link/link";
+import { WithLocale } from "@/src/types/with-locale";
+import { LoginForm } from "@/src/features/page/login/components/loginForm/server";
 import { ThemeToggle } from "@/src/theme/components/theme-toggle";
 import styles from "./styles.module.scss";
 import { redirect } from "next/navigation";
 import { UsersService } from "@/src/services/users/server";
+import { Typography } from "@/src/components/typography/typography";
+import { getDictionary } from "@/src/features/localization/get-dictionary";
+import { Link } from "@/src/components/link/link";
 
 const Login: FC<WithLocale> = async ({ params: { lang } }) => {
   const user = await UsersService.GetMeAsync();

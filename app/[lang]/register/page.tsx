@@ -1,11 +1,11 @@
 import { FC, Fragment } from "react";
-import { getDictionary } from "../../../src/localization/dictionaries";
-import { WithLocale } from "@/src/shared/types/with-locale";
-import { Typography } from "@/src/shared/components/typography/typography";
-import { Link } from "@/src/shared/components/link/link";
 import { ThemeToggle } from "@/src/theme/components/theme-toggle";
 import styles from "./styles.module.scss";
-import { RegisterUserForm } from "@/src/page/register/components/registerForm/server";
+import { RegisterUserForm } from "@/src/features/page/register/components/registerForm/server";
+import { Typography } from "@/src/components/typography/typography";
+import { getDictionary } from "@/src/features/localization/get-dictionary";
+import { WithLocale } from "@/src/types/with-locale";
+import { Link } from "@/src/components/link/link";
 
 const Register: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);

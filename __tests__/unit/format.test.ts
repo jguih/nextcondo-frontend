@@ -1,4 +1,4 @@
-import { format } from "@/src/localization/utils";
+import { format } from "@/src/features/localization/utils";
 
 describe("format", () => {
   it("replaces variables on a string", () => {

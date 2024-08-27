@@ -1,9 +1,9 @@
 "use client";
-import { Button } from "@/src/shared/components/button/button";
-import { MoonFilled } from "@/src/shared/components/icon/icons/moon-filled";
-import { SunHigh } from "@/src/shared/components/icon/icons/sun-high";
 import { FC } from "react";
 import { useThemeToggler } from "./useThemeToggler";
+import { Button } from "@/src/components/button/button";
+import { SunHigh } from "@/src/components/icon/icons/sun-high";
+import { MoonFilled } from "@/src/components/icon/icons/moon-filled";
 
 export const ThemeToggle: FC = () => {
   const { theme, toggleTheme, mounted } = useThemeToggler();

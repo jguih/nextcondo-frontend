@@ -3,7 +3,7 @@ import { createFetchClient, IFetchClient } from "@/src/data/fetchClient/client";
 import { JsonStrategy } from "@/src/data/fetchClient/strategy";
 import { IAuthService } from "./IAuthService";
 import { authSchema } from "./schemas";
-import { getNextCondoApiUrl } from "@/src/shared/env/utils";
+import { getNextCondoApiUrl } from "@/src/shared/components/env/utils";
 
 export class NextCondoApiAuthService implements IAuthService {
   client: IFetchClient;

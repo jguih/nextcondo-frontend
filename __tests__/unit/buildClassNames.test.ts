@@ -1,4 +1,4 @@
-import { buildClassNames } from "@/src/shared/components/utils/build-class-names";
+import { buildClassNames } from "@/src/components/utils/build-class-names";
 
 describe("buildClassNames", () => {
   it("builds class string list considering boolean expressions", () => {

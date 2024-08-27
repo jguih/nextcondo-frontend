@@ -1,9 +1,9 @@
+import { EnvProvider } from "@/src/components/env/context";
+import { getEnv } from "@/src/components/env/get-env.action";
+import { LocaleProvider } from "@/src/features/localization/components/lang-provider";
+import { GlobalServiceProvider } from "@/src/services/components/global-provider";
 import "../globals.scss";
-import { LocaleProvider } from "@/src/localization/client/LangProvider";
-import { GlobalServiceProvider } from "@/src/services/global-provider";
-import { EnvProvider } from "@/src/shared/env/context";
-import { getEnv } from "@/src/shared/env/get-env.action";
-import { WithLocale } from "@/src/shared/types/with-locale";
+import { WithLocale } from "@/src/types/with-locale";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { FC, PropsWithChildren } from "react";

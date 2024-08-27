@@ -1,6 +1,6 @@
-import { CircularProgress } from "@/src/shared/components/circularProgress/circular-progress";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import { CircularProgress } from "@/src/components/circularProgress/circular-progress";
 
 const HomeLoading: FC = () => {
   return (

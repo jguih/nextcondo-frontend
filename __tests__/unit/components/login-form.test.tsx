@@ -1,7 +1,7 @@
 /** @jest-environment jsdom */
-import { LoginForm } from "@/src/page/login/components/loginForm/client";
+import { LoginForm } from "@/src/features/page/login/components/loginForm/client";
 import { IAuthService } from "@/src/services/auth/IAuthService";
-import { GlobalServiceProvider } from "@/src/services/global-provider";
+import { GlobalServiceProvider } from "@/src/services/components/global-provider";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useRouter } from "next/navigation";

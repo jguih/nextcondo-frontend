@@ -1,10 +1,10 @@
 import "server-only";
-import { createFetchClient, IFetchClient } from "@/src/data/fetchClient/client";
 import { IUsersService } from "./IUsersService";
-import { getNextCondoApiUrl } from "@/src/shared/env/utils";
-import { JsonStrategy } from "@/src/data/fetchClient/strategy";
 import { userSchema } from "./schemas";
 import { headers } from "next/headers";
+import { getNextCondoApiUrl } from "@/src/components/env/utils";
+import { createFetchClient, IFetchClient } from "@/src/lib/fetchClient/client";
+import { JsonStrategy } from "@/src/lib/fetchClient/strategy";
 
 export class NextCondoApiUsersService implements IUsersService {
   client: IFetchClient;

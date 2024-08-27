@@ -1,4 +1,4 @@
-import { joinUrlAndEndpoint } from "@/src/data/utils";
+import { joinUrlAndEndpoint } from "@/src/lib/fetchClient/utils";
 
 describe("joinUrlAndEndpoint", () => {
   it("joins /endpoint with url/", () => {

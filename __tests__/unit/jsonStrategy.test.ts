@@ -1,6 +1,9 @@
-import { JsonStrategy } from "@/src/data/fetchClient/strategy";
-import { JsonStrategyError } from "@/src/data/fetchClient/strategy.error";
-import { ProblemDetails, problemDetailsSchema } from "@/src/data/schemas/auth";
+import {
+  ProblemDetails,
+  problemDetailsSchema,
+} from "@/src/lib/fetchClient/schemas/auth";
+import { JsonStrategy } from "@/src/lib/fetchClient/strategy";
+import { JsonStrategyError } from "@/src/lib/fetchClient/strategy.error";
 import { z } from "zod";
 
 describe("JsonStrategy", () => {
