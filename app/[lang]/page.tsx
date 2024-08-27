@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { WithLocale } from "@/src/types/with-locale";
 import styles from "./styles.module.scss";
-import { AppSidebar } from "@/src/shared/components/sidebar/app/app-sidebar";
 import { redirect } from "next/navigation";
 import { UsersService } from "@/src/services/users/server";
 import { Button } from "@/src/components/button/button";
@@ -9,6 +8,7 @@ import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
 import { Typography } from "@/src/components/typography/typography";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
+import { AppSidebar } from "@/src/components/sidebar/app/app-sidebar";
 
 const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   const user = await UsersService.GetMeAsync();
