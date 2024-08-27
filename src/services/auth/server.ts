@@ -1,9 +1,9 @@
 import "server-only";
-import { createFetchClient, IFetchClient } from "@/src/data/fetchClient/client";
-import { JsonStrategy } from "@/src/data/fetchClient/strategy";
 import { IAuthService } from "./IAuthService";
 import { authSchema } from "./schemas";
-import { getNextCondoApiUrl } from "@/src/shared/components/env/utils";
+import { createFetchClient, IFetchClient } from "@/src/lib/fetchClient/client";
+import { getNextCondoApiUrl } from "@/src/components/env/utils";
+import { JsonStrategy } from "@/src/lib/fetchClient/strategy";
 
 export class NextCondoApiAuthService implements IAuthService {
   client: IFetchClient;
