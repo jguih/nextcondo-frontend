@@ -4,7 +4,7 @@ import { userSchema } from "./schemas";
 import { headers } from "next/headers";
 import { getNextCondoApiUrl } from "@/src/components/env/utils";
 import { createFetchClient, IFetchClient } from "@/src/lib/fetchClient/client";
-import { JsonStrategy } from "@/src/lib/fetchClient/strategy";
+import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
 
 export class NextCondoApiUsersService implements IUsersService {
   client: IFetchClient;

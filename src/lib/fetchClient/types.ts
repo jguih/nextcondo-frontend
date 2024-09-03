@@ -1,9 +1,9 @@
 import { ProblemDetails } from "./schemas/auth";
-import { FetchStrategy } from "./strategy";
+import { IFetchStrategy } from "./IFetchStrategy";
 
 type BaseHttpProps<Output> = {
   endpoint?: string;
-  strategy: FetchStrategy<Output>;
+  strategy: IFetchStrategy<Output>;
 } & Omit<RequestInit, "method" | "body">;
 
 export type HttpGetProps<Output> = BaseHttpProps<Output>;

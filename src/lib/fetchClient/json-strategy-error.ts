@@ -1,19 +1,5 @@
 import { ProblemDetails } from "./schemas/auth";
-
-type StrategyErrorProps = {
-  message: string;
-  statusCode: number;
-};
-
-export class StrategyError extends Error {
-  statusCode: number;
-
-  constructor({ statusCode, message }: StrategyErrorProps) {
-    super();
-    this.statusCode = statusCode;
-    this.message = message;
-  }
-}
+import { StrategyError, StrategyErrorProps } from "./StrategyError";
 
 type JsonStrategyErrorProps = StrategyErrorProps & {
   data?: ProblemDetails;

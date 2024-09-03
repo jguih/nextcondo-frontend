@@ -1,6 +1,6 @@
 import { FAKE_API } from "@/jest.setup";
 import { createFetchClient } from "@/src/lib/fetchClient/client";
-import { JsonStrategy } from "@/src/lib/fetchClient/strategy";
+import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
 import { server } from "@/src/test/mocks/node";
 import { z } from "zod";
 

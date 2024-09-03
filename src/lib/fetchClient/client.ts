@@ -4,8 +4,9 @@ import {
   FetchClientFailedResponse,
   FetchClientResponse,
 } from "./types";
-import { JsonStrategyError, StrategyError } from "./strategy.error";
+import { JsonStrategyError } from "./json-strategy-error";
 import { joinUrlAndEndpoint } from "./utils";
+import { StrategyError } from "./StrategyError";
 
 const sendError = (error: unknown): FetchClientFailedResponse => {
   if (error instanceof JsonStrategyError) {

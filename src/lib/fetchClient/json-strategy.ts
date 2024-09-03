@@ -1,12 +1,9 @@
 import { ZodSchema } from "zod";
 import { problemDetailsSchema } from "./schemas/auth";
-import { JsonStrategyError } from "./strategy.error";
+import { JsonStrategyError } from "./json-strategy-error";
+import { IFetchStrategy } from "./IFetchStrategy";
 
-export interface FetchStrategy<Output> {
-  handleAsync: (response: Response) => Promise<Output>;
-}
-
-export class JsonStrategy<Output> implements FetchStrategy<Output> {
+export class JsonStrategy<Output> implements IFetchStrategy<Output> {
   schema: ZodSchema<Output>;
 
   constructor(schema: ZodSchema<Output>) {
