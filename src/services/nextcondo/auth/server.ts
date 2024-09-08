@@ -1,15 +1,16 @@
 import "server-only";
+
 import { IAuthService } from "./IAuthService";
 import { authSchema } from "./schemas";
 import { createFetchClient, IFetchClient } from "@/src/lib/fetchClient/client";
-import { getNextCondoApiUrl } from "@/src/components/env/utils";
 import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
+import { getNextCondoBackendUrl } from "@/src/lib/environment/get-backend-url";
 
 export class NextCondoApiAuthService implements IAuthService {
   client: IFetchClient;
 
   constructor() {
-    this.client = createFetchClient(getNextCondoApiUrl());
+    this.client = createFetchClient(getNextCondoBackendUrl());
   }
 
   async LoginAsync(credentials: FormData): Promise<boolean> {

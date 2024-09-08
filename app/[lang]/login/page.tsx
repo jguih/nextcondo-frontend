@@ -4,7 +4,7 @@ import { LoginForm } from "@/src/features/page/login/components/loginForm/server
 import { ThemeToggle } from "@/src/theme/components/theme-toggle";
 import styles from "./styles.module.scss";
 import { redirect } from "next/navigation";
-import { UsersService } from "@/src/services/users/server";
+import { UsersService } from "@/src/services/nextcondo/users/server";
 import { Typography } from "@/src/components/typography/typography";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { Link } from "@/src/components/link/link";

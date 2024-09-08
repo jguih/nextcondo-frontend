@@ -1,12 +1,18 @@
 "use client";
 import { FC, PropsWithChildren } from "react";
 import { Services, ServicesProvider } from "./provider";
-import { useAuthService } from "../auth/client";
+import { useAuthService } from "../nextcondo/auth/client";
 
-export const GlobalServiceProvider: FC<
-  PropsWithChildren<Partial<Services>>
-> = ({ children, ...overrideServices }) => {
-  const AuthService = useAuthService();
+type GlobalServiceProviderProps = PropsWithChildren<
+  { nextcondoBackendPublicUrl: string } & Partial<Services>
+>;
+
+export const GlobalServiceProvider: FC<GlobalServiceProviderProps> = ({
+  children,
+  nextcondoBackendPublicUrl,
+  ...overrideServices
+}) => {
+  const AuthService = useAuthService({ nextcondoBackendPublicUrl });
 
   const services: Services = {
     AuthService: AuthService,

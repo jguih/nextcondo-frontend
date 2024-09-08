@@ -1,5 +1,3 @@
-import { EnvProvider } from "@/src/components/env/context";
-import { getEnv } from "@/src/components/env/get-env.action";
 import { LocaleProvider } from "@/src/features/localization/components/lang-provider";
 import { GlobalServiceProvider } from "@/src/services/components/global-provider";
 import "../globals.scss";
@@ -7,6 +5,7 @@ import { WithLocale } from "@/src/types/with-locale";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { FC, PropsWithChildren } from "react";
+import { getNextCondoBackendPublicUrl } from "@/src/services/nextcondo/public/get-public-url";
 
 export const metadata: Metadata = {
   title: "NextCondo",
@@ -24,8 +23,7 @@ const HomeLayout: FC<PropsWithChildren<WithLocale>> = async ({
   children,
   params: { lang },
 }) => {
-  const env = await getEnv();
-
+  const nextcondoBackendUrl = await getNextCondoBackendPublicUrl();
   return (
     <html
       lang={lang}
@@ -34,9 +32,11 @@ const HomeLayout: FC<PropsWithChildren<WithLocale>> = async ({
     >
       <body>
         <LocaleProvider lang={lang}>
-          <EnvProvider env={env}>
-            <GlobalServiceProvider>{children}</GlobalServiceProvider>
-          </EnvProvider>
+          <GlobalServiceProvider
+            nextcondoBackendPublicUrl={nextcondoBackendUrl}
+          >
+            {children}
+          </GlobalServiceProvider>
         </LocaleProvider>
       </body>
     </html>

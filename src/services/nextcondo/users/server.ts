@@ -2,15 +2,15 @@ import "server-only";
 import { IUsersService } from "./IUsersService";
 import { userSchema } from "./schemas";
 import { headers } from "next/headers";
-import { getNextCondoApiUrl } from "@/src/components/env/utils";
 import { createFetchClient, IFetchClient } from "@/src/lib/fetchClient/client";
 import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
+import { getNextCondoBackendUrl } from "@/src/lib/environment/get-backend-url";
 
 export class NextCondoApiUsersService implements IUsersService {
   client: IFetchClient;
 
   constructor() {
-    this.client = createFetchClient(getNextCondoApiUrl());
+    this.client = createFetchClient(getNextCondoBackendUrl());
   }
 
   async GetMeAsync() {

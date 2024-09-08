@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 import { LoginForm } from "@/src/features/page/login/components/loginForm/client";
-import { IAuthService } from "@/src/services/auth/IAuthService";
+import { IAuthService } from "@/src/services/nextcondo/auth/IAuthService";
 import { GlobalServiceProvider } from "@/src/services/components/global-provider";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -32,7 +32,10 @@ const fakeAuthService = new FakeAuthService();
 
 const TestLoginForm: FC = () => {
   return (
-    <GlobalServiceProvider AuthService={fakeAuthService}>
+    <GlobalServiceProvider
+      AuthService={fakeAuthService}
+      nextcondoBackendPublicUrl=""
+    >
       <LoginForm>
         <button type="submit">submit</button>
       </LoginForm>

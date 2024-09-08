@@ -2,7 +2,7 @@ import { FC } from "react";
 import { WithLocale } from "@/src/types/with-locale";
 import styles from "./styles.module.scss";
 import { redirect } from "next/navigation";
-import { UsersService } from "@/src/services/users/server";
+import { UsersService } from "@/src/services/nextcondo/users/server";
 import { Button } from "@/src/components/button/button";
 import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";

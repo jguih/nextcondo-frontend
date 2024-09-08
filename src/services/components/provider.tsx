@@ -1,6 +1,6 @@
 "use client";
 import { createContext, FC, PropsWithChildren, useContext } from "react";
-import { IAuthService } from "../auth/IAuthService";
+import { IAuthService } from "../nextcondo/auth/IAuthService";
 
 export type Services = {
   AuthService: IAuthService;

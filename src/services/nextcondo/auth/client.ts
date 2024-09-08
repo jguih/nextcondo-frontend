@@ -1,13 +1,18 @@
 "use client";
+
 import { IAuthService } from "./IAuthService";
 import { authSchema } from "./schemas";
 import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
 import { createFetchClient } from "@/src/lib/fetchClient/client";
-import { useEnv } from "@/src/components/env/context";
 
-export const useAuthService = (): IAuthService => {
-  const { NEXT_PUBLIC_NEXTCONDOAPI_URL } = useEnv();
-  const client = createFetchClient(NEXT_PUBLIC_NEXTCONDOAPI_URL);
+type UseAuthServiceProps = {
+  nextcondoBackendPublicUrl: string;
+};
+
+export const useAuthService = ({
+  nextcondoBackendPublicUrl,
+}: UseAuthServiceProps): IAuthService => {
+  const client = createFetchClient(nextcondoBackendPublicUrl);
 
   const LoginAsync: IAuthService["LoginAsync"] = async (credentials) => {
     const result = await client.postAsync({
