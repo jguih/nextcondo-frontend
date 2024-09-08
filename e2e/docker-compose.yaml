@@ -1,0 +1,31 @@
+services:
+  nextcondo-frontend:
+    image: thejguih/nextcondo:latest
+    depends_on:
+      - nextcondo-backend
+    networks:
+      - nextcondotest
+  
+  nextcondo-backend: 
+    image: thejguih/nextcondoapi:latest
+    depends_on:
+      - nextcondo-postgres
+    environment:
+      PUBLIC_URL: 192.168.0.143/api
+      DB_USER: nextcondo
+      DB_PASSWORD: nextcondo
+      DB_DATABASE: nextcondo
+    networks:
+      - nextcondotest
+
+  nextcondo-postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: nextcondo
+      POSTGRES_PASSWORD: nextcondo
+      POSTGRES_DB: nextcondo
+    networks:
+      - nextcondotest
+
+networks: 
+  nextcondotest:

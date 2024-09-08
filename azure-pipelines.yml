@@ -5,123 +5,100 @@
 
 trigger:
   tags:
-    include: 
-    - '*'
+    include:
+      - "*"
 
 pool: "Home Server"
 
 stages:
-- stage: build
-  jobs:
-  - job:
-    displayName: "Build nextapp"
-    pool: "Home Server"
-    steps:
-    - task: Cache@2
-      displayName: 'Cache .next/cache'
-      inputs:
-        key: next | $(Agent.OS) | package-lock.json
-        path: '$(System.DefaultWorkingDirectory)/.next/cache'
-    - task: Npm@1
-      inputs:
-        command: 'install'
-        workingDir: '$(System.DefaultWorkingDirectory)'
-      displayName: 'Install dependencies'
-    - task: Npm@1
-      inputs:
-        command: 'custom'
-        workingDir: '$(System.DefaultWorkingDirectory)'
-        customCommand: 'run build'
-      displayName: 'Build app'
-    - task: CopyFiles@2
-      displayName: 'Copy .next/standalone to staging directory'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)/.next/standalone'
-        Contents: '**'
-        TargetFolder: '$(System.DefaultWorkingDirectory)/staging'
-    # The following two folders needs to be copied over manualy, see https://nextjs.org/docs/app/api-reference/next-config-js/output
-    - task: CopyFiles@2
-      displayName: 'Copy public folder to staging directory'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)/public'
-        Contents: '**'
-        TargetFolder: '$(System.DefaultWorkingDirectory)/staging/public'
-    - task: CopyFiles@2
-      displayName: 'Copy .next/static to staging directory'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)/.next/static'
-        Contents: '**'
-        TargetFolder: '$(System.DefaultWorkingDirectory)/staging/.next/static'
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/staging'
-        artifact: 'nextapp'
-        publishLocation: 'pipeline'
-    
-  
-- stage: test
-  dependsOn: build
-  jobs:
-  - job:
-    displayName: "Test nextapp"
-    steps:
-    - task: Npm@1
-      inputs:
-        command: 'install'
-        workingDir: '$(System.DefaultWorkingDirectory)'
-    - task: Npm@1
-      displayName: "Run Tests"
-      inputs:
-        command: 'custom'
-        workingDir: '$(System.DefaultWorkingDirectory)'
-        customCommand: 'run test:unit'
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'JUnit'
-        testResultsFiles: '**/junit.xml'
-        failTaskOnFailureToPublishResults: true
-        failTaskOnMissingResultsFile: true
+  - stage: build
+    jobs:
+      - job:
+        displayName: "Build nextjsapp"
+        pool: "Home Server"
+        steps:
+          - task: Cache@2
+            displayName: "Cache .next/cache"
+            inputs:
+              key: next | $(Agent.OS) | package-lock.json
+              path: "$(System.DefaultWorkingDirectory)/.next/cache"
+          - task: Npm@1
+            inputs:
+              command: "install"
+              workingDir: "$(System.DefaultWorkingDirectory)"
+            displayName: "Install dependencies"
+          - script: |
+              bash scripts/build.sh
+            displayName: "Build nextjsapp"
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: "$(System.DefaultWorkingDirectory)/.next/standalone"
+              artifact: "nextapp"
+              publishLocation: "pipeline"
 
-- stage: deploy
-  dependsOn: test
-  condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
-  jobs:
-  - deployment: 
-    displayName: "Deploy docker image"
-    environment:
-      name: nextcondo-frontend
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - checkout: self
-          - task: DownloadPipelineArtifact@2
+  - stage: test
+    dependsOn: build
+    jobs:
+      - job:
+        displayName: "Test nextapp"
+        steps:
+          - task: Npm@1
             inputs:
-              buildType: 'current'
-              artifactName: 'nextapp'
-              targetPath: '$(System.DefaultWorkingDirectory)/release'
-          - task: Docker@2
-            displayName: 'Build docker image'
+              command: "install"
+              workingDir: "$(System.DefaultWorkingDirectory)"
+          - task: Npm@1
+            displayName: "Run Tests"
             inputs:
-              containerRegistry: 'azure'
-              repository: 'thejguih/nextcondo'
-              command: 'build'
-              Dockerfile: '**/Dockerfile'
-              tags: |
-                $(Build.SourceBranchName)
-                latest
-          - task: Docker@2
-            displayName: 'Publish image to docker-hub'
+              command: "custom"
+              workingDir: "$(System.DefaultWorkingDirectory)"
+              customCommand: "run test:unit"
+          - task: PublishTestResults@2
             inputs:
-              containerRegistry: 'azure'
-              repository: 'thejguih/nextcondo'
-              command: 'push'
-              tags: |
-                $(Build.SourceBranchName)
-                latest
-          - script: |
-              docker rmi thejguih/nextcondo:$(Build.SourceBranchName)
-            displayName: "Remove image $(Build.SourceBranchName) from host"
-          - script: |
-              docker rmi thejguih/nextcondo:latest
-            displayName: "Remove image latest from host"
+              testResultsFormat: "JUnit"
+              testResultsFiles: "**/junit.xml"
+              failTaskOnFailureToPublishResults: true
+              failTaskOnMissingResultsFile: true
+
+  - stage: deploy
+    dependsOn: test
+    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+    jobs:
+      - deployment:
+        displayName: "Deploy docker image"
+        environment:
+          name: nextcondo-frontend
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - task: DownloadPipelineArtifact@2
+                  inputs:
+                    buildType: "current"
+                    artifactName: "nextapp"
+                    targetPath: "$(System.DefaultWorkingDirectory)/release"
+                - task: Docker@2
+                  displayName: "Build docker image"
+                  inputs:
+                    containerRegistry: "azure"
+                    repository: "thejguih/nextcondo"
+                    command: "build"
+                    Dockerfile: "**/Dockerfile"
+                    tags: |
+                      $(Build.SourceBranchName)
+                      latest
+                - task: Docker@2
+                  displayName: "Publish image to docker-hub"
+                  inputs:
+                    containerRegistry: "azure"
+                    repository: "thejguih/nextcondo"
+                    command: "push"
+                    tags: |
+                      $(Build.SourceBranchName)
+                      latest
+                - script: |
+                    docker rmi thejguih/nextcondo:$(Build.SourceBranchName)
+                  displayName: "Remove image $(Build.SourceBranchName) from host"
+                - script: |
+                    docker rmi thejguih/nextcondo:latest
+                  displayName: "Remove image latest from host"
