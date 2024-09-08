@@ -1,7 +1,13 @@
 services:
-  nextcondo-test:
-    image: nextcondo-test
-    container_name: nextcondo-test
-    restart: unless-stopped
+  nextcondo-frontend:
+    build: 
+      dockerfile: Dockerfile
+      context: .
     ports:
       - 3000:80
+    networks:
+      - nextcondotest
+
+networks: 
+  nextcondotest:
+    external: true

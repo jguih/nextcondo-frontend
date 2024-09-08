@@ -13,7 +13,7 @@ RUN adduser --system --uid 1001 nextjs
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
 
-COPY --chown=nextjs:nodejs ./release ./
+COPY --chown=nextjs:nodejs ./.next/standalone ./
 
 USER nextjs
 
