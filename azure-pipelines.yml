@@ -46,12 +46,9 @@ stages:
             inputs:
               command: "install"
               workingDir: "$(System.DefaultWorkingDirectory)"
-          - task: Npm@1
-            displayName: "Run Tests"
-            inputs:
-              command: "custom"
-              workingDir: "$(System.DefaultWorkingDirectory)"
-              customCommand: "run test:unit"
+          - script: |
+              bash scripts/run-tests.sh
+            displayName: "Test nextjsapp"
           - task: PublishTestResults@2
             inputs:
               testResultsFormat: "JUnit"
@@ -99,6 +96,3 @@ stages:
                 - script: |
                     docker rmi thejguih/nextcondo:$(Build.SourceBranchName)
                   displayName: "Remove image $(Build.SourceBranchName) from host"
-                - script: |
-                    docker rmi thejguih/nextcondo:latest
-                  displayName: "Remove image latest from host"

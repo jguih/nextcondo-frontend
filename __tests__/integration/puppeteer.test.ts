@@ -1,12 +1,10 @@
-import puppeteer, { Browser, Page } from "puppeteer";
+import puppeteer, { Browser } from "puppeteer";
 
 describe.skip("Puppeteer", () => {
   let browser: Browser;
-  let page: Page;
 
   beforeAll(async () => {
     browser = await puppeteer.launch();
-    page = await browser.newPage();
   });
 
   it("redirects to login page", async () => {

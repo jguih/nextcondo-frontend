@@ -7,7 +7,7 @@
 export const buildClassNames = (
   classes: Record<string, boolean | null | undefined>,
   ...staticClasses: Array<string | undefined | null>
-) => {
+): string => {
   const newClasses: string[] = Object.entries(classes)
     .filter((obj) => {
       const [, value] = obj;

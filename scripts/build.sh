@@ -3,19 +3,22 @@
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 root_path="${parent_path}/.."
 
+remove_standalone() {
+  if [ -d ".next/standalone" ]
+  then
+    rm -r .next/standalone
+  fi
+}
+
 build_nextjsapp() {
-  cd "${root_path}"
-  rm -r .next/standalone
   npm run build
 }
 
-move_publicfolder() {
-  cd "${root_path}"
+copy_publicfolder() {
   cp -r public .next/standalone/public
 }
 
-move_staticfolder() {
-  cd "${root_path}"
+copy_staticfolder() {
   cp -r .next/static .next/standalone/.next/static
 }
 
@@ -33,6 +36,9 @@ finish_err() {
 trap finish_err ERR
 trap finish EXIT
 
+cd "${root_path}"
+
+remove_standalone
 build_nextjsapp
-move_staticfolder
-move_publicfolder
+copy_staticfolder
+copy_publicfolder
