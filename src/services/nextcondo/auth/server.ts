@@ -6,6 +6,9 @@ import { createFetchClient, IFetchClient } from "@/src/lib/fetchClient/client";
 import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
 import { getNextCondoBackendUrl } from "@/src/lib/environment/get-backend-url";
 
+/**
+ * Server only implementation of NextCondoBackend IAuthService
+ */
 export class NextCondoApiAuthService implements IAuthService {
   client: IFetchClient;
 

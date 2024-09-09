@@ -13,7 +13,7 @@ export const checkFormValidityFromEvent: (
     const inputs = event.currentTarget.getElementsByTagName("input");
     for (let index = 0; index < inputs.length; index++) {
       const input = inputs[index];
-      if (!input.checkValidity()) {
+      if (!input.validity.valid) {
         input.focus();
         break;
       }

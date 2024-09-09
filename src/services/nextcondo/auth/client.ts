@@ -9,6 +9,10 @@ type UseAuthServiceProps = {
   nextcondoBackendPublicUrl: string;
 };
 
+/**
+ * Client only implementation of NextCondoBackend IAuthService.
+ * @returns `IAuthService`
+ */
 export const useAuthService = ({
   nextcondoBackendPublicUrl,
 }: UseAuthServiceProps): IAuthService => {

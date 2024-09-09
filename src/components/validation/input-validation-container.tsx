@@ -41,11 +41,13 @@ export const InputValidationContainer: FC<InputValidationContainerProps> = ({
 
   const validate = () => {
     if (!inputRef.current) return;
+
     const validity = inputRef.current.validity;
     const message = getValidationMessageFromValidity(
       validity,
       validationMessages
     );
+
     inputRef.current.setCustomValidity(message);
 
     if (!validity.valid) {
@@ -56,12 +58,12 @@ export const InputValidationContainer: FC<InputValidationContainerProps> = ({
   };
 
   const onChange: ChangeEventHandler<HTMLInputElement> = () => {
-    if (visited) validate();
+    if (visited) inputRef.current?.checkValidity();
   };
 
   const onBlur: FocusEventHandler<HTMLInputElement> = () => {
     setVisited(true);
-    validate();
+    inputRef.current?.checkValidity();
   };
 
   const onInvalid: FormEventHandler<HTMLInputElement> = () => {
@@ -74,8 +76,8 @@ export const InputValidationContainer: FC<InputValidationContainerProps> = ({
     isError: error !== null,
     errorMessage: error,
     onChange,
-    onInvalid,
     onBlur,
+    onInvalid,
     ref: inputRef,
   });
 };
