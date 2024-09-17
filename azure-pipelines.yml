@@ -73,7 +73,7 @@ stages:
                   inputs:
                     buildType: "current"
                     artifactName: "nextapp"
-                    targetPath: "$(System.DefaultWorkingDirectory)/release"
+                    targetPath: "$(System.DefaultWorkingDirectory)/.next/standalone"
                 - task: Docker@2
                   displayName: "Build docker image"
                   inputs:
