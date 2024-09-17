@@ -16,7 +16,7 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   if (!user) {
     redirect("/login");
   }
-  const userCondominiums = await CondominiumService.GetMineAsync();
+  await CondominiumService.GetMineAsync();
   const d = await getDictionary(lang);
 
   return (
