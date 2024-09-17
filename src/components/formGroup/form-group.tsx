@@ -12,7 +12,7 @@ export const FormGroup: FC<FormGroupProps> = ({
 }) => {
   const classes = buildClassNames(
     { [styles.error]: error === true },
-    styles["form-control"],
+    styles["form-group"],
     props.className
   );
   return (

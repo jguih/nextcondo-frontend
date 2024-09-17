@@ -1,11 +1,11 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import styles from "./styles.module.scss";
 import { Typography } from "../typography/typography";
 import { Button } from "../button/button";
 import { Menu } from "../icon/icons/menu";
 
 export type HeaderProps = {
-  title?: string;
+  title?: string | ReactNode;
 };
 
 export const Header: FC<HeaderProps> = ({ title }) => {
@@ -15,7 +15,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
         <Button variant="light" color="neutral" data-sidebarid="appsidebar">
           <Menu bold />
         </Button>
-        {title && <Typography>{title}</Typography>}
+        {typeof title === "string" ? <Typography>{title}</Typography> : title}
       </div>
     </div>
   );

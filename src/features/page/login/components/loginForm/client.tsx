@@ -1,59 +1,43 @@
 "use client";
 
-import {
-  useForm,
-  FormProvider,
-  useFormContext,
-} from "@/src/components/form/context";
+import { useForm, FormProvider } from "@/src/components/form/context";
 import { FormGroup } from "@/src/components/formGroup/form-group";
 import { Input } from "@/src/components/input/input";
 import { Label } from "@/src/components/label/label";
 import { Typography } from "@/src/components/typography/typography";
-import {
-  ValidationMessages,
-  InputValidationContainer,
-} from "@/src/components/validation/input-validation-container";
-import { checkFormValidityFromEvent } from "@/src/components/validation/utils";
+import { InputValidationContainer } from "@/src/components/validation/input-validation-container";
 import { useServices } from "@/src/services/components/provider";
 import { useRouter } from "next/navigation";
-import { ReactElement, FC, FormEventHandler } from "react";
+import { ReactElement, FC, useState } from "react";
 import styles from "./styles.module.scss";
+import { ValidationMessages } from "@/src/components/validation/types";
 
 interface LoginFormProps {
   children?: ReactElement | ReactElement[];
+  error?: ReactElement | ReactElement[];
 }
 
-export const LoginForm: FC<LoginFormProps> = ({ children }) => {
+export const LoginForm: FC<LoginFormProps> = ({ children, error }) => {
   const form = useForm();
-  const { dispatch } = form;
+  const { handleSubmitAsync } = form;
   const router = useRouter();
   const { AuthService } = useServices();
+  const [isError, setIsError] = useState(false);
 
-  const handleOnSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    dispatch({ type: "reset" });
-    const isValid = checkFormValidityFromEvent(event);
-
-    if (!isValid) return;
-
-    const formData: FormData = new FormData(event.currentTarget);
-
-    dispatch({ type: "pending", payload: true });
-    const success = await AuthService.LoginAsync(formData);
+  const handleOnSubmit = handleSubmitAsync(async (data) => {
+    const success = await AuthService.LoginAsync(data);
     if (success) {
-      dispatch({ type: "success", payload: true });
       router.push("/");
     } else {
-      dispatch({ type: "error", payload: true });
+      setIsError(true);
     }
-    dispatch({ type: "pending", payload: false });
-  };
+  });
 
   return (
     <FormProvider {...form}>
       <form onSubmit={handleOnSubmit} noValidate className={styles.form}>
         {children}
+        {isError && error}
       </form>
     </FormProvider>
   );
@@ -132,13 +116,9 @@ export const LoginFormPassword: FC<PasswordProps> = ({
 };
 
 export const LoginFormError: FC<{ message: string }> = ({ message }) => {
-  const { isError } = useFormContext();
-
-  if (isError) {
-    return (
-      <Typography color="danger" className={styles.error}>
-        {message}
-      </Typography>
-    );
-  }
+  return (
+    <Typography color="danger" className={styles.error}>
+      {message}
+    </Typography>
+  );
 };

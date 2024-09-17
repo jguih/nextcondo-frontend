@@ -12,36 +12,100 @@
   font-size: calc(var(--p) * 1.2);
 }
 
-.link {
-  text-decoration: none;
+.solid {
+  padding: theme.spacing(0.6) theme.spacing(1);
+  border-radius: var(--radius-sm);
   border: var(--border) solid transparent;
-  border-radius: var(--radius);
+  cursor: pointer;
+  transition-property: background-color;
+  transition: 0.06s ease;
 
-  background-color: transparent;
-  color: var(--on-accent-light);
-  stroke: var(--on-accent-light);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: theme.spacing(1);
+  text-decoration: none;
+}
+
+.light {
+  border-radius: var(--radius-sm);
+  border: var(--border) solid transparent;
+  padding: theme.spacing(0.2);
+}
+
+@mixin solid($color) {
+  background-color: var(--#{$color});
+  color: var(--on-#{$color});
+  stroke: var(--on-#{$color});
 
   &:hover {
-    background-color: var(--accent-light-hover-bg);
-    border-color: var(--accent-light-hover-border);
+    background-color: var(--#{$color}-hover-bg);
+    border-color: var(--#{$color}-hover-border);
   }
 
   &:active {
-    background-color: var(--accent-light-active-bg);
-    border-color: var(--accent-light-active-border);
-    color: var(--accent-light-on-active-bg);
-    stroke: var(--accent-light-on-active-bg);
+    background-color: var(--#{$color}-active-bg);
+    border-color: var(--#{$color}-active-border);
+    color: var(--#{$color}-on-active-bg);
+    stroke: var(--#{$color}-on-active-bg);
+  }
+
+  &:disabled {
+    background-color: var(--#{$color}-disabled-bg);
+    border-color: var(--#{$color}-disabled-bg);
+    color: var(--#{$color}-on-disabled-bg);
+    stroke: var(--#{$color}-on-disabled-bg);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  &:focus {
+    outline: var(--#{$color}-active-border) solid var(--border);
+  }
+}
+
+@mixin light($color) {
+  background-color: transparent;
+  color: var(--on-#{$color});
+  stroke: var(--on-#{$color});
+
+  &:hover {
+    background-color: var(--#{$color}-hover-bg);
+    border-color: var(--#{$color}-hover-border);
+  }
+
+  &:active {
+    background-color: var(--#{$color}-active-bg);
+    border-color: var(--#{$color}-active-border);
+    color: var(--#{$color}-on-active-bg);
+    stroke: var(--#{$color}-on-active-bg);
   }
 
   &:disabled {
     background-color: transparent;
     border-color: transparent;
-    color: var(--accent-light-on-disabled-bg);
-    stroke: var(--accent-light-on-disabled-bg);
+    color: var(--#{$color}-on-disabled-bg);
+    stroke: var(--#{$color}-on-disabled-bg);
     cursor: not-allowed;
+    box-shadow: none;
+    &:hover {
+      background-color: var(--#{$color}-disabled-bg);
+      border-color: var(--#{$color}-disabled-bg);
+    }
   }
 
   &:focus {
-    outline: var(--accent-light-active-border) solid var(--border);
+    outline: var(--#{$color}-active-border) solid var(--border);
+  }
+}
+
+@each $color in theme.$colors {
+  .solid.#{$color} {
+    @include solid("#{$color}");
+  }
+
+  .light.#{$color} {
+    @include light("#{$color}-light");
   }
 }

@@ -24,6 +24,16 @@
       "no_property_added": "Não encontramos uma propriedade associada a sua conta. Adicione uma para começar a gerenciar o seu condomínio.",
       "welcome": "Bem Vindo!",
       "add_property": "Adicionar Condomínio"
+    },
+    "add_condominium": {
+      "title": "Criar Condomínio",
+      "relationship_type": "Tipo de proprietário",
+      "tenant": "Morador",
+      "manager": "Síndico",
+      "name": "Nome",
+      "name_required": "Informe um nome de condomínio válido, como Ed. Downtown",
+      "description": "Descrição",
+      "submit": "Criar Condomínio"
     }
   },
   "boolean": {

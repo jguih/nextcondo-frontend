@@ -1,6 +1,6 @@
 @use "theme.utils" as theme;
 
-.form-control {
+.form-group {
   display: flex;
   flex-direction: column;
   gap: theme.spacing();
@@ -12,6 +12,6 @@
   padding-left: theme.spacing(2);
 }
 
-.form-control:not(:first-child) {
+.form-group:not(:first-child) {
   margin-top: theme.spacing(2);
 }

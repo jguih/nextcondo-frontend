@@ -4,6 +4,7 @@ import { IAuthService } from "./IAuthService";
 import { authSchema } from "./schemas";
 import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
 import { createFetchClient } from "@/src/lib/fetchClient/client";
+import { LogService } from "../../logger/client";
 
 type UseAuthServiceProps = {
   nextcondoBackendPublicUrl: string;
@@ -25,6 +26,11 @@ export const useAuthService = ({
       credentials: "include",
       body: credentials,
     });
+    if (result.success) {
+      LogService.info("Login successfull", result.response);
+    } else {
+      LogService.error("Login failed", result.response);
+    }
     return result.success;
   };
 
@@ -34,6 +40,11 @@ export const useAuthService = ({
       strategy: new JsonStrategy(authSchema.logout),
       credentials: "include",
     });
+    if (result.success) {
+      LogService.info("Logout successfull", result.response);
+    } else {
+      LogService.error("Logout failed", result.response);
+    }
     return result.success;
   };
 

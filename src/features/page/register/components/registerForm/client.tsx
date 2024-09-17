@@ -1,17 +1,14 @@
 "use client";
-import { FC, FormEventHandler, ReactElement } from "react";
+import { FC, ReactElement, useState } from "react";
 import styles from "./styles.module.scss";
 import { useForm, FormProvider } from "@/src/components/form/context";
 import { FormGroup } from "@/src/components/formGroup/form-group";
 import { Input } from "@/src/components/input/input";
 import { Label } from "@/src/components/label/label";
 import { Typography } from "@/src/components/typography/typography";
-import {
-  ValidationMessages,
-  InputValidationContainer,
-} from "@/src/components/validation/input-validation-container";
-import { checkFormValidityFromEvent } from "@/src/components/validation/utils";
+import { InputValidationContainer } from "@/src/components/validation/input-validation-container";
 import { useServices } from "@/src/services/components/provider";
+import { ValidationMessages } from "@/src/components/validation/types";
 
 interface FormProps {
   children: ReactElement[] | ReactElement;
@@ -28,37 +25,26 @@ export const RegisterUserForm: FC<FormProps> = ({
 }) => {
   const { AuthService } = useServices();
   const form = useForm();
-  const { isSuccess, isError, dispatch } = form;
+  const { handleSubmitAsync } = form;
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   if (isSuccess) {
     return success;
   }
 
-  const handleSubmitAsync: FormEventHandler<HTMLFormElement> = async (
-    event
-  ) => {
-    event.preventDefault();
-    event.stopPropagation();
-    dispatch({ type: "reset" });
-    const isValid = checkFormValidityFromEvent(event);
-
-    if (!isValid) return;
-
-    const formData: FormData = new FormData(event.currentTarget);
-
-    dispatch({ type: "pending", payload: true });
-    const success = await AuthService.RegisterAsync(formData);
+  const handleOnSubmitAsync = handleSubmitAsync(async (data) => {
+    const success = await AuthService.RegisterAsync(data);
     if (success) {
-      dispatch({ type: "success", payload: true });
+      setIsSuccess(true);
     } else {
-      dispatch({ type: "error", payload: true });
+      setIsError(true);
     }
-    dispatch({ type: "pending", payload: false });
-  };
+  });
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={handleSubmitAsync} noValidate className={styles.form}>
+      <form onSubmit={handleOnSubmitAsync} noValidate className={styles.form}>
         {children}
         {isError && error}
         {submit}

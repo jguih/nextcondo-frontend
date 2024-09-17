@@ -3,7 +3,14 @@ import styles from "./styles.module.scss";
 import { buildClassNames } from "../utils/build-class-names";
 import { SemanticColors } from "@/src/theme/types";
 
-export type TypographyTags = "p" | "small" | "h1" | "h2" | "h3" | "h4";
+export type TypographyTags =
+  | "p"
+  | "small"
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "legend";
 
 export type TypographyProps<Tag extends TypographyTags> = {
   tag?: Tag;

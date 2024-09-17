@@ -15,3 +15,5 @@ export type Sizes = {
 };
 
 export type SizeOptions = Sizes["small"] | Sizes["medium"] | Sizes["large"];
+
+export type ThemeVariant = "solid" | "light";

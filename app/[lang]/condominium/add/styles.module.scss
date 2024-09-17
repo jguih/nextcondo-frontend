@@ -1,0 +1,7 @@
+@use "theme.utils" as theme;
+
+.loading-container {
+  padding: theme.spacing(1);
+  display: flex;
+  justify-content: center;
+}

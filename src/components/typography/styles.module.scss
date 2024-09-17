@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "theme.utils" as theme;
+
 .muted {
-  filter: brightness(50%);
+  filter: opacity(60%);
 }

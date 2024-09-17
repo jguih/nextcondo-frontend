@@ -1,69 +1,58 @@
 "use client";
 import {
   createContext,
-  Dispatch,
   FC,
   PropsWithChildren,
+  useCallback,
   useContext,
   useReducer,
 } from "react";
-
-export type FormState = {
-  isPending: boolean;
-  isError: boolean;
-  isSubmited: boolean;
-  isSuccess: boolean;
-};
-
-type FormAction =
-  | {
-      type: "pending" | "error" | "submited" | "success";
-      payload: boolean;
-    }
-  | { type: "reset" };
-
-type FormContextProps = FormState & {
-  dispatch: Dispatch<FormAction>;
-};
+import { checkFormValidityFromEvent } from "../validation/utils";
+import { FormAction, FormState, IFormHandler } from "./IFormHandler";
 
 const initialState: FormState = {
   isPending: false,
-  isError: false,
-  isSubmited: false,
-  isSuccess: false,
+  wasSubmited: false,
 };
 
-const FormContext = createContext<FormContextProps>({
-  ...initialState,
-  dispatch: () => {},
-});
+const FormContext = createContext<IFormHandler | null>(null);
 
 const formReducer = (state: FormState, action: FormAction): FormState => {
   switch (action.type) {
-    case "error": {
-      return { ...state, isError: action.payload };
-    }
     case "pending": {
       return { ...state, isPending: action.payload };
     }
     case "submited": {
-      return { ...state, isSubmited: action.payload };
-    }
-    case "success": {
-      return { ...state, isSuccess: action.payload };
-    }
-    case "reset": {
-      return { ...initialState };
+      return { ...state, wasSubmited: true };
     }
   }
 };
 
-export const useForm = () => {
+export const useForm = (): IFormHandler => {
   const [state, dispatch] = useReducer(formReducer, initialState);
-  return { ...state, dispatch };
+
+  const handleSubmitAsync: IFormHandler["handleSubmitAsync"] = useCallback(
+    (cb) => {
+      return async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        dispatch({ type: "submited" });
+
+        if (!checkFormValidityFromEvent(event)) return;
+
+        const formData: FormData = new FormData(event.currentTarget);
+        dispatch({ type: "pending", payload: true });
+        await cb(formData);
+        dispatch({ type: "pending", payload: false });
+      };
+    },
+    [dispatch]
+  );
+
+  return { ...state, dispatch, handleSubmitAsync };
 };
 
-export const FormProvider: FC<PropsWithChildren<FormContextProps>> = ({
+export const FormProvider: FC<PropsWithChildren<IFormHandler>> = ({
   children,
   ...props
 }) => {
@@ -72,5 +61,8 @@ export const FormProvider: FC<PropsWithChildren<FormContextProps>> = ({
 
 export const useFormContext = () => {
   const context = useContext(FormContext);
+  if (context === null) {
+    throw new Error("useFormContext used outside FormProvider");
+  }
   return context;
 };

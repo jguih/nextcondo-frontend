@@ -24,6 +24,16 @@
       "no_property_added": "We couldn't find a property associated with your account. Add one to start managing it.",
       "welcome": "Welcome!",
       "add_property": "Add Condominium"
+    },
+    "add_condominium": {
+      "title": "Add Condominium",
+      "relationship_type": "Relationship Type",
+      "tenant": "Tenant",
+      "manager": "Manager",
+      "name": "Name",
+      "name_required": "Enter a valid condominium name, like Galaxy Towers",
+      "description": "Description",
+      "submit": "Create Condominium"
     }
   },
   "boolean": {

@@ -13,7 +13,11 @@ import { Link } from "@/src/components/link/link";
 
 export const LoginForm: FC<{ d: Dictionary }> = ({ d }) => {
   return (
-    <ClientLoginForm>
+    <ClientLoginForm
+      error={
+        <LoginFormError message={d.validation.invalid_login_credentials} />
+      }
+    >
       <LoginFormEmail
         label={d.auth.email}
         validationMessages={{
@@ -30,7 +34,6 @@ export const LoginForm: FC<{ d: Dictionary }> = ({ d }) => {
       <Link href={"/login"} className={styles["forgot-password"]}>
         {d.auth.forgot_password}
       </Link>
-      <LoginFormError message={d.validation.invalid_login_credentials} />
       <SubmitButton className={styles["submit-btn"]}>
         <Typography tag="p">{d.auth.login}</Typography>
       </SubmitButton>

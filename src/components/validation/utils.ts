@@ -1,6 +1,6 @@
 "use client";
 import { FormEvent } from "react";
-import { ValidationMessages } from "./input-validation-container";
+import { ValidationMessages } from "./types";
 
 /**
  * Checks for validity state from an event. It'll focus the first invalid input in the form when invalid and will blur current fucused input on submit.

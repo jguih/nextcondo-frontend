@@ -3,11 +3,11 @@ import styles from "./styles.module.scss";
 import { buildClassNames } from "../utils/build-class-names";
 import { CircularProgress } from "../circularProgress/circular-progress";
 import { Typography } from "../typography/typography";
-import { SemanticColors } from "@/src/theme/types";
+import { SemanticColors, ThemeVariant } from "@/src/theme/types";
 
 export type ButtonProps = {
   color?: SemanticColors;
-  variant?: "solid" | "light";
+  variant?: ThemeVariant;
   loading?: boolean;
   fullWidth?: boolean;
 } & ComponentProps<"button">;

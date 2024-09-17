@@ -17,54 +17,52 @@ type RenderFnProps = {
   id: string;
   isError: boolean;
   errorMessage: string | null;
-  ref: MutableRefObject<HTMLInputElement | null>;
-} & Pick<ComponentProps<"input">, "onChange" | "onBlur" | "onInvalid">;
+  ref: MutableRefObject<HTMLTextAreaElement | null>;
+} & Pick<ComponentProps<"textarea">, "onChange" | "onBlur" | "onInvalid">;
 
-export type InputValidationContainerProps = {
+export type TextAreaValidationContainerProps = {
   validationMessages?: ValidationMessages;
   id: string;
   render: (props: RenderFnProps) => ReactElement;
 };
 
-export const InputValidationContainer: FC<InputValidationContainerProps> = ({
-  validationMessages = {},
-  render,
-  id,
-}) => {
+export const TextAreaValidationContainer: FC<
+  TextAreaValidationContainerProps
+> = ({ validationMessages = {}, render, id }) => {
   const [error, setError] = useState<string | null>(null);
   const [visited, setVisited] = useState(false);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const validate = () => {
-    if (!inputRef.current) return;
+    if (!textareaRef.current) return;
 
-    const validity = inputRef.current.validity;
+    const validity = textareaRef.current.validity;
     const message = getValidationMessageFromValidity(
       validity,
       validationMessages
     );
 
-    inputRef.current.setCustomValidity(message);
+    textareaRef.current.setCustomValidity(message);
 
     if (!validity.valid) {
-      setError(inputRef.current.validationMessage);
+      setError(textareaRef.current.validationMessage);
     } else {
       setError(null);
     }
   };
 
-  const onChange: ChangeEventHandler<HTMLInputElement> = () => {
+  const onChange: ChangeEventHandler<HTMLTextAreaElement> = () => {
     if (visited) validate();
-    inputRef.current?.checkValidity();
+    textareaRef.current?.checkValidity();
   };
 
-  const onBlur: FocusEventHandler<HTMLInputElement> = () => {
+  const onBlur: FocusEventHandler<HTMLTextAreaElement> = () => {
     setVisited(true);
     validate();
-    inputRef.current?.checkValidity();
+    textareaRef.current?.checkValidity();
   };
 
-  const onInvalid: FormEventHandler<HTMLInputElement> = () => {
+  const onInvalid: FormEventHandler<HTMLTextAreaElement> = () => {
     setVisited(true);
     validate();
   };
@@ -76,6 +74,6 @@ export const InputValidationContainer: FC<InputValidationContainerProps> = ({
     onChange,
     onBlur,
     onInvalid,
-    ref: inputRef,
+    ref: textareaRef,
   });
 };

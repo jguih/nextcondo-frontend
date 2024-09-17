@@ -15,6 +15,10 @@
   gap: theme.spacing(1);
 }
 
+.submit {
+  margin-top: theme.spacing(2);
+}
+
 @mixin solid($color) {
   background-color: var(--#{$color});
   color: var(--on-#{$color});

@@ -21,10 +21,17 @@ h5 {
 p,
 label,
 input,
+textarea,
 button,
-a {
+a,
+legend {
   font-size: var(--p);
   margin: 0;
+}
+
+textarea,
+input {
+  font-family: inherit;
 }
 
 small {
