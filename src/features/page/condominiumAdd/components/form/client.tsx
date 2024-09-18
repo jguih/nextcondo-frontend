@@ -13,7 +13,6 @@ import { InputValidationContainer } from "@/src/components/validation/input-vali
 import { TextAreaValidationContainer } from "@/src/components/validation/textarea-validation-container";
 import { ValidationMessages } from "@/src/components/validation/types";
 import { useServices } from "@/src/services/components/provider";
-import { User } from "@/src/services/nextcondo/users/schemas";
 import { useRouter } from "next/navigation";
 import { FC, PropsWithChildren } from "react";
 
@@ -41,12 +40,14 @@ export const Form: FC<PropsWithChildren> = ({ children }) => {
 
 type FormRelationshipTypeProps = {
   legend: string;
+  description: string;
   manager: string;
   tenant: string;
 };
 
 export const FormRelationshipType: FC<FormRelationshipTypeProps> = ({
   legend,
+  description,
   manager,
   tenant,
 }) => {
@@ -54,7 +55,7 @@ export const FormRelationshipType: FC<FormRelationshipTypeProps> = ({
     <fieldset className={styles["field-set"]}>
       <Typography tag="legend">{legend}</Typography>
       <Typography tag="small" muted>
-        Define quais funções você terá dentro do condomínio.
+        {description}
       </Typography>
       <RadioGroup>
         <Radio id="tenant" name="relationshipType" defaultChecked value={1} />
@@ -129,8 +130,4 @@ export const FormDescription: FC<FormDescription> = ({ label }) => {
       )}
     />
   );
-};
-
-export const FormUser: FC<{ user: User }> = ({ user }) => {
-  return <input hidden id="owner" defaultValue={user.id} name="ownerId" />;
 };

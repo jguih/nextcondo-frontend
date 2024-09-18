@@ -28,6 +28,7 @@
     "add_condominium": {
       "title": "Criar Condomínio",
       "relationship_type": "Tipo de proprietário",
+      "relationship_type_description": "Define quais funções você terá dentro do condomínio",
       "tenant": "Morador",
       "manager": "Síndico",
       "name": "Nome",

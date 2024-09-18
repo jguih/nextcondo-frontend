@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import { WithLocale } from "@/src/types/with-locale";
 import styles from "./styles.module.scss";
 import { redirect } from "next/navigation";
@@ -10,31 +10,40 @@ import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { AppSidebar } from "@/src/components/sidebar/app/app-sidebar";
 import { Link } from "@/src/components/link/link";
 import { CondominiumService } from "@/src/services/nextcondo/condominium/server";
+import { HomePageContents } from "@/src/features/page/home/contents/server";
 
 const Home: FC<WithLocale> = async ({ params: { lang } }) => {
+  const d = await getDictionary(lang);
   const user = await UsersService.GetMeAsync();
   if (!user) {
     redirect("/login");
   }
-  await CondominiumService.GetMineAsync();
-  const d = await getDictionary(lang);
+  const result = await CondominiumService.GetMineCurrentAsync();
+  const currentCondo = result.success ? result.response.data : undefined;
+  const headerTitle = currentCondo ? currentCondo.name : d.page.home.welcome;
 
   return (
     <Layout.Root>
       <Layout.Header>
-        <Header title={d.page.home.welcome} />
+        <Header title={headerTitle} />
       </Layout.Header>
       <AppSidebar />
       <Layout.Main className={styles.main}>
-        <Typography tag="p">{d.page.home.no_property_added}</Typography>
-        <Link
-          className={styles["add-condo-btn"]}
-          href={"/condominium/add"}
-          variant="solid"
-          color="primary"
-        >
-          {d.page.home.add_property}
-        </Link>
+        {!currentCondo ? (
+          <Fragment>
+            <Typography tag="p">{d.page.home.no_property_added}</Typography>
+            <Link
+              className={styles["add-condo-btn"]}
+              href={"/condominium/add"}
+              variant="solid"
+              color="primary"
+            >
+              {d.page.home.add_property}
+            </Link>
+          </Fragment>
+        ) : (
+          <HomePageContents />
+        )}
       </Layout.Main>
     </Layout.Root>
   );

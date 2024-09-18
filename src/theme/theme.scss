@@ -138,7 +138,7 @@ $themes: (
     "accent-disabled-bg": map.get($pallete, "neutral-400"),
     "accent-on-disabled-bg": map.get($pallete, "neutral-100"),
     // Accent light variant
-    "on-accent-light": map.get($pallete, "accent-800"),
+    "on-accent-light": map.get($pallete, "accent-600"),
     "accent-light-hover-bg": map.get($pallete, "accent-200"),
     "accent-light-hover-border": map.get($pallete, "accent-200"),
     "accent-light-active-bg": map.get($pallete, "accent-300"),
@@ -285,12 +285,12 @@ $themes: (
     "accent-disabled-bg": map.get($pallete, "neutral-800"),
     "accent-on-disabled-bg": map.get($pallete, "neutral-300"),
     // Accent light variant
-    "on-accent-light": map.get($pallete, "accent-200"),
-    "accent-light-hover-bg": map.get($pallete, "accent-700"),
-    "accent-light-hover-border": map.get($pallete, "accent-700"),
+    "on-accent-light": map.get($pallete, "accent-400"),
+    "accent-light-hover-bg": map.get($pallete, "accent-800"),
+    "accent-light-hover-border": map.get($pallete, "accent-800"),
     "accent-light-active-bg": map.get($pallete, "accent-600"),
     "accent-light-active-border": map.get($pallete, "accent-600"),
-    "accent-light-on-active-bg": map.get($pallete, "accent-300"),
+    "accent-light-on-active-bg": map.get($pallete, "accent-200"),
     "accent-light-disabled-bg": map.get($pallete, "neutral-900"),
     "accent-light-on-disabled-bg": map.get($pallete, "neutral-300"),
     // Danger variant

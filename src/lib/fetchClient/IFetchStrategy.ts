@@ -1,3 +1,3 @@
-export interface IFetchStrategy<Output> {
-  handleAsync: (response: Response) => Promise<Output>;
+export interface IFetchStrategy<Output = undefined> {
+  handleAsync: (response: Response) => Promise<Output | undefined>;
 }

@@ -15,11 +15,16 @@ export class JsonStrategy<Output> implements IFetchStrategy<Output> {
     const isJsonResponse = contentType?.includes("application/json") ?? false;
     const isProblemDetailsResponse =
       contentType?.includes("application/problem+json") ?? false;
+    const status = response.status;
+
+    if (response.ok && status === 204) {
+      return;
+    }
 
     if (!isJsonResponse && !isProblemDetailsResponse) {
       throw new JsonStrategyError({
-        message: "Response body is not a valid JSON",
-        statusCode: 500,
+        message: "Response body is not JSON",
+        statusCode: status,
       });
     }
 
@@ -29,25 +34,25 @@ export class JsonStrategy<Output> implements IFetchStrategy<Output> {
       const result = await problemDetailsSchema.safeParseAsync(originalJson);
       if (result.success) {
         throw new JsonStrategyError({
-          message: "Response is Problem Details",
-          statusCode: response.status,
+          message: "Request failed with Problem Details",
+          statusCode: status,
           data: result.data,
         });
       }
       throw new JsonStrategyError({
-        message: "Failed to parse Problem Details on response body",
-        statusCode: response.status,
+        message: "Request failed with invalid Problem Details response",
+        statusCode: status,
       });
     }
 
     if (!response.ok) {
       throw new JsonStrategyError({
-        message: "Request failed and response body could not be parsed",
-        statusCode: response.status,
+        message: "Request failed and response body is not Problems Details",
+        statusCode: status,
       });
     }
 
-    // Response is Ok
+    // Response is Ok and not 204
     const zodResult = await this.schema.safeParseAsync(originalJson);
     if (zodResult.success) {
       return zodResult.data;
@@ -56,7 +61,7 @@ export class JsonStrategy<Output> implements IFetchStrategy<Output> {
     throw new JsonStrategyError({
       message:
         "Request succeded, but response body failed to parse using schema",
-      statusCode: 500,
+      statusCode: status,
     });
   }
 }

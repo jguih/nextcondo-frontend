@@ -5,7 +5,7 @@ const relationshipTypeSchema = z.union([
   z.literal("Manager"),
 ]);
 
-const addCondominiumResponseSchema = z.object({
+const condominiumDtoSchema = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string().optional().nullable(),
@@ -15,21 +15,19 @@ const addCondominiumResponseSchema = z.object({
   }),
   members: z.array(
     z.object({
-      user: z.object({
-        id: z.string(),
-        fullName: z.string(),
-      }),
+      id: z.string(),
+      fullName: z.string(),
       relationshipType: relationshipTypeSchema,
     })
   ),
 });
+const getMineCondominiumResponseSchema = z.array(condominiumDtoSchema);
+const getMineCurrentReponseSchema = condominiumDtoSchema;
 
-const getMineCondominiumResponseSchema = z.array(addCondominiumResponseSchema);
-
-export type CondominiumDto = z.infer<typeof addCondominiumResponseSchema>;
+export type CondominiumDto = z.infer<typeof condominiumDtoSchema>;
 
 export const schemas = {
   relationshipType: relationshipTypeSchema,
-  addCondominiumResponse: addCondominiumResponseSchema,
-  getMineCondominiumResponse: getMineCondominiumResponseSchema,
+  getMineResponse: getMineCondominiumResponseSchema,
+  getMineCurrentReponse: getMineCurrentReponseSchema,
 };

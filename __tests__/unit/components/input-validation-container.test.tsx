@@ -1,8 +1,6 @@
 /** @jest-environment jsdom */
-import {
-  ValidationMessages,
-  InputValidationContainer,
-} from "@/src/components/validation/input-validation-container";
+import { InputValidationContainer } from "@/src/components/validation/input-validation-container";
+import { ValidationMessages } from "@/src/components/validation/types";
 import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 

@@ -1,3 +1,4 @@
+import styles from "./styles.module.scss";
 import { FC, Fragment } from "react";
 import { Layout } from "@/src/components/layout/layout";
 import { UsersService } from "@/src/services/nextcondo/users/server";
@@ -16,7 +17,7 @@ const CondominiumAddPage: FC<WithLocale> = async ({ params: { lang } }) => {
   return (
     <Fragment>
       <Layout.Main>
-        <Form d={d} user={user} />
+        <Form d={d} />
       </Layout.Main>
     </Fragment>
   );

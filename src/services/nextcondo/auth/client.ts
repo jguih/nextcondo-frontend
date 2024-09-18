@@ -43,7 +43,7 @@ export const useAuthService = ({
     if (result.success) {
       LogService.info("Logout successfull", result.response);
     } else {
-      LogService.error("Logout failed", result.response);
+      LogService.error("Logout failed", result);
     }
     return result.success;
   };

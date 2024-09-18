@@ -20,7 +20,7 @@ describe("JsonStrategy", () => {
       if (error instanceof JsonStrategyError) {
         // Assert
         expect(error.data).toBeFalsy();
-        expect(error.statusCode).toBe(500);
+        expect(error.statusCode).toBe(response.status);
         return;
       }
     }
@@ -74,9 +74,9 @@ describe("JsonStrategy", () => {
         // Assert
         expect(error.data).toBeTruthy();
         expect(error.statusCode).toBe(500);
-        expect(error.data?.status).toBe(500);
-        expect(error.data?.title).toBe(details.title);
-        expect(error.data?.detail).toBe(details.detail);
+        expect(error.data!.status).toBe(500);
+        expect(error.data!.title).toBe(details.title);
+        expect(error.data!.detail).toBe(details.detail);
         return;
       }
     }
@@ -108,7 +108,7 @@ describe("JsonStrategy", () => {
       if (error instanceof JsonStrategyError) {
         // Assert
         expect(error.data).toBeFalsy();
-        expect(error.statusCode).toBe(500);
+        expect(error.statusCode).toBe(response.status);
         return;
       }
     }
@@ -134,8 +134,8 @@ describe("JsonStrategy", () => {
 
     // Assert
     expect(result).toBeTruthy();
-    expect(result.name).toBe(responseBody.name);
-    expect(result.description).toBe(responseBody.description);
+    expect(result!.name).toBe(responseBody.name);
+    expect(result!.description).toBe(responseBody.description);
   });
 
   it("parses valid array of json objects", async () => {
@@ -159,7 +159,23 @@ describe("JsonStrategy", () => {
     const result = await strategy.handleAsync(response);
 
     // Assert
-    expect(result.length).toBe(1);
-    expect(result.map((r) => r.name).includes("Willy Wonka")).toBeTruthy();
+    expect(result).toBeTruthy();
+    expect(result!.length).toBe(1);
+    expect(result!.map((r) => r.name).includes("Willy Wonka")).toBeTruthy();
+  });
+
+  it("returns undefined when response status is 204 (no content)", async () => {
+    // Arrange
+    const response = new Response(undefined, {
+      status: 204,
+    });
+    const schema = z.object({});
+    const strategy = new JsonStrategy(schema);
+
+    // Act
+    const result = await strategy.handleAsync(response);
+
+    // Assert
+    expect(result).toBeFalsy();
   });
 });

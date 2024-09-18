@@ -4,18 +4,17 @@ import {
   FormDescription,
   FormName,
   FormRelationshipType,
-  FormUser,
 } from "./client";
 import { Dictionary } from "@/src/features/localization/types";
 import { SubmitButton } from "@/src/components/button/submit/submit";
 import { Typography } from "@/src/components/typography/typography";
-import { User } from "@/src/services/nextcondo/users/schemas";
 
-export const Form: FC<{ d: Dictionary; user: User }> = ({ d, user }) => {
+export const Form: FC<{ d: Dictionary }> = ({ d }) => {
   return (
     <ClientForm>
       <FormRelationshipType
         legend={d.page.add_condominium.relationship_type}
+        description={d.page.add_condominium.relationship_type_description}
         manager={d.page.add_condominium.manager}
         tenant={d.page.add_condominium.tenant}
       />
@@ -26,7 +25,6 @@ export const Form: FC<{ d: Dictionary; user: User }> = ({ d, user }) => {
         }}
       />
       <FormDescription label={d.page.add_condominium.description} />
-      <FormUser user={user} />
       <SubmitButton>
         <Typography>{d.page.add_condominium.submit}</Typography>
       </SubmitButton>

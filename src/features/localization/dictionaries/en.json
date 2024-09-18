@@ -28,6 +28,7 @@
     "add_condominium": {
       "title": "Add Condominium",
       "relationship_type": "Relationship Type",
+      "relationship_type_description": "Defines which functions you will have access to",
       "tenant": "Tenant",
       "manager": "Manager",
       "name": "Name",

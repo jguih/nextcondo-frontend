@@ -4,31 +4,28 @@ import {
   FetchClientFailedResponse,
   FetchClientResponse,
 } from "./types";
-import { JsonStrategyError } from "./json-strategy-error";
 import { joinUrlAndEndpoint } from "./utils";
 import { StrategyError } from "./StrategyError";
 
 const sendError = (error: unknown): FetchClientFailedResponse => {
-  if (error instanceof JsonStrategyError) {
+  if (error instanceof StrategyError) {
     return {
       success: false,
       response: {
         statusCode: error.statusCode,
         data: error.data,
       },
-    };
-  }
-  if (error instanceof StrategyError) {
-    return {
-      success: false,
-      response: {
-        statusCode: error.statusCode,
+      error: {
+        message: error.message,
       },
     };
   }
   if (error instanceof Error) {
     return {
       success: false,
+      error: {
+        message: error.message,
+      },
     };
   }
   return {
@@ -47,10 +44,20 @@ const httpGetAsync = async <Output>(
       method: "GET",
     });
     const result = await strategy.handleAsync(response);
+    if (result) {
+      return {
+        success: true,
+        hasData: true,
+        response: {
+          data: result,
+          statusCode: response.status,
+        },
+      };
+    }
     return {
       success: true,
+      hasData: false,
       response: {
-        data: result,
         statusCode: response.status,
       },
     };
@@ -71,10 +78,20 @@ const httpPostAsync = async <Output>(
       body,
     });
     const result = await strategy.handleAsync(response);
+    if (result) {
+      return {
+        success: true,
+        hasData: true,
+        response: {
+          data: result,
+          statusCode: response.status,
+        },
+      };
+    }
     return {
       success: true,
+      hasData: false,
       response: {
-        data: result,
         statusCode: response.status,
       },
     };

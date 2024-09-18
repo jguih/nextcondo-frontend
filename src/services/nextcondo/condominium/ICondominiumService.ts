@@ -10,7 +10,10 @@ export interface ICondominiumService {
   AddAsync: (data: FormData) => Promise<boolean>;
   /**
    * Returns an `Array` of all condominiums that the current user is in.
-   * @returns `FetchClientResponse`
    */
   GetMineAsync: () => Promise<FetchClientResponse<CondominiumDto[]>>;
+  /**
+   * Fetch current active condominium for user.
+   */
+  GetMineCurrentAsync: () => Promise<FetchClientResponse<CondominiumDto>>;
 }
