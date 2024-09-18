@@ -15,7 +15,7 @@ export const getNextCondoBackendPublicUrl = async (): Promise<string> => {
     endpoint: "Public/publicURL",
     strategy: new JsonStrategy(publicUrlSchema),
   });
-  if (publicUrl.success) {
+  if (publicUrl.success && publicUrl.hasData) {
     return publicUrl.response.data.url;
   }
   throw new Error("Failed to get nextcondo backend public url");
