@@ -1,8 +1,8 @@
-import { FC } from "react";
 import styles from "./styles.module.scss";
 import { CircularProgress } from "@/src/components/circularProgress/circular-progress";
+import { FC } from "react";
 
-const CondominiumAddLoading: FC = async () => {
+const OccurrencesLoading: FC = async () => {
   return (
     <div className={styles["loading-container"]}>
       <CircularProgress size="lg" />
@@ -10,4 +10,4 @@ const CondominiumAddLoading: FC = async () => {
   );
 };
 
-export default CondominiumAddLoading;
+export default OccurrencesLoading;

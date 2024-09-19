@@ -7,10 +7,11 @@ import {
 import { joinUrlAndEndpoint } from "./utils";
 import { StrategyError } from "./StrategyError";
 
-const sendError = (error: unknown): FetchClientFailedResponse => {
+const sendError = (error: unknown, url?: string): FetchClientFailedResponse => {
   if (error instanceof StrategyError) {
     return {
       success: false,
+      url,
       response: {
         statusCode: error.statusCode,
         data: error.data,
@@ -23,6 +24,7 @@ const sendError = (error: unknown): FetchClientFailedResponse => {
   if (error instanceof Error) {
     return {
       success: false,
+      url,
       error: {
         message: error.message,
       },
@@ -37,8 +39,8 @@ const httpGetAsync = async <Output>(
   url: string,
   { endpoint, strategy, ...props }: HttpGetProps<Output>
 ): Promise<FetchClientResponse<Output>> => {
+  const parsedUrl = joinUrlAndEndpoint(url, endpoint);
   try {
-    const parsedUrl = joinUrlAndEndpoint(url, endpoint);
     const response = await fetch(parsedUrl, {
       ...props,
       method: "GET",
@@ -46,6 +48,7 @@ const httpGetAsync = async <Output>(
     const result = await strategy.handleAsync(response);
     if (result) {
       return {
+        url: parsedUrl,
         success: true,
         hasData: true,
         response: {
@@ -55,6 +58,7 @@ const httpGetAsync = async <Output>(
       };
     }
     return {
+      url: parsedUrl,
       success: true,
       hasData: false,
       response: {
@@ -62,7 +66,7 @@ const httpGetAsync = async <Output>(
       },
     };
   } catch (error) {
-    return sendError(error);
+    return sendError(error, parsedUrl);
   }
 };
 
@@ -80,6 +84,7 @@ const httpPostAsync = async <Output>(
     const result = await strategy.handleAsync(response);
     if (result) {
       return {
+        url: parsedUrl,
         success: true,
         hasData: true,
         response: {
@@ -89,6 +94,7 @@ const httpPostAsync = async <Output>(
       };
     }
     return {
+      url: parsedUrl,
       success: true,
       hasData: false,
       response: {
@@ -96,7 +102,7 @@ const httpPostAsync = async <Output>(
       },
     };
   } catch (error) {
-    return sendError(error);
+    return sendError(error, parsedUrl);
   }
 };
 

@@ -1,10 +1,18 @@
 @use "theme.utils" as theme;
 
+.root-with-bottom-nav {
+  display: grid;
+  grid-template-columns: 1fr;
+  // First row for header, last for bottom nav
+  grid-template-rows: 55px 1fr 80px;
+  min-height: 100dvh;
+}
+
 .root {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 55px 1fr; // First row for Header
-  min-height: 100vh;
+  grid-template-rows: 55px 1fr;
+  min-height: 100dvh;
 }
 
 .header {
@@ -16,8 +24,7 @@
   justify-content: space-between;
   grid-column: 1 / -1;
   align-items: center;
-  border-bottom: 1px solid;
-  border-color: var(--static-40);
+  box-shadow: 0px -3px 8px 2px var(--shadow-color);
   position: sticky;
   top: 0;
   z-index: 999;
@@ -25,4 +32,14 @@
 
 .main {
   padding: theme.spacing(2);
+}
+
+.bottom-navigation {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: theme.spacing(1);
+  grid-column: 1 / -1;
+  padding: theme.spacing(1) theme.spacing(1.5);
+  background-color: var(--background-level1);
+  box-shadow: 0px 4px 8px 2px var(--shadow-color);
 }

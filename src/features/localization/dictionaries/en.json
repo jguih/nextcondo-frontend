@@ -23,7 +23,11 @@
       "title": "Home",
       "no_property_added": "We couldn't find a property associated with your account. Add one to start managing it.",
       "welcome": "Welcome!",
-      "add_property": "Add Condominium"
+      "add_property": "Add Condominium",
+      "services": "Services",
+      "service_label_reservations": "Reservations",
+      "service_label_occurrences": "Occurrences",
+      "service_label_tenants": "Tenants"
     },
     "add_condominium": {
       "title": "Add Condominium",
@@ -76,5 +80,10 @@
   },
   "common": {
     "or": "or"
+  },
+  "bottom_nav": {
+    "home": "Home",
+    "notifications": "Notifications",
+    "my_profile": "My Profile"
   }
 }

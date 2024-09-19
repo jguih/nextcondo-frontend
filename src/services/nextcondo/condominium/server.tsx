@@ -1,3 +1,4 @@
+import "server-only";
 import { createFetchClient, IFetchClient } from "@/src/lib/fetchClient/client";
 import { ICondominiumService } from "./ICondominiumService";
 import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
@@ -24,12 +25,21 @@ class NextCondoCondominiumService implements ICondominiumService {
       body: data,
     });
     if (result.success) {
-      LogService.info("Condominium created\n", JSON.stringify(result, null, 2));
+      LogService.info({
+        from: "CondominiumService",
+        message: "New condominium added successfully",
+        fetch_url: result.url,
+        status_code: result.response?.statusCode,
+      });
     } else {
-      LogService.error(
-        "Failed to create condominium\n",
-        JSON.stringify(result, null, 2)
-      );
+      LogService.error({
+        from: "CondominiumService",
+        message: "Failed to add new condominium",
+        fetch_url: result.url,
+        status_code: result.response?.statusCode,
+        error: { message: result.error?.message },
+        problem_details: result.response?.data,
+      });
     }
     return result.success;
   }
@@ -43,14 +53,23 @@ class NextCondoCondominiumService implements ICondominiumService {
     });
     if (result.success) {
       LogService.info(
-        "Fetched condominium for current user\n",
-        JSON.stringify(result, null, 2)
+        {
+          from: "CondominiumService",
+          message: "Fetched condominium list for current user",
+          fetch_url: result.url,
+          status_code: result.response?.statusCode,
+        },
+        { condominium_id_list: result.response.data?.map((c) => c.id) }
       );
     } else {
-      LogService.error(
-        "Failed to fetch condominium for current user\n",
-        JSON.stringify(result, null, 2)
-      );
+      LogService.error({
+        from: "CondominiumService",
+        message: "Failed to fetch condominium list for current user",
+        fetch_url: result.url,
+        status_code: result.response?.statusCode,
+        error: { message: result.error?.message },
+        problem_details: result.response?.data,
+      });
     }
     return result;
   }
@@ -64,14 +83,23 @@ class NextCondoCondominiumService implements ICondominiumService {
     });
     if (result.success) {
       LogService.info(
-        "Fetched current condominium for current user\n",
-        JSON.stringify(result, null, 2)
+        {
+          from: "CondominiumService",
+          message: "Fetched current condominium for current user",
+          fetch_url: result.url,
+          status_code: result.response?.statusCode,
+        },
+        { condominium_id: result.response.data?.id }
       );
     } else {
-      LogService.error(
-        "Failed to fetch current condominium for current user\n",
-        JSON.stringify(result, null, 2)
-      );
+      LogService.error({
+        from: "CondominiumService",
+        message: "Failed to fetch current condominium for current user",
+        fetch_url: result.url,
+        status_code: result.response?.statusCode,
+        error: { message: result.error?.message },
+        problem_details: result.response?.data,
+      });
     }
     return result;
   }

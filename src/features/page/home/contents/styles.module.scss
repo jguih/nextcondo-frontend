@@ -1,15 +1,14 @@
 @use "theme.utils" as theme;
 
-.nav-button {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  gap: theme.spacing(0.6);
-  padding: theme.spacing(0.6) theme.spacing(1);
-  text-align: center;
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: theme.spacing(2);
+  background-color: var(--background-level1);
+  padding: theme.spacing(4) theme.spacing(2);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
-.selected {
-  font-weight: 500;
+.title {
+  grid-column: 1 / -1;
 }

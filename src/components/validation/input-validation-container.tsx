@@ -54,8 +54,10 @@ export const InputValidationContainer: FC<InputValidationContainerProps> = ({
   };
 
   const onChange: ChangeEventHandler<HTMLInputElement> = () => {
-    if (visited) validate();
-    inputRef.current?.checkValidity();
+    if (visited) {
+      validate();
+      inputRef.current?.checkValidity();
+    }
   };
 
   const onBlur: FocusEventHandler<HTMLInputElement> = () => {

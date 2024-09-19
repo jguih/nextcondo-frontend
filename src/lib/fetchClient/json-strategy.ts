@@ -47,7 +47,7 @@ export class JsonStrategy<Output> implements IFetchStrategy<Output> {
 
     if (!response.ok) {
       throw new JsonStrategyError({
-        message: "Request failed and response body is not Problems Details",
+        message: "Request failed and response body is not Problem Details",
         statusCode: status,
       });
     }

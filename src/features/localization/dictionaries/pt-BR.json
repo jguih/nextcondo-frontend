@@ -23,7 +23,11 @@
       "title": "Home",
       "no_property_added": "Não encontramos uma propriedade associada a sua conta. Adicione uma para começar a gerenciar o seu condomínio.",
       "welcome": "Bem Vindo!",
-      "add_property": "Adicionar Condomínio"
+      "add_property": "Adicionar Condomínio",
+      "services": "Serviços",
+      "service_label_reservations": "Reservas",
+      "service_label_occurrences": "Ocorrências",
+      "service_label_tenants": "Moradores"
     },
     "add_condominium": {
       "title": "Criar Condomínio",
@@ -76,5 +80,10 @@
   },
   "common": {
     "or": "ou"
+  },
+  "bottom_nav": {
+    "home": "Home",
+    "notifications": "Notificações",
+    "my_profile": "Meu Perfil"
   }
 }

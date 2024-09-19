@@ -52,8 +52,10 @@ export const TextAreaValidationContainer: FC<
   };
 
   const onChange: ChangeEventHandler<HTMLTextAreaElement> = () => {
-    if (visited) validate();
-    textareaRef.current?.checkValidity();
+    if (visited) {
+      validate();
+      textareaRef.current?.checkValidity();
+    }
   };
 
   const onBlur: FocusEventHandler<HTMLTextAreaElement> = () => {

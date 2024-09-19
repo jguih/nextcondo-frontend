@@ -14,7 +14,6 @@ $pallete: (
   "primary-800": hsl(222, 45%, 20%),
   "primary-900": hsl(222, 45%, 10%),
   // Others
-  "shadow-color": hsl(225, 25%, 30%),
   "white": #ffffff,
   "black": #000000,
   // Neutral
@@ -88,7 +87,7 @@ $themes: (
     "background-level1": darken(map.get($pallete, "white"), 8%),
     "background-level2": darken(map.get($pallete, "white"), 10%),
     "background-level3": darken(map.get($pallete, "white"), 12%),
-    "shadow-color": map.get($pallete, "shadow-color"),
+    "shadow-color": color.scale(map.get($pallete, "black"), $lightness: 20%),
     // Primary variant
     "primary": map.get($pallete, "primary-600"),
     "on-primary": map.get($pallete, "white"),
@@ -235,7 +234,7 @@ $themes: (
       color.scale(map.get($pallete, "black"), $lightness: 10%),
     "background-level3":
       color.scale(map.get($pallete, "black"), $lightness: 12%),
-    "shadow-color": map.get($pallete, "shadow-color"),
+    "shadow-color": color.scale(map.get($pallete, "black"), $lightness: 15%),
     // Primary variant
     "primary": map.get($pallete, "primary-600"),
     "on-primary": map.get($pallete, "white"),

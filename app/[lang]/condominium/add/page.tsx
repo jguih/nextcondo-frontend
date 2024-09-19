@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { FC } from "react";
 import { Layout } from "@/src/components/layout/layout";
 import { UsersService } from "@/src/services/nextcondo/users/server";
 import { redirect } from "next/navigation";
@@ -14,11 +14,9 @@ const CondominiumAddPage: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
 
   return (
-    <Fragment>
-      <Layout.Main>
-        <Form d={d} />
-      </Layout.Main>
-    </Fragment>
+    <Layout.Main>
+      <Form d={d} />
+    </Layout.Main>
   );
 };
 

@@ -1,15 +1,5 @@
 @use "theme.utils" as theme;
 
-.main {
-  align-content: flex-end;
-  width: 100dvw;
-}
-
-.add-condo-btn {
-  margin-top: theme.spacing(2);
-  width: 100%;
-}
-
 .loading-container {
   padding: theme.spacing(1);
   display: flex;

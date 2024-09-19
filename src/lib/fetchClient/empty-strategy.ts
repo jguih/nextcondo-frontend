@@ -26,7 +26,7 @@ export class EmptyStrategy implements IFetchStrategy {
 
     if (!response.ok) {
       throw new EmptyStrategyError({
-        message: "Request failed and response body is not Problems Details",
+        message: "Request failed and response body is not Problem Details",
         statusCode: response.status,
       });
     }

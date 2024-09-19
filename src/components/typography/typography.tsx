@@ -10,7 +10,8 @@ export type TypographyTags =
   | "h2"
   | "h3"
   | "h4"
-  | "legend";
+  | "legend"
+  | "span";
 
 export type TypographyProps<Tag extends TypographyTags> = {
   tag?: Tag;

@@ -9,6 +9,11 @@ type useCondominiumService = {
   nextcondoBackendPublicUrl: string;
 };
 
+const service = "CondominiumService";
+
+/**
+ * Client side implementation of `ICondominiumService`.
+ */
 export const useCondominiumService = ({
   nextcondoBackendPublicUrl,
 }: useCondominiumService): ICondominiumService => {
@@ -22,9 +27,21 @@ export const useCondominiumService = ({
       body: data,
     });
     if (result.success) {
-      LogService.info("Condominium created\n", result.response);
+      LogService.info({
+        from: service,
+        message: "New condominium added successfully",
+        fetch_url: result.url,
+        status_code: result.response?.statusCode,
+      });
     } else {
-      LogService.error("Failed to create condominium\n", result);
+      LogService.error({
+        from: service,
+        message: "Failed to add new condominium",
+        fetch_url: result.url,
+        status_code: result.response?.statusCode,
+        error: { message: result.error?.message },
+        problem_details: result.response?.data,
+      });
     }
     return result.success;
   };
@@ -36,12 +53,24 @@ export const useCondominiumService = ({
       credentials: "include",
     });
     if (result.success) {
-      LogService.info("Fetched condominium for current user\n", result);
-    } else {
-      LogService.error(
-        "Failed to fetch condominium for current user\n",
-        result
+      LogService.info(
+        {
+          from: service,
+          message: "Fetched condominium list for current user",
+          fetch_url: result.url,
+          status_code: result.response?.statusCode,
+        },
+        { condominium_id_list: result.response.data?.map((c) => c.id) }
       );
+    } else {
+      LogService.error({
+        from: service,
+        message: "Failed to fetch condominium list for current user",
+        fetch_url: result.url,
+        status_code: result.response?.statusCode,
+        error: { message: result.error?.message },
+        problem_details: result.response?.data,
+      });
     }
     return result;
   };
@@ -55,14 +84,23 @@ export const useCondominiumService = ({
       });
       if (result.success) {
         LogService.info(
-          "Fetched current condominium for current user\n",
-          result
+          {
+            from: service,
+            message: "Fetched current condominium for current user",
+            fetch_url: result.url,
+            status_code: result.response?.statusCode,
+          },
+          { condominium_id: result.response.data?.id }
         );
       } else {
-        LogService.error(
-          "Failed to fetch current condominium for current user\n",
-          result
-        );
+        LogService.error({
+          from: service,
+          message: "Failed to fetch current condominium for current user",
+          fetch_url: result.url,
+          status_code: result.response?.statusCode,
+          error: { message: result.error?.message },
+          problem_details: result.response?.data,
+        });
       }
       return result;
     };

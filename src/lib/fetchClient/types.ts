@@ -12,24 +12,31 @@ export type HttpPostProps<Output> = BaseHttpProps<Output> & {
   body?: RequestInit["body"];
 };
 
-export type FetchClientSuccessResponse<Output> = {
-  success: true;
-  response: { statusCode: number };
-} & (
-  | {
-      hasData: true;
-      response: {
-        data: Output;
-      };
-    }
-  | {
-      hasData: false;
-      response: {
-        data?: undefined;
-      };
-    }
-);
-export type FetchClientFailedResponse = {
+type BaseResponse = {
+  url?: string;
+};
+
+export type FetchClientSuccessResponse<Output> = BaseResponse &
+  (
+    | {
+        success: true;
+        hasData: true;
+        response: {
+          data: Output;
+          statusCode: number;
+        };
+      }
+    | {
+        success: true;
+        hasData: false;
+        response: {
+          data?: undefined;
+          statusCode: number;
+        };
+      }
+  );
+
+export type FetchClientFailedResponse = BaseResponse & {
   success: false;
   response?: {
     data?: ProblemDetails;
@@ -39,6 +46,7 @@ export type FetchClientFailedResponse = {
     message: string;
   };
 };
+
 export type FetchClientResponse<Output> =
   | FetchClientSuccessResponse<Output>
   | FetchClientFailedResponse;

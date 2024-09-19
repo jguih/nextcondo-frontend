@@ -2,11 +2,11 @@ import { FC, PropsWithChildren } from "react";
 import { Metadata } from "next";
 import { Layout } from "@/src/components/layout/layout";
 import { Header } from "@/src/components/header/header";
-import { AppSidebar } from "@/src/components/sidebar/app/app-sidebar";
 import { UsersService } from "@/src/services/nextcondo/users/server";
 import { redirect } from "next/navigation";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { WithLocale } from "@/src/types/with-locale";
+import { GoBackButton } from "@/src/components/header/go-back-button";
 
 export const metadata: Metadata = {
   title: "NextCondo | Add Condominium",
@@ -23,13 +23,15 @@ const CondominiumAddLayout: FC<PropsWithChildren<WithLocale>> = async ({
   const d = await getDictionary(lang);
 
   return (
-    <Layout.Root>
+    <Layout.RootWithBottomNav>
       <Layout.Header>
-        <Header title={d.page.add_condominium.title} />
+        <Header
+          title={d.page.add_condominium.title}
+          actionButton={<GoBackButton />}
+        />
       </Layout.Header>
-      <AppSidebar />
       {children}
-    </Layout.Root>
+    </Layout.RootWithBottomNav>
   );
 };
 

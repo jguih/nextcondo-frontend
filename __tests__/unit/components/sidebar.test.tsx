@@ -1,27 +1,37 @@
 /** @jest-environment jsdom */
-import { useSidebar } from "@/src/components/sidebar/hooks/useSidebar";
 import { Sidebar } from "@/src/components/sidebar/sidebar";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { FC, Fragment } from "react";
+import { FC, Fragment, useState } from "react";
 
 const sidebarId = "test-sidebar";
 const mockHandleOnUnmount = jest.fn();
 const TestSidebar: FC = () => {
-  const { register } = useSidebar({ id: sidebarId });
+  const [isOpen, setIsOpen] = useState(false);
+  const [shouldMount, setShouldMount] = useState(false);
+  const open = () => {
+    setIsOpen(true);
+    setShouldMount(true);
+  };
+  const close = () => setIsOpen(false);
+  const unmount = () => setShouldMount(false);
   return (
     <Fragment>
       <Sidebar
-        {...register}
-        data-testid={sidebarId}
+        isOpen={isOpen}
+        onClose={close}
+        shouldMount={shouldMount}
         onUnMount={() => {
           mockHandleOnUnmount();
-          register.onUnMount();
+          unmount();
         }}
+        data-testid={sidebarId}
       >
         <h1>Testing</h1>
       </Sidebar>
-      <button data-sidebarid={sidebarId}>Open</button>
+      <button data-sidebarid={sidebarId} onClick={open}>
+        Open
+      </button>
     </Fragment>
   );
 };

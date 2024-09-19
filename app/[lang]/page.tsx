@@ -7,10 +7,17 @@ import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
 import { Typography } from "@/src/components/typography/typography";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
-import { AppSidebar } from "@/src/components/sidebar/app/app-sidebar";
+import {
+  AppSidebar,
+  AppSidebarHeader,
+  AppSidebarItemConfigurations,
+  AppSidebarItemLogoutButton,
+  AppSidebarItemThemeToggler,
+} from "@/src/components/sidebar/app/app-sidebar";
 import { Link } from "@/src/components/link/link";
 import { CondominiumService } from "@/src/services/nextcondo/condominium/server";
 import { HomePageContents } from "@/src/features/page/home/contents/server";
+import { HomeBottomNavigation } from "@/src/features/page/home/contents/bottom-navigation";
 
 const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
@@ -23,12 +30,16 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   const headerTitle = currentCondo ? currentCondo.name : d.page.home.welcome;
 
   return (
-    <Layout.Root>
+    <Layout.RootWithBottomNav>
       <Layout.Header>
         <Header title={headerTitle} />
       </Layout.Header>
-      <AppSidebar />
-      <Layout.Main className={styles.main}>
+      <AppSidebar header={<AppSidebarHeader />}>
+        <AppSidebarItemConfigurations label={d.side_drawer.configurations} />
+        <AppSidebarItemThemeToggler label={d.side_drawer.change_theme} />
+        <AppSidebarItemLogoutButton label={d.auth.logout} />
+      </AppSidebar>
+      <main className={styles.main}>
         {!currentCondo ? (
           <Fragment>
             <Typography tag="p">{d.page.home.no_property_added}</Typography>
@@ -42,10 +53,19 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
             </Link>
           </Fragment>
         ) : (
-          <HomePageContents />
+          <HomePageContents d={d} />
         )}
-      </Layout.Main>
-    </Layout.Root>
+      </main>
+      <Layout.BottomNavigation>
+        <HomeBottomNavigation
+          labels={{
+            home: d.bottom_nav.home,
+            myProfile: d.bottom_nav.my_profile,
+            notifications: d.bottom_nav.notifications,
+          }}
+        />
+      </Layout.BottomNavigation>
+    </Layout.RootWithBottomNav>
   );
 };
 

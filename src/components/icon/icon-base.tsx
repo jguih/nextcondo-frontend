@@ -22,6 +22,7 @@ export const IconBase: FC<IconBaseProps> = ({
       [styles[`icon-${size}`]]: size !== undefined,
       [`stroke-${color}`]: color !== undefined,
       [`color-${color}`]: color !== undefined,
+      [styles["color-inherit"]]: color === undefined,
       [styles.bold]: bold,
     },
     styles.icon,
