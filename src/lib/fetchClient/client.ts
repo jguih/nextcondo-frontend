@@ -3,15 +3,21 @@ import {
   HttpPostProps,
   FetchClientFailedResponse,
   FetchClientResponse,
+  HttpDeleteProps,
 } from "./types";
 import { joinUrlAndEndpoint } from "./utils";
 import { StrategyError } from "./StrategyError";
 
-const sendError = (error: unknown, url?: string): FetchClientFailedResponse => {
+const sendError = (
+  error: unknown,
+  method: "GET" | "POST" | "PUT" | "DELETE",
+  url: string
+): FetchClientFailedResponse => {
   if (error instanceof StrategyError) {
     return {
       success: false,
       url,
+      method,
       response: {
         statusCode: error.statusCode,
         data: error.data,
@@ -21,10 +27,21 @@ const sendError = (error: unknown, url?: string): FetchClientFailedResponse => {
       },
     };
   }
+  if (error instanceof TypeError) {
+    return {
+      success: false,
+      url,
+      method,
+      error: {
+        message: error.message,
+      },
+    };
+  }
   if (error instanceof Error) {
     return {
       success: false,
       url,
+      method,
       error: {
         message: error.message,
       },
@@ -32,7 +49,18 @@ const sendError = (error: unknown, url?: string): FetchClientFailedResponse => {
   }
   return {
     success: false,
+    url,
+    method,
+    error: {
+      message: errorHasMessage(error) ? error.message : "unknown fetch error",
+    },
   };
+};
+
+const errorHasMessage = (error: unknown): error is { message: string } => {
+  return error && typeof error === "object" && Object.hasOwn(error, "message")
+    ? true
+    : false;
 };
 
 const httpGetAsync = async <Output>(
@@ -49,6 +77,7 @@ const httpGetAsync = async <Output>(
     if (result) {
       return {
         url: parsedUrl,
+        method: "GET",
         success: true,
         hasData: true,
         response: {
@@ -59,6 +88,7 @@ const httpGetAsync = async <Output>(
     }
     return {
       url: parsedUrl,
+      method: "GET",
       success: true,
       hasData: false,
       response: {
@@ -66,7 +96,7 @@ const httpGetAsync = async <Output>(
       },
     };
   } catch (error) {
-    return sendError(error, parsedUrl);
+    return sendError(error, "GET", parsedUrl);
   }
 };
 
@@ -85,6 +115,7 @@ const httpPostAsync = async <Output>(
     if (result) {
       return {
         url: parsedUrl,
+        method: "POST",
         success: true,
         hasData: true,
         response: {
@@ -95,6 +126,7 @@ const httpPostAsync = async <Output>(
     }
     return {
       url: parsedUrl,
+      method: "POST",
       success: true,
       hasData: false,
       response: {
@@ -102,7 +134,44 @@ const httpPostAsync = async <Output>(
       },
     };
   } catch (error) {
-    return sendError(error, parsedUrl);
+    return sendError(error, "POST", parsedUrl);
+  }
+};
+
+const httpDeleteAsync = async <Output>(
+  url: string,
+  { endpoint, strategy, ...props }: HttpDeleteProps<Output>
+): Promise<FetchClientResponse<Output>> => {
+  const parsedUrl = joinUrlAndEndpoint(url, endpoint);
+  try {
+    const response = await fetch(parsedUrl, {
+      ...props,
+      method: "DELETE",
+    });
+    const result = await strategy.handleAsync(response);
+    if (result) {
+      return {
+        url: parsedUrl,
+        method: "DELETE",
+        success: true,
+        hasData: true,
+        response: {
+          data: result,
+          statusCode: response.status,
+        },
+      };
+    }
+    return {
+      url: parsedUrl,
+      method: "DELETE",
+      success: true,
+      hasData: false,
+      response: {
+        statusCode: response.status,
+      },
+    };
+  } catch (error) {
+    return sendError(error, "DELETE", parsedUrl);
   }
 };
 
@@ -130,11 +199,15 @@ export interface IFetchClient {
   postAsync: <Output>(
     props: HttpPostProps<Output>
   ) => Promise<FetchClientResponse<Output>>;
+  deleteAsync: <Output>(
+    props: HttpDeleteProps<Output>
+  ) => Promise<FetchClientResponse<Output>>;
 }
 
 export const createFetchClient = (url: string): IFetchClient => {
   return {
     getAsync: (props) => httpGetAsync(url, { ...props }),
     postAsync: (props) => httpPostAsync(url, { ...props }),
+    deleteAsync: (props) => httpDeleteAsync(url, { ...props }),
   };
 };

@@ -2,21 +2,32 @@
 
 .button {
   padding: theme.spacing(0.6) theme.spacing(1);
-  border-radius: var(--radius-sm);
   border: var(--border) solid transparent;
   cursor: pointer;
-  transition-property: background-color;
-  transition: 0.06s ease;
+  transition: background-color 0.2s ease;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: theme.spacing(1);
+
+  &:not(.round) {
+    border-radius: var(--radius-sm);
+  }
 }
 
 .submit {
   margin-top: theme.spacing(2);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.round {
+  border-radius: 50%;
+  padding: theme.spacing(1.4) theme.spacing(1.4);
 }
 
 @mixin solid($color) {
@@ -93,8 +104,4 @@
   .light.#{$color} {
     @include light("#{$color}-light");
   }
-}
-
-.full-width {
-  width: 100%;
 }

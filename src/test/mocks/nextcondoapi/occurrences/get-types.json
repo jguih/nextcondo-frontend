@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name_EN": "Maintenance",
+    "name_PTBR": "Manutenção",
+    "description_EN": "Issues related to plumbing, electrical, and general repairs.",
+    "description_PTBR": "Problemas relacionados à encanamento, sistema elétrico e reparos gerais."
+  },
+  {
+    "id": 2,
+    "name_EN": "Security Incident",
+    "name_PTBR": "Incidente de Segurança",
+    "description_EN": "Reports of theft, vandalism, or unauthorized access.",
+    "description_PTBR": "Denúncias de roubo, vandalismo ou acesso não autorizado à propriedade."
+  },
+  {
+    "id": 3,
+    "name_EN": "Common Area",
+    "name_PTBR": "Área Comum",
+    "description_EN": "Problems in shared spaces like gyms, pools, or gardens.",
+    "description_PTBR": "Problemas nas áreas comuns como academias, piscinas ou jardins."
+  },
+  {
+    "id": 4,
+    "name_EN": "Noise",
+    "name_PTBR": "Barulho",
+    "description_EN": "Issues related to loud music, parties, or other disturbances.",
+    "description_PTBR": "Problemas relacionados à som alto, festas ou outros incômodos."
+  },
+  {
+    "id": 5,
+    "name_EN": "Emergency",
+    "name_PTBR": "Emergência",
+    "description_EN": "Fire alarms, medical emergencies, or natural disasters.",
+    "description_PTBR": "Alarmes de incêndio, emergências médicas ou desastres naturais."
+  },
+  {
+    "id": 6,
+    "name_EN": "Utility",
+    "name_PTBR": "Utilidade",
+    "description_EN": "Issues with utilities like water, electricity, or internet services.",
+    "description_PTBR": "Problemas com utilidades como fornecimento de água ou eletricidade ou internet."
+  }
+]

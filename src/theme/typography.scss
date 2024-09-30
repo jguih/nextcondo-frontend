@@ -14,7 +14,7 @@ h2,
 h3,
 h4,
 h5 {
-  line-height: 1.4;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -24,7 +24,10 @@ input,
 textarea,
 button,
 a,
-legend {
+legend,
+select,
+option {
+  line-height: 1.25;
   font-size: var(--p);
   margin: 0;
 }
@@ -52,8 +55,10 @@ h3 {
 
 h4 {
   font-size: var(--h4);
+  font-weight: 500;
 }
 
 h5 {
   font-size: var(--h5);
+  font-weight: 500;
 }

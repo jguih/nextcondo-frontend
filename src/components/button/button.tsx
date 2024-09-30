@@ -10,6 +10,7 @@ export type ButtonProps = {
   variant?: ThemeVariant;
   loading?: boolean;
   fullWidth?: boolean;
+  round?: boolean;
 } & ComponentProps<"button">;
 
 export const Button: FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ export const Button: FC<ButtonProps> = ({
   loading,
   fullWidth,
   children,
+  round,
   ...props
 }) => {
   const classes = buildClassNames(
@@ -25,6 +27,7 @@ export const Button: FC<ButtonProps> = ({
       [styles[color]]: color !== undefined,
       [styles[variant]]: variant !== undefined,
       [styles["full-width"]]: fullWidth === true,
+      [styles.round]: round !== undefined,
     },
     styles.button,
     props.className

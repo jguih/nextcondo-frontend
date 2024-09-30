@@ -10,6 +10,7 @@ export type TypographyTags =
   | "h2"
   | "h3"
   | "h4"
+  | "h5"
   | "legend"
   | "span";
 

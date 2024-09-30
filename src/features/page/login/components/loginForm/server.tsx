@@ -21,14 +21,14 @@ export const LoginForm: FC<{ d: Dictionary }> = ({ d }) => {
       <LoginFormEmail
         label={d.auth.email}
         validationMessages={{
-          typeMismatch: d.validation.required_email,
-          valueMissing: d.validation.required_email,
+          typeMismatch: d.validation.input_validation_email_required,
+          valueMissing: d.validation.input_validation_email_required,
         }}
       />
       <LoginFormPassword
         label={d.auth.password}
         validationMessages={{
-          valueMissing: d.validation.required_password,
+          valueMissing: d.page.login.input_validation_password_required,
         }}
       />
       <Link href={"/login"} className={styles["forgot-password"]}>

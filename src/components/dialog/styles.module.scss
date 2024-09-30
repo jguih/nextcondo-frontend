@@ -1,0 +1,26 @@
+@use "theme.utils" as theme;
+
+.dialog {
+  background-color: var(--background);
+  border: none;
+  outline: none;
+  border-radius: var(--radius);
+  box-shadow: 4px 4px 4px -4px var(--shadow-color);
+}
+
+$spacing: 3;
+
+.header {
+  margin-bottom: theme.spacing($spacing);
+}
+
+.content {
+  margin: theme.spacing($spacing) 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: theme.spacing(1);
+}

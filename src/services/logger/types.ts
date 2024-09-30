@@ -10,6 +10,7 @@ type LogServices =
   | "CondominiumService"
   | "UsersService"
   | "PublicService"
+  | "OccurrencesService"
   | "";
 
 export type LogMessage = {
@@ -23,6 +24,7 @@ export type LogMessage = {
   problem_details?: ProblemDetails;
   status_code?: number;
   fetch_url?: string;
+  http_method?: "GET" | "POST" | "PUT" | "DELETE";
 };
 
 export type LogMessageCommand = Omit<LogMessage, "level" | "timestamp">;

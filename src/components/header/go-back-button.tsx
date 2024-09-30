@@ -4,12 +4,15 @@ import { Button, ButtonProps } from "../button/button";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "../icon/icons/arrow-left";
 
-export const GoBackButton: FC<ButtonProps> = (props) => {
+export const GoBackButton: FC<{ path?: string } & ButtonProps> = ({
+  path = "/",
+  ...props
+}) => {
   const router = useRouter();
 
   const handleOnClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     props.onClick?.(e);
-    router.back();
+    router.push(path);
   };
 
   return (

@@ -1,0 +1,97 @@
+[
+  {
+    "id": "6a1b0aec-3c8a-46dc-8874-71317ca3e9e5",
+    "creator": {
+      "id": "6c7683c0-55dc-4da2-8a8c-32b87ead9ad1",
+      "fullName": "José Guilherme"
+    },
+    "condominium": {
+      "id": "c0a45549-c4a7-41ad-9513-73802ea18985"
+    },
+    "occurrenceType": {
+      "id": 3,
+      "name_EN": "Common Area",
+      "name_PTBR": "Área Comum"
+    },
+    "title": "Testing",
+    "description": null,
+    "createdAt": "2024-09-24T19:15:45.448889+00:00",
+    "updatedAt": "2024-09-24T19:15:45.448889+00:00"
+  },
+  {
+    "id": "5501fe8b-f86e-4d18-8bff-a1b58dd6f4fc",
+    "creator": {
+      "id": "6c7683c0-55dc-4da2-8a8c-32b87ead9ad1",
+      "fullName": "José Guilherme"
+    },
+    "condominium": {
+      "id": "c0a45549-c4a7-41ad-9513-73802ea18985"
+    },
+    "occurrenceType": {
+      "id": 2,
+      "name_EN": "Security Incident",
+      "name_PTBR": "Incidente de Segurança"
+    },
+    "title": "Someone stole my \uD83D\uDE3A",
+    "description": null,
+    "createdAt": "2024-09-24T19:42:09.016009+00:00",
+    "updatedAt": "2024-09-24T19:42:09.016009+00:00"
+  },
+  {
+    "id": "bd05477f-223e-4f66-a60f-95505d797755",
+    "creator": {
+      "id": "6c7683c0-55dc-4da2-8a8c-32b87ead9ad1",
+      "fullName": "José Guilherme"
+    },
+    "condominium": {
+      "id": "c0a45549-c4a7-41ad-9513-73802ea18985"
+    },
+    "occurrenceType": {
+      "id": 2,
+      "name_EN": "Security Incident",
+      "name_PTBR": "Incidente de Segurança"
+    },
+    "title": "My Occurrence",
+    "description": "Idk, just something here",
+    "createdAt": "2024-09-25T14:14:56.043203+00:00",
+    "updatedAt": "2024-09-25T14:14:56.043203+00:00"
+  },
+  {
+    "id": "a5cf0b74-fa96-40dc-b7ba-1bcc5db334f1",
+    "creator": {
+      "id": "6c7683c0-55dc-4da2-8a8c-32b87ead9ad1",
+      "fullName": "José Guilherme"
+    },
+    "condominium": {
+      "id": "c0a45549-c4a7-41ad-9513-73802ea18985"
+    },
+    "occurrenceType": {
+      "id": 4,
+      "name_EN": "Noise",
+      "name_PTBR": "Barulho"
+    },
+    "title": "Muito Barulho !!!",
+    "description": null,
+    "createdAt": "2024-09-25T14:20:12.464584+00:00",
+    "updatedAt": "2024-09-25T14:20:12.464584+00:00"
+  },
+  {
+    "id": "c3d14412-2d8f-4594-bb98-1b85987c3891",
+    "creator": {
+      "id": "6c7683c0-55dc-4da2-8a8c-32b87ead9ad1",
+      "fullName": "José Guilherme"
+    },
+    "condominium": {
+      "id": "c0a45549-c4a7-41ad-9513-73802ea18985"
+    },
+    "occurrenceType": {
+      "id": 6,
+      "name_EN": "Utility",
+      "name_PTBR": "Utilidade"
+    },
+    "title": "From my cellphone*!#(+$+",
+    "description": null,
+    "createdAt": "2024-09-25T14:22:47.177354+00:00",
+    "updatedAt": "2024-09-25T14:22:47.177354+00:00"
+  }
+]

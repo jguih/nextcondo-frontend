@@ -18,12 +18,12 @@ export const RegisterUserForm: FC<{ d: Dictionary }> = ({ d }) => {
     <ClientRegisterUserForm
       error={
         <Typography color="danger" tag="p" className={styles["error-msg"]}>
-          {d.page.register.fail}
+          {d.page.register.error}
         </Typography>
       }
       submit={
         <SubmitButton className={styles["submit-btn"]}>
-          <Typography tag="p">{d.page.register.submit}</Typography>
+          <Typography tag="p">{d.page.register.create_account}</Typography>
         </SubmitButton>
       }
       success={
@@ -34,37 +34,45 @@ export const RegisterUserForm: FC<{ d: Dictionary }> = ({ d }) => {
       }
     >
       <RegisterFormFullName
-        label={d.page.register.full_name}
+        label={d.page.register.input_label_fullName}
         validationMessages={{
-          valueMissing: d.validation.required_full_name,
+          valueMissing: d.validation.input_validation_fullName_required,
         }}
       />
       <RegisterFormPhone
-        label={d.page.register.phone}
-        description={d.page.register.phone_description}
+        label={d.page.register.input_label_phone}
+        description={d.page.register.input_description_phone}
       />
       <RegisterFormEmail
         label={d.auth.email}
-        description={d.page.register.email_description}
+        description={d.page.register.input_description_email}
         validationMessages={{
-          valueMissing: d.validation.required_email_without_example,
-          typeMismatch: d.validation.required_email_without_example,
+          valueMissing:
+            d.validation.input_validation_email_required_withoutExample,
+          typeMismatch:
+            d.validation.input_validation_email_required_withoutExample,
         }}
       />
       <RegisterFormPassword
         label={d.auth.password}
-        description={format(d.page.register.password_description, {
+        description={format(d.page.register.input_description_password, {
           min: 8,
           max: 30,
         })}
         validationMessages={{
-          valueMissing: d.validation.required_new_password,
-          tooShort: format(d.validation.password_too_short_plural, {
-            count: 8,
-          }),
-          tooLong: format(d.validation.password_too_long_plural, {
-            count: 30,
-          }),
+          valueMissing: d.page.register.input_validation_password_required,
+          tooShort: format(
+            d.validation.input_validation_password_tooShortPlural,
+            {
+              count: 8,
+            }
+          ),
+          tooLong: format(
+            d.validation.input_validation_password_tooLongPlural,
+            {
+              count: 30,
+            }
+          ),
         }}
       />
     </ClientRegisterUserForm>

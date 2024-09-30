@@ -1,12 +1,13 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { CircularProgress } from "@/src/components/circularProgress/circular-progress";
+import { Layout } from "@/src/components/layout/layout";
 
 const CondominiumAddLoading: FC = async () => {
   return (
-    <div className={styles["loading-container"]}>
+    <Layout.Main className={styles["loading-container"]}>
       <CircularProgress size="lg" />
-    </div>
+    </Layout.Main>
   );
 };
 

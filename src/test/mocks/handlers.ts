@@ -1,18 +1,34 @@
 import { http, HttpResponse } from "msw";
-import { FAKE_API } from "@/jest.setup";
 import { joinUrlAndEndpoint } from "@/src/lib/fetchClient/utils";
+import occurrences from "@/src/test/mocks/nextcondoapi/occurrences/get.json";
+import occurrencesTypes from "@/src/test/mocks/nextcondoapi/occurrences/get-types.json";
 
 export const handlers = [
-  http.post(joinUrlAndEndpoint(FAKE_API, "/Auth/login"), () => {
-    return HttpResponse.json({ status: "Ok" });
-  }),
-  // Intercept "GET https://example.com/user" requests...
-  http.get("https://example.com/user", () => {
-    // ...and respond to them using this JSON response.
-    return HttpResponse.json({
-      id: "c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d",
-      firstName: "John",
-      lastName: "Maverick",
-    });
-  }),
+  http.post(
+    joinUrlAndEndpoint(process.env.NEXTCONDO_BACKEND_URL!, "/Auth/login"),
+    () => {
+      return HttpResponse.json({ status: "Ok" });
+    }
+  ),
+
+  http.get(
+    joinUrlAndEndpoint(process.env.NEXTCONDO_BACKEND_URL!, "/Occurrences"),
+    () => {
+      return HttpResponse.json(occurrences, {
+        status: 200,
+      });
+    }
+  ),
+
+  http.get(
+    joinUrlAndEndpoint(
+      process.env.NEXTCONDO_BACKEND_URL!,
+      "/Occurrences/types"
+    ),
+    () => {
+      return HttpResponse.json(occurrencesTypes, {
+        status: 200,
+      });
+    }
+  ),
 ];

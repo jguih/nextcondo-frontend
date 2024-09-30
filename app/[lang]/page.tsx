@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { FC } from "react";
 import { WithLocale } from "@/src/types/with-locale";
 import styles from "./styles.module.scss";
 import { redirect } from "next/navigation";
@@ -7,17 +7,22 @@ import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
 import { Typography } from "@/src/components/typography/typography";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
-import {
-  AppSidebar,
-  AppSidebarHeader,
-  AppSidebarItemConfigurations,
-  AppSidebarItemLogoutButton,
-  AppSidebarItemThemeToggler,
-} from "@/src/components/sidebar/app/app-sidebar";
 import { Link } from "@/src/components/link/link";
 import { CondominiumService } from "@/src/services/nextcondo/condominium/server";
-import { HomePageContents } from "@/src/features/page/home/contents/server";
-import { HomeBottomNavigation } from "@/src/features/page/home/contents/bottom-navigation";
+import { HomePageContents } from "@/src/features/page/home/components/server";
+import { AppSidebar } from "@/src/components/sidebar/app/sidebar";
+import { AppSidebarHeader } from "@/src/components/sidebar/app/header";
+import { AppSidebarContent } from "@/src/components/sidebar/app/content";
+import {
+  AppSidebarItemConfigurations,
+  AppSidebarItemLogout,
+  AppSidebarItemThemeToggler,
+} from "@/src/components/sidebar/app/items";
+import {
+  HomeBottomNavigationHome,
+  HomeBottomNavigationMyProfile,
+  HomeBottomNavigationNotifications,
+} from "@/src/features/page/home/components/bottom-navigation";
 
 const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
@@ -27,43 +32,58 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   }
   const result = await CondominiumService.GetMineCurrentAsync();
   const currentCondo = result.success ? result.response.data : undefined;
-  const headerTitle = currentCondo ? currentCondo.name : d.page.home.welcome;
+
+  if (!currentCondo) {
+    return (
+      <Layout.Root>
+        <Layout.Header>
+          <Header title={d.page.home.welcome} />
+        </Layout.Header>
+        <AppSidebar>
+          <AppSidebarHeader title={d.page.home.welcome} />
+          <AppSidebarContent>
+            <AppSidebarItemConfigurations
+              label={d.side_drawer.configurations}
+            />
+            <AppSidebarItemThemeToggler label={d.side_drawer.change_theme} />
+            <AppSidebarItemLogout label={d.auth.logout} />
+          </AppSidebarContent>
+        </AppSidebar>
+        <Layout.Main className={styles.main}>
+          <Typography tag="p">{d.page.home.no_property_added}</Typography>
+          <Link
+            className={styles["add-condo-btn"]}
+            href={"/condominium/add"}
+            variant="solid"
+            color="primary"
+          >
+            {d.page.home.add_property}
+          </Link>
+        </Layout.Main>
+      </Layout.Root>
+    );
+  }
 
   return (
     <Layout.RootWithBottomNav>
       <Layout.Header>
-        <Header title={headerTitle} />
+        <Header title={currentCondo.name} />
       </Layout.Header>
-      <AppSidebar header={<AppSidebarHeader />}>
-        <AppSidebarItemConfigurations label={d.side_drawer.configurations} />
-        <AppSidebarItemThemeToggler label={d.side_drawer.change_theme} />
-        <AppSidebarItemLogoutButton label={d.auth.logout} />
+      <AppSidebar>
+        <AppSidebarHeader title={currentCondo.name} />
+        <AppSidebarContent>
+          <AppSidebarItemConfigurations label={d.side_drawer.configurations} />
+          <AppSidebarItemThemeToggler label={d.side_drawer.change_theme} />
+          <AppSidebarItemLogout label={d.auth.logout} />
+        </AppSidebarContent>
       </AppSidebar>
       <main className={styles.main}>
-        {!currentCondo ? (
-          <Fragment>
-            <Typography tag="p">{d.page.home.no_property_added}</Typography>
-            <Link
-              className={styles["add-condo-btn"]}
-              href={"/condominium/add"}
-              variant="solid"
-              color="primary"
-            >
-              {d.page.home.add_property}
-            </Link>
-          </Fragment>
-        ) : (
-          <HomePageContents d={d} />
-        )}
+        <HomePageContents d={d} />
       </main>
       <Layout.BottomNavigation>
-        <HomeBottomNavigation
-          labels={{
-            home: d.bottom_nav.home,
-            myProfile: d.bottom_nav.my_profile,
-            notifications: d.bottom_nav.notifications,
-          }}
-        />
+        <HomeBottomNavigationHome label={d.bottom_nav.home} />
+        <HomeBottomNavigationNotifications label={d.bottom_nav.notifications} />
+        <HomeBottomNavigationMyProfile label={d.bottom_nav.my_profile} />
       </Layout.BottomNavigation>
     </Layout.RootWithBottomNav>
   );

@@ -1,6 +1,5 @@
 import { LocaleProvider } from "@/src/features/localization/components/lang-provider";
 import { GlobalServiceProvider } from "@/src/services/components/global-provider";
-import "../globals.scss";
 import { WithLocale } from "@/src/types/with-locale";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";

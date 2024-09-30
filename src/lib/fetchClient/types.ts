@@ -12,8 +12,11 @@ export type HttpPostProps<Output> = BaseHttpProps<Output> & {
   body?: RequestInit["body"];
 };
 
+export type HttpDeleteProps<Output> = BaseHttpProps<Output>;
+
 type BaseResponse = {
-  url?: string;
+  method: "GET" | "POST" | "PUT" | "DELETE";
+  url: string;
 };
 
 export type FetchClientSuccessResponse<Output> = BaseResponse &

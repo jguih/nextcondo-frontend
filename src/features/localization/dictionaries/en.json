@@ -3,21 +3,23 @@
     "login": {
       "title": "Login",
       "subtitle": "Don't have an account?",
-      "subtitle_action": "Create an account"
+      "subtitle_action": "Create an account",
+      "input_validation_password_required": "Enter your password"
     },
     "register": {
       "title": "Register",
       "subtitle": "Already registered?",
       "subtitle_action": "Login",
-      "full_name": "Full Name",
-      "phone": "Phone number (Optional)",
-      "submit": "Create Account",
+      "input_label_full_name": "Full Name",
+      "input_label_phone": "Phone number (Optional)",
+      "create_account": "Create Account",
       "success": "Please, check your email to complete your registration",
-      "fail": "We are having problems while attempting to create your account",
+      "error": "We are having problems while attempting to create your account",
       "go_to_login_page": "Go to login page",
-      "password_description": "Must have at least {{ min }} characters and at most {{ max }}.",
-      "email_description": "Enter a valid email address, like nome@exemplo.com",
-      "phone_description": "If you want others to contact you."
+      "input_description_password": "Must have at least {{ min }} characters and at most {{ max }}.",
+      "input_description_email": "Enter a valid email address, like nome@exemplo.com",
+      "input_description_phone": "If you want others to contact you.",
+      "input_validation_password_required": "Enter a valid password"
     },
     "home": {
       "title": "Home",
@@ -29,16 +31,29 @@
       "service_label_occurrences": "Occurrences",
       "service_label_tenants": "Tenants"
     },
-    "add_condominium": {
+    "condominium/add": {
       "title": "Add Condominium",
-      "relationship_type": "Relationship Type",
-      "relationship_type_description": "Defines which functions you will have access to",
-      "tenant": "Tenant",
-      "manager": "Manager",
-      "name": "Name",
-      "name_required": "Enter a valid condominium name, like Galaxy Towers",
-      "description": "Description",
-      "submit": "Create Condominium"
+      "input_label_relationship_type": "Relationship Type",
+      "input_description_relationship_type": "Defines which functions you will have access to",
+      "input_validation_name_required": "Enter a valid condominium name, like Galaxy Towers",
+      "create_condominium": "Create Condominium"
+    },
+    "occurrences": {
+      "title": "Occurrences"
+    },
+    "occurrences/add": {
+      "title": "Add Occurrences",
+      "create_occurrence": "Add Occurrences",
+      "input_validation_title_required": "Enter an occurrence title",
+      "input_label_title": "Title",
+      "input_label_description": "Description",
+      "input_label_category": "Category"
+    },
+    "occurrences/[id]": {
+      "category": "Category",
+      "owned_by": "By",
+      "delete_occurrence_modal_title": "Delete occurrence?",
+      "delete_occurrence_modal_description": "Are you sure? this action is irreversible!"
     }
   },
   "boolean": {
@@ -55,7 +70,10 @@
   "button": {
     "submit": "Send",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close"
   },
   "side_drawer": {
     "home": "Home",
@@ -69,17 +87,20 @@
   },
   "validation": {
     "invalid_login_credentials": "Invalid email or password",
-    "required_email": "Enter an email address in the correct format, like name@exemple.com",
-    "required_email_without_example": "Enter an email address in the correct format",
-    "required_phone": "Enter a valid phone number, like (00) 0000-0000",
-    "required_password": "Enter your password",
-    "required_new_password": "Enter a valid password",
-    "required_full_name": "Enter your full name",
-    "password_too_short_plural": "Passord must have at least {{ count }} characters",
-    "password_too_long_plural": "Password must have at most {{ count }} caracteres"
+    "input_validation_email_required": "Enter an email address in the correct format, like name@exemple.com",
+    "input_validation_email_required_withoutExample": "Enter an email address in the correct format",
+    "input_validation_phone_required": "Enter a valid phone number, like (00) 0000-0000",
+    "input_validation_fullName_required": "Enter your full name",
+    "input_validation_password_tooShortPlural": "Password must have at least {{ count }} characters",
+    "input_validation_password_tooLongPlural": "Password must have at most {{ count }} caracteres"
   },
   "common": {
-    "or": "or"
+    "or": "or",
+    "title": "Title",
+    "description": "Description",
+    "tenant": "Tenant",
+    "manager": "Manager",
+    "name": "Name"
   },
   "bottom_nav": {
     "home": "Home",

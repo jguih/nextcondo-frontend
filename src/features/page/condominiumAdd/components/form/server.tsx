@@ -13,20 +13,23 @@ export const Form: FC<{ d: Dictionary }> = ({ d }) => {
   return (
     <ClientForm>
       <FormRelationshipType
-        legend={d.page.add_condominium.relationship_type}
-        description={d.page.add_condominium.relationship_type_description}
-        manager={d.page.add_condominium.manager}
-        tenant={d.page.add_condominium.tenant}
+        legend={d.page["condominium/add"].input_label_relationship_type}
+        description={
+          d.page["condominium/add"].input_description_relationship_type
+        }
+        manager={d.common.manager}
+        tenant={d.common.tenant}
       />
       <FormName
-        label={d.page.add_condominium.name}
+        label={d.common.name}
         validationMessages={{
-          valueMissing: d.page.add_condominium.name_required,
+          valueMissing:
+            d.page["condominium/add"].input_validation_name_required,
         }}
       />
-      <FormDescription label={d.page.add_condominium.description} />
+      <FormDescription label={d.common.description} />
       <SubmitButton>
-        <Typography>{d.page.add_condominium.submit}</Typography>
+        <Typography>{d.page["condominium/add"].create_condominium}</Typography>
       </SubmitButton>
     </ClientForm>
   );

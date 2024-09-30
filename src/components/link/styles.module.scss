@@ -17,8 +17,7 @@
   border-radius: var(--radius-sm);
   border: var(--border) solid transparent;
   cursor: pointer;
-  transition-property: background-color;
-  transition: 0.06s ease;
+  transition: background-color 0.2s ease;
 
   display: flex;
   flex-direction: row;
@@ -40,6 +39,7 @@
   border-radius: var(--radius-sm);
   border: var(--border) solid transparent;
   padding: theme.spacing(0.2);
+  transition: background-color 0.2s ease;
 }
 
 @mixin solid($color) {
