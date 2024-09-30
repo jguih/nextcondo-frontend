@@ -10,7 +10,7 @@
       "title": "Register",
       "subtitle": "Already registered?",
       "subtitle_action": "Login",
-      "input_label_full_name": "Full Name",
+      "input_label_fullName": "Full Name",
       "input_label_phone": "Phone number (Optional)",
       "create_account": "Create Account",
       "success": "Please, check your email to complete your registration",
@@ -52,8 +52,8 @@
     "occurrences/[id]": {
       "category": "Category",
       "owned_by": "By",
-      "delete_occurrence_modal_title": "Delete occurrence?",
-      "delete_occurrence_modal_description": "Are you sure? this action is irreversible!"
+      "modal_title_deleteOccurrence": "Delete occurrence?",
+      "modal_description_deleteOccurrence": "Are you sure? this action is irreversible!"
     }
   },
   "boolean": {
