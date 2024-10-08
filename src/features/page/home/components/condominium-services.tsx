@@ -57,7 +57,12 @@ export const CondominiumServicesTenants: FC<{ label: string }> = ({
   label,
 }) => {
   return (
-    <Link href={"/"} variant="solid" color="primary" orientation="vertical">
+    <Link
+      href={"/tenants"}
+      variant="solid"
+      color="primary"
+      orientation="vertical"
+    >
       <Typography tag="span">{label}</Typography>
       <Users size="xl" bold />
     </Link>

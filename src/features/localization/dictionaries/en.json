@@ -64,6 +64,9 @@
       "input_label_description": "Description",
       "input_label_category": "Category",
       "succeeded_update_occurrence": "Occurrence updated successfully"
+    },
+    "tenants": {
+      "title": "Tenants"
     }
   },
   "boolean": {

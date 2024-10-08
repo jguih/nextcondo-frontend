@@ -64,6 +64,9 @@
       "input_label_description": "Descrição",
       "input_label_category": "Categoria",
       "succeeded_update_occurrence": "Ocorrência atualizada com sucesso"
+    },
+    "tenants": {
+      "title": "Moradores"
     }
   },
   "boolean": {
