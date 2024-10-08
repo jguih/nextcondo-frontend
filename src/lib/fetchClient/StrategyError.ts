@@ -1,4 +1,4 @@
-import { ProblemDetails } from "./schemas/auth";
+import { ProblemDetails } from "./schemas/problem-details";
 
 export type StrategyErrorProps = {
   message: string;

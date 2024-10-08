@@ -1,4 +1,4 @@
-import { ProblemDetails } from "./schemas/auth";
+import { ProblemDetails } from "./schemas/problem-details";
 import { IFetchStrategy } from "./IFetchStrategy";
 
 type BaseHttpProps<Output> = {
@@ -13,6 +13,10 @@ export type HttpPostProps<Output> = BaseHttpProps<Output> & {
 };
 
 export type HttpDeleteProps<Output> = BaseHttpProps<Output>;
+
+export type HttpPutProps<Output> = BaseHttpProps<Output> & {
+  body?: RequestInit["body"];
+};
 
 type BaseResponse = {
   method: "GET" | "POST" | "PUT" | "DELETE";

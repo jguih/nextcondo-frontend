@@ -1,4 +1,4 @@
-import { ProblemDetails } from "@/src/lib/fetchClient/schemas/auth";
+import { ProblemDetails } from "@/src/lib/fetchClient/schemas/problem-details";
 import { joinUrlAndEndpoint } from "@/src/lib/fetchClient/utils";
 import { NextCondoOccurrencesService } from "@/src/services/nextcondo/occurrences/server";
 import { server } from "@/src/test/mocks/node";

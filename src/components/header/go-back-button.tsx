@@ -5,14 +5,18 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft } from "../icon/icons/arrow-left";
 
 export const GoBackButton: FC<{ path?: string } & ButtonProps> = ({
-  path = "/",
+  path,
   ...props
 }) => {
   const router = useRouter();
 
   const handleOnClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     props.onClick?.(e);
-    router.push(path);
+    if (!path) {
+      router.back();
+    } else {
+      router.push(path);
+    }
   };
 
   return (

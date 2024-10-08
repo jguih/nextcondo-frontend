@@ -47,13 +47,23 @@
       "input_validation_title_required": "Informe um título para a ocorrência",
       "input_label_title": "Título",
       "input_label_description": "Descrição",
-      "input_label_category": "Categoria"
+      "input_label_category": "Categoria",
+      "succeeded_create_occurrence": "Ocorrência criada com sucesso"
     },
     "occurrences/[id]": {
       "category": "Categoria",
       "owned_by": "Por",
       "modal_title_deleteOccurrence": "Excluir ocorrência?",
-      "modal_description_deleteOccurrence": "Deseja mesmo excluir a ocorrência? Esta ação é irreversível!"
+      "modal_description_deleteOccurrence": "Deseja mesmo excluir a ocorrência? Esta ação é irreversível!",
+      "succeeded_delete_occurrence": "Ocorrência deletada com sucesso"
+    },
+    "occurrences/[id]/edit": {
+      "title": "Editar Ocorrência",
+      "input_validation_title_required": "Informe um título para a ocorrência",
+      "input_label_title": "Título",
+      "input_label_description": "Descrição",
+      "input_label_category": "Categoria",
+      "succeeded_update_occurrence": "Ocorrência atualizada com sucesso"
     }
   },
   "boolean": {
@@ -66,6 +76,12 @@
     "email": "Email",
     "password": "Senha",
     "forgot_password": "Esqueceu sua senha?"
+  },
+  "error": {
+    "not_authorized_to_perform_action": "Você não tem permissão para realizar esta ação",
+    "failed_to_stablish_connection_with_server": "Não foi possível se conectar com o servidor",
+    "occurrence_not_found": "Ocorrência não encontrada",
+    "generic": "Erro desconhecido. Tente novamente mais tarde."
   },
   "button": {
     "submit": "Enviar",

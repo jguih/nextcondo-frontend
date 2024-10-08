@@ -39,7 +39,12 @@ export const Button: FC<ButtonProps> = ({
       children
     );
   return (
-    <button {...props} disabled={loading || props.disabled} className={classes}>
+    <button
+      type="button"
+      {...props}
+      disabled={loading || props.disabled}
+      className={classes}
+    >
       {loading ? <CircularProgress /> : content}
     </button>
   );

@@ -4,8 +4,9 @@ import {
   FetchClientFailedResponse,
   FetchClientResponse,
   HttpDeleteProps,
+  HttpPutProps,
 } from "./types";
-import { joinUrlAndEndpoint } from "./utils";
+import { errorHasMessage, joinUrlAndEndpoint } from "./utils";
 import { StrategyError } from "./StrategyError";
 
 const sendError = (
@@ -55,12 +56,6 @@ const sendError = (
       message: errorHasMessage(error) ? error.message : "unknown fetch error",
     },
   };
-};
-
-const errorHasMessage = (error: unknown): error is { message: string } => {
-  return error && typeof error === "object" && Object.hasOwn(error, "message")
-    ? true
-    : false;
 };
 
 const httpGetAsync = async <Output>(
@@ -175,6 +170,44 @@ const httpDeleteAsync = async <Output>(
   }
 };
 
+const httpPutAsync = async <Output>(
+  url: string,
+  { strategy, endpoint, body, ...props }: HttpPutProps<Output>
+): Promise<FetchClientResponse<Output>> => {
+  const parsedUrl = joinUrlAndEndpoint(url, endpoint);
+  try {
+    const response = await fetch(parsedUrl, {
+      ...props,
+      method: "PUT",
+      body: body,
+    });
+    const result = await strategy.handleAsync(response);
+    if (result) {
+      return {
+        url: parsedUrl,
+        method: "PUT",
+        success: true,
+        hasData: true,
+        response: {
+          data: result,
+          statusCode: response.status,
+        },
+      };
+    }
+    return {
+      url: parsedUrl,
+      method: "PUT",
+      success: true,
+      hasData: false,
+      response: {
+        statusCode: response.status,
+      },
+    };
+  } catch (error) {
+    return sendError(error, "PUT", parsedUrl);
+  }
+};
+
 /**
  * Client that handles HTTP requests.
  * It works as a fetch wrapper.
@@ -199,8 +232,24 @@ export interface IFetchClient {
   postAsync: <Output>(
     props: HttpPostProps<Output>
   ) => Promise<FetchClientResponse<Output>>;
+  /**
+   * Handles DELETE requests.
+   * @param endpoint (optional) The endpoint to be fetched.
+   * @param strategy Response body parser strategy.
+   * @returns `Output` as defined by the chosen strategy.
+   */
   deleteAsync: <Output>(
     props: HttpDeleteProps<Output>
+  ) => Promise<FetchClientResponse<Output>>;
+  /**
+   * Handles PUT requests.
+   * @param endpoint (optional) The endpoint to be fetched.
+   * @param strategy Response body parser strategy.
+   * @param body (optional) Request body.
+   * @returns `Output` as defined by the chosen strategy.
+   */
+  putAsync: <Output>(
+    props: HttpPutProps<Output>
   ) => Promise<FetchClientResponse<Output>>;
 }
 
@@ -209,5 +258,6 @@ export const createFetchClient = (url: string): IFetchClient => {
     getAsync: (props) => httpGetAsync(url, { ...props }),
     postAsync: (props) => httpPostAsync(url, { ...props }),
     deleteAsync: (props) => httpDeleteAsync(url, { ...props }),
+    putAsync: (props) => httpPutAsync(url, { ...props }),
   };
 };

@@ -164,10 +164,36 @@ export class NextCondoOccurrencesService implements IOccurrencesService {
         occurrence_id: id,
       });
     } else {
-      this.LogError(result, "Failed to delete occurrence");
+      this.LogError(result, "Failed to delete occurrence", {
+        occurrence_id: id,
+      });
+    }
+    return result;
+  }
+
+  async EditAsync(data: FormData): Promise<FetchClientResponse<undefined>> {
+    const id = (data.get("id") as string | null) ?? undefined;
+    const result = await this.client.putAsync({
+      endpoint: `Occurrences`,
+      strategy: new EmptyStrategy(),
+      credentials: "include",
+      headers: {
+        cookie: this.GetCookies(),
+      },
+      body: data,
+    });
+    if (result.success) {
+      this.LogInfo(result, "Updated occurrence successfully", {
+        occurrence_id: id,
+      });
+    } else {
+      this.LogError(result, "Failed to update occurrence", {
+        occurrence_id: id,
+      });
     }
     return result;
   }
 }
 
-export const OccurrencesService = new NextCondoOccurrencesService();
+export const OccurrencesService: IOccurrencesService =
+  new NextCondoOccurrencesService();

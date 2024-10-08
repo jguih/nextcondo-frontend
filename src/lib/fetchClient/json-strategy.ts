@@ -1,5 +1,5 @@
 import { ZodSchema } from "zod";
-import { problemDetailsSchema } from "./schemas/auth";
+import { problemDetailsSchema } from "./schemas/problem-details";
 import { JsonStrategyError } from "./json-strategy-error";
 import { IFetchStrategy } from "./IFetchStrategy";
 

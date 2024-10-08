@@ -1,4 +1,4 @@
-import { problemDetailsSchema } from "./schemas/auth";
+import { problemDetailsSchema } from "./schemas/problem-details";
 import { IFetchStrategy } from "./IFetchStrategy";
 import { EmptyStrategyError } from "./empty-strategy-error";
 

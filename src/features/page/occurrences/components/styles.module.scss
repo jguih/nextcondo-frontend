@@ -59,15 +59,9 @@
   }
 }
 
-.float-container {
+.float {
   position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: theme.spacing(2);
-  z-index: 100;
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
+  bottom: theme.spacing(2);
+  right: theme.spacing(2);
+  z-index: 1000;
 }

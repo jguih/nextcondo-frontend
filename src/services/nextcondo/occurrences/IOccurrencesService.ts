@@ -18,4 +18,5 @@ export interface IOccurrencesService {
     id: string
   ) => Promise<FetchClientResponse<GetOccurrenceByIdResponseDto>>;
   DeleteAsync: (id: string) => Promise<FetchClientResponse<undefined>>;
+  EditAsync: (data: FormData) => Promise<FetchClientResponse<undefined>>;
 }

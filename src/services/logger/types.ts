@@ -1,4 +1,4 @@
-import { ProblemDetails } from "@/src/lib/fetchClient/schemas/auth";
+import { ProblemDetails } from "@/src/lib/fetchClient/schemas/problem-details";
 
 export type LogExtraFields = Record<
   string,

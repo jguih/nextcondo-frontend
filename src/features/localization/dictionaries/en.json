@@ -47,13 +47,23 @@
       "input_validation_title_required": "Enter an occurrence title",
       "input_label_title": "Title",
       "input_label_description": "Description",
-      "input_label_category": "Category"
+      "input_label_category": "Category",
+      "succeeded_create_occurrence": "Occurrence created successfully"
     },
     "occurrences/[id]": {
       "category": "Category",
       "owned_by": "By",
       "modal_title_deleteOccurrence": "Delete occurrence?",
-      "modal_description_deleteOccurrence": "Are you sure? this action is irreversible!"
+      "modal_description_deleteOccurrence": "Are you sure? this action is irreversible!",
+      "succeeded_delete_occurrence": "Occurrence deleted successfully"
+    },
+    "occurrences/[id]/edit": {
+      "title": "Edit Occurrence",
+      "input_validation_title_required": "Enter an occurrence title",
+      "input_label_title": "Title",
+      "input_label_description": "Description",
+      "input_label_category": "Category",
+      "succeeded_update_occurrence": "Occurrence updated successfully"
     }
   },
   "boolean": {
@@ -66,6 +76,12 @@
     "email": "Email",
     "password": "Password",
     "forgot_password": "Forgot your password?"
+  },
+  "error": {
+    "not_authorized_to_perform_action": "You're not authorized to perform this action",
+    "failed_to_stablish_connection_with_server": "Could not stablish connection with server",
+    "occurrence_not_found": "Occurrence not found",
+    "generic": "Unknown error. Try again later."
   },
   "button": {
     "submit": "Send",

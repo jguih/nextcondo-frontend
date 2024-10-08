@@ -11,7 +11,7 @@ $anim-timing-function: ease-in-out;
   top: 0;
   bottom: 0;
   background-color: var(--background);
-  z-index: 1000;
+  z-index: var(--appsidebar-z-index);
   padding: theme.spacing(2);
 
   &.in {

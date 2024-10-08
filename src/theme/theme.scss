@@ -398,6 +398,11 @@ $themes: (
   --radius-lg: calc(var(--radius) * 3);
   --border: 0.15rem;
   --border-sm: var(--border);
+
+  --header-height: 55px;
+  --header-z-index: 1000;
+  --snackbar-z-index: 1001;
+  --appsidebar-z-index: 1002;
 }
 
 @each $color in themeutils.$colors {

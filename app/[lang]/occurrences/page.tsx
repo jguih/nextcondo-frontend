@@ -10,6 +10,7 @@ import { WithLocale } from "@/src/types/with-locale";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { FC, Fragment } from "react";
+import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 
 export const metadata: Metadata = {
   title: "NextCondo | Occurrences",
@@ -30,13 +31,14 @@ const OccurrencesPage: FC<WithLocale> = async ({ params: { lang } }) => {
       <Layout.Header>
         <Header
           title={d.page.occurrences.title}
-          actionButton={<GoBackButton />}
+          actionButton={<GoBackButton path="/" />}
         />
       </Layout.Header>
+      <AppSnackbarDispatcher position="top" />
       <Layout.Main>
-        <AddOccurrenceButton />
         <OccurrencesList occurrenceList={occurrenceList} />
       </Layout.Main>
+      <AddOccurrenceButton />
     </Fragment>
   );
 };

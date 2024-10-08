@@ -1,11 +1,5 @@
 @use "theme.utils" as theme;
 
-.card {
-  padding: theme.spacing(0.7) theme.spacing(1);
-  background-color: var(--background-level1);
-  border-radius: var(--radius);
-}
-
 .footer {
   > * {
     line-height: 1.6;

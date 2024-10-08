@@ -2,12 +2,11 @@
 import { createContext, FC, PropsWithChildren, useContext } from "react";
 import { IAuthService } from "../nextcondo/auth/IAuthService";
 import { ICondominiumService } from "../nextcondo/condominium/ICondominiumService";
-import { IOccurrencesService } from "../nextcondo/occurrences/IOccurrencesService";
 
 export type Services = {
   AuthService: IAuthService;
   CondominiumService: ICondominiumService;
-  OccurrencesService: IOccurrencesService;
+  // OccurrencesService: IOccurrencesService;
 };
 
 const ServicesContext = createContext<Services | null>(null);

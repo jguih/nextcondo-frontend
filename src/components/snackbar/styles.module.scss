@@ -1,0 +1,67 @@
+@use "theme.utils" as theme;
+
+$anim-duration: 0.25s;
+$anim-timing-function: ease-in-out;
+
+.message {
+  padding: theme.spacing(2);
+  border-radius: var(--radius);
+  position: fixed;
+  z-index: var(--snackbar-z-index);
+  box-shadow: 4px 4px 4px -4px var(--shadow-color);
+
+  &.in {
+    animation: $anim-duration snackbar-in $anim-timing-function;
+    animation-fill-mode: forwards;
+  }
+
+  &.out {
+    animation: $anim-duration snackbar-out $anim-timing-function;
+    animation-fill-mode: forwards;
+  }
+}
+
+.position-top {
+  top: calc(55px + theme.spacing(2));
+  right: theme.spacing(2);
+  left: theme.spacing(2);
+}
+
+.position-bottom {
+  bottom: theme.spacing(2);
+  right: theme.spacing(2);
+  left: theme.spacing(2);
+}
+
+@keyframes snackbar-in {
+  from {
+    scale: 0.9;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+@keyframes snackbar-out {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0%;
+  }
+}
+
+.info {
+  background-color: var(--neutral);
+  color: var(--on-neutral);
+}
+
+.success {
+  background-color: var(--success);
+  color: var(--on-success);
+}
+
+.error {
+  background-color: var(--danger);
+  color: var(--on-danger);
+}

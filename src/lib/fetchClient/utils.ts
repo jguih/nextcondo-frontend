@@ -12,3 +12,12 @@ export const joinUrlAndEndpoint = (url: string, endpoint?: string) => {
   const parsedApiUrl = url.endsWith("/") ? url : `${url}/`;
   return `${parsedApiUrl}${parsedEndpoint}`;
 };
+
+/** Checks if error has a message */
+export const errorHasMessage = (
+  error: unknown
+): error is { message: string } => {
+  return error && typeof error === "object" && Object.hasOwn(error, "message")
+    ? true
+    : false;
+};

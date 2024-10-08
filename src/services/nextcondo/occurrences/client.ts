@@ -168,5 +168,16 @@ export const useOccurrencesService = ({
     return result;
   };
 
-  return { GetAsync, GetByIdAsync, AddAsync, GetTypesAsync, DeleteAsync };
+  const EditAsync: IOccurrencesService["EditAsync"] = async () => {
+    throw new Error("Not Implemented");
+  };
+
+  return {
+    GetAsync,
+    GetByIdAsync,
+    AddAsync,
+    GetTypesAsync,
+    DeleteAsync,
+    EditAsync,
+  };
 };
