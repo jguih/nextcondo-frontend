@@ -1,0 +1,21 @@
+@use "theme.utils" as theme;
+
+.item {
+  display: flex;
+  flex-direction: row;
+  gap: theme.spacing(1);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: theme.spacing(0.5);
+  flex-grow: 1;
+  position: relative;
+
+  & > .relationship {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

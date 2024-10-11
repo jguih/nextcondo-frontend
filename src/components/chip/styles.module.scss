@@ -1,0 +1,17 @@
+@use "theme.utils" as theme;
+
+.chip {
+  padding: theme.spacing(0.2) theme.spacing(0.4);
+  border-radius: var(--radius);
+}
+
+@mixin chip($color) {
+  background-color: var(--#{$color});
+  color: var(--on-#{$color});
+}
+
+@each $color in theme.$colors {
+  .#{$color} {
+    @include chip("#{$color}");
+  }
+}
