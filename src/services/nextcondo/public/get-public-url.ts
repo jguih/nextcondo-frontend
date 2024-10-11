@@ -5,6 +5,7 @@ import { createFetchClient } from "@/src/lib/fetchClient/client";
 import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
 import { z } from "zod";
 import { LogService } from "../../logger/server";
+import { getLogMessageFromFetchClientResponse } from "../../logger/utils/get-fetch-client-response-message";
 
 const publicUrlSchema = z.object({
   url: z.string(),
@@ -20,22 +21,18 @@ export const getNextCondoBackendPublicUrl = async (): Promise<string> => {
   if (result.success && result.hasData) {
     LogService.info(
       {
+        ...getLogMessageFromFetchClientResponse(result),
         from: "PublicService",
         message: "Fetched NextCondo Back-End public URL successfully",
-        fetch_url: result.url,
-        status_code: result.response?.statusCode,
       },
       { public_url: result.response.data.url }
     );
     return result.response.data.url;
-  } else if (!result.success) {
+  } else {
     LogService.error({
+      ...getLogMessageFromFetchClientResponse(result),
       from: "PublicService",
       message: "Failed to fetch NextCondo Back-End public URL",
-      fetch_url: result.url,
-      status_code: result.response?.statusCode,
-      error: { message: result.error?.message },
-      problem_details: result.response?.data,
     });
   }
 

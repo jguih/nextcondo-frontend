@@ -6,6 +6,7 @@ import { createFetchClient, IFetchClient } from "@/src/lib/fetchClient/client";
 import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
 import { getNextCondoBackendUrl } from "@/src/lib/environment/get-backend-url";
 import { LogService } from "../../logger/server";
+import { getLogMessageFromFetchClientResponse } from "../../logger/utils/get-fetch-client-response-message";
 
 export class NextCondoApiUsersService implements IUsersService {
   client: IFetchClient;
@@ -24,22 +25,18 @@ export class NextCondoApiUsersService implements IUsersService {
     if (result.success) {
       LogService.info(
         {
+          ...getLogMessageFromFetchClientResponse(result),
           from: "UsersService",
           message: "Fetched current user successfully",
-          fetch_url: result.url,
-          status_code: result.response?.statusCode,
         },
         { user_id: result.response.data?.id }
       );
       return result.response.data;
     } else {
       LogService.error({
+        ...getLogMessageFromFetchClientResponse(result),
         from: "UsersService",
         message: "Failed to fetch current user",
-        fetch_url: result.url,
-        status_code: result.response?.statusCode,
-        error: { message: result.error?.message },
-        problem_details: result.response?.data,
       });
     }
   }

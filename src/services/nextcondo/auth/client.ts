@@ -4,6 +4,7 @@ import { IAuthService } from "./IAuthService";
 import { createFetchClient } from "@/src/lib/fetchClient/client";
 import { LogService } from "../../logger/client";
 import { EmptyStrategy } from "@/src/lib/fetchClient/empty-strategy";
+import { getLogMessageFromFetchClientResponse } from "../../logger/utils/get-fetch-client-response-message";
 
 type UseAuthServiceProps = {
   nextcondoBackendPublicUrl: string;
@@ -28,19 +29,15 @@ export const useAuthService = ({
     });
     if (result.success) {
       LogService.info({
+        ...getLogMessageFromFetchClientResponse(result),
         from: "AuthService",
         message: "User logged in",
-        fetch_url: result.url,
-        status_code: result.response.statusCode,
       });
     } else {
       LogService.error({
+        ...getLogMessageFromFetchClientResponse(result),
         from: "AuthService",
         message: "User login failed",
-        fetch_url: result.url,
-        status_code: result.response?.statusCode,
-        error: { message: result.error?.message },
-        problem_details: result.response?.data,
       });
     }
     return result.success;
@@ -54,19 +51,15 @@ export const useAuthService = ({
     });
     if (result.success) {
       LogService.info({
+        ...getLogMessageFromFetchClientResponse(result),
         from: "AuthService",
         message: "User logged out",
-        fetch_url: result.url,
-        status_code: result.response?.statusCode,
       });
     } else {
       LogService.error({
+        ...getLogMessageFromFetchClientResponse(result),
         from: "AuthService",
         message: "User logout failed",
-        fetch_url: result.url,
-        status_code: result.response?.statusCode,
-        error: { message: result.error?.message },
-        problem_details: result.response?.data,
       });
     }
     return result.success;
@@ -80,19 +73,15 @@ export const useAuthService = ({
     });
     if (result.success) {
       LogService.info({
+        ...getLogMessageFromFetchClientResponse(result),
         from: "AuthService",
         message: "User registered",
-        fetch_url: result.url,
-        status_code: result.response?.statusCode,
       });
     } else {
       LogService.error({
+        ...getLogMessageFromFetchClientResponse(result),
         from: "AuthService",
         message: "User registration failed",
-        fetch_url: result.url,
-        status_code: result.response?.statusCode,
-        error: { message: result.error?.message },
-        problem_details: result.response?.data,
       });
     }
     return result.success;
