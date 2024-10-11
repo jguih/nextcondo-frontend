@@ -11,6 +11,7 @@ type LogServices =
   | "UsersService"
   | "PublicService"
   | "OccurrencesService"
+  | "TenantsService"
   | "";
 
 export type LogMessage = {

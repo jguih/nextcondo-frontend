@@ -2,6 +2,7 @@ import { GoBackButton } from "@/src/components/header/go-back-button";
 import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
+import { TenantsService } from "@/src/services/nextcondo/tenants/server";
 import { UsersService } from "@/src/services/nextcondo/users/server";
 import { WithLocale } from "@/src/types/with-locale";
 import { Metadata } from "next";
@@ -18,6 +19,7 @@ const TenantsPage: FC<WithLocale> = async ({ params: { lang } }) => {
     redirect("/login");
   }
   const d = await getDictionary(lang);
+  await TenantsService.GetAsync();
 
   return (
     <Fragment>
