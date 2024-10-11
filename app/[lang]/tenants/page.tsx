@@ -7,7 +7,6 @@ import { WithLocale } from "@/src/types/with-locale";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { FC, Fragment } from "react";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 
 export const metadata: Metadata = {
   title: "NextCondo | Occurrences",
@@ -28,7 +27,6 @@ const TenantsPage: FC<WithLocale> = async ({ params: { lang } }) => {
           actionButton={<GoBackButton path="/" />}
         />
       </Layout.Header>
-      <AppSnackbarDispatcher position="top" />
       <Layout.Main>W.I.P</Layout.Main>
     </Fragment>
   );
