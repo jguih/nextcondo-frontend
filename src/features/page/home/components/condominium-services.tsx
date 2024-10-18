@@ -30,7 +30,12 @@ export const CondominiumServicesReservations: FC<{ label: string }> = ({
   label,
 }) => {
   return (
-    <Link href={"/"} variant="solid" color="primary" orientation="vertical">
+    <Link
+      href={"/commonAreas"}
+      variant="solid"
+      color="primary"
+      orientation="vertical"
+    >
       <Typography tag="span">{label}</Typography>
       <Calendar size="xl" bold />
     </Link>

@@ -13,7 +13,7 @@ import { redirect } from "next/navigation";
 import { FC, Fragment } from "react";
 
 export const metadata: Metadata = {
-  title: "NextCondo | Occurrences",
+  title: "NextCondo | Tenants",
 };
 
 const TenantsPage: FC<WithLocale> = async ({ params: { lang } }) => {

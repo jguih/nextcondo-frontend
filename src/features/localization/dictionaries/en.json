@@ -67,6 +67,9 @@
     },
     "tenants": {
       "title": "Tenants"
+    },
+    "commonAreas": {
+      "title": "Common Areas"
     }
   },
   "boolean": {
