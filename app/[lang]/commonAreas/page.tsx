@@ -2,6 +2,7 @@ import { GoBackButton } from "@/src/components/header/go-back-button";
 import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
+import { CommonAreasService } from "@/src/services/nextcondo/commonAreas/server";
 import { UsersService } from "@/src/services/nextcondo/users/server";
 import { WithLocale } from "@/src/types/with-locale";
 import { Metadata } from "next";
@@ -18,6 +19,9 @@ const CommonAreasPage: FC<WithLocale> = async ({ params: { lang } }) => {
     redirect("/login");
   }
   const d = await getDictionary(lang);
+  const result = await CommonAreasService.GetAsync();
+  const commonAreaList =
+    result.success && result.hasData ? result.response.data : [];
 
   return (
     <Fragment>
@@ -27,7 +31,9 @@ const CommonAreasPage: FC<WithLocale> = async ({ params: { lang } }) => {
           actionButton={<GoBackButton path="/" />}
         />
       </Layout.Header>
-      <Layout.Main></Layout.Main>
+      <Layout.Main>
+        <pre>{JSON.stringify(commonAreaList, null, 2)}</pre>
+      </Layout.Main>
     </Fragment>
   );
 };
