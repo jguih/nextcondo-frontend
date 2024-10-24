@@ -30,7 +30,7 @@ export const getLocalizedAttribute = (
   lang: Locale
 ): string => {
   let text = "";
-  // ["pt", "br"] -> "ptbr"
+  // "pt-br" -> ["pt", "br"] -> "ptbr"
   const normalizedLang = lang.split("-").join("").toLowerCase();
   Object.entries(object).forEach((item) => {
     const [key, value] = item;

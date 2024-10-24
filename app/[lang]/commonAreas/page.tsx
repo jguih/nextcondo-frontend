@@ -12,10 +12,8 @@ import {
 } from "@/src/features/localization/utils";
 import { CommonAreaItem } from "@/src/features/page/commonAreas/components/commonAreaItem/common-area-item";
 import { CommonAreasService } from "@/src/services/nextcondo/commonAreas/server";
-import { UsersService } from "@/src/services/nextcondo/users/server";
 import { WithLocale } from "@/src/types/with-locale";
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { FC, Fragment } from "react";
 
 export const metadata: Metadata = {
@@ -23,10 +21,6 @@ export const metadata: Metadata = {
 };
 
 const CommonAreasPage: FC<WithLocale> = async ({ params: { lang } }) => {
-  const user = await UsersService.GetMeAsync();
-  if (!user) {
-    redirect("/login");
-  }
   const d = await getDictionary(lang);
   const result = await CommonAreasService.GetAsync();
   const commonAreaList =
@@ -46,7 +40,11 @@ const CommonAreasPage: FC<WithLocale> = async ({ params: { lang } }) => {
             <ListItem key={area.id}>
               <CommonAreaItem
                 action={
-                  <Link href={"/"} variant="solid" color="primary">
+                  <Link
+                    href={`/commonAreas/${area.id}/booking`}
+                    variant="solid"
+                    color="primary"
+                  >
                     {d.page.commonAreas.action_book}
                   </Link>
                 }
