@@ -1,0 +1,29 @@
+@use "theme.utils" as theme;
+
+.item {
+  display: flex;
+  flex-direction: row;
+  gap: theme.spacing(1);
+
+  & > img {
+    border-radius: var(--radius);
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: theme.spacing(0.5);
+  flex-grow: 1;
+  position: relative;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

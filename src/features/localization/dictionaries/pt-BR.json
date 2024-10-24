@@ -69,7 +69,11 @@
       "title": "Moradores"
     },
     "commonAreas": {
-      "title": "Áreas Comuns"
+      "title": "Áreas Comuns",
+      "action_book": "Agendar",
+      "time_from_to": "{{ time1 }} até {{ time2 }}",
+      "available_facility": "{{ count }} instalação disponível",
+      "available_facility_plural": "{{ count }} instalações disponíveis"
     }
   },
   "boolean": {

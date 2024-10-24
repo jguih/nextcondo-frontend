@@ -69,7 +69,11 @@
       "title": "Tenants"
     },
     "commonAreas": {
-      "title": "Common Areas"
+      "title": "Common Areas",
+      "action_book": "Book",
+      "time_from_to": "{{ time1 }} to {{ time2 }}",
+      "available_facility": "{{ count }} facility available",
+      "available_facility_plural": "{{ count }} facilities available"
     }
   },
   "boolean": {

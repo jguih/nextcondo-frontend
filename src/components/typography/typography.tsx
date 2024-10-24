@@ -18,18 +18,21 @@ export type TypographyProps<Tag extends TypographyTags> = {
   tag?: Tag;
   color?: SemanticColors;
   muted?: boolean;
+  bold?: boolean;
 } & Omit<ComponentProps<Tag>, "color">;
 
 export const Typography = <Tag extends TypographyTags>({
   tag,
   color,
-  muted,
+  muted = false,
+  bold = false,
   ...props
 }: TypographyProps<Tag>) => {
   const classes = buildClassNames(
     {
       [`color-${color}`]: color !== undefined,
       [styles["muted"]]: muted === true,
+      [styles.bold]: bold === true,
     },
     props.className
   );

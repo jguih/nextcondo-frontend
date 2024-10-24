@@ -1,3 +1,5 @@
+import { Locale } from "@/i18n-config";
+
 /**
  * Replaces variables on a string using keys and values from the props object.
  * @param entry `String` that contains variables to be replaced.
@@ -20,4 +22,21 @@ export const format = (
     );
   }
   return newEntry;
+};
+
+export const getLocalizedAttribute = (
+  object: Record<string, string | number>,
+  prop: string,
+  lang: Locale
+): string => {
+  let text = "";
+  // ["pt", "br"] -> "ptbr"
+  const normalizedLang = lang.split("-").join("").toLowerCase();
+  Object.entries(object).forEach((item) => {
+    const [key, value] = item;
+    if (key.includes(prop) && key.toLowerCase().includes(normalizedLang)) {
+      text = String(value);
+    }
+  });
+  return text;
 };
