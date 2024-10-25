@@ -74,6 +74,10 @@
       "time_from_to": "{{ time1 }} até {{ time2 }}",
       "available_facility": "{{ count }} instalação disponível",
       "available_facility_plural": "{{ count }} instalações disponíveis"
+    },
+    "commonAreas/[id]/booking": {
+      "fieldset_legend_facility": "Instalação",
+      "input_label_date": "Data"
     }
   },
   "boolean": {
@@ -99,7 +103,8 @@
     "save": "Salvar",
     "edit": "Editar",
     "delete": "Deletar",
-    "close": "Fechar"
+    "close": "Fechar",
+    "go_back": "Voltar"
   },
   "side_drawer": {
     "home": "Home",
@@ -126,7 +131,8 @@
     "description": "Descrição",
     "tenant": "Morador",
     "manager": "Síndico",
-    "name": "Nome"
+    "name": "Nome",
+    "resource_does_not_exist": "O recurso requisitado não foi encontrado"
   },
   "bottom_nav": {
     "home": "Home",

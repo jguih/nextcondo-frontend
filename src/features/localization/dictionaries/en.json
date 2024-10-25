@@ -74,6 +74,10 @@
       "time_from_to": "{{ time1 }} to {{ time2 }}",
       "available_facility": "{{ count }} facility available",
       "available_facility_plural": "{{ count }} facilities available"
+    },
+    "commonAreas/[id]/booking": {
+      "fieldset_legend_facility": "Facility",
+      "input_label_date": "Date"
     }
   },
   "boolean": {
@@ -99,7 +103,8 @@
     "save": "Save",
     "edit": "Edit",
     "delete": "Delete",
-    "close": "Close"
+    "close": "Close",
+    "go_back": "Go Back"
   },
   "side_drawer": {
     "home": "Home",
@@ -126,7 +131,8 @@
     "description": "Description",
     "tenant": "Tenant",
     "manager": "Manager",
-    "name": "Name"
+    "name": "Name",
+    "resource_does_not_exist": "This resource does not exist"
   },
   "bottom_nav": {
     "home": "Home",

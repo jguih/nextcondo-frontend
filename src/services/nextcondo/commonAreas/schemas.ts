@@ -26,6 +26,12 @@ export type GetCommonAreasResponseDto = z.infer<
   typeof getCommonAreasResponseDtoSchema
 >;
 
+const getCommonAreaByIdResponseDtoSchema = commonAreaDtoSchema;
+export type GetCommonAreaByIdResponseDto = z.infer<
+  typeof getCommonAreaByIdResponseDtoSchema
+>;
+
 export const schemas = {
   getCommonAreasResponseDto: getCommonAreasResponseDtoSchema,
+  getCommonAreaByIdResponseDto: getCommonAreaByIdResponseDtoSchema,
 };

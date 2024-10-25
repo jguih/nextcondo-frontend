@@ -6,10 +6,11 @@ import { useFormGroupContext } from "../formGroup/context";
 
 export type InputProps = {
   error?: boolean;
+  fullWidth?: boolean;
 } & ComponentProps<"input">;
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { error, ...props },
+  { error, fullWidth = false, ...props },
   forwardedRef
 ) {
   const context = useFormGroupContext();
@@ -17,6 +18,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     {
       [styles.error]:
         error === true || (context !== null && context.error === true),
+      [styles["full-width"]]: fullWidth === true,
     },
     styles.input,
     props.className
