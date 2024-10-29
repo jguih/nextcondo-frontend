@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const relationshipTypeSchema = z.union([
+const relationshipTypeDtoSchema = z.union([
   z.literal("Tenant"),
   z.literal("Manager"),
 ]);
@@ -17,17 +17,18 @@ const condominiumDtoSchema = z.object({
     z.object({
       id: z.string(),
       fullName: z.string(),
-      relationshipType: relationshipTypeSchema,
+      relationshipType: relationshipTypeDtoSchema,
     })
   ),
 });
-const getMineCondominiumResponseSchema = z.array(condominiumDtoSchema);
-const getMineCurrentReponseSchema = condominiumDtoSchema;
 
-export type CondominiumDto = z.infer<typeof condominiumDtoSchema>;
+const getMineSchema = z.array(condominiumDtoSchema);
+export type GetCondominiumMine = z.infer<typeof getMineSchema>;
+
+const getMineCurrentSchema = condominiumDtoSchema;
+export type GetCondominiumMineCurrent = z.infer<typeof getMineCurrentSchema>;
 
 export const schemas = {
-  relationshipType: relationshipTypeSchema,
-  getMineResponse: getMineCondominiumResponseSchema,
-  getMineCurrentReponse: getMineCurrentReponseSchema,
+  getMine: getMineSchema,
+  getMineCurrent: getMineCurrentSchema,
 };

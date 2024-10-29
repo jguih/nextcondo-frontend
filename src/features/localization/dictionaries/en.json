@@ -36,7 +36,8 @@
       "input_label_relationship_type": "Relationship Type",
       "input_description_relationship_type": "Defines which functions you will have access to",
       "input_validation_name_required": "Enter a valid condominium name, like Galaxy Towers",
-      "create_condominium": "Create Condominium"
+      "create_condominium": "Create Condominium",
+      "succeeded_create_condominium": "Condominium created successfully"
     },
     "occurrences": {
       "title": "Occurrences"

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import {
-  Form as ClientForm,
+  Form,
   FormDescription,
   FormName,
   FormRelationshipType,
@@ -9,9 +9,9 @@ import { Dictionary } from "@/src/features/localization/types";
 import { SubmitButton } from "@/src/components/button/submit/submit";
 import { Typography } from "@/src/components/typography/typography";
 
-export const Form: FC<{ d: Dictionary }> = ({ d }) => {
+export const AddCondominiumForm: FC<{ d: Dictionary }> = ({ d }) => {
   return (
-    <ClientForm>
+    <Form>
       <FormRelationshipType
         legend={d.page["condominium/add"].input_label_relationship_type}
         description={
@@ -31,6 +31,6 @@ export const Form: FC<{ d: Dictionary }> = ({ d }) => {
       <SubmitButton>
         <Typography>{d.page["condominium/add"].create_condominium}</Typography>
       </SubmitButton>
-    </ClientForm>
+    </Form>
   );
 };

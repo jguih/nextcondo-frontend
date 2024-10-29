@@ -36,7 +36,8 @@
       "input_label_relationship_type": "Tipo de proprietário",
       "input_description_relationship_type": "Define quais funções você terá dentro do condomínio",
       "input_validation_name_required": "Informe um nome de condomínio válido, como Ed. Downtown",
-      "create_condominium": "Criar Condomínio"
+      "create_condominium": "Criar Condomínio",
+      "succeeded_create_condominium": "Condomínio criado com sucesso"
     },
     "occurrences": {
       "title": "Ocorrências"

@@ -1,5 +1,5 @@
 import { FetchClientResponse } from "@/src/lib/fetchClient/types";
-import { CondominiumDto } from "./schemas";
+import { GetCondominiumMine, GetCondominiumMineCurrent } from "./schemas";
 
 export interface ICondominiumService {
   /**
@@ -7,13 +7,15 @@ export interface ICondominiumService {
    * @param data `FormData` with required information to create a new condominium.
    * @returns `true` if success.
    */
-  AddAsync: (data: FormData) => Promise<boolean>;
+  AddAsync: (data: FormData) => Promise<FetchClientResponse<undefined>>;
   /**
    * Returns an `Array` of all condominiums that the current user is in.
    */
-  GetMineAsync: () => Promise<FetchClientResponse<CondominiumDto[]>>;
+  GetMineAsync: () => Promise<FetchClientResponse<GetCondominiumMine>>;
   /**
    * Fetch current active condominium for user.
    */
-  GetMineCurrentAsync: () => Promise<FetchClientResponse<CondominiumDto>>;
+  GetMineCurrentAsync: () => Promise<
+    FetchClientResponse<GetCondominiumMineCurrent>
+  >;
 }

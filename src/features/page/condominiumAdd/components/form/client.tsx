@@ -12,20 +12,27 @@ import { Typography } from "@/src/components/typography/typography";
 import { InputValidationContainer } from "@/src/components/validation/input-validation-container";
 import { TextAreaValidationContainer } from "@/src/components/validation/textarea-validation-container";
 import { ValidationMessages } from "@/src/components/validation/types";
-import { useServices } from "@/src/services/components/provider";
 import { useRouter } from "next/navigation";
 import { FC, PropsWithChildren } from "react";
+import { ActionAddCondominiumAsync } from "../../actions";
+import { useAppSnackbar } from "@/src/components/snackbar/store";
+import { useLocale } from "@/src/features/localization/components/lang-provider";
 
 export const Form: FC<PropsWithChildren> = ({ children }) => {
   const form = useForm();
   const { handleSubmitAsync } = form;
-  const { CondominiumService } = useServices();
+  const snackbar = useAppSnackbar((state) => state.dispatch);
   const router = useRouter();
+  const lang = useLocale();
 
   const handleOnSubmit = handleSubmitAsync(async (data) => {
-    const success = await CondominiumService.AddAsync(data);
-    if (success) {
-      router.push("/");
+    const { result, message } = await ActionAddCondominiumAsync(data, lang);
+    if (result.success) {
+      snackbar(message, "success");
+      router.push(`/`);
+      router.refresh();
+    } else {
+      snackbar(message, "error");
     }
   });
 
