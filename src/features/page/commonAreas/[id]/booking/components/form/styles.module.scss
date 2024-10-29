@@ -1,0 +1,10 @@
+@use "theme.utils" as theme;
+
+.grid-fieldset {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.validation-error {
+  grid-column: 1 / -1;
+}

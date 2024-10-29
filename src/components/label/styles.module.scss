@@ -3,4 +3,9 @@
   color: var(--danger);
 }
 
-.label {}
+.disabled {
+  filter: opacity(60%);
+}
+
+.label {
+}

@@ -6,6 +6,10 @@
   // First row for header, last for bottom nav
   grid-template-rows: var(--header-height) 1fr 80px;
   min-height: 100dvh;
+
+  & .main {
+    max-height: calc(100dvh - var(--header-height) - 80px);
+  }
 }
 
 .root {
@@ -13,6 +17,10 @@
   grid-template-columns: 1fr;
   grid-template-rows: var(--header-height) 1fr;
   min-height: 100dvh;
+
+  & .main {
+    max-height: calc(100dvh - var(--header-height));
+  }
 }
 
 .header {
@@ -33,11 +41,12 @@
 .main {
   padding: theme.spacing(2);
   max-width: 100dvw;
+  overflow-y: scroll;
 }
 
 .bottom-navigation {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: theme.spacing(1);
   grid-column: 1 / -1;
   padding: theme.spacing(1) theme.spacing(1.5);

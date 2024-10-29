@@ -1,6 +1,6 @@
 "use server";
 
-import { Locale } from "@/i18n-config";
+import { i18n, Locale } from "@/i18n-config";
 import { IOccurrencesService } from "@/src/services/nextcondo/occurrences/IOccurrencesService";
 import { OccurrencesService } from "@/src/services/nextcondo/occurrences/server";
 import { revalidatePath } from "next/cache";
@@ -8,7 +8,7 @@ import { getDictionary } from "../../localization/get-dictionary";
 
 export const ActionDeleteOccurrenceAsync = async (
   occurrenceId: string,
-  lang: Locale,
+  lang: Locale = i18n.defaultLocale,
   deleteAsync: IOccurrencesService["DeleteAsync"] = OccurrencesService.DeleteAsync.bind(
     OccurrencesService
   ),

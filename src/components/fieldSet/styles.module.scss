@@ -1,6 +1,26 @@
+@use "theme.utils" as theme;
+
 .fieldset {
   border-radius: var(--radius);
-  border-color: var(--static-40);
   border-width: var(--border);
   border-style: solid;
+
+  &:not(.error) {
+    border-color: var(--static-40);
+  }
+
+  &.error {
+    border-color: var(--danger);
+  }
+}
+
+.required {
+  & legend::after {
+    content: " *";
+    color: var(--danger);
+  }
+}
+
+.fieldset:not(:first-child) {
+  margin-top: theme.spacing(2);
 }

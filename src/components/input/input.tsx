@@ -23,14 +23,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     styles.input,
     props.className
   );
-
-  const required =
-    props.required !== undefined ? props.required : context?.required;
+  const isDisabled =
+    props.disabled !== undefined ? props.disabled : context?.disabled ?? false;
+  const isRequired =
+    props.required !== undefined ? props.required : context?.required ?? false;
 
   return (
     <input
       {...props}
-      required={required}
+      required={isRequired}
+      disabled={isDisabled}
       className={classes}
       ref={forwardedRef}
     />

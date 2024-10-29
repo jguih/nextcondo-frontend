@@ -4,6 +4,7 @@ import { createContext, FC, PropsWithChildren, useContext } from "react";
 export type FormGroupContextState = {
   error?: boolean;
   required?: boolean;
+  disabled?: boolean;
 };
 
 const FormGroupContext = createContext<FormGroupContextState | null>(null);

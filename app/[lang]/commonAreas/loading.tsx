@@ -3,11 +3,11 @@ import { CircularProgress } from "@/src/components/circularProgress/circular-pro
 import { GoBackButton } from "@/src/components/header/go-back-button";
 import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
-import { FC, Fragment } from "react";
+import { FC } from "react";
 
 const CommonAreasLoading: FC = async () => {
   return (
-    <Fragment>
+    <Layout.Root>
       <Layout.Header>
         <Header
           title={<CircularProgress />}
@@ -17,7 +17,7 @@ const CommonAreasLoading: FC = async () => {
       <Layout.Main className={styles["loading-container"]}>
         <CircularProgress size="lg" />
       </Layout.Main>
-    </Fragment>
+    </Layout.Root>
   );
 };
 

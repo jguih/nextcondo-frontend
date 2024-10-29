@@ -12,7 +12,7 @@ import { FormAction, FormState, IFormHandler } from "./IFormHandler";
 
 const initialState: FormState = {
   isPending: false,
-  wasSubmited: false,
+  wasSubmitted: false,
 };
 
 const FormContext = createContext<IFormHandler | null>(null);
@@ -22,8 +22,8 @@ const formReducer = (state: FormState, action: FormAction): FormState => {
     case "pending": {
       return { ...state, isPending: action.payload };
     }
-    case "submited": {
-      return { ...state, wasSubmited: true };
+    case "submitted": {
+      return { ...state, wasSubmitted: true };
     }
   }
 };
@@ -36,7 +36,7 @@ export const useForm = (): IFormHandler => {
       return async (event) => {
         event.preventDefault();
         event.stopPropagation();
-        dispatch({ type: "submited" });
+        dispatch({ type: "submitted" });
 
         if (!checkFormValidityFromEvent(event)) return;
 

@@ -77,7 +77,15 @@
     },
     "commonAreas/[id]/booking": {
       "fieldset_legend_facility": "Instalação",
-      "input_label_date": "Data"
+      "input_label_date": "Data",
+      "input_description_date": "Informe um data entre {{ from }} e {{ to }}",
+      "input_validation_date_required": "Informe uma data válida",
+      "input_validation_schedule_required": "Selecione um horário",
+      "fieldset_legend_schedule": "Horários",
+      "succeeded_create_reservation": "Reserva criada com sucesso"
+    },
+    "commonAreas/bookingHistory": {
+      "title": "Histórico de Reservas"
     }
   },
   "boolean": {
@@ -95,6 +103,7 @@
     "not_authorized_to_perform_action": "Você não tem permissão para realizar esta ação",
     "failed_to_stablish_connection_with_server": "Não foi possível se conectar com o servidor",
     "occurrence_not_found": "Ocorrência não encontrada",
+    "resource_not_found": "Recurso não encontrado",
     "generic": "Erro desconhecido. Tente novamente mais tarde."
   },
   "button": {
@@ -107,13 +116,7 @@
     "go_back": "Voltar"
   },
   "side_drawer": {
-    "home": "Home",
-    "common_areas": "Áreas comuns",
-    "occurrences": "Ocorrências",
-    "tenants": "Moradores",
-    "user": "Usuário",
     "change_theme": "Tema Claro/Escuro",
-    "help": "Ajuda",
     "configurations": "Configurações"
   },
   "validation": {
@@ -137,6 +140,13 @@
   "bottom_nav": {
     "home": "Home",
     "notifications": "Notificações",
-    "my_profile": "Meu Perfil"
+    "my_profile": "Meu Perfil",
+    "common_areas": "Áreas Comuns",
+    "booking_history": "Histórico"
+  },
+  "status": {
+    "completed": "Finalizado",
+    "confirmed": "Confirmado",
+    "in_progress": "Em Andamento"
   }
 }

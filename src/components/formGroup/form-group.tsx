@@ -8,6 +8,7 @@ export type FormGroupProps = FormGroupContextState & ComponentProps<"div">;
 export const FormGroup: FC<FormGroupProps> = ({
   error,
   required,
+  disabled,
   ...props
 }) => {
   const classes = buildClassNames(
@@ -16,7 +17,7 @@ export const FormGroup: FC<FormGroupProps> = ({
     props.className
   );
   return (
-    <FormGroupProvider value={{ error, required }}>
+    <FormGroupProvider value={{ error, required, disabled }}>
       <div {...props} className={classes} />
     </FormGroupProvider>
   );

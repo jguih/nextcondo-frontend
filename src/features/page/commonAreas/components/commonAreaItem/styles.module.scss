@@ -3,10 +3,11 @@
 .item {
   display: flex;
   flex-direction: row;
-  gap: theme.spacing(1);
+  gap: theme.spacing(2);
 
   & > img {
     border-radius: var(--radius);
+    align-self: center;
   }
 }
 
@@ -16,6 +17,13 @@
   gap: theme.spacing(0.5);
   flex-grow: 1;
   position: relative;
+
+  & p,
+  small {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .title {
@@ -24,6 +32,7 @@
 
 .actions {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: theme.spacing(1);
 }

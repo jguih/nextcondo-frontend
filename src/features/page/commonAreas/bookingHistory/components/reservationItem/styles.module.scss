@@ -1,0 +1,16 @@
+@use "theme.utils" as theme;
+
+.reservation-item {
+  position: relative;
+}
+
+.title {
+  line-height: 1;
+  margin-bottom: theme.spacing(1);
+}
+
+.status {
+  position: absolute;
+  right: 0;
+  top: 0;
+}

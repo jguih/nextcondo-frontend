@@ -77,7 +77,15 @@
     },
     "commonAreas/[id]/booking": {
       "fieldset_legend_facility": "Facility",
-      "input_label_date": "Date"
+      "input_label_date": "Date",
+      "input_description_date": "Enter a date between {{ from }} and {{ to }}",
+      "input_validation_date_required": "Enter a valid date",
+      "input_validation_schedule_required": "Select a schedule",
+      "fieldset_legend_schedule": "Schedules",
+      "succeeded_create_reservation": "Reservation created successfully"
+    },
+    "commonAreas/bookingHistory": {
+      "title": "Booking History"
     }
   },
   "boolean": {
@@ -95,6 +103,7 @@
     "not_authorized_to_perform_action": "You're not authorized to perform this action",
     "failed_to_stablish_connection_with_server": "Could not stablish connection with server",
     "occurrence_not_found": "Occurrence not found",
+    "resource_not_found": "Requested resource not found",
     "generic": "Unknown error. Try again later."
   },
   "button": {
@@ -107,13 +116,7 @@
     "go_back": "Go Back"
   },
   "side_drawer": {
-    "home": "Home",
-    "common_areas": "Common Areas",
-    "occurrences": "Occurrences",
-    "tenants": "Tenants",
-    "user": "User",
     "change_theme": "Theme Dark/Light",
-    "help": "Help",
     "configurations": "Configurations"
   },
   "validation": {
@@ -137,6 +140,13 @@
   "bottom_nav": {
     "home": "Home",
     "notifications": "Notifications",
-    "my_profile": "My Profile"
+    "my_profile": "My Profile",
+    "common_areas": "Common Areas",
+    "booking_history": "Booking History"
+  },
+  "status": {
+    "completed": "Completed",
+    "confirmed": "Confirmed",
+    "in_progress": "In Progress"
   }
 }

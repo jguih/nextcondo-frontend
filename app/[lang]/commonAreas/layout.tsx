@@ -1,6 +1,4 @@
-import { FC, PropsWithChildren } from "react";
-import { Layout } from "@/src/components/layout/layout";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
+import { FC, Fragment, PropsWithChildren } from "react";
 import { UsersService } from "@/src/services/nextcondo/users/server";
 import { redirect } from "next/navigation";
 
@@ -9,12 +7,7 @@ const CommonAreasLayout: FC<PropsWithChildren> = async ({ children }) => {
   if (!user) {
     redirect("/login");
   }
-  return (
-    <Layout.Root>
-      <AppSnackbarDispatcher />
-      {children}
-    </Layout.Root>
-  );
+  return <Fragment>{children}</Fragment>;
 };
 
 export default CommonAreasLayout;

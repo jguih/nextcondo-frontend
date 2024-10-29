@@ -3,6 +3,7 @@
 .chip {
   padding: theme.spacing(0.2) theme.spacing(0.4);
   border-radius: var(--radius);
+  width: fit-content;
 }
 
 @mixin chip($color) {

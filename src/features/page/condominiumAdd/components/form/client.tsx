@@ -7,7 +7,7 @@ import { Input } from "@/src/components/input/input";
 import { TextArea } from "@/src/components/input/textarea";
 import { Label } from "@/src/components/label/label";
 import { Radio } from "@/src/components/radio/radio";
-import { RadioGroup } from "@/src/components/radio/radio-group";
+import { RadioGroup } from "@/src/components/formGroup/radio/radio-group";
 import { Typography } from "@/src/components/typography/typography";
 import { InputValidationContainer } from "@/src/components/validation/input-validation-container";
 import { TextAreaValidationContainer } from "@/src/components/validation/textarea-validation-container";

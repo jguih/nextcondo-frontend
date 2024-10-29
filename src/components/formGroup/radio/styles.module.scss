@@ -1,0 +1,8 @@
+@use "theme.utils" as theme;
+
+.radio-group {
+  padding-left: theme.spacing(0.2);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

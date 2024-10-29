@@ -10,7 +10,7 @@ export type FormState = {
    * Is set to `true` on form submittion and never changes after.
    * @default false
    */
-  wasSubmited: boolean;
+  wasSubmitted: boolean;
 };
 
 /**
@@ -21,7 +21,7 @@ export type FormAction =
       type: "pending";
       payload: boolean;
     }
-  | { type: "submited" };
+  | { type: "submitted" };
 
 /**
  * Function that handles async form submittion. Automatically updates form states.
