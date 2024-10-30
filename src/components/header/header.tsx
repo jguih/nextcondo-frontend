@@ -4,7 +4,7 @@ import { Typography } from "../typography/typography";
 import { OpenAppSidebarButton } from "./open-app-sidebar-button";
 
 export type HeaderProps = {
-  title?: string | ReactNode;
+  title?: string | ReactNode | ReactNode[];
   actionButton?: ReactNode;
 };
 

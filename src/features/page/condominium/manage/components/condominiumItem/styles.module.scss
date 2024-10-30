@@ -1,0 +1,27 @@
+@use "theme.utils" as theme;
+
+.owner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: theme.spacing(1);
+}
+
+.details {
+  flex-grow: 1;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  gap: theme.spacing(1);
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: theme.spacing(1);
+  margin-top: theme.spacing(2);
+}

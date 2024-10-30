@@ -134,6 +134,8 @@
     "title": "Título",
     "description": "Descrição",
     "tenant": "Morador",
+    "tenant_plural": "Moradores",
+    "owner": "Dono",
     "manager": "Síndico",
     "name": "Nome",
     "resource_does_not_exist": "O recurso requisitado não foi encontrado"

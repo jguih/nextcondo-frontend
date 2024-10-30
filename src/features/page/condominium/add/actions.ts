@@ -4,7 +4,7 @@ import { i18n, Locale } from "@/i18n-config";
 import { ICondominiumService } from "@/src/services/nextcondo/condominium/ICondominiumService";
 import { CondominiumService } from "@/src/services/nextcondo/condominium/server";
 import { revalidatePath } from "next/cache";
-import { getDictionary } from "../../localization/get-dictionary";
+import { getDictionary } from "../../../localization/get-dictionary";
 
 export const ActionAddCondominiumAsync = async (
   data: FormData,
@@ -36,7 +36,7 @@ export const ActionAddCondominiumAsync = async (
   if (result.response && result.response.statusCode === 404) {
     return {
       result,
-      message: d.error.occurrence_not_found,
+      message: d.error.resource_not_found,
     };
   }
 

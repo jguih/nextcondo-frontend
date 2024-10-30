@@ -22,8 +22,8 @@ export const CommonAreaItem: FC<{
       <div className={styles.item}>
         <Image
           src="/placeholder/gym.jpg"
-          height={96}
-          width={96}
+          height={132}
+          width={112}
           alt="Placeholder Image"
         />
         <div className={styles.details}>
@@ -45,16 +45,16 @@ export const CommonAreaItem: FC<{
                   count: commonArea.slots.length,
                 })}
           </Typography>
+          <div className={styles.actions}>
+            <Link
+              href={`/commonAreas/${commonArea.id}/booking`}
+              variant="solid"
+              color="primary"
+            >
+              {d.page.commonAreas.action_book}
+            </Link>
+          </div>
         </div>
-      </div>
-      <div className={styles.actions}>
-        <Link
-          href={`/commonAreas/${commonArea.id}/booking`}
-          variant="solid"
-          color="primary"
-        >
-          {d.page.commonAreas.action_book}
-        </Link>
       </div>
     </div>
   );

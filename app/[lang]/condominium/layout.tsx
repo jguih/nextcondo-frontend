@@ -1,13 +1,18 @@
 import { FC, PropsWithChildren } from "react";
 import { Metadata } from "next";
-import { Layout } from "@/src/components/layout/layout";
+import { redirect } from "next/navigation";
+import { UsersService } from "@/src/services/nextcondo/users/server";
 
 export const metadata: Metadata = {
   title: "NextCondo | Condominium",
 };
 
 const CondominiumLayout: FC<PropsWithChildren> = async ({ children }) => {
-  return <Layout.Root>{children}</Layout.Root>;
+  const user = await UsersService.GetMeAsync();
+  if (!user) {
+    redirect("/login");
+  }
+  return <>{children}</>;
 };
 
 export default CondominiumLayout;

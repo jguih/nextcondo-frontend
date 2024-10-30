@@ -134,6 +134,8 @@
     "title": "Title",
     "description": "Description",
     "tenant": "Tenant",
+    "tenant_plural": "Tenants",
+    "owner": "Owner",
     "manager": "Manager",
     "name": "Name",
     "resource_does_not_exist": "This resource does not exist"
