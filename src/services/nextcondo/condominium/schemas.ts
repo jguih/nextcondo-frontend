@@ -22,13 +22,21 @@ const condominiumDtoSchema = z.object({
   ),
 });
 
-const getMineSchema = z.array(condominiumDtoSchema);
-export type GetCondominiumMine = z.infer<typeof getMineSchema>;
+const getMineResponseSchema = z.array(condominiumDtoSchema);
+export type GetMineCondominiumResponse = z.infer<typeof getMineResponseSchema>;
 
-const getMineCurrentSchema = condominiumDtoSchema;
-export type GetCondominiumMineCurrent = z.infer<typeof getMineCurrentSchema>;
+const getMineCurrentResponseSchema = condominiumDtoSchema;
+export type GetMineCurrentCondominiumResponse = z.infer<
+  typeof getMineCurrentResponseSchema
+>;
+
+const setMineCurrentResponseSchema = condominiumDtoSchema;
+export type SetMineCurrentCondominiumResponse = z.infer<
+  typeof setMineCurrentResponseSchema
+>;
 
 export const schemas = {
-  getMine: getMineSchema,
-  getMineCurrent: getMineCurrentSchema,
+  getMine: getMineResponseSchema,
+  getMineCurrent: getMineCurrentResponseSchema,
+  setMineCurrentResponse: setMineCurrentResponseSchema,
 };

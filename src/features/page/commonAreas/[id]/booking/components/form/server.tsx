@@ -4,6 +4,7 @@ import { Form, FormDate, FormFacility, FormTimeSlots } from "./client";
 import { GetCommonAreaByIdResponseDto } from "@/src/services/nextcondo/commonAreas/schemas";
 import { SubmitButton } from "@/src/components/button/submit/submit";
 import { format } from "@/src/features/localization/utils";
+import { getUserTimezoneOffsetMinutes } from "@/src/lib/utils/timezone-utils";
 
 export const CommonAreaBookingForm: FC<{
   d: Dictionary;
@@ -60,6 +61,12 @@ export const CommonAreaBookingForm: FC<{
         }}
         error={d.common.resource_does_not_exist}
         legend={d.page["commonAreas/[id]/booking"].fieldset_legend_schedule}
+      />
+      <input
+        id="timezone-offset-minutes"
+        name="timezoneOffsetMinutes"
+        defaultValue={getUserTimezoneOffsetMinutes()}
+        hidden
       />
       <SubmitButton>{d.button.submit}</SubmitButton>
     </Form>

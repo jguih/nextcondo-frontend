@@ -1,5 +1,9 @@
 import { FetchClientResponse } from "@/src/lib/fetchClient/types";
-import { GetCondominiumMine, GetCondominiumMineCurrent } from "./schemas";
+import {
+  GetMineCondominiumResponse,
+  GetMineCurrentCondominiumResponse,
+  SetMineCurrentCondominiumResponse,
+} from "./schemas";
 
 export interface ICondominiumService {
   /**
@@ -11,11 +15,14 @@ export interface ICondominiumService {
   /**
    * Returns an `Array` of all condominiums that the current user is in.
    */
-  GetMineAsync: () => Promise<FetchClientResponse<GetCondominiumMine>>;
+  GetMineAsync: () => Promise<FetchClientResponse<GetMineCondominiumResponse>>;
   /**
    * Fetch current active condominium for user.
    */
   GetMineCurrentAsync: () => Promise<
-    FetchClientResponse<GetCondominiumMineCurrent>
+    FetchClientResponse<GetMineCurrentCondominiumResponse>
   >;
+  SetMineCurrentAsync: (
+    id: string
+  ) => Promise<FetchClientResponse<SetMineCurrentCondominiumResponse>>;
 }

@@ -7,10 +7,13 @@ import {
   format,
   getLocalizedAttribute,
 } from "@/src/features/localization/utils";
-import { getLocalDate, getLocalTime } from "../../../get-local-time";
 import { Chip } from "@/src/components/chip/chip";
 import styles from "./styles.module.scss";
 import { getStatus } from "../get-status";
+import {
+  convertDateToUserLocale,
+  convertTimeFromUTCToUserTimezone,
+} from "@/src/lib/utils/timezone-utils";
 
 export const ReservationItem: FC<{
   reservation: GetReservationsResponseDto[number];
@@ -25,11 +28,19 @@ export const ReservationItem: FC<{
       <Typography color="accent">
         {getLocalizedAttribute(reservation.slot, "name", lang)}
       </Typography>
-      <Typography>{getLocalDate(reservation.date, lang)}</Typography>
+      <Typography>{convertDateToUserLocale(reservation.date, lang)}</Typography>
       <Typography>
         {format(d.page.commonAreas.time_from_to, {
-          time1: getLocalTime(reservation.startAt, reservation.date, lang),
-          time2: getLocalTime(reservation.endAt, reservation.date, lang),
+          time1: convertTimeFromUTCToUserTimezone(
+            reservation.startAt,
+            lang,
+            reservation.date
+          ),
+          time2: convertTimeFromUTCToUserTimezone(
+            reservation.endAt,
+            lang,
+            reservation.date
+          ),
         })}
       </Typography>
       <Chip

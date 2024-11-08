@@ -29,15 +29,50 @@
       "services": "Serviços",
       "service_label_reservations": "Reservas",
       "service_label_occurrences": "Ocorrências",
-      "service_label_tenants": "Moradores"
+      "service_label_tenants": "Moradores",
+      "action_change_current_condominium": "Alterar condomínio atual",
+      "action_add_new_condominium": "Adicionar novo condomínio",
+      "action_admin": "Administrar"
     },
     "condominium/add": {
-      "title": "Criar Condomínio",
+      "title": "Adicionar Condomínio",
       "input_label_relationship_type": "Tipo de proprietário",
       "input_description_relationship_type": "Define quais funções você terá dentro do condomínio",
       "input_validation_name_required": "Informe um nome de condomínio válido, como Ed. Downtown",
       "create_condominium": "Criar Condomínio",
       "succeeded_create_condominium": "Condomínio criado com sucesso"
+    },
+    "condominium/mine": {
+      "title": "Meus Condomínios",
+      "succeeded_set_current_condominium": "Condomínio atual alterado para {{ name }}"
+    },
+    "condominium/admin": {
+      "title": "Administração do Condomínio",
+      "service_label_add_common_area": "Adicionar área comum"
+    },
+    "condominium/admin/commonArea/add": {
+      "input_label_common_area_type": "Tipo de área comum",
+      "input_label_start_time": "Horário de início",
+      "input_label_end_time": "Horário de fim",
+      "input_label_time_interval": "Intervalo",
+      "input_description_time_interval": "Informe a duração de cada agendamento, no formato hh:mm",
+      "input_validation_time_interval_required": "Informe um intervalo válido",
+      "input_validation_time_interval_step_mismatch": "Informe um intervalo com incrementos de {{ step }}, como {{ examples }}",
+      "input_validation_time_interval_range_underflow": "Informe um intervalo de no mínimo {{ min }}",
+      "input_validation_time_required": "Informe um horário válido",
+      "fieldset_legend_facility_plural": "Instalações",
+      "fieldset_legend_facility": "Instalação {{ index }}",
+      "input_label_facility_name_ptbr": "Nome (Português)",
+      "input_label_facility_name_en": "Nome (Inglês)",
+      "action_label_add_facility": "Adicionar Instalação",
+      "fieldset_description_facilities": "Adicione instalações à área comum. Agendamentos são feitos por instalação. Uma instalação pode ser a própria área comum, parte dela ou algum dispositivo que necessite de agendamento antes do uso.",
+      "fieldset_description_facilities_gym_example_list": "Instalação 1: Academia Bloco B; Instalação 2: Academia Bloco C",
+      "fieldset_description_facilities_gym_example_title": "Exemplo de academia:",
+      "fieldset_description_facilities_laundry_room_example_list": "Instalação 1: Máquina de Lavar 1; Instalação 2: Máquina de Lavar 2",
+      "fieldset_description_facilities_laundry_room_example_title": "Exemplo de lavanderia:",
+      "input_validation_name_en_required": "Informe um nome válido, como: Gym Block B",
+      "input_validation_name_ptbr_required": "Informe um nome válido, como: Academia Bloco B",
+      "succeeded_create_common_area": "Área comum criada com sucesso"
     },
     "occurrences": {
       "title": "Ocorrências"
@@ -113,8 +148,10 @@
     "save": "Salvar",
     "edit": "Editar",
     "delete": "Deletar",
+    "remove": "Remover",
     "close": "Fechar",
-    "go_back": "Voltar"
+    "go_back": "Voltar",
+    "enter": "Entrar"
   },
   "side_drawer": {
     "change_theme": "Tema Claro/Escuro",
@@ -145,7 +182,9 @@
     "notifications": "Notificações",
     "my_profile": "Meu Perfil",
     "common_areas": "Áreas Comuns",
-    "booking_history": "Histórico"
+    "booking_history": "Histórico",
+    "my_condominiums": "Meus Condomínios",
+    "add_condominium": "Adicionar Condomínio"
   },
   "status": {
     "completed": "Finalizado",

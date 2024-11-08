@@ -8,7 +8,7 @@ import { getDictionary } from "@/src/features/localization/get-dictionary";
 import {
   BottomNavigationBookingHistory,
   BottomNavigationCommonAreas,
-} from "@/src/features/page/commonAreas/components/commonAreaItem/bottom-navigation";
+} from "@/src/features/page/commonAreas/components/bottom-navigation";
 import { CommonAreaItem } from "@/src/features/page/commonAreas/components/commonAreaItem/common-area-item";
 import { CommonAreasService } from "@/src/services/nextcondo/commonAreas/server";
 import { WithLocale } from "@/src/types/with-locale";

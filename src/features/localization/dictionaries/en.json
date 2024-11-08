@@ -29,7 +29,10 @@
       "services": "Services",
       "service_label_reservations": "Reservations",
       "service_label_occurrences": "Occurrences",
-      "service_label_tenants": "Tenants"
+      "service_label_tenants": "Tenants",
+      "action_change_current_condominium": "Change current condominium",
+      "action_add_new_condominium": "Add new condominium",
+      "action_admin": "Administration"
     },
     "condominium/add": {
       "title": "Add Condominium",
@@ -38,6 +41,38 @@
       "input_validation_name_required": "Enter a valid condominium name, like Galaxy Towers",
       "create_condominium": "Create Condominium",
       "succeeded_create_condominium": "Condominium created successfully"
+    },
+    "condominium/mine": {
+      "title": "My Condominiums",
+      "succeeded_set_current_condominium": "Current condominium set to {{ name }}"
+    },
+    "condominium/admin": {
+      "title": "Condominium Administration",
+      "service_label_add_common_area": "Add common area"
+    },
+    "condominium/admin/commonArea/add": {
+      "input_label_common_area_type": "Common area type",
+      "input_label_start_time": "Start time",
+      "input_label_end_time": "End time",
+      "input_label_time_interval": "Interval",
+      "input_description_time_interval": "Enter the duration of each reservation, in the format hh:mm",
+      "input_validation_time_interval_required": "Enter a valid interval",
+      "input_validation_time_interval_step_mismatch": "Enter a interval with increments of {{ step }}, like {{ examples }}",
+      "input_validation_time_interval_range_underflow": "Enter a interval of at least {{ min }}",
+      "input_validation_time_required": "Enter a valid time",
+      "fieldset_legend_facility_plural": "Facilities",
+      "fieldset_legend_facility": "Facility {{ index }}",
+      "input_label_facility_name_ptbr": "Name (Portuguese)",
+      "input_label_facility_name_en": "Name (English)",
+      "action_label_add_facility": "Add Facility",
+      "fieldset_description_facilities": "Add facilities to this common area. Reservations are made for each facility. A facility can be the common area itself, part of it or some device that needs booking before use.",
+      "fieldset_description_facilities_gym_example_list": "Facility 1: Gym Block B; Facility 2: Gym Block C",
+      "fieldset_description_facilities_gym_example_title": "Gym example:",
+      "fieldset_description_facilities_laundry_room_example_list": "Facility 1: Washing machine 1; Facility 2: Washing machine 2",
+      "fieldset_description_facilities_laundry_room_example_title": "Laundry Room example:",
+      "input_validation_name_en_required": "Enter a valid name in English, like Gym Block B",
+      "input_validation_name_ptbr_required": "Enter a valid name in Portuguese (Brazil), like Academia Bloco B",
+      "succeeded_create_common_area": "Common area created successfully"
     },
     "occurrences": {
       "title": "Occurrences"
@@ -113,8 +148,10 @@
     "save": "Save",
     "edit": "Edit",
     "delete": "Delete",
+    "remove": "Remove",
     "close": "Close",
-    "go_back": "Go Back"
+    "go_back": "Go Back",
+    "enter": "Enter"
   },
   "side_drawer": {
     "change_theme": "Theme Dark/Light",
@@ -145,7 +182,9 @@
     "notifications": "Notifications",
     "my_profile": "My Profile",
     "common_areas": "Common Areas",
-    "booking_history": "Booking History"
+    "booking_history": "Booking History",
+    "my_condominiums": "My Condominiums",
+    "add_condominium": "Add Condominium"
   },
   "status": {
     "completed": "Completed",

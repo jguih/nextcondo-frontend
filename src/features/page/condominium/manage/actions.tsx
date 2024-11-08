@@ -1,30 +1,34 @@
 "use server";
-
 import { i18n, Locale } from "@/i18n-config";
+import { getDictionary } from "@/src/features/localization/get-dictionary";
+import { format } from "@/src/features/localization/utils";
 import { ICondominiumService } from "@/src/services/nextcondo/condominium/ICondominiumService";
 import { CondominiumService } from "@/src/services/nextcondo/condominium/server";
 import { revalidatePath } from "next/cache";
-import { getDictionary } from "../../../localization/get-dictionary";
 
-export const ActionAddCondominiumAsync = async (
-  data: FormData,
+export const ActionSetCurrentCondominiumAsync = async (
+  condominiumId: string,
   lang: Locale = i18n.defaultLocale,
-  addCondominiumAsync: ICondominiumService["AddAsync"] = CondominiumService.AddAsync.bind(
+  setCurrentCondominiumAsync: ICondominiumService["SetMineCurrentAsync"] = CondominiumService.SetMineCurrentAsync.bind(
     CondominiumService
   ),
   nextRevalidatePath: typeof revalidatePath = revalidatePath
 ): Promise<{
-  result: Awaited<ReturnType<ICondominiumService["AddAsync"]>>;
+  result: Awaited<ReturnType<ICondominiumService["SetMineCurrentAsync"]>>;
   message: string;
 }> => {
-  const result = await addCondominiumAsync(data);
   const d = await getDictionary(lang);
+  const result = await setCurrentCondominiumAsync(condominiumId);
 
   if (result.success) {
     nextRevalidatePath(`/`);
+    nextRevalidatePath(`/condominium/mine`);
     return {
       result,
-      message: d.page["condominium/add"].succeeded_create_condominium,
+      message: format(
+        d.page["condominium/mine"].succeeded_set_current_condominium,
+        { name: result.response.data?.name ?? "" }
+      ),
     };
   }
 

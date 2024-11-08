@@ -3,6 +3,7 @@ import {
   GetBookingSlotResponseDto,
   GetCommonAreaByIdResponseDto,
   GetCommonAreasResponseDto,
+  GetCommonAreaTypesResponseDto,
   GetReservationsResponseDto,
 } from "./schemas";
 
@@ -14,7 +15,8 @@ export interface ICommonAreasService {
   GetBookingSlotAsync: (
     id: number,
     slotId: number,
-    date: string
+    date: string,
+    timezoneOffsetMinutes: number
   ) => Promise<FetchClientResponse<GetBookingSlotResponseDto>>;
   AddReservationAsync: (
     id: number,
@@ -23,4 +25,8 @@ export interface ICommonAreasService {
   GetReservationsAsync: () => Promise<
     FetchClientResponse<GetReservationsResponseDto>
   >;
+  GetTypesAsync: () => Promise<
+    FetchClientResponse<GetCommonAreaTypesResponseDto>
+  >;
+  AddAsync: (data: FormData) => Promise<FetchClientResponse<undefined>>;
 }

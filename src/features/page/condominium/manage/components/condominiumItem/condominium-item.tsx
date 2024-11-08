@@ -1,14 +1,13 @@
 import { Avatar } from "@/src/components/avatar/avatar";
 import { Typography } from "@/src/components/typography/typography";
-import { GetCondominiumMine } from "@/src/services/nextcondo/condominium/schemas";
+import { GetMineCondominiumResponse } from "@/src/services/nextcondo/condominium/schemas";
 import { FC, Fragment } from "react";
 import styles from "./styles.module.scss";
 import { Dictionary } from "@/src/features/localization/types";
-import { Button } from "@/src/components/button/button";
-import { Link } from "@/src/components/link/link";
+import { EnterCondominiumButton } from "../enter-condominium-button";
 
 export const CondominiumItem: FC<{
-  condominium: GetCondominiumMine[number];
+  condominium: GetMineCondominiumResponse[number];
   disabled: boolean;
   d: Dictionary;
 }> = ({ condominium, disabled, d }) => {
@@ -34,8 +33,11 @@ export const CondominiumItem: FC<{
         </div>
       </div>
       <div className={styles.actions}>
-        <Link href={"/condominium/manage"}>Ver Detalhes</Link>
-        <Button disabled={disabled}>Entrar</Button>
+        <EnterCondominiumButton
+          label={d.button.enter}
+          disabled={disabled}
+          condominiumId={condominium.id}
+        />
       </div>
     </Fragment>
   );

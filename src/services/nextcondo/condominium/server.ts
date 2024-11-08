@@ -3,9 +3,10 @@ import { createFetchClient, IFetchClient } from "@/src/lib/fetchClient/client";
 import { ICondominiumService } from "./ICondominiumService";
 import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
 import {
-  GetCondominiumMineCurrent,
-  GetCondominiumMine,
+  GetMineCurrentCondominiumResponse,
+  GetMineCondominiumResponse,
   schemas,
+  SetMineCurrentCondominiumResponse,
 } from "./schemas";
 import { getNextCondoBackendUrl } from "@/src/lib/environment/get-backend-url";
 import { FetchClientResponse } from "@/src/lib/fetchClient/types";
@@ -51,7 +52,9 @@ class NextCondoCondominiumService implements ICondominiumService {
     return result;
   }
 
-  async GetMineAsync(): Promise<FetchClientResponse<GetCondominiumMine>> {
+  async GetMineAsync(): Promise<
+    FetchClientResponse<GetMineCondominiumResponse>
+  > {
     const result = await this.client.getAsync({
       endpoint: "/Condominium/mine",
       credentials: "include",
@@ -80,7 +83,7 @@ class NextCondoCondominiumService implements ICondominiumService {
   }
 
   async GetMineCurrentAsync(): Promise<
-    FetchClientResponse<GetCondominiumMineCurrent>
+    FetchClientResponse<GetMineCurrentCondominiumResponse>
   > {
     const result = await this.client.getAsync({
       endpoint: "/Condominium/mine/current",
@@ -105,6 +108,39 @@ class NextCondoCondominiumService implements ICondominiumService {
         from: "CondominiumService",
         message: "Failed to fetch current condominium for current user",
       });
+    }
+    return result;
+  }
+
+  async SetMineCurrentAsync(
+    id: string
+  ): Promise<FetchClientResponse<SetMineCurrentCondominiumResponse>> {
+    const result = await this.client.postAsync({
+      endpoint: `/Condominium/mine/current/${id}`,
+      credentials: "include",
+      headers: {
+        cookie: this.GetCookies(),
+      },
+      strategy: new JsonStrategy(schemas.setMineCurrentResponse),
+    });
+    if (result.success) {
+      LogService.info(
+        {
+          ...getLogMessageFromFetchClientResponse(result),
+          from: "CondominiumService",
+          message: "Set current condominium for current user successfully",
+        },
+        { condominium_id: id }
+      );
+    } else {
+      LogService.error(
+        {
+          ...getLogMessageFromFetchClientResponse(result),
+          from: "CondominiumService",
+          message: "Failed to set current condominium for current user",
+        },
+        { condominium_id: id }
+      );
     }
     return result;
   }

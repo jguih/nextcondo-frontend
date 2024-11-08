@@ -12,7 +12,7 @@ import { Metadata } from "next";
 import { FC, PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
-  title: "NextCondo | Condominium Add",
+  title: "NextCondo | Condominium Manage",
 };
 
 const CondominiumManageLayout: FC<PropsWithChildren<WithLocale>> = async ({
@@ -26,17 +26,17 @@ const CondominiumManageLayout: FC<PropsWithChildren<WithLocale>> = async ({
       <AppSnackbarDispatcher position="top" />
       <Layout.Header>
         <Header
-          title={d.page["condominium/add"].title}
+          title={d.page["condominium/mine"].title}
           actionButton={<GoBackButton path="/" />}
         />
       </Layout.Header>
       {children}
       <Layout.BottomNavigation>
-        <BottomNavigationMyCondominiums label={d.bottom_nav.my_condominiums} />
-        <BottomNavigationAddCondominium
-          label={d.bottom_nav.add_condominium}
+        <BottomNavigationMyCondominiums
+          label={d.bottom_nav.my_condominiums}
           selected
         />
+        <BottomNavigationAddCondominium label={d.bottom_nav.add_condominium} />
       </Layout.BottomNavigation>
     </Layout.RootWithBottomNav>
   );

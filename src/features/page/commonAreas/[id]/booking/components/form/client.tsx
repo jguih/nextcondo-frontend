@@ -28,7 +28,7 @@ import styles from "./styles.module.scss";
 import { ActionAddReservationAsync } from "../../actions";
 import { useAppSnackbar } from "@/src/components/snackbar/store";
 import { useRouter } from "next/navigation";
-import { getLocalTime } from "../../../../get-local-time";
+import { getUserTimezoneOffsetMinutes } from "@/src/lib/utils/timezone-utils";
 
 export const Form: FC<
   PropsWithChildren<{
@@ -172,10 +172,12 @@ export const FormTimeSlots: FC<{
 }> = ({ commonAreaId, legend, validationMessages, error }) => {
   const { wasSubmitted } = useFormContext();
   const { state, dispatch } = useBookingFormContext();
+  const timezoneOffsetMinutes = getUserTimezoneOffsetMinutes();
   const swr = useBookingSlot({
     commonAreaId,
     slotId: state.slotId,
     date: state.date,
+    timezoneOffsetMinutes,
   });
   const bookingSlot =
     swr.data?.success && swr.data.hasData ? swr.data.response.data : undefined;
@@ -215,7 +217,6 @@ export const FormTimeSlots: FC<{
     <FieldSet required isError={isError} className={styles["grid-fieldset"]}>
       <Typography tag="legend">{legend}</Typography>
       {bookingSlot.slots.map((slot, index) => {
-        const localTime = getLocalTime(slot.startAt, bookingSlot.date);
         return (
           <RadioGroup key={slot.startAt} disabled={!slot.available}>
             <Radio
@@ -226,7 +227,9 @@ export const FormTimeSlots: FC<{
               checked={state.startAt === slot.startAt}
               onChange={handleOnChange}
             />
-            <Label htmlFor={`slot-${slot.startAt}`}>{localTime}</Label>
+            <Label htmlFor={`slot-${slot.startAt}`}>
+              {slot.startAt.slice(0, 5)}
+            </Label>
           </RadioGroup>
         );
       })}

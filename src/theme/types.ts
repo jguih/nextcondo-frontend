@@ -7,7 +7,7 @@ export type SemanticColors =
   | "warning"
   | "neutral";
 
-type Sizes = {
+export type Sizes = {
   small: "sm";
   medium: "md";
   large: "lg";

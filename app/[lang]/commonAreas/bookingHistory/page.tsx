@@ -9,7 +9,7 @@ import { ReservationItem } from "@/src/features/page/commonAreas/bookingHistory/
 import {
   BottomNavigationBookingHistory,
   BottomNavigationCommonAreas,
-} from "@/src/features/page/commonAreas/components/commonAreaItem/bottom-navigation";
+} from "@/src/features/page/commonAreas/components/bottom-navigation";
 import { CommonAreasService } from "@/src/services/nextcondo/commonAreas/server";
 import { WithLocale } from "@/src/types/with-locale";
 import { FC } from "react";

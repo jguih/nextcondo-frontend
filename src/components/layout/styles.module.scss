@@ -4,11 +4,11 @@
   display: grid;
   grid-template-columns: 1fr;
   // First row for header, last for bottom nav
-  grid-template-rows: var(--header-height) 1fr 80px;
+  grid-template-rows: var(--header-height) 1fr var(--bottom-nav-height);
   min-height: 100dvh;
 
   & .main {
-    max-height: calc(100dvh - var(--header-height) - 80px);
+    max-height: calc(100dvh - var(--header-height) - var(--bottom-nav-height));
   }
 }
 

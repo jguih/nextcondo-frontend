@@ -19,6 +19,7 @@ export type TypographyProps<Tag extends TypographyTags> = {
   color?: SemanticColors;
   muted?: boolean;
   bold?: boolean;
+  noWrap?: boolean;
 } & Omit<ComponentProps<Tag>, "color">;
 
 export const Typography = <Tag extends TypographyTags>({
@@ -26,6 +27,7 @@ export const Typography = <Tag extends TypographyTags>({
   color,
   muted = false,
   bold = false,
+  noWrap = false,
   ...props
 }: TypographyProps<Tag>) => {
   const classes = buildClassNames(
@@ -33,6 +35,7 @@ export const Typography = <Tag extends TypographyTags>({
       [`color-${color}`]: color !== undefined,
       [styles["muted"]]: muted === true,
       [styles.bold]: bold === true,
+      [styles["no-wrap"]]: noWrap === true,
     },
     props.className
   );

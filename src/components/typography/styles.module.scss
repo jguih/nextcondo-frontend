@@ -8,3 +8,9 @@
 .bold {
   font-weight: 800;
 }
+
+.no-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -9,8 +9,8 @@ import { GetCommonAreasResponseDto } from "@/src/services/nextcondo/commonAreas/
 import { Link } from "@/src/components/link/link";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
-import { getLocalTime } from "../../get-local-time";
 import Image from "next/image";
+import { convertTimeFromUTCToUserTimezone } from "@/src/lib/utils/timezone-utils";
 
 export const CommonAreaItem: FC<{
   commonArea: GetCommonAreasResponseDto[number];
@@ -32,8 +32,11 @@ export const CommonAreaItem: FC<{
           </Typography>
           <Typography>
             {format(d.page.commonAreas.time_from_to, {
-              time1: getLocalTime(commonArea.startTime),
-              time2: getLocalTime(commonArea.endTime),
+              time1: convertTimeFromUTCToUserTimezone(
+                commonArea.startTime,
+                lang
+              ),
+              time2: convertTimeFromUTCToUserTimezone(commonArea.endTime, lang),
             })}
           </Typography>
           <Typography tag="small" muted>

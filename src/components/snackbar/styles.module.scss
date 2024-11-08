@@ -8,7 +8,7 @@ $anim-timing-function: ease-in-out;
   border-radius: var(--radius);
   position: fixed;
   z-index: var(--snackbar-z-index);
-  box-shadow: 4px 4px 4px -4px var(--shadow-color);
+  box-shadow: var(--box-shadow);
 
   &.in {
     animation: $anim-duration snackbar-in $anim-timing-function;

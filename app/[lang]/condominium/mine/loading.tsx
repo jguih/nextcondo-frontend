@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Layout } from "@/src/components/layout/layout";
 import { LoadingPage } from "@/src/components/loading/loading-page";
 
-const CondominiumAddLoading: FC = async () => {
+const CondominiumManageLoading: FC = async () => {
   return (
     <Layout.Main>
       <LoadingPage />
@@ -10,4 +10,4 @@ const CondominiumAddLoading: FC = async () => {
   );
 };
 
-export default CondominiumAddLoading;
+export default CondominiumManageLoading;

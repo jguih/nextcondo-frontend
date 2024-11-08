@@ -24,6 +24,14 @@ import {
   HomeBottomNavigationNotifications,
 } from "@/src/features/page/home/components/bottom-navigation";
 import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
+import { List } from "@/src/components/list/list";
+import {
+  ListItem,
+  ListItemAnchor,
+  ListItemButton,
+  ListItemDropdown,
+} from "@/src/components/list/items";
+import { ChevronDown } from "@/src/components/icon/icons/chevron-down";
 
 const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
@@ -69,7 +77,38 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   return (
     <Layout.RootWithBottomNav>
       <Layout.Header>
-        <Header title={currentCondo.name} />
+        <Header
+          title={
+            <List>
+              <ListItem>
+                <ListItemButton>
+                  {currentCondo.name} <ChevronDown size="sm" bold />
+                </ListItemButton>
+                <ListItemDropdown>
+                  <ListItem>
+                    <ListItemAnchor href={"/condominium/mine"}>
+                      <Typography noWrap>
+                        {d.page.home.action_change_current_condominium}
+                      </Typography>
+                    </ListItemAnchor>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemAnchor href={"/condominium/add"}>
+                      <Typography noWrap>
+                        {d.page.home.action_add_new_condominium}
+                      </Typography>
+                    </ListItemAnchor>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemAnchor href={"/condominium/admin"}>
+                      <Typography noWrap>{d.page.home.action_admin}</Typography>
+                    </ListItemAnchor>
+                  </ListItem>
+                </ListItemDropdown>
+              </ListItem>
+            </List>
+          }
+        />
       </Layout.Header>
       <AppSnackbarDispatcher position="top" />
       <AppSidebar>

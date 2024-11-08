@@ -1,30 +1,31 @@
 "use server";
 
 import { i18n, Locale } from "@/i18n-config";
-import { ICondominiumService } from "@/src/services/nextcondo/condominium/ICondominiumService";
-import { CondominiumService } from "@/src/services/nextcondo/condominium/server";
+import { getDictionary } from "@/src/features/localization/get-dictionary";
+import { ICommonAreasService } from "@/src/services/nextcondo/commonAreas/ICommonAreasService";
+import { CommonAreasService } from "@/src/services/nextcondo/commonAreas/server";
 import { revalidatePath } from "next/cache";
-import { getDictionary } from "../../../localization/get-dictionary";
 
-export const ActionAddCondominiumAsync = async (
+export const ActionAddCommonAreaAsync = async (
   data: FormData,
   lang: Locale = i18n.defaultLocale,
-  addCondominiumAsync: ICondominiumService["AddAsync"] = CondominiumService.AddAsync.bind(
-    CondominiumService
+  addCommonAreaAsync: ICommonAreasService["AddAsync"] = CommonAreasService.AddAsync.bind(
+    CommonAreasService
   ),
   nextRevalidatePath: typeof revalidatePath = revalidatePath
 ): Promise<{
-  result: Awaited<ReturnType<ICondominiumService["AddAsync"]>>;
+  result: Awaited<ReturnType<ICommonAreasService["AddAsync"]>>;
   message: string;
 }> => {
-  const result = await addCondominiumAsync(data);
   const d = await getDictionary(lang);
+  const result = await addCommonAreaAsync(data);
 
   if (result.success) {
-    nextRevalidatePath(`/`);
+    nextRevalidatePath("/commonAreas");
     return {
       result,
-      message: d.page["condominium/add"].succeeded_create_condominium,
+      message:
+        d.page["condominium/admin/commonArea/add"].succeeded_create_common_area,
     };
   }
 

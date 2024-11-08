@@ -14,9 +14,9 @@ import { TextAreaValidationContainer } from "@/src/components/validation/textare
 import { ValidationMessages } from "@/src/components/validation/types";
 import { useRouter } from "next/navigation";
 import { FC, PropsWithChildren } from "react";
-import { ActionAddCondominiumAsync } from "../actions";
 import { useAppSnackbar } from "@/src/components/snackbar/store";
 import { useLocale } from "@/src/features/localization/components/lang-provider";
+import { ActionAddCondominiumAsync } from "../../actions";
 
 export const Form: FC<PropsWithChildren> = ({ children }) => {
   const form = useForm();

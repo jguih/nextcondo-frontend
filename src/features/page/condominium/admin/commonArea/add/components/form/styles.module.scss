@@ -1,0 +1,10 @@
+@use "theme.utils" as theme;
+
+.delete-btn {
+  margin-top: theme.spacing(2);
+  margin-left: auto;
+}
+
+.add-btn {
+  margin-top: theme.spacing(2);
+}

@@ -17,3 +17,8 @@ export const ListItemButton: FC<ComponentProps<"button">> = (props) => {
   const classes = buildClassNames({}, styles["item-button"], props.className);
   return <button {...props} className={classes} />;
 };
+
+export const ListItemDropdown: FC<ComponentProps<"ul">> = (props) => {
+  const classes = buildClassNames({}, styles["item-dropdown"], props.className);
+  return <ul {...props} className={classes} />;
+};

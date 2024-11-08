@@ -7,6 +7,7 @@ import {
   GetBookingSlotResponseDto,
   GetCommonAreaByIdResponseDto,
   GetCommonAreasResponseDto,
+  GetCommonAreaTypesResponseDto,
   GetReservationsResponseDto,
   schemas,
 } from "./schemas";
@@ -153,6 +154,66 @@ export class NextCondoCommonAreasService implements ICommonAreasService {
         ...getLogMessageFromFetchClientResponse(result),
         from: "CommonAreasService",
         message: "Failed to fetch reservations",
+      });
+    }
+    return result;
+  }
+
+  async GetTypesAsync(): Promise<
+    FetchClientResponse<GetCommonAreaTypesResponseDto>
+  > {
+    const result = await this.client.getAsync({
+      endpoint: `/CommonAreas/types`,
+      strategy: new JsonStrategy(schemas.getCommonAreaTypesResponseDto),
+      credentials: "include",
+      headers: {
+        cookie: this.GetCookies(),
+      },
+    });
+    if (result.success) {
+      LogService.info(
+        {
+          ...getLogMessageFromFetchClientResponse(result),
+          from: "CommonAreasService",
+          message: "Fetched common area types successfully",
+        },
+        {
+          common_area_type_id_list: result.response.data?.map(
+            (type) => type.id
+          ),
+        }
+      );
+    } else {
+      LogService.error({
+        ...getLogMessageFromFetchClientResponse(result),
+        from: "CommonAreasService",
+        message: "Failed to fetch common area types",
+      });
+    }
+    return result;
+  }
+
+  async AddAsync(data: FormData): Promise<FetchClientResponse<undefined>> {
+    const result = await this.client.postAsync({
+      endpoint: `/CommonAreas`,
+      strategy: new EmptyStrategy(),
+      credentials: "include",
+      headers: {
+        cookie: this.GetCookies(),
+      },
+      body: data,
+    });
+    if (result.success) {
+      LogService.info({
+        ...getLogMessageFromFetchClientResponse(result),
+        from: "CommonAreasService",
+        message: "Created common area successfully",
+      });
+    } else {
+      LogService.error({
+        ...getLogMessageFromFetchClientResponse(result),
+        from: "CommonAreasService",
+        message: "Failed to create common area",
       });
     }
     return result;

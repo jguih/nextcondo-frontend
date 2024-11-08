@@ -6,6 +6,7 @@ import {
   GetBookingSlotResponseDto,
   GetCommonAreaByIdResponseDto,
   GetCommonAreasResponseDto,
+  GetCommonAreaTypesResponseDto,
   GetReservationsResponseDto,
   schemas,
 } from "./schemas";
@@ -33,10 +34,11 @@ export class NextCondoCommonAreasService implements ICommonAreasService {
   async GetBookingSlotAsync(
     id: number,
     slotId: number,
-    date: string
+    date: string,
+    timezoneOffsetMinutes: number
   ): Promise<FetchClientResponse<GetBookingSlotResponseDto>> {
     const result = await this.client.getAsync({
-      endpoint: `/CommonAreas/${id}/slot/${slotId}/date/${date}/bookingSlots`,
+      endpoint: `/CommonAreas/${id}/slot/${slotId}/date/${date}/bookingSlots?timezoneOffsetMinutes=${timezoneOffsetMinutes}`,
       strategy: new JsonStrategy(schemas.getBookingSlotResponseDto),
       credentials: "include",
     });
@@ -63,6 +65,16 @@ export class NextCondoCommonAreasService implements ICommonAreasService {
   async GetReservationsAsync(): Promise<
     FetchClientResponse<GetReservationsResponseDto>
   > {
+    throw new Error("Not Implemented");
+  }
+
+  async GetTypesAsync(): Promise<
+    FetchClientResponse<GetCommonAreaTypesResponseDto>
+  > {
+    throw new Error("Not Implemented");
+  }
+
+  async AddAsync(): Promise<FetchClientResponse<undefined>> {
     throw new Error("Not Implemented");
   }
 }

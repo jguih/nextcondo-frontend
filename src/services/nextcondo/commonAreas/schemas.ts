@@ -73,9 +73,15 @@ export type GetReservationsResponseDto = z.infer<
   typeof getReservationsResponseDtoSchema
 >;
 
+const getCommonAreaTypesResponseDtoSchema = z.array(commonAreaTypeSchema);
+export type GetCommonAreaTypesResponseDto = z.infer<
+  typeof getCommonAreaTypesResponseDtoSchema
+>;
+
 export const schemas = {
   getCommonAreasResponseDto: getCommonAreasResponseDtoSchema,
   getCommonAreaByIdResponseDto: getCommonAreaByIdResponseDtoSchema,
   getBookingSlotResponseDto: getBookingSlotResponseDtoSchema,
   getReservationsResponseDto: getReservationsResponseDtoSchema,
+  getCommonAreaTypesResponseDto: getCommonAreaTypesResponseDtoSchema,
 };
