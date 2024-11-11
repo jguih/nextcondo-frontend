@@ -10,13 +10,16 @@ import {
   BottomNavigationBookingHistory,
   BottomNavigationCommonAreas,
 } from "@/src/features/page/commonAreas/components/bottom-navigation";
+import { getUserTimezoneOffsetMinutes } from "@/src/lib/utils/timezone-utils";
 import { CommonAreasService } from "@/src/services/nextcondo/commonAreas/server";
 import { WithLocale } from "@/src/types/with-locale";
 import { FC } from "react";
 
 const BookingHistoryPage: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
-  const result = await CommonAreasService.GetReservationsAsync();
+  const result = await CommonAreasService.GetReservationsAsync(
+    getUserTimezoneOffsetMinutes()
+  );
   const reservations =
     result.success && result.hasData ? result.response.data : [];
 

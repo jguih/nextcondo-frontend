@@ -10,10 +10,7 @@ import {
 import { Chip } from "@/src/components/chip/chip";
 import styles from "./styles.module.scss";
 import { getStatus } from "../get-status";
-import {
-  convertDateToUserLocale,
-  convertTimeFromUTCToUserTimezone,
-} from "@/src/lib/utils/timezone-utils";
+import { convertDateToUserLocale } from "@/src/lib/utils/timezone-utils";
 
 export const ReservationItem: FC<{
   reservation: GetReservationsResponseDto[number];
@@ -31,16 +28,8 @@ export const ReservationItem: FC<{
       <Typography>{convertDateToUserLocale(reservation.date, lang)}</Typography>
       <Typography>
         {format(d.page.commonAreas.time_from_to, {
-          time1: convertTimeFromUTCToUserTimezone(
-            reservation.startAt,
-            lang,
-            reservation.date
-          ),
-          time2: convertTimeFromUTCToUserTimezone(
-            reservation.endAt,
-            lang,
-            reservation.date
-          ),
+          time1: reservation.startAt.slice(0, 5),
+          time2: reservation.endAt.slice(0, 5),
         })}
       </Typography>
       <Chip

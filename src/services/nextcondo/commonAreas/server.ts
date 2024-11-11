@@ -125,11 +125,11 @@ export class NextCondoCommonAreasService implements ICommonAreasService {
     return result;
   }
 
-  async GetReservationsAsync(): Promise<
-    FetchClientResponse<GetReservationsResponseDto>
-  > {
+  async GetReservationsAsync(
+    timezoneOffsetMinutes: number
+  ): Promise<FetchClientResponse<GetReservationsResponseDto>> {
     const result = await this.client.getAsync({
-      endpoint: `/CommonAreas/reservation`,
+      endpoint: `/CommonAreas/reservation?timezoneOffsetMinutes=${timezoneOffsetMinutes}`,
       strategy: new JsonStrategy(schemas.getReservationsResponseDto),
       credentials: "include",
       headers: {

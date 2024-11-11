@@ -22,9 +22,9 @@ export interface ICommonAreasService {
     id: number,
     data: FormData
   ) => Promise<FetchClientResponse<undefined>>;
-  GetReservationsAsync: () => Promise<
-    FetchClientResponse<GetReservationsResponseDto>
-  >;
+  GetReservationsAsync: (
+    timezoneOffsetMinutes: number
+  ) => Promise<FetchClientResponse<GetReservationsResponseDto>>;
   GetTypesAsync: () => Promise<
     FetchClientResponse<GetCommonAreaTypesResponseDto>
   >;

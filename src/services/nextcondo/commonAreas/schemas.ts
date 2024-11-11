@@ -40,6 +40,7 @@ const reservationDtoSchema = z.object({
     z.literal("Completed"),
     z.literal("In Progress"),
     z.literal("Confirmed"),
+    z.literal(""),
   ]),
   commonArea: z.object({
     id: z.number(),

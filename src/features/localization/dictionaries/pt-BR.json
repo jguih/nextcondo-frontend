@@ -189,6 +189,7 @@
   "status": {
     "completed": "Finalizado",
     "confirmed": "Confirmado",
-    "in_progress": "Em Andamento"
+    "in_progress": "Em Andamento",
+    "unknown": "Unknown"
   }
 }

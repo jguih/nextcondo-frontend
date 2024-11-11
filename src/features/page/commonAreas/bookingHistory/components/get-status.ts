@@ -16,5 +16,7 @@ export const getStatus = (
     case "In Progress": {
       return d.status.in_progress;
     }
+    default:
+      return d.status.unknown;
   }
 };
