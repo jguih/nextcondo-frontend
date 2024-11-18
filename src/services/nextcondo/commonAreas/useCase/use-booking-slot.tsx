@@ -33,7 +33,6 @@ export const useBookingSlot = ({
         slotId,
         date,
         timezoneOffsetMinutes
-      ),
-    { refreshInterval: 1000 * 30 }
+      )
   );
 };

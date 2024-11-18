@@ -14,7 +14,7 @@ import { SubmitButton } from "@/src/components/button/submit/submit";
 import { Typography } from "@/src/components/typography/typography";
 import { List } from "@/src/components/list/list";
 import { ListItem } from "@/src/components/list/items";
-import { getUserTimezoneOffsetMinutes } from "@/src/lib/utils/timezone-utils";
+import { UserTimezoneOffsetMinutesInput } from "@/src/lib/utils/timezone/timezone-offset-input";
 
 export const AddCommonAreaForm: FC<{ d: Dictionary }> = async ({ d }) => {
   const pageDic = d.page["condominium/admin/commonArea/add"];
@@ -112,12 +112,7 @@ export const AddCommonAreaForm: FC<{ d: Dictionary }> = async ({ d }) => {
           </>
         }
       />
-      <input
-        id="timezone-offset-minutes"
-        name="timezoneOffsetMinutes"
-        defaultValue={getUserTimezoneOffsetMinutes()}
-        hidden
-      />
+      <UserTimezoneOffsetMinutesInput />
       <SubmitButton>{d.button.save}</SubmitButton>
     </Form>
   );

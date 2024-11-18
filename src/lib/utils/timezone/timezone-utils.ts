@@ -1,3 +1,4 @@
+import "client-only";
 import { Locale } from "@/i18n-config";
 
 export const getUserTimezoneOffsetMinutes = () => {

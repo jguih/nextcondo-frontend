@@ -62,10 +62,35 @@ export class NextCondoCommonAreasService implements ICommonAreasService {
     throw new Error("Not Implemented");
   }
 
-  async GetReservationsAsync(): Promise<
-    FetchClientResponse<GetReservationsResponseDto>
-  > {
-    throw new Error("Not Implemented");
+  async GetReservationsAsync(
+    timezoneOffsetMinutes: number
+  ): Promise<FetchClientResponse<GetReservationsResponseDto>> {
+    const result = await this.client.getAsync({
+      endpoint: `/CommonAreas/reservation?timezoneOffsetMinutes=${timezoneOffsetMinutes}`,
+      strategy: new JsonStrategy(schemas.getReservationsResponseDto),
+      credentials: "include",
+    });
+    if (result.success) {
+      LogService.info(
+        {
+          ...getLogMessageFromFetchClientResponse(result),
+          from: "CommonAreasService",
+          message: "Fetched reservations successfully",
+        },
+        {
+          reservation_id_list: result.response.data?.map(
+            (reservation) => reservation.id
+          ),
+        }
+      );
+    } else {
+      LogService.error({
+        ...getLogMessageFromFetchClientResponse(result),
+        from: "CommonAreasService",
+        message: "Failed to fetch reservations",
+      });
+    }
+    return result;
   }
 
   async GetTypesAsync(): Promise<

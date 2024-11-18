@@ -28,7 +28,7 @@ import styles from "./styles.module.scss";
 import { ActionAddReservationAsync } from "../../actions";
 import { useAppSnackbar } from "@/src/components/snackbar/store";
 import { useRouter } from "next/navigation";
-import { getUserTimezoneOffsetMinutes } from "@/src/lib/utils/timezone-utils";
+import { getUserTimezoneOffsetMinutes } from "@/src/lib/utils/timezone/timezone-utils";
 
 export const Form: FC<
   PropsWithChildren<{

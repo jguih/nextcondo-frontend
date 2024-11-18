@@ -10,7 +10,7 @@ import { Link } from "@/src/components/link/link";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import Image from "next/image";
-import { convertTimeFromUTCToUserTimezone } from "@/src/lib/utils/timezone-utils";
+import { CommonAreaTime } from "./common-area-time";
 
 export const CommonAreaItem: FC<{
   commonArea: GetCommonAreasResponseDto[number];
@@ -30,15 +30,11 @@ export const CommonAreaItem: FC<{
           <Typography tag="h5" color="primary" bold>
             {getLocalizedAttribute(commonArea.type, "name", lang)}
           </Typography>
-          <Typography>
-            {format(d.page.commonAreas.time_from_to, {
-              time1: convertTimeFromUTCToUserTimezone(
-                commonArea.startTime,
-                lang
-              ),
-              time2: convertTimeFromUTCToUserTimezone(commonArea.endTime, lang),
-            })}
-          </Typography>
+          <CommonAreaTime
+            text={d.page.commonAreas.time_from_to}
+            startTime={commonArea.startTime}
+            endTime={commonArea.endTime}
+          />
           <Typography tag="small" muted>
             {commonArea.slots.length > 1
               ? format(d.page.commonAreas.available_facility_plural, {
