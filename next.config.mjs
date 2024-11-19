@@ -4,6 +4,11 @@ const nextConfig = {
   sassOptions: {
     includePaths: ['./src/theme'],
   },
+  images: {
+    remotePatterns: [
+      {protocol: "https", hostname: "**"}
+    ]
+  }
 };
 
 export default nextConfig;

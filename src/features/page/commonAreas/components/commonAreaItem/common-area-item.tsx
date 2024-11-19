@@ -17,18 +17,25 @@ export const CommonAreaItem: FC<{
   lang: Locale;
 }> = async ({ commonArea, lang }) => {
   const d = await getDictionary(lang);
+  const commonAreaTypeName = getLocalizedAttribute(
+    commonArea.type,
+    "name",
+    lang
+  );
   return (
     <div>
       <div className={styles.item}>
         <Image
-          src="/placeholder/gym.jpg"
+          src={commonArea.coverImageURL}
           height={132}
           width={112}
-          alt="Placeholder Image"
+          alt={`cover image for ${commonAreaTypeName}`}
+          unoptimized
+          priority
         />
         <div className={styles.details}>
           <Typography tag="h5" color="primary" bold>
-            {getLocalizedAttribute(commonArea.type, "name", lang)}
+            {commonAreaTypeName}
           </Typography>
           <CommonAreaTime
             text={d.page.commonAreas.time_from_to}
