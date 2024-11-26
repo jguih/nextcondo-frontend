@@ -7,6 +7,7 @@ import { JsonStrategy } from "@/src/lib/fetchClient/json-strategy";
 import { getNextCondoBackendUrl } from "@/src/lib/environment/get-backend-url";
 import { LogService } from "../../logger/server";
 import { getLogMessageFromFetchClientResponse } from "../../logger/utils/get-fetch-client-response-message";
+import { CondominiumService } from "../condominium/server";
 
 export class NextCondoApiUsersService implements IUsersService {
   client: IFetchClient;
@@ -39,6 +40,25 @@ export class NextCondoApiUsersService implements IUsersService {
         message: "Failed to fetch current user",
       });
     }
+  }
+
+  async IsOwnerOrManagerOfCurrentCondomominium(): Promise<boolean> {
+    const me = await this.GetMeAsync();
+    const result = await CondominiumService.GetMineCurrentAsync();
+    const currentCondominium =
+      result.success && result.hasData ? result.response.data : undefined;
+    if (!currentCondominium || !me) return false;
+    if (currentCondominium.owner.id === me.id) {
+      return true;
+    }
+    if (
+      currentCondominium.members.some(
+        (member) => member.id === me.id && member.relationshipType === "Manager"
+      )
+    ) {
+      return true;
+    }
+    return false;
   }
 }
 
