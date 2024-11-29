@@ -1,8 +1,6 @@
 import { FC, Fragment } from "react";
 import { WithLocale } from "@/src/types/with-locale";
 import { LoginForm } from "@/src/features/page/login/components/loginForm/server";
-import { ThemeToggle } from "@/src/theme/components/theme-toggle";
-import styles from "./styles.module.scss";
 import { redirect } from "next/navigation";
 import { UsersService } from "@/src/services/nextcondo/users/server";
 import { Typography } from "@/src/components/typography/typography";
@@ -18,10 +16,7 @@ const Login: FC<WithLocale> = async ({ params: { lang } }) => {
 
   return (
     <Fragment>
-      <div className={styles["title-container"]}>
-        <Typography tag="h1">{d.page.login.title}</Typography>
-        <ThemeToggle />
-      </div>
+      <Typography tag="h1">{d.page.login.title}</Typography>
       <div>
         <Typography tag="small" muted>
           {d.page.login.subtitle}{" "}

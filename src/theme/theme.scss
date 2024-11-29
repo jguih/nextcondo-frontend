@@ -375,19 +375,46 @@ $themes: (
   ),
 );
 
-:root[data-theme="light"] {
-  $light: map.get($themes, "light");
-  @each $color, $value in $light {
-    --#{$color}: #{$value};
+@media (prefers-color-scheme: no-preference) {
+  :root {
+    $light: map.get($themes, "light");
+    @each $color, $value in $light {
+      --#{$color}: #{$value};
+    }
   }
 }
 
-:root[data-theme="dark"] {
-  $dark: map.get($themes, "dark");
-  @each $color, $value in $dark {
-    --#{$color}: #{$value};
+@media (prefers-color-scheme: light) {
+  :root {
+    $light: map.get($themes, "light");
+    @each $color, $value in $light {
+      --#{$color}: #{$value};
+    }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    $dark: map.get($themes, "dark");
+    @each $color, $value in $dark {
+      --#{$color}: #{$value};
+    }
+  }
+}
+
+// :root[data-theme="light"] {
+//   $light: map.get($themes, "light");
+//   @each $color, $value in $light {
+//     --#{$color}: #{$value};
+//   }
+// }
+
+// :root[data-theme="dark"] {
+//   $dark: map.get($themes, "dark");
+//   @each $color, $value in $dark {
+//     --#{$color}: #{$value};
+//   }
+// }
 
 :root {
   --spacing: 0.6rem;

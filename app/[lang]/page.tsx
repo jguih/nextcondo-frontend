@@ -16,7 +16,6 @@ import { AppSidebarContent } from "@/src/components/sidebar/app/content";
 import {
   AppSidebarItemConfigurations,
   AppSidebarItemLogout,
-  AppSidebarItemThemeToggler,
 } from "@/src/components/sidebar/app/items";
 import {
   HomeBottomNavigationHome,
@@ -55,7 +54,6 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
             <AppSidebarItemConfigurations
               label={d.side_drawer.configurations}
             />
-            <AppSidebarItemThemeToggler label={d.side_drawer.change_theme} />
             <AppSidebarItemLogout label={d.auth.logout} />
           </AppSidebarContent>
         </AppSidebar>
@@ -115,7 +113,6 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
         <AppSidebarHeader title={currentCondo.name} />
         <AppSidebarContent>
           <AppSidebarItemConfigurations label={d.side_drawer.configurations} />
-          <AppSidebarItemThemeToggler label={d.side_drawer.change_theme} />
           <AppSidebarItemLogout label={d.auth.logout} />
         </AppSidebarContent>
       </AppSidebar>

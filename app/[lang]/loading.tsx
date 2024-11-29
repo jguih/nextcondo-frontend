@@ -1,8 +1,8 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
 import { CircularProgress } from "@/src/components/circularProgress/circular-progress";
 import { Layout } from "@/src/components/layout/layout";
 import { Header } from "@/src/components/header/header";
+import { LoadingPage } from "@/src/components/loading/loading-page";
 
 const HomeLoading: FC = async () => {
   return (
@@ -10,8 +10,8 @@ const HomeLoading: FC = async () => {
       <Layout.Header>
         <Header title={<CircularProgress />} />
       </Layout.Header>
-      <Layout.Main className={styles["loading-container"]}>
-        <CircularProgress size="lg" />
+      <Layout.Main>
+        <LoadingPage />
       </Layout.Main>
     </Layout.Root>
   );

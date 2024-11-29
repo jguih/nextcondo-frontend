@@ -24,11 +24,7 @@ const HomeLayout: FC<PropsWithChildren<WithLocale>> = async ({
 }) => {
   const nextcondoBackendUrl = await getNextCondoBackendPublicUrl();
   return (
-    <html
-      lang={lang}
-      data-theme="light"
-      style={{ fontFamily: `${InterFont.style.fontFamily}` }}
-    >
+    <html lang={lang} style={{ fontFamily: `${InterFont.style.fontFamily}` }}>
       <body>
         <LocaleProvider lang={lang}>
           <GlobalServiceProvider
