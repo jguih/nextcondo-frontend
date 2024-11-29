@@ -40,6 +40,8 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   }
   const result = await CondominiumService.GetMineCurrentAsync();
   const currentCondo = result.success ? result.response.data : undefined;
+  const isManagerOrOwner =
+    await UsersService.IsOwnerOrManagerOfCurrentCondomominium();
 
   if (!currentCondo) {
     return (
@@ -97,11 +99,15 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
                       </Typography>
                     </ListItemAnchor>
                   </ListItem>
-                  <ListItem>
-                    <ListItemAnchor href={"/condominium/admin"}>
-                      <Typography noWrap>{d.page.home.action_admin}</Typography>
-                    </ListItemAnchor>
-                  </ListItem>
+                  {isManagerOrOwner && (
+                    <ListItem>
+                      <ListItemAnchor href={"/condominium/admin"}>
+                        <Typography noWrap>
+                          {d.page.home.action_admin}
+                        </Typography>
+                      </ListItemAnchor>
+                    </ListItem>
+                  )}
                 </ListItemDropdown>
               </ListItem>
             </List>
