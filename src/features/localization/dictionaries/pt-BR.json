@@ -151,7 +151,8 @@
     "remove": "Remover",
     "close": "Fechar",
     "go_back": "Voltar",
-    "enter": "Entrar"
+    "enter": "Entrar",
+    "create": "Criar"
   },
   "side_drawer": {
     "change_theme": "Tema Claro/Escuro",

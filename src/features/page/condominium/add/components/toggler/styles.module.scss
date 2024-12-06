@@ -1,0 +1,5 @@
+@use "theme.utils" as theme;
+
+.button-group {
+  margin-bottom: theme.spacing(2);
+}

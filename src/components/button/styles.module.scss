@@ -3,6 +3,7 @@
 .button {
   padding: theme.spacing(0.6) theme.spacing(1);
   border: var(--border) solid transparent;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: background-color 0.2s ease;
 
@@ -11,10 +12,6 @@
   justify-content: center;
   align-items: center;
   gap: theme.spacing(1);
-
-  &:not(.round) {
-    border-radius: var(--radius-sm);
-  }
 }
 
 .submit {
@@ -103,5 +100,23 @@
 
   .light.#{$color} {
     @include light("#{$color}-light");
+  }
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+
+  .button:first-child {
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  }
+
+  .button {
+    border-radius: 0;
+  }
+
+  .button:last-child {
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   }
 }

@@ -151,7 +151,8 @@
     "remove": "Remove",
     "close": "Close",
     "go_back": "Go Back",
-    "enter": "Enter"
+    "enter": "Enter",
+    "create": "Create"
   },
   "side_drawer": {
     "change_theme": "Theme Dark/Light",
