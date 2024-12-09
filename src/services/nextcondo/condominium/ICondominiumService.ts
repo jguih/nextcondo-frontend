@@ -25,4 +25,5 @@ export interface ICondominiumService {
   SetMineCurrentAsync: (
     id: string
   ) => Promise<FetchClientResponse<SetMineCurrentCondominiumResponse>>;
+  JoinAsync: (id: string) => Promise<FetchClientResponse<undefined>>;
 }

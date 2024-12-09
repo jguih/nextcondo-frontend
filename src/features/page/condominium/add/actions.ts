@@ -55,3 +55,54 @@ export const ActionAddCondominiumAsync = async (
     message: d.error.generic,
   };
 };
+
+export const ActionJoinCondominiumAsync = async (
+  data: FormData,
+  lang: Locale = i18n.defaultLocale,
+  joinCondominiumAsync: ICondominiumService["JoinAsync"] = CondominiumService.JoinAsync.bind(
+    CondominiumService
+  ),
+  nextRevalidatePath: typeof revalidatePath = revalidatePath
+): Promise<{
+  result: Awaited<ReturnType<ICondominiumService["JoinAsync"]>>;
+  message: string;
+}> => {
+  const id = data.get("id") as string;
+  const result = await joinCondominiumAsync(id);
+  const d = await getDictionary(lang);
+
+  if (result.success) {
+    nextRevalidatePath(`/`);
+    return {
+      result,
+      message: d.page["condominium/add"].succeeded_create_condominium,
+    };
+  }
+
+  // Error
+  if (result.response && result.response.statusCode === 401) {
+    return {
+      result,
+      message: d.error.not_authorized_to_perform_action,
+    };
+  }
+
+  if (result.response && result.response.statusCode === 404) {
+    return {
+      result,
+      message: d.error.resource_not_found,
+    };
+  }
+
+  if (!result.response) {
+    return {
+      result,
+      message: d.error.failed_to_stablish_connection_with_server,
+    };
+  }
+
+  return {
+    result,
+    message: d.error.generic,
+  };
+};

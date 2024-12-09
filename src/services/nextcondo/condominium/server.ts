@@ -144,6 +144,37 @@ class NextCondoCondominiumService implements ICondominiumService {
     }
     return result;
   }
+
+  async JoinAsync(id: string): Promise<FetchClientResponse<undefined>> {
+    const result = await this.client.postAsync({
+      endpoint: `/Condominium/join/${id}`,
+      credentials: "include",
+      headers: {
+        cookie: this.GetCookies(),
+      },
+      strategy: new EmptyStrategy(),
+    });
+    if (result.success) {
+      LogService.info(
+        {
+          ...getLogMessageFromFetchClientResponse(result),
+          from: "CondominiumService",
+          message: "Join condominium successfully",
+        },
+        { condominium_id: id }
+      );
+    } else {
+      LogService.error(
+        {
+          ...getLogMessageFromFetchClientResponse(result),
+          from: "CondominiumService",
+          message: "Failed to join condominium",
+        },
+        { condominium_id: id }
+      );
+    }
+    return result;
+  }
 }
 
 export const CondominiumService: ICondominiumService =

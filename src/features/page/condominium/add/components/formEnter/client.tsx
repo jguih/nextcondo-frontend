@@ -8,12 +8,28 @@ import { Typography } from "@/src/components/typography/typography";
 import { InputValidationContainer } from "@/src/components/validation/input-validation-container";
 import { ValidationMessages } from "@/src/components/validation/types";
 import { FC, PropsWithChildren } from "react";
+import { ActionJoinCondominiumAsync } from "../../actions";
+import { useLocale } from "@/src/features/localization/components/lang-provider";
+import { useAppSnackbar } from "@/src/components/snackbar/store";
+import { useRouter } from "next/navigation";
 
 export const Form: FC<PropsWithChildren> = ({ children }) => {
   const form = useForm();
   const { handleSubmitAsync } = form;
+  const lang = useLocale();
+  const snackbar = useAppSnackbar((state) => state.dispatch);
+  const router = useRouter();
 
-  const handleOnSubmit = handleSubmitAsync(async () => {});
+  const handleOnSubmit = handleSubmitAsync(async (data) => {
+    const { result, message } = await ActionJoinCondominiumAsync(data, lang);
+    if (result.success) {
+      snackbar(message, "success");
+      router.push(`/condominium/mine`);
+      router.refresh();
+    } else {
+      snackbar(message, "error");
+    }
+  });
 
   return (
     <FormProvider {...form}>
