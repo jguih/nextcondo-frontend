@@ -40,7 +40,10 @@
       "input_description_relationship_type": "Defines which functions you will have access to",
       "input_validation_name_required": "Enter a valid condominium name, like Galaxy Towers",
       "create_condominium": "Create Condominium",
-      "succeeded_create_condominium": "Condominium created successfully"
+      "succeeded_create_condominium": "Condominium created successfully",
+      "enter_condominium": "Join Condominium",
+      "input_label_id": "Id",
+      "input_validation_id_required": "Enter a valid condominium Id, like 432b4b02-7443-42a2-bae1-b888e7ccf5d0"
     },
     "condominium/mine": {
       "title": "My Condominiums",

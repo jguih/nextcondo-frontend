@@ -40,7 +40,10 @@
       "input_description_relationship_type": "Define quais funções você terá dentro do condomínio",
       "input_validation_name_required": "Informe um nome de condomínio válido, como Ed. Downtown",
       "create_condominium": "Criar Condomínio",
-      "succeeded_create_condominium": "Condomínio criado com sucesso"
+      "succeeded_create_condominium": "Condomínio criado com sucesso",
+      "enter_condominium": "Entrar no Condomínio",
+      "input_label_id": "Id",
+      "input_validation_id_required": "Informe um Id de condomínio válido, como 432b4b02-7443-42a2-bae1-b888e7ccf5d0"
     },
     "condominium/mine": {
       "title": "Meus Condomínios",
