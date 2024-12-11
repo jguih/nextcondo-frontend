@@ -42,7 +42,7 @@ export class NextCondoApiUsersService implements IUsersService {
     }
   }
 
-  async IsOwnerOrManagerOfCurrentCondomominium(): Promise<boolean> {
+  async IsOwnerOrManagerOfCurrentCondominium(): Promise<boolean> {
     const me = await this.GetMeAsync();
     const result = await CondominiumService.GetMineCurrentAsync();
     const currentCondominium =

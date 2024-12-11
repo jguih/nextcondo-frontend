@@ -19,7 +19,7 @@ const commonAreaDtoSchema = z.object({
   endTime: z.string(),
   timeInterval: z.string(),
   slots: z.array(commonAreaSlotSchema),
-  coverImageURL: z.string(),
+  coverImageURL: z.string().optional().nullable(),
 });
 
 const timeSlotDtoSchema = z.object({

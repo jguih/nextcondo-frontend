@@ -13,7 +13,7 @@ const CondominiumAdminLayout: FC<PropsWithChildren<WithLocale>> = async ({
   params: { lang },
 }) => {
   const isAuthorized =
-    await UsersService.IsOwnerOrManagerOfCurrentCondomominium();
+    await UsersService.IsOwnerOrManagerOfCurrentCondominium();
   if (!isAuthorized) {
     return <Unauthorized lang={lang} />;
   }

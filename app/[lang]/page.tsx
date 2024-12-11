@@ -41,7 +41,7 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   const result = await CondominiumService.GetMineCurrentAsync();
   const currentCondo = result.success ? result.response.data : undefined;
   const isManagerOrOwner =
-    await UsersService.IsOwnerOrManagerOfCurrentCondomominium();
+    await UsersService.IsOwnerOrManagerOfCurrentCondominium();
 
   if (!currentCondo) {
     return (

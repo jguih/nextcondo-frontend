@@ -25,14 +25,22 @@ export const CommonAreaItem: FC<{
   return (
     <div>
       <div className={styles.item}>
-        <Image
-          src={commonArea.coverImageURL}
-          height={132}
-          width={112}
-          alt={`cover image for ${commonAreaTypeName}`}
-          unoptimized
-          priority
-        />
+        {commonArea.coverImageURL ? (
+          <Image
+            src={commonArea.coverImageURL}
+            height={132}
+            width={112}
+            alt={`cover image for ${commonAreaTypeName}`}
+            unoptimized
+            priority
+          />
+        ) : (
+          <div className={styles.placeholder}>
+            <Typography muted>
+              {commonAreaTypeName.slice(0, 2).toUpperCase()}
+            </Typography>
+          </div>
+        )}
         <div className={styles.details}>
           <Typography tag="h5" color="primary" bold>
             {commonAreaTypeName}

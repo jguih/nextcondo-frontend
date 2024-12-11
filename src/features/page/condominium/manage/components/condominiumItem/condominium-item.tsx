@@ -1,4 +1,3 @@
-import { Avatar } from "@/src/components/avatar/avatar";
 import { Typography } from "@/src/components/typography/typography";
 import { GetMineCondominiumResponse } from "@/src/services/nextcondo/condominium/schemas";
 import { FC, Fragment } from "react";
@@ -15,21 +14,22 @@ export const CondominiumItem: FC<{
     <Fragment>
       <div className={styles.item}>
         <div className={styles.details}>
-          <Typography tag="h5">{condominium.name}</Typography>
+          <Typography tag="h5" color="primary">
+            {condominium.name}
+          </Typography>
           {condominium.description && (
             <Fragment>
               <Typography>{condominium.description}</Typography>
               <br />
             </Fragment>
           )}
-          <Typography>
+          <Typography muted>
             {d.common.tenant_plural}: {condominium.members.length}
           </Typography>
-        </div>
-        <div className={styles.owner}>
-          <Typography>{d.common.owner}:</Typography>
-          <Avatar name={condominium.owner.fullName} size="sm" />
-          <Typography>{condominium.owner.fullName}</Typography>
+          <Typography muted>Id: {condominium.id}</Typography>
+          <Typography muted>
+            {d.common.owner}: {condominium.owner.fullName}
+          </Typography>
         </div>
       </div>
       <div className={styles.actions}>
