@@ -6,6 +6,10 @@ import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { WithLocale } from "@/src/types/with-locale";
 import { FC } from "react";
+import styles from "./styles.module.scss";
+import { BuildingCommunity } from "@/src/components/icon/icons/building-community";
+import { Typography } from "@/src/components/typography/typography";
+import { Button } from "@/src/components/button/button";
 
 const CondominiumAdminPage: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
@@ -20,9 +24,21 @@ const CondominiumAdminPage: FC<WithLocale> = async ({ params: { lang } }) => {
         />
       </Layout.Header>
       <Layout.Main>
-        <Link href={"/condominium/admin/commonAreas/add"}>
-          {d.page["condominium/admin"].service_label_add_common_area}
-        </Link>
+        <Typography tag="h4">{d.page.home.services}</Typography>
+        <div className={styles["services-grid"]}>
+          <Link
+            href={"/condominium/admin/commonAreas/add"}
+            variant="solid"
+            orientation="vertical"
+            color="primary"
+          >
+            {d.page["condominium/admin"].service_label_add_common_area}
+            <BuildingCommunity size="xl" bold />
+          </Link>
+          <Button color="primary" disabled>
+            W.I.P
+          </Button>
+        </div>
       </Layout.Main>
     </Layout.Root>
   );

@@ -1,0 +1,8 @@
+@use "theme.utils" as theme;
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: theme.spacing(2);
+  margin-top: theme.spacing(2);
+}
