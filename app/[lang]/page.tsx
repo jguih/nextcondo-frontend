@@ -88,14 +88,7 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
                   <ListItem>
                     <ListItemAnchor href={"/condominium/mine"}>
                       <Typography noWrap>
-                        {d.page.home.action_change_current_condominium}
-                      </Typography>
-                    </ListItemAnchor>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemAnchor href={"/condominium/add"}>
-                      <Typography noWrap>
-                        {d.page.home.action_add_new_condominium}
+                        {d.page.home.dropdown_option_my_condominiums}
                       </Typography>
                     </ListItemAnchor>
                   </ListItem>
@@ -103,7 +96,7 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
                     <ListItem>
                       <ListItemAnchor href={"/condominium/admin"}>
                         <Typography noWrap>
-                          {d.page.home.action_admin}
+                          {d.page.home.dropdown_option_manage}
                         </Typography>
                       </ListItemAnchor>
                     </ListItem>

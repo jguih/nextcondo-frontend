@@ -1,8 +1,8 @@
-import { Home as HomeIcon } from "@/src/components/icon/icons/home";
 import { Typography } from "@/src/components/typography/typography";
 import { FC } from "react";
 import { BottomNavigationLink } from "@/src/components/bottomNavigation/navigation-link";
 import { Calendar } from "@/src/components/icon/icons/calendar";
+import { BuildingCommunity } from "@/src/components/icon/icons/building-community";
 
 export const BottomNavigationCommonAreas: FC<{
   label: string;
@@ -10,7 +10,7 @@ export const BottomNavigationCommonAreas: FC<{
 }> = ({ label, selected }) => {
   return (
     <BottomNavigationLink href={"/commonAreas"} selected={selected}>
-      <HomeIcon bold size="lg" />
+      <BuildingCommunity bold size="lg" />
       <br />
       <Typography tag="small">{label}</Typography>
     </BottomNavigationLink>

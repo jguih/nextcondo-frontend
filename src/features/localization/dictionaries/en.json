@@ -30,9 +30,8 @@
       "service_label_reservations": "Reservations",
       "service_label_occurrences": "Occurrences",
       "service_label_tenants": "Tenants",
-      "action_change_current_condominium": "Change current condominium",
-      "action_add_new_condominium": "Add new condominium",
-      "action_admin": "Administration"
+      "dropdown_option_manage": "Manage",
+      "dropdown_option_my_condominiums": "My Condominiums"
     },
     "condominium/add": {
       "title": "Add Condominium",
