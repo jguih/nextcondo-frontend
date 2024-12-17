@@ -6,7 +6,7 @@ import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { WithLocale } from "@/src/types/with-locale";
 import { FC, PropsWithChildren } from "react";
 
-const CondominiumAdminCommonAreasAddLayout: FC<
+const CondominiumAdminCommonAreasEditLayout: FC<
   PropsWithChildren<WithLocale>
 > = async ({ params: { lang }, children }) => {
   await getDictionary(lang);
@@ -16,7 +16,7 @@ const CondominiumAdminCommonAreasAddLayout: FC<
       <AppSnackbarDispatcher />
       <Layout.Header>
         <Header
-          title={"Adicionar Área Comum"}
+          title={"Editar Área Comum"}
           actionButton={<GoBackButton path="/condominium/admin" />}
         />
       </Layout.Header>
@@ -25,4 +25,4 @@ const CondominiumAdminCommonAreasAddLayout: FC<
   );
 };
 
-export default CondominiumAdminCommonAreasAddLayout;
+export default CondominiumAdminCommonAreasEditLayout;

@@ -35,6 +35,15 @@ const CondominiumAdminPage: FC<WithLocale> = async ({ params: { lang } }) => {
             {d.page["condominium/admin"].service_label_add_common_area}
             <BuildingCommunity size="xl" bold />
           </Link>
+          <Link
+            href={"/condominium/admin/commonAreas/23/edit"}
+            variant="solid"
+            orientation="vertical"
+            color="primary"
+          >
+            Editar área comum
+            <BuildingCommunity size="xl" bold />
+          </Link>
           <Button color="primary" disabled>
             W.I.P
           </Button>

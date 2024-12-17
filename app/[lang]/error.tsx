@@ -12,10 +12,12 @@ export default function Error({
   return (
     <Layout.Root>
       <Layout.Header>
-        <Header />
+        <Header title={"error"} />
       </Layout.Header>
       <Layout.Main>
+        <br />
         <Typography color="danger">{error.message}</Typography>
+        <br />
         <Link href={"/"} variant="solid" color="primary">
           Try again
         </Link>
