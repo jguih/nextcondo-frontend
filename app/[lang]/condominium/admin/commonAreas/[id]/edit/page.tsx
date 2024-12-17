@@ -1,7 +1,7 @@
 import { Locale } from "@/i18n-config";
 import { Layout } from "@/src/components/layout/layout";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
-import { AddCommonAreaForm } from "@/src/features/page/condominium/admin/commonArea/add/components/form/server";
+import { EditCommonAreaForm } from "@/src/features/page/condominium/admin/commonArea/edit/components/form/server";
 import { CommonAreasService } from "@/src/services/nextcondo/commonAreas/server";
 import { FC } from "react";
 
@@ -26,7 +26,7 @@ const CondominiumAdminCommonAreasEditPage: FC<{
 
   return (
     <Layout.Main>
-      <AddCommonAreaForm d={d} />
+      <EditCommonAreaForm d={d} commonArea={commonArea} />
     </Layout.Main>
   );
 };

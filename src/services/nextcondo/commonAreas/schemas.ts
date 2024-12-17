@@ -4,6 +4,7 @@ const commonAreaTypeSchema = z.object({
   id: z.number(),
   name_EN: z.string(),
   name_PTBR: z.string(),
+  available: z.boolean(),
 });
 
 const commonAreaSlotSchema = z.object({
@@ -14,7 +15,11 @@ const commonAreaSlotSchema = z.object({
 
 const commonAreaDtoSchema = z.object({
   id: z.number(),
-  type: commonAreaTypeSchema,
+  type: z.object({
+    id: z.number(),
+    name_EN: z.string(),
+    name_PTBR: z.string(),
+  }),
   startTime: z.string(),
   endTime: z.string(),
   timeInterval: z.string(),

@@ -25,7 +25,7 @@ export const format = (
 };
 
 export const getLocalizedAttribute = (
-  object: Record<string, string | number>,
+  object: Record<string, string | number | boolean>,
   prop: string,
   lang: Locale
 ): string => {

@@ -1,12 +1,5 @@
 import { FC } from "react";
-import {
-  Form,
-  FormCommonAreaType,
-  FormEndTime,
-  FormSlots,
-  FormStartTime,
-  FormTimeInterval,
-} from "./client";
+import { Form } from "./client";
 import { CommonAreasService } from "@/src/services/nextcondo/commonAreas/server";
 import { Dictionary } from "@/src/features/localization/types";
 import { format } from "@/src/features/localization/utils";
@@ -15,14 +8,22 @@ import { Typography } from "@/src/components/typography/typography";
 import { List } from "@/src/components/list/list";
 import { ListItem } from "@/src/components/list/items";
 import { UserTimezoneOffsetMinutesInput } from "@/src/lib/utils/timezone/timezone-offset-input";
+import {
+  FormCommonAreaType,
+  FormEndTime,
+  FormSlots,
+  FormStartTime,
+  FormTimeInterval,
+} from "../../../components/form-fields";
 
 export const AddCommonAreaForm: FC<{ d: Dictionary }> = async ({ d }) => {
   const pageDic = d.page["condominium/admin/commonArea/add"];
   const result = await CommonAreasService.GetTypesAsync();
   const commonAreaTypes =
     result.success && result.hasData ? result.response.data : [];
-  const firstCommonAreaType =
-    commonAreaTypes.length > 0 ? commonAreaTypes[0].id : undefined;
+  const firstCommonAreaType = commonAreaTypes.find(
+    (ca) => ca.available === true
+  )?.id;
 
   return (
     <Form>
