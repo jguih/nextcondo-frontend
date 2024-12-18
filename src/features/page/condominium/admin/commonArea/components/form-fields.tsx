@@ -14,9 +14,13 @@ import {
   format,
   getLocalizedAttribute,
 } from "@/src/features/localization/utils";
-import { GetCommonAreaTypesResponseDto } from "@/src/services/nextcondo/commonAreas/schemas";
+import {
+  GetCommonAreaByIdResponseDto,
+  GetCommonAreaTypesResponseDto,
+} from "@/src/services/nextcondo/commonAreas/schemas";
 import { FC, ReactElement, useState } from "react";
 import styles from "./styles.module.scss";
+import { convertTimeFromUTCToUserTimezone } from "@/src/lib/utils/timezone/timezone-utils";
 
 export const FormCommonAreaType: FC<{
   label: string;
@@ -51,6 +55,10 @@ export const FormStartTime: FC<{
   validationMessages: Required<Pick<ValidationMessages, "valueMissing">>;
   defaultValue?: string;
 }> = ({ label, validationMessages, defaultValue }) => {
+  const lang = useLocale();
+  if (defaultValue) {
+    defaultValue = convertTimeFromUTCToUserTimezone(defaultValue, lang);
+  }
   return (
     <InputValidationContainer
       id="start-time"
@@ -78,6 +86,10 @@ export const FormEndTime: FC<{
   validationMessages: Required<Pick<ValidationMessages, "valueMissing">>;
   defaultValue?: string;
 }> = ({ label, validationMessages, defaultValue }) => {
+  const lang = useLocale();
+  if (defaultValue) {
+    defaultValue = convertTimeFromUTCToUserTimezone(defaultValue, lang);
+  }
   return (
     <InputValidationContainer
       id="end-time"
@@ -153,8 +165,10 @@ export const FormSlots: FC<{
       nameEN: Required<Pick<ValidationMessages, "valueMissing">>;
     };
   };
-}> = ({ legend, label, description, facility }) => {
-  const [slotIds, setSlotIds] = useState<number[]>([0]);
+  initialSlots?: GetCommonAreaByIdResponseDto["slots"];
+}> = ({ legend, label, description, facility, initialSlots }) => {
+  const [slotIds, setSlotIds] = useState<number[]>([]);
+  const [initialSetup, setInitialSetup] = useState(false);
 
   const appendSlot = () => {
     const last = slotIds.length > 0 ? slotIds[slotIds.length - 1] : 0;
@@ -165,6 +179,21 @@ export const FormSlots: FC<{
     const newSlotIds = slotIds.filter((id) => id !== slotId);
     setSlotIds([...newSlotIds]);
   };
+
+  const getInitialSlot = (
+    slotId: number
+  ): GetCommonAreaByIdResponseDto["slots"][number] | undefined => {
+    if (!initialSlots) return;
+    return initialSlots.find((slot) => slot.id === slotId);
+  };
+
+  if (initialSlots && initialSlots.length > 0 && !initialSetup) {
+    setSlotIds(initialSlots.map((slot) => slot.id));
+    setInitialSetup(true);
+  } else if (!initialSetup) {
+    appendSlot();
+    setInitialSetup(true);
+  }
 
   return (
     <FieldSet required>
@@ -186,6 +215,7 @@ export const FormSlots: FC<{
                   type="text"
                   required
                   name={`slots[${index}].name_ptbr`}
+                  defaultValue={getInitialSlot(slotId)?.name_PTBR}
                   {...inputProps}
                 />
                 {isError && (
@@ -205,6 +235,7 @@ export const FormSlots: FC<{
                   type="text"
                   required
                   name={`slots[${index}].name_en`}
+                  defaultValue={getInitialSlot(slotId)?.name_EN}
                   {...inputProps}
                 />
                 {isError && (

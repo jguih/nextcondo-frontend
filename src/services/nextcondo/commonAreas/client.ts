@@ -102,4 +102,8 @@ export class NextCondoCommonAreasService implements ICommonAreasService {
   async AddAsync(): Promise<FetchClientResponse<undefined>> {
     throw new Error("Not Implemented");
   }
+
+  async EditAsync(): Promise<FetchClientResponse<undefined>> {
+    throw new Error("Not Implemented");
+  }
 }

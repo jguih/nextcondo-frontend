@@ -9,14 +9,13 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { BuildingCommunity } from "@/src/components/icon/icons/building-community";
 import { Typography } from "@/src/components/typography/typography";
-import { Button } from "@/src/components/button/button";
 
 const CondominiumAdminPage: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
 
   return (
     <Layout.Root>
-      <AppSnackbarDispatcher position="top" />
+      <AppSnackbarDispatcher />
       <Layout.Header>
         <Header
           title={d.page["condominium/admin"].title}
@@ -44,9 +43,6 @@ const CondominiumAdminPage: FC<WithLocale> = async ({ params: { lang } }) => {
             Editar área comum
             <BuildingCommunity size="xl" bold />
           </Link>
-          <Button color="primary" disabled>
-            W.I.P
-          </Button>
         </div>
       </Layout.Main>
     </Layout.Root>

@@ -4,9 +4,6 @@ import { CommonAreasService } from "@/src/services/nextcondo/commonAreas/server"
 import { Dictionary } from "@/src/features/localization/types";
 import { format } from "@/src/features/localization/utils";
 import { SubmitButton } from "@/src/components/button/submit/submit";
-import { Typography } from "@/src/components/typography/typography";
-import { List } from "@/src/components/list/list";
-import { ListItem } from "@/src/components/list/items";
 import { UserTimezoneOffsetMinutesInput } from "@/src/lib/utils/timezone/timezone-offset-input";
 import {
   FormCommonAreaType,
@@ -15,6 +12,7 @@ import {
   FormStartTime,
   FormTimeInterval,
 } from "../../../components/form-fields";
+import { FormSlotsDescription } from "../../../components/form-slots-description";
 
 export const AddCommonAreaForm: FC<{ d: Dictionary }> = async ({ d }) => {
   const pageDic = d.page["condominium/admin/commonArea/add"];
@@ -76,42 +74,7 @@ export const AddCommonAreaForm: FC<{ d: Dictionary }> = async ({ d }) => {
             },
           },
         }}
-        description={
-          <>
-            <Typography tag="small" muted>
-              {pageDic.fieldset_description_facilities}
-            </Typography>
-            <br />
-            <br />
-            <Typography tag="small">
-              {pageDic.fieldset_description_facilities_gym_example_title}
-            </Typography>
-            <List spacing="none">
-              {pageDic.fieldset_description_facilities_gym_example_list
-                .split(";")
-                .map((text, index) => (
-                  <ListItem key={text + index}>
-                    <Typography tag="small">{text.trim()}</Typography>
-                  </ListItem>
-                ))}
-            </List>
-            <br />
-            <Typography tag="small">
-              {
-                pageDic.fieldset_description_facilities_laundry_room_example_title
-              }
-            </Typography>
-            <List spacing="none">
-              {pageDic.fieldset_description_facilities_laundry_room_example_list
-                .split(";")
-                .map((text, index) => (
-                  <ListItem key={text + index}>
-                    <Typography tag="small">{text.trim()}</Typography>
-                  </ListItem>
-                ))}
-            </List>
-          </>
-        }
+        description={<FormSlotsDescription d={d} />}
       />
       <UserTimezoneOffsetMinutesInput />
       <SubmitButton>{d.button.save}</SubmitButton>

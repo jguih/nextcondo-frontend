@@ -190,6 +190,32 @@ export class NextCondoCommonAreasService implements ICommonAreasService {
     }
     return result;
   }
+
+  async EditAsync(data: FormData): Promise<FetchClientResponse<undefined>> {
+    const result = await this.client.putAsync({
+      endpoint: `/CommonAreas`,
+      strategy: new EmptyStrategy(),
+      credentials: "include",
+      headers: {
+        cookie: this.GetCookies(),
+      },
+      body: data,
+    });
+    if (result.success) {
+      LogService.info({
+        ...getLogMessageFromFetchClientResponse(result),
+        from: "CommonAreasService",
+        message: "Updated common area successfully",
+      });
+    } else {
+      LogService.error({
+        ...getLogMessageFromFetchClientResponse(result),
+        from: "CommonAreasService",
+        message: "Failed to update common area",
+      });
+    }
+    return result;
+  }
 }
 
 export const CommonAreasService: ICommonAreasService =

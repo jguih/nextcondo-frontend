@@ -76,6 +76,9 @@
       "input_validation_name_ptbr_required": "Informe um nome válido, como: Academia Bloco B",
       "succeeded_create_common_area": "Área comum criada com sucesso"
     },
+    "condominium/admin/commonArea/edit": {
+      "succeeded_update_common_area": "Área comum atualizada com sucesso"
+    },
     "occurrences": {
       "title": "Ocorrências"
     },

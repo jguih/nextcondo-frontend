@@ -29,4 +29,5 @@ export interface ICommonAreasService {
     FetchClientResponse<GetCommonAreaTypesResponseDto>
   >;
   AddAsync: (data: FormData) => Promise<FetchClientResponse<undefined>>;
+  EditAsync: (data: FormData) => Promise<FetchClientResponse<undefined>>;
 }

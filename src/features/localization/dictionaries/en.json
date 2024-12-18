@@ -76,6 +76,9 @@
       "input_validation_name_ptbr_required": "Enter a valid name in Portuguese (Brazil), like Academia Bloco B",
       "succeeded_create_common_area": "Common area created successfully"
     },
+    "condominium/admin/commonArea/edit": {
+      "succeeded_update_common_area": "Common area updated successfully"
+    },
     "occurrences": {
       "title": "Occurrences"
     },
