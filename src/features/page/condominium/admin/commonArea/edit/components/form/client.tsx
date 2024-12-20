@@ -17,7 +17,7 @@ export const Form: FC<PropsWithChildren> = ({ children }) => {
     const { result, message } = await ActionEditCommonAreaAsync(data, lang);
     if (result.success) {
       snackbar(message, "success");
-      router.push(`/condominium/admin`);
+      router.push(`/condominium/admin/commonAreas`);
     } else {
       snackbar(message, "error");
     }
