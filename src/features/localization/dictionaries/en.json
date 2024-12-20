@@ -50,9 +50,13 @@
     },
     "condominium/admin": {
       "title": "Condominium Administration",
-      "service_label_add_common_area": "Add common area"
+      "service_label_manage_common_areas": "Common Areas"
+    },
+    "condominium/admin/commonAreas": {
+      "title": "Manage Common Areas"
     },
     "condominium/admin/commonArea/add": {
+      "title": "Add Common Area",
       "input_label_common_area_type": "Common area type",
       "input_label_start_time": "Start time",
       "input_label_end_time": "End time",
@@ -77,6 +81,7 @@
       "succeeded_create_common_area": "Common area created successfully"
     },
     "condominium/admin/commonArea/edit": {
+      "title": "Update Common Area",
       "succeeded_update_common_area": "Common area updated successfully"
     },
     "occurrences": {

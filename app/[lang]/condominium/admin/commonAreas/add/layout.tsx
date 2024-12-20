@@ -9,14 +9,14 @@ import { FC, PropsWithChildren } from "react";
 const CondominiumAdminCommonAreasAddLayout: FC<
   PropsWithChildren<WithLocale>
 > = async ({ params: { lang }, children }) => {
-  await getDictionary(lang);
+  const d = await getDictionary(lang);
 
   return (
     <Layout.Root>
       <AppSnackbarDispatcher />
       <Layout.Header>
         <Header
-          title={"Adicionar Área Comum"}
+          title={d.page["condominium/admin/commonArea/add"].title}
           actionButton={<GoBackButton path="/condominium/admin" />}
         />
       </Layout.Header>

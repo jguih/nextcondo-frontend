@@ -58,6 +58,14 @@ export class NextCondoApiUsersService implements IUsersService {
     ) {
       return true;
     }
+    LogService.warn(
+      {
+        from: "UsersService",
+        message:
+          "Current user is not manager or owner of current condominium. Some functionalities may not be accessible.",
+      },
+      { user_id: me.id, condominium_id: currentCondominium.id }
+    );
     return false;
   }
 }

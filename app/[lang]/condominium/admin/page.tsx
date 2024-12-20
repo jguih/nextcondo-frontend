@@ -26,21 +26,12 @@ const CondominiumAdminPage: FC<WithLocale> = async ({ params: { lang } }) => {
         <Typography tag="h4">{d.page.home.services}</Typography>
         <div className={styles["services-grid"]}>
           <Link
-            href={"/condominium/admin/commonAreas/add"}
+            href={"/condominium/admin/commonAreas"}
             variant="solid"
             orientation="vertical"
             color="primary"
           >
-            {d.page["condominium/admin"].service_label_add_common_area}
-            <BuildingCommunity size="xl" bold />
-          </Link>
-          <Link
-            href={"/condominium/admin/commonAreas/23/edit"}
-            variant="solid"
-            orientation="vertical"
-            color="primary"
-          >
-            Editar área comum
+            {d.page["condominium/admin"].service_label_manage_common_areas}
             <BuildingCommunity size="xl" bold />
           </Link>
         </div>

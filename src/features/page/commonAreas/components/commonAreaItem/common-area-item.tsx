@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 import styles from "./styles.module.scss";
 import { Typography } from "@/src/components/typography/typography";
 import {
@@ -15,7 +15,8 @@ import { CommonAreaTime } from "./common-area-time";
 export const CommonAreaItem: FC<{
   commonArea: GetCommonAreasResponseDto[number];
   lang: Locale;
-}> = async ({ commonArea, lang }) => {
+  actions?: ReactElement | ReactElement[];
+}> = async ({ commonArea, lang, actions }) => {
   const d = await getDictionary(lang);
   const commonAreaTypeName = getLocalizedAttribute(
     commonArea.type,
@@ -60,13 +61,16 @@ export const CommonAreaItem: FC<{
                 })}
           </Typography>
           <div className={styles.actions}>
-            <Link
-              href={`/commonAreas/${commonArea.id}/booking`}
-              variant="solid"
-              color="primary"
-            >
-              {d.page.commonAreas.action_book}
-            </Link>
+            {actions}
+            {!actions && (
+              <Link
+                href={`/commonAreas/${commonArea.id}/booking`}
+                variant="solid"
+                color="primary"
+              >
+                {d.page.commonAreas.action_book}
+              </Link>
+            )}
           </div>
         </div>
       </div>
