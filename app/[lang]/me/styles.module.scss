@@ -1,0 +1,13 @@
+@use "theme.utils" as theme;
+
+.avatar-container {
+  margin-bottom: theme.spacing(2);
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.edit-me-form {
+  margin-top: theme.spacing(2);
+}

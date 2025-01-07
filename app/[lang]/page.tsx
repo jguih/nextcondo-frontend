@@ -23,14 +23,7 @@ import {
   HomeBottomNavigationNotifications,
 } from "@/src/features/page/home/components/bottom-navigation";
 import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
-import { List } from "@/src/components/list/list";
-import {
-  ListItem,
-  ListItemAnchor,
-  ListItemButton,
-  ListItemDropdown,
-} from "@/src/components/list/items";
-import { ChevronDown } from "@/src/components/icon/icons/chevron-down";
+import { CondominiumDropdown } from "@/src/components/condominiumDropdown/condominium-dropdown";
 
 const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   const d = await getDictionary(lang);
@@ -40,8 +33,6 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   }
   const result = await CondominiumService.GetMineCurrentAsync();
   const currentCondo = result.success ? result.response.data : undefined;
-  const isManagerOrOwner =
-    await UsersService.IsOwnerOrManagerOfCurrentCondominium();
 
   if (!currentCondo) {
     return (
@@ -77,35 +68,7 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
   return (
     <Layout.RootWithBottomNav>
       <Layout.Header>
-        <Header
-          title={
-            <List>
-              <ListItem>
-                <ListItemButton>
-                  {currentCondo.name} <ChevronDown size="sm" bold />
-                </ListItemButton>
-                <ListItemDropdown>
-                  <ListItem>
-                    <ListItemAnchor href={"/condominium/mine"}>
-                      <Typography noWrap>
-                        {d.page.home.dropdown_option_my_condominiums}
-                      </Typography>
-                    </ListItemAnchor>
-                  </ListItem>
-                  {isManagerOrOwner && (
-                    <ListItem>
-                      <ListItemAnchor href={"/condominium/admin"}>
-                        <Typography noWrap>
-                          {d.page.home.dropdown_option_manage}
-                        </Typography>
-                      </ListItemAnchor>
-                    </ListItem>
-                  )}
-                </ListItemDropdown>
-              </ListItem>
-            </List>
-          }
-        />
+        <Header title={<CondominiumDropdown lang={lang} />} />
       </Layout.Header>
       <AppSnackbarDispatcher position="top" />
       <AppSidebar>
@@ -119,7 +82,7 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
         <HomePageContents d={d} />
       </main>
       <Layout.BottomNavigation>
-        <HomeBottomNavigationHome label={d.bottom_nav.home} />
+        <HomeBottomNavigationHome label={d.bottom_nav.home} selected />
         <HomeBottomNavigationNotifications label={d.bottom_nav.notifications} />
         <HomeBottomNavigationMyProfile label={d.bottom_nav.my_profile} />
       </Layout.BottomNavigation>

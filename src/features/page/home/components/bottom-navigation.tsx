@@ -5,9 +5,12 @@ import { Bell } from "@/src/components/icon/icons/bell";
 import { User } from "@/src/components/icon/icons/user";
 import { BottomNavigationLink } from "@/src/components/bottomNavigation/navigation-link";
 
-export const HomeBottomNavigationHome: FC<{ label: string }> = ({ label }) => {
+export const HomeBottomNavigationHome: FC<{
+  label: string;
+  selected?: boolean;
+}> = ({ label, selected = false }) => {
   return (
-    <BottomNavigationLink selected href={"/"}>
+    <BottomNavigationLink selected={selected} href={"/"}>
       <HomeIcon bold size="lg" />
       <br />
       <Typography tag="small">{label}</Typography>
@@ -15,11 +18,12 @@ export const HomeBottomNavigationHome: FC<{ label: string }> = ({ label }) => {
   );
 };
 
-export const HomeBottomNavigationNotifications: FC<{ label: string }> = ({
-  label,
-}) => {
+export const HomeBottomNavigationNotifications: FC<{
+  label: string;
+  selected?: boolean;
+}> = ({ label, selected = false }) => {
   return (
-    <BottomNavigationLink href={"/"}>
+    <BottomNavigationLink selected={selected} href={"/"}>
       <Bell bold size="lg" />
       <br />
       <Typography tag="small">{label}</Typography>
@@ -27,11 +31,12 @@ export const HomeBottomNavigationNotifications: FC<{ label: string }> = ({
   );
 };
 
-export const HomeBottomNavigationMyProfile: FC<{ label: string }> = ({
-  label,
-}) => {
+export const HomeBottomNavigationMyProfile: FC<{
+  label: string;
+  selected?: boolean;
+}> = ({ label, selected = false }) => {
   return (
-    <BottomNavigationLink href={"/"}>
+    <BottomNavigationLink selected={selected} href={"/me"}>
       <User bold size="lg" />
       <br />
       <Typography tag="small">{label}</Typography>

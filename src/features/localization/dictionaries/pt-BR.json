@@ -33,6 +33,9 @@
       "dropdown_option_manage": "Administrar",
       "dropdown_option_my_condominiums": "Meus Condomínios"
     },
+    "me": {
+      "succeeded_edit_user": "Dados de usuário atualizados com sucesso"
+    },
     "condominium/add": {
       "title": "Adicionar Condomínio",
       "input_label_relationship_type": "Tipo de proprietário",

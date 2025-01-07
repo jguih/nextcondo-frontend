@@ -8,6 +8,8 @@ import { getNextCondoBackendUrl } from "@/src/lib/environment/get-backend-url";
 import { LogService } from "../../logger/server";
 import { getLogMessageFromFetchClientResponse } from "../../logger/utils/get-fetch-client-response-message";
 import { CondominiumService } from "../condominium/server";
+import { FetchClientResponse } from "@/src/lib/fetchClient/types";
+import { EmptyStrategy } from "@/src/lib/fetchClient/empty-strategy";
 
 export class NextCondoApiUsersService implements IUsersService {
   client: IFetchClient;
@@ -16,11 +18,17 @@ export class NextCondoApiUsersService implements IUsersService {
     this.client = createFetchClient(getNextCondoBackendUrl());
   }
 
+  GetCookies(): string {
+    return headers().get("cookie") ?? "";
+  }
+
   async GetMeAsync(): Promise<User | undefined> {
     const result = await this.client.getAsync({
       strategy: new JsonStrategy(userSchema),
       endpoint: "/Users/me",
-      headers: headers(),
+      headers: {
+        cookie: this.GetCookies(),
+      },
       credentials: "include",
     });
     if (result.success) {
@@ -68,6 +76,32 @@ export class NextCondoApiUsersService implements IUsersService {
     );
     return false;
   }
+
+  async EditMeAsync(data: FormData): Promise<FetchClientResponse<undefined>> {
+    const result = await this.client.putAsync({
+      strategy: new EmptyStrategy(),
+      endpoint: "/Users/me",
+      headers: {
+        cookie: this.GetCookies(),
+      },
+      credentials: "include",
+      body: data,
+    });
+    if (result.success) {
+      LogService.info({
+        ...getLogMessageFromFetchClientResponse(result),
+        from: "UsersService",
+        message: "Updated current user successfully",
+      });
+    } else {
+      LogService.error({
+        ...getLogMessageFromFetchClientResponse(result),
+        from: "UsersService",
+        message: "Failed to update current user",
+      });
+    }
+    return result;
+  }
 }
 
-export const UsersService = new NextCondoApiUsersService();
+export const UsersService: IUsersService = new NextCondoApiUsersService();

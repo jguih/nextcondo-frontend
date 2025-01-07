@@ -33,6 +33,9 @@
       "dropdown_option_manage": "Manage",
       "dropdown_option_my_condominiums": "My Condominiums"
     },
+    "me": {
+      "succeeded_edit_user": "User data updated successfully"
+    },
     "condominium/add": {
       "title": "Add Condominium",
       "input_label_relationship_type": "Relationship Type",

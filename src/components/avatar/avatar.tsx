@@ -6,7 +6,7 @@ import { getInitials } from "./get-initials";
 import { SizeOptions } from "@/src/theme/types";
 
 export const Avatar: FC<
-  ComponentProps<"div"> & { name: string; size?: SizeOptions }
+  ComponentProps<"div"> & { name: string; size?: SizeOptions | "profile" }
 > = ({ name, size = "md", ...props }) => {
   const classes = buildClassNames(
     {},

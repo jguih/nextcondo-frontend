@@ -23,3 +23,10 @@
 .size-xl {
   padding: theme.spacing(2.4);
 }
+
+.size-profile {
+  padding: theme.spacing(5.4);
+  & > p {
+    font-size: calc(var(--p) * 1.4);
+  }
+}
