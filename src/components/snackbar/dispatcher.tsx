@@ -46,7 +46,7 @@ export const AppSnackbarDispatcher: FC<
   return (
     <div
       {...props}
-      key={message.text}
+      key={JSON.stringify(message)}
       className={messageClasses}
       onAnimationEnd={() => {
         unmount();

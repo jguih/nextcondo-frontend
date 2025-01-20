@@ -189,7 +189,8 @@
     "owner": "Owner",
     "manager": "Manager",
     "name": "Name",
-    "resource_does_not_exist": "This resource does not exist"
+    "resource_does_not_exist": "This resource does not exist",
+    "succeeded_copy_to_clipboard": "Text added to clipboard"
   },
   "bottom_nav": {
     "home": "Home",

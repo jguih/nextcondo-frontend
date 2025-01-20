@@ -5,14 +5,15 @@ import { CopyPlus } from "@/src/components/icon/icons/copy-plus";
 import { useAppSnackbar } from "@/src/components/snackbar/store";
 import { FC, MouseEventHandler } from "react";
 
-export const CopyIdButton: FC<{ condominiumId: string }> = ({
+export const CopyIdButton: FC<{ condominiumId: string; message: string }> = ({
   condominiumId,
+  message,
 }) => {
   const snackbar = useAppSnackbar((state) => state.dispatch);
 
   const handleOnClick: MouseEventHandler<HTMLButtonElement> = () => {
     navigator.clipboard.writeText(condominiumId);
-    snackbar("text copied to clipboard", "success");
+    snackbar(message, "success");
   };
 
   return (

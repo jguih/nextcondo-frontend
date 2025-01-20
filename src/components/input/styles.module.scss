@@ -15,6 +15,17 @@
   &:focus {
     outline-color: var(--primary-active-border);
   }
+
+  &:disabled {
+    background-color: var(--neutral-disabled-bg);
+    color: var(--neutral-on-disabled-bg);
+    border-color: var(--neutral);
+    cursor: not-allowed;
+
+    &:hover {
+      border-color: var(--neutral-hover-border);
+    }
+  }
 }
 
 .error {

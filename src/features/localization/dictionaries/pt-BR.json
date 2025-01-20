@@ -189,7 +189,8 @@
     "owner": "Dono",
     "manager": "Síndico",
     "name": "Nome",
-    "resource_does_not_exist": "O recurso requisitado não foi encontrado"
+    "resource_does_not_exist": "O recurso requisitado não foi encontrado",
+    "succeeded_copy_to_clipboard": "Texto copiado para a área de transferência"
   },
   "bottom_nav": {
     "home": "Home",

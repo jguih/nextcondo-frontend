@@ -111,3 +111,33 @@ export const FormPhone: FC<PhoneProps> = ({
     />
   );
 };
+
+export const FormEmail: FC<{
+  label: string;
+  defaultValue?: string;
+}> = ({ label, defaultValue }) => {
+  return (
+    <InputValidationContainer
+      id="email"
+      render={({ id, errorMessage, isError, ...inputProps }) => (
+        <FormGroup error={isError}>
+          <Label htmlFor={id}>{label}</Label>
+          <Input
+            id={id}
+            name="email"
+            type="email"
+            aria-describedby={`${id}-help`}
+            defaultValue={defaultValue}
+            disabled
+            {...inputProps}
+          />
+          {isError && (
+            <Typography tag="small" color="danger" id={`${id}-help`}>
+              {errorMessage}
+            </Typography>
+          )}
+        </FormGroup>
+      )}
+    />
+  );
+};

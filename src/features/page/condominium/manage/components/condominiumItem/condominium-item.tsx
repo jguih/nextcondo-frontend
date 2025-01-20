@@ -28,7 +28,11 @@ export const CondominiumItem: FC<{
             {d.common.tenant_plural}: {condominium.members.length}
           </Typography>
           <Typography muted>
-            Id: {condominium.id} <CopyIdButton condominiumId={condominium.id} />
+            Id: {condominium.id}{" "}
+            <CopyIdButton
+              condominiumId={condominium.id}
+              message={d.common.succeeded_copy_to_clipboard}
+            />
           </Typography>
           <Typography muted>
             {d.common.owner}: {condominium.owner.fullName}

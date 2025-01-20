@@ -1,6 +1,6 @@
 import { Locale } from "@/i18n-config";
 import { ComponentProps, FC } from "react";
-import { Form, FormFullName, FormPhone } from "./client";
+import { Form, FormEmail, FormFullName, FormPhone } from "./client";
 import { SubmitButton } from "@/src/components/button/submit/submit";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { UsersService } from "@/src/services/nextcondo/users/server";
@@ -13,6 +13,7 @@ export const EditMeForm: FC<
   console.log(user);
   return (
     <Form {...props}>
+      <FormEmail defaultValue={user?.email} label={d.auth.email} />
       <FormFullName
         label={d.page.register.input_label_fullName}
         validationMessages={{
