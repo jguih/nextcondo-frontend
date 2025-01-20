@@ -7,8 +7,10 @@ import { usePathname } from "next/navigation";
 import { pathPosition } from "./path-position";
 import { useLocale } from "@/src/features/localization/components/lang-provider";
 
+export type SnackbarPosition = "top" | "bottom" | "bottom-elevated";
+
 export const AppSnackbarDispatcher: FC<
-  ComponentProps<"div"> & { position?: "top" | "bottom" }
+  ComponentProps<"div"> & { position?: SnackbarPosition }
 > = ({ position = "bottom", ...props }) => {
   const message = useAppSnackbar((state) => state.message);
   const isOpen = useAppSnackbar((state) => state.isOpen);
@@ -18,7 +20,7 @@ export const AppSnackbarDispatcher: FC<
   const lang = useLocale();
   const pathName = _pathName.replace(lang, "").substring(1);
 
-  const getPosition = (): "top" | "bottom" => {
+  const getPosition = (): SnackbarPosition => {
     let pos = position;
     pathPosition.forEach(({ path, position }) => {
       if (pathName.match(path)) {

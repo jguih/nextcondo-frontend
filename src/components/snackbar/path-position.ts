@@ -1,4 +1,6 @@
-export const pathPosition: Array<{ path: RegExp; position: "top" | "bottom" }> =
+import { SnackbarPosition } from "./dispatcher";
+
+export const pathPosition: Array<{ path: RegExp; position: SnackbarPosition }> =
   [
     {
       path: /^$/,
@@ -6,10 +8,10 @@ export const pathPosition: Array<{ path: RegExp; position: "top" | "bottom" }> =
     },
     {
       path: /^\/condominium\/mine$/,
-      position: "top",
+      position: "bottom-elevated",
     },
-    { path: /^\/condominium\/add$/, position: "top" },
-    { path: /^\/me$/, position: "top" },
-    { path: /^\/commonAreas$/, position: "top" },
-    { path: /^\/commonAreas\/bookingHistory$/, position: "top" },
+    { path: /^\/condominium\/add$/, position: "bottom-elevated" },
+    { path: /^\/me$/, position: "bottom-elevated" },
+    { path: /^\/commonAreas$/, position: "bottom-elevated" },
+    { path: /^\/commonAreas\/bookingHistory$/, position: "bottom-elevated" },
   ];
