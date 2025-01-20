@@ -2,7 +2,6 @@ import { GoBackButton } from "@/src/components/header/go-back-button";
 import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
 import { Link } from "@/src/components/link/link";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { WithLocale } from "@/src/types/with-locale";
 import { FC } from "react";
@@ -15,7 +14,6 @@ const CondominiumAdminPage: FC<WithLocale> = async ({ params: { lang } }) => {
 
   return (
     <Layout.Root>
-      <AppSnackbarDispatcher />
       <Layout.Header>
         <Header
           title={d.page["condominium/admin"].title}

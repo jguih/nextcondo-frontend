@@ -3,7 +3,6 @@ import { ResourceDoesNotExist } from "@/src/components/error/resource-does-not-e
 import { GoBackButton } from "@/src/components/header/go-back-button";
 import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { getLocalizedAttribute } from "@/src/features/localization/utils";
 import { CommonAreaBookingForm } from "@/src/features/page/commonAreas/[id]/booking/components/form/server";
@@ -30,7 +29,6 @@ const CommonAreaBookingPage: FC<{
   if (!commonArea) {
     return (
       <Layout.Root>
-        <AppSnackbarDispatcher />
         <Layout.Header>
           <Header actionButton={<GoBackButton path="/commonAreas" />} />
         </Layout.Header>
@@ -43,7 +41,6 @@ const CommonAreaBookingPage: FC<{
 
   return (
     <Layout.Root>
-      <AppSnackbarDispatcher />
       <Layout.Header>
         <Header
           actionButton={<GoBackButton path="/commonAreas" />}

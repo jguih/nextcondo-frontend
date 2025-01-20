@@ -4,7 +4,6 @@ import { Layout } from "@/src/components/layout/layout";
 import { Link } from "@/src/components/link/link";
 import { ListItem } from "@/src/components/list/items";
 import { List } from "@/src/components/list/list";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { CommonAreaItem } from "@/src/features/page/commonAreas/components/commonAreaItem/common-area-item";
 import { AddCommonAreaButton } from "@/src/features/page/condominium/admin/commonArea/components/add-common-area-button";
@@ -22,7 +21,6 @@ const CondominiumAdminCommonAreasPage: FC<WithLocale> = async ({
 
   return (
     <Layout.Root>
-      <AppSnackbarDispatcher />
       <Layout.Header>
         <Header
           title={d.page["condominium/admin/commonAreas"].title}

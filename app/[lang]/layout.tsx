@@ -5,6 +5,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { FC, PropsWithChildren } from "react";
 import { getNextCondoBackendPublicUrl } from "@/src/services/nextcondo/public/get-public-url";
+import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 
 export const metadata: Metadata = {
   title: "NextCondo",
@@ -30,6 +31,7 @@ const HomeLayout: FC<PropsWithChildren<WithLocale>> = async ({
           <GlobalServiceProvider
             nextcondoBackendPublicUrl={nextcondoBackendUrl}
           >
+            <AppSnackbarDispatcher />
             {children}
           </GlobalServiceProvider>
         </LocaleProvider>

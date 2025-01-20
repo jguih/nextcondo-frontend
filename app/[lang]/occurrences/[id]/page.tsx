@@ -2,7 +2,6 @@ import { Locale } from "@/i18n-config";
 import { GoBackButton } from "@/src/components/header/go-back-button";
 import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { Typography } from "@/src/components/typography/typography";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { OccurrenceCard } from "@/src/features/page/occurrences/id/components/card/occurrence-card";
@@ -42,7 +41,6 @@ const OccurrenceByIdPage: FC<OccurrenceByIdPageProps> = async ({
           actionButton={<GoBackButton path="/occurrences" />}
         />
       </Layout.Header>
-      <AppSnackbarDispatcher />
       <Layout.Main>
         {occurrence ? (
           <OccurrenceCard occurrence={occurrence} lang={lang} d={d} />

@@ -22,7 +22,6 @@ import {
   HomeBottomNavigationMyProfile,
   HomeBottomNavigationNotifications,
 } from "@/src/features/page/home/components/bottom-navigation";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { CondominiumDropdown } from "@/src/components/condominiumDropdown/condominium-dropdown";
 
 const Home: FC<WithLocale> = async ({ params: { lang } }) => {
@@ -40,7 +39,6 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
         <Layout.Header>
           <Header title={d.page.home.welcome} />
         </Layout.Header>
-        <AppSnackbarDispatcher position="top" />
         <AppSidebar>
           <AppSidebarHeader title={d.page.home.welcome} />
           <AppSidebarContent>
@@ -70,7 +68,6 @@ const Home: FC<WithLocale> = async ({ params: { lang } }) => {
       <Layout.Header>
         <Header title={<CondominiumDropdown lang={lang} />} />
       </Layout.Header>
-      <AppSnackbarDispatcher position="top" />
       <AppSidebar>
         <AppSidebarHeader title={currentCondo.name} />
         <AppSidebarContent>

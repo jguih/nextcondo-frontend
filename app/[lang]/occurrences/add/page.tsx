@@ -1,5 +1,4 @@
 import { Layout } from "@/src/components/layout/layout";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { AddOccurrenceForm } from "@/src/features/page/occurrences/add/components/form/server";
 import { UsersService } from "@/src/services/nextcondo/users/server";
@@ -19,7 +18,6 @@ const OccurrencesAddPage: FC<WithLocale> = async ({ params: { lang } }) => {
       <Layout.Main>
         <AddOccurrenceForm d={d} />
       </Layout.Main>
-      <AppSnackbarDispatcher />
     </Fragment>
   );
 };

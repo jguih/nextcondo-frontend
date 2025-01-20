@@ -3,7 +3,6 @@ import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
 import { ListItem } from "@/src/components/list/items";
 import { List } from "@/src/components/list/list";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import {
   BottomNavigationBookingHistory,
@@ -27,7 +26,6 @@ const CommonAreasPage: FC<WithLocale> = async ({ params: { lang } }) => {
 
   return (
     <Layout.RootWithBottomNav>
-      <AppSnackbarDispatcher position="top" />
       <Layout.Header>
         <Header
           title={d.page.commonAreas.title}

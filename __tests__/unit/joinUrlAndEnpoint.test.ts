@@ -2,11 +2,14 @@ import { joinUrlAndEndpoint } from "@/src/lib/fetchClient/utils";
 
 describe("joinUrlAndEndpoint", () => {
   it("joins /endpoint with url/", () => {
+    // Arrange
     const url = "https://myurl.domain/api/";
     const endpoint = "/Endpoint";
 
+    // Act
     const joined = joinUrlAndEndpoint(url, endpoint);
 
+    // Assert
     expect(joined).toBe("https://myurl.domain/api/Endpoint");
   });
 

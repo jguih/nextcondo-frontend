@@ -16,7 +16,7 @@ export type AppSnackbarStore = SnackbarState & {
   dispatch: (message: string, level: Level) => void;
 };
 
-const timeout = 5000;
+const timeout = 3000;
 let timer: ReturnType<typeof setTimeout> | null = null;
 
 export const useAppSnackbar = create<AppSnackbarStore>((set, get) => ({

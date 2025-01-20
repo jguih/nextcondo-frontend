@@ -1,7 +1,6 @@
 import { GoBackButton } from "@/src/components/header/go-back-button";
 import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import {
   BottomNavigationAddCondominium,
@@ -23,7 +22,6 @@ const CondominiumManageLayout: FC<PropsWithChildren<WithLocale>> = async ({
 
   return (
     <Layout.RootWithBottomNav>
-      <AppSnackbarDispatcher position="top" />
       <Layout.Header>
         <Header
           title={d.page["condominium/add"].title}

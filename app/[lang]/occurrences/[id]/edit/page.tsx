@@ -2,7 +2,6 @@ import { Locale } from "@/i18n-config";
 import { GoBackButton } from "@/src/components/header/go-back-button";
 import { Header } from "@/src/components/header/header";
 import { Layout } from "@/src/components/layout/layout";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import { EditOccurrenceForm } from "@/src/features/page/occurrences/id/edit/components/form/server";
 import { OccurrencesService } from "@/src/services/nextcondo/occurrences/server";
@@ -47,7 +46,6 @@ const OccurrenceByIdEditPage: FC<OccurrenceByIdPageProps> = async ({
       <Layout.Main>
         {occurrence && <EditOccurrenceForm d={d} occurrence={occurrence} />}
       </Layout.Main>
-      <AppSnackbarDispatcher />
     </Fragment>
   );
 };

@@ -4,6 +4,7 @@ import { FC, Fragment } from "react";
 import styles from "./styles.module.scss";
 import { Dictionary } from "@/src/features/localization/types";
 import { EnterCondominiumButton } from "../enter-condominium-button";
+import { CopyIdButton } from "./copy-id-button";
 
 export const CondominiumItem: FC<{
   condominium: GetMineCondominiumResponse[number];
@@ -26,7 +27,9 @@ export const CondominiumItem: FC<{
           <Typography muted>
             {d.common.tenant_plural}: {condominium.members.length}
           </Typography>
-          <Typography muted>Id: {condominium.id}</Typography>
+          <Typography muted>
+            Id: {condominium.id} <CopyIdButton condominiumId={condominium.id} />
+          </Typography>
           <Typography muted>
             {d.common.owner}: {condominium.owner.fullName}
           </Typography>

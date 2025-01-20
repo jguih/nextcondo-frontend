@@ -8,7 +8,6 @@ import {
   AppSidebarItemLogout,
 } from "@/src/components/sidebar/app/items";
 import { AppSidebar } from "@/src/components/sidebar/app/sidebar";
-import { AppSnackbarDispatcher } from "@/src/components/snackbar/dispatcher";
 import { getDictionary } from "@/src/features/localization/get-dictionary";
 import {
   HomeBottomNavigationHome,
@@ -46,7 +45,6 @@ const MeLayout: FC<PropsWithChildren<{ params: { lang: Locale } }>> = async ({
       <Layout.Header>
         <Header title={d.bottom_nav.my_profile} />
       </Layout.Header>
-      <AppSnackbarDispatcher position="top" />
       <AppSidebar>
         <AppSidebarHeader title={currentCondo.name} />
         <AppSidebarContent>
